@@ -23,11 +23,9 @@ class Queues {
     return names;
   }
 
-  get(queueName, done) {
-    const once = _.once(done);
+  async get(queueName) {
     if (this._queues.has(queueName)) {
-      once(null, this._queues.get(queueName));
-      return;
+      return this._queues.get(queueName);
     }
 
     const { name, port, host, options } = _.find(config.queues, { name: queueName });
@@ -37,9 +35,9 @@ class Queues {
 
     protectedFunctions.forEach(fn => bull[fn] = protectFunction);
 
-    this._queues.set(name, bull);
+    await bull.isReady();
 
-    bull.isReady().then(() => once(null, bull));
+    return bull;
   }
 }
 
