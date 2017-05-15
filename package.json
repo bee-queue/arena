@@ -11,7 +11,6 @@
     "express": "^4.15.2",
     "express-hbs": "^1.0.4",
     "hbs-utils": "^0.0.4",
-    "lodash": "^4.17.4",
-    "synchronize": "^2.0.0"
+    "lodash": "^4.17.4"
   }
 }
