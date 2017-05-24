@@ -34,7 +34,7 @@ class Queues {
     });
 
     protectedFunctions.forEach(fn => bull[fn] = protectFunction);
-
+    this._queues.set(name, bull);
     await bull.isReady();
 
     return bull;
