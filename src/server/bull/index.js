@@ -28,13 +28,17 @@ class Queues {
       return this._queues.get(queueName);
     }
 
-    const { name, port, host, options } = _.find(config.queues, { name: queueName });
+    const queueConfig = _.find(config.queues, { name: queueName });
+    if (!queueConfig) {
+      return null;
+    }
+
+    const { name, port, host, options } = queueConfig;
     const bull = new Bull(name, {
       redis: { port, host }
     });
-
     protectedFunctions.forEach(fn => bull[fn] = protectFunction);
-
+    this._queues.set(name, bull);
     await bull.isReady();
 
     return bull;
