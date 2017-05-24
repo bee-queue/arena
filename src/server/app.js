@@ -3,6 +3,7 @@ const hbs = require('express-hbs');
 require('./views/helpers/handlebars')(hbs);
 const hbsutils = require('hbs-utils')(hbs);
 const path = require('path');
+const auth = require('./auth');
 
 const routes = require('./views/routes');
 
@@ -20,6 +21,8 @@ app.use(express.static(path.join(__dirname, '/../../public')));
 hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/
 });
+
+app.use(auth);
 
 app.use('/', routes);
 

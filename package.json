@@ -7,11 +7,19 @@
   "author": "Chuy Martinez <chuy@mixmax.com>",
   "license": "MIT",
   "dependencies": {
+    "basic-auth": "^1.1.0",
     "bull": "^3.0.0-alpha.4",
     "express": "^4.15.2",
     "express-hbs": "^1.0.4",
     "hbs-utils": "^0.0.4",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "nodemon": "^1.11.0"
   },
-  "engines": { "node": ">=7.10" }
+  "scripts": {
+    "start": "nodemon src/server/app.js",
+    "inspect": "nodemon --inspect src/server/app.js"
+  },
+  "engines": {
+    "node": ">=7.10"
+  }
 }
