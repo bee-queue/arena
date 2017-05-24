@@ -1,9 +1,6 @@
 {
-  "auth": {
-    "type": "http-basic",
-    "admins": {
-      "admin@example.com": {"password": "password"}
-    }
+  "users": {
+    "admin@example.com": "password"
   },
   "queues": [
     {
