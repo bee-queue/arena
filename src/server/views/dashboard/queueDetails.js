@@ -3,6 +3,13 @@ const Queues = require('../../bull');
 async function handler(req, res) {
   const name = req.params.queueName;
   const queue = await Queues.get(name);
+  if (!queue) {
+    res
+      .status(404)
+      .render('dashboard/templates/queueNotFound.hbs', {
+        name
+      });
+  }
 
   const promises = [
     queue.getActiveCount(),
