@@ -3,9 +3,10 @@ const hbs = require('express-hbs');
 require('./views/helpers/handlebars')(hbs);
 const hbsutils = require('hbs-utils')(hbs);
 const path = require('path');
-const auth = require('./auth');
+const basicAuth = require('express-basic-auth');
 
 const routes = require('./views/routes');
+const {users} = require('./config/index.json');
 
 const app = express();
 
@@ -22,7 +23,10 @@ hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/
 });
 
-app.use(auth);
+app.use(basicAuth({
+  users,
+  challenge: true
+}));
 
 app.use('/', routes);
 
