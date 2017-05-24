@@ -1,10 +1,17 @@
-<h2>Queue {{ name }}</h2>
-<ul class="list-group">
-  {{#each groups }}
-    <li class="list-group-item">
-      <a href="{{ ../name }}/{{ this.[0] }}">
-        <span class="text-capitalize">{{ this.[0] }}</span>: {{ this.[1] }}
-      </a>
-    </li>
-  {{/each}}
-</ul>
+<h2>Queue <code>{{ name }}</code></h2>
+<h3>Job Types</h3>
+
+<div class="row">
+  <div class="col-sm-4 no-padding">
+    <ul class="list-group">
+      {{#each groups }}
+        <li class="list-group-item">
+          <span class="badge">{{this.[1]}}</span>
+          <a href="{{ ../name }}/{{ this.[0] }}">
+            <span class="text-capitalize">{{ this.[0] }}</span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
