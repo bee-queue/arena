@@ -7,7 +7,7 @@
   "author": "Chuy Martinez <chuy@mixmax.com>",
   "license": "MIT",
   "dependencies": {
-    "bull": "^3.0.0-alpha.4",
+    "bull": "^3.0.0-rc.1",
     "express": "^4.15.2",
     "express-basic-auth": "^1.0.2",
     "express-hbs": "^1.0.4",
