@@ -64,7 +64,7 @@
             <h4 class="header-collapse">{{ this.name }} <small>(#{{ this.id }})</small></h4>
           </a>
           <div id="collapse{{this.id}}" class="collapse">
-            {{> dashboard/jobDetails this displayJobInline=true queueName=../name isFailed=../isFailed }}
+            {{> dashboard/jobDetails this displayJobInline=true queueName=../name jobState=../jobState }}
           </div>
         </li>
       {{/each}}

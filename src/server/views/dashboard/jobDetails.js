@@ -15,11 +15,11 @@ async function handler(req, res) {
     return res.json(job);
   }
 
-  const isFailed = await job.isFailed();
+  const jobState = await job.getState();
 
   return res.render('dashboard/templates/jobDetails.hbs', {
     queueName,
-    isFailed,
+    jobState,
     job: job.toJSON() // toJSON() automatically converts progress to a number
   });
 }

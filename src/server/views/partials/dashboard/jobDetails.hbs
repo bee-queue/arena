@@ -2,14 +2,14 @@
   <h3>{{ this.name }} <small>(#{{ this.id }})</small></h3>
 {{/unless}}
 
-{{#if isFailed}}
+{{#eq jobState 'failed'}}
   <h5>Actions</h5>
   <form class="js-retryjob-form">
     <input type="hidden" name="queueName" value="{{ queueName }}" />
     <input type="hidden" name="jobId" value="{{ this.id }}" />
     <button class="btn btn-success">Retry</button>
   </form>
-{{/if}}
+{{/eq}}
 
 <div class="row">
   <div class="col-sm-4">
@@ -31,7 +31,10 @@
 
 <h5>Progress</h5>
 <div class="progress">
-  <div class="progress-bar progress-bar-danger"
+  <div class="progress-bar
+              {{#eq jobState 'failed'}}
+              progress-bar-danger
+              {{/eq}}"
        role="progressbar"
        aria-valuenow="{{ this.progress }}"
        aria-valuemin="0"

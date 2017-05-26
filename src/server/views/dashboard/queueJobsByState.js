@@ -32,7 +32,7 @@ async function handler(req, res) {
     currentPage: page,
     pages,
     pageSize,
-    isFailed: state === 'failed',
+    jobState: state,
     lastPage: _.last(pages)
   });
 }
