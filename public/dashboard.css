@@ -104,3 +104,13 @@ body {
   border-radius: 50%;
 }
 
+/*
+ * Pagination
+ */
+.pagination-container {
+  margin: 20px 0;
+}
+
+.pagination {
+  margin: 0;
+}

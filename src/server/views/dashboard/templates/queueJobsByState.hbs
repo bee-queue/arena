@@ -1,14 +1,73 @@
 <h2>Queue <code>{{ name }}</code></h2>
+
 <h3>List of jobs in {{ state }} state</h3>
-<ul class="list-group">
-  {{#each jobs}}
-    <li class="list-group-item">
-      <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
-        Job: {{ this.id }} {{ this.name }}
-      </a>
-      <div id="collapse{{this.id}}" class="collapse">
-        <pre>{{{ json this true }}}</pre>
-      </div>
-    </li>
-  {{/each}}
-</ul>
+
+<div class="row pagination-container">
+  <div class="col-sm-10">
+    <nav aria-label="Job navigation">
+      <ul class="pagination">
+        <li
+          {{#eq currentPage 1}}
+            class="disabled">
+              <span>&laquo;</span>
+          {{else}}
+            ><a href="/dashboard/{{ name }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          {{/eq}}
+        </li>
+        {{#each pages}}
+          <li
+            {{#eq this ../currentPage}}
+              class="active"
+            {{/eq}}>
+
+            <a href="/dashboard/{{ ../name }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+          </li>
+        {{/each}}
+        <li
+          {{#eq currentPage lastPage}}
+            class="disabled">
+              <span>&raquo;</span>
+          {{else}}
+            ><a href="/dashboard/{{ name }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          {{/eq}}
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-sm-2 text-right">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Page Size <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }}</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="list-group">
+      {{#each jobs}}
+        <li class="list-group-item">
+          <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
+            Job: {{ this.id }} {{ this.name }}
+          </a>
+          <div id="collapse{{this.id}}" class="collapse">
+            <pre>{{{ json this true }}}</pre>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

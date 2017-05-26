@@ -1,9 +1,10 @@
 const express = require('express');
-const hbs = require('express-hbs');
-require('./views/helpers/handlebars')(hbs);
-const hbsutils = require('hbs-utils')(hbs);
 const path = require('path');
 const basicAuth = require('express-basic-auth');
+
+const hbs = require('./hbshelpers');
+require('./views/helpers/handlebars')(hbs);
+const hbsutils = require('hbs-utils')(hbs);
 
 const routes = require('./views/routes');
 const {users} = require('./config/index.json');
