@@ -61,10 +61,10 @@
       {{#each jobs}}
         <li class="list-group-item">
           <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
-            Job: {{ this.id }} {{ this.name }}
+            <h4 class="header-collapse">{{ this.name }} <small>(#{{ this.id }})</small></h4>
           </a>
           <div id="collapse{{this.id}}" class="collapse">
-            <pre>{{{ json this true }}}</pre>
+            {{> dashboard/jobDetails this displayJobInline=true queueName=../name }}
           </div>
         </li>
       {{/each}}

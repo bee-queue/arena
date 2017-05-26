@@ -13,9 +13,11 @@ const app = express();
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
+app.set('json spaces', 2);
 
 app.engine('hbs', hbs.express4({
-  defaultLayout: `${__dirname}/views/layout.hbs`
+  defaultLayout: `${__dirname}/views/layout.hbs`,
+  partialsDir: `${__dirname}/views/partials`
 }));
 
 app.use(express.static(path.join(__dirname, '/../../public')));

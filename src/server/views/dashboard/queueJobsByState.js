@@ -25,7 +25,7 @@ async function handler(req, res) {
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
-  res.render('dashboard/templates/queueJobsByState.hbs', {
+  return res.render('dashboard/templates/queueJobsByState.hbs', {
     name: queueName,
     state,
     jobs,

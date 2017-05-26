@@ -10,5 +10,10 @@ hbs.registerHelper('adjustedPage', function(currentPage, pageSize, newPageSize) 
   return _.ceil(firstId / newPageSize) + 1;
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  hbs.registerHelper('_keys', function(obj) {
+    return _.keys(obj);
+  });  
+}
 
 module.exports = hbs;

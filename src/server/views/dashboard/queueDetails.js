@@ -41,7 +41,7 @@ async function handler(req, res) {
 
   const [jobCounts, stats] = await Promise.all([queue.getJobCounts(), getStats]);
 
-  res.render('dashboard/templates/queueDetails.hbs', {
+  return res.render('dashboard/templates/queueDetails.hbs', {
     name,
     jobCounts,
     stats

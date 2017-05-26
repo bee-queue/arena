@@ -114,3 +114,10 @@ body {
 .pagination {
   margin: 0;
 }
+
+/*
+ * Collapsing
+ */
+.header-collapse {
+  margin: 0;
+}
