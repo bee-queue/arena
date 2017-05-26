@@ -13,7 +13,7 @@ const metrics = [
 async function handler(req, res) {
   const name = req.params.queueName;
   const queue = await Queues.get(name);
-  if (!queue) res.status(404).render('dashboard/templates/queueNotFound.hbs', {name});
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name});
 
   /*
     TODO(randall): get feedback on practicality of this idea

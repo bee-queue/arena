@@ -5,8 +5,8 @@ async function handler(req, res) {
   const { queueName, state } = req.params;
   const jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
   const queue = await Queues.get(queueName);
-  if (!queue) res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
-  if (!_.includes(jobTypes, state)) res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {name: queueName, state});
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
+  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {name: queueName, state});
 
   const jobCounts = await queue.getJobCounts();
 
