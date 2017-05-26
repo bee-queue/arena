@@ -12,17 +12,22 @@
 {{/eq}}
 
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
+    <h5>State</h5>
+    {{capitalize jobState}}
+  </div>
+
+  <div class="col-sm-3">
     <h5>Timestamp</h5>
     {{moment this.timestamp "llll"}}
   </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{ this.attemptsMade }}
   </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <h5>Permalinks</h5>
     <a href="/dashboard/{{ queueName }}/{{ this.id }}" class="btn btn-info btn-sm">Job #{{ this.id }}</a>
     <a href="/dashboard/{{ queueName }}/{{ this.id }}?json=true" class="btn btn-info btn-sm">JSON</a>
