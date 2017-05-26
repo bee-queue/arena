@@ -9,7 +9,7 @@ async function handler(req, res) {
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
 
   const job = await queue.getJob(id);
-  if (!job) return res.status(404).render('dashboard/templates/jobNotFound.hbs', {id});
+  if (!job) return res.status(404).render('dashboard/templates/jobNotFound.hbs', {id, queueName});
 
   if (json === 'true') {
     return res.json(job);

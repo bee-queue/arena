@@ -29,3 +29,8 @@
     </table>
   </div>
 </div>
+
+{{#contentFor 'sidebar'}}
+  <li><a href="/dashboard">Queues Overview</a></li>
+  <li class="active"><a href="#">Queue <code>{{ name }}</code></a></li>
+{{/contentFor}}

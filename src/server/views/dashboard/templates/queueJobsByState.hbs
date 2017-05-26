@@ -71,3 +71,9 @@
     </ul>
   </div>
 </div>
+
+{{#contentFor 'sidebar'}}
+  <li><a href="/dashboard">Queues Overview</a></li>
+  <li><a href="/dashboard/{{ name }}">Queue <code>{{ name }}</code></a></li>
+  <li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
+{{/contentFor}}
