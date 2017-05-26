@@ -18,7 +18,7 @@ async function handler(req, res) {
 
   return res.render('dashboard/templates/jobDetails.hbs', {
     queueName,
-    job
+    job: job.toJSON() // toJSON() automatically converts progress to a number
   });
 }
 
