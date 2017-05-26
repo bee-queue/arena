@@ -11,6 +11,16 @@
   </form>
 {{/eq}}
 
+{{#eq jobState 'completed'}}
+  <h5>Actions</h5>
+  <form class="js-deletejob-form">
+    <input type="hidden" name="queueName" value="{{ queueName }}" />
+    <input type="hidden" name="jobState" value="{{ jobState }}" />
+    <input type="hidden" name="jobId" value="{{ this.id }}" />
+    <button class="btn btn-danger">Delete</button>
+  </form>
+{{/eq}}
+
 <div class="row">
   <div class="col-sm-3">
     <h5>State</h5>
