@@ -26,14 +26,14 @@ $(document).ready(() => {
     }
   });
 
-  $('.js-deletejob-form').on('submit', function(e) {
+  $('.js-removejob-form').on('submit', function(e) {
     e.preventDefault();
 
     const jobId = getField(this, 'jobId')
     const queueName = getField(this, 'queueName');
     const jobState = getField(this, 'jobState');
 
-    const r = window.confirm(`Retry job #${jobId} in queue "${queueName}"?`);
+    const r = window.confirm(`Remove job #${jobId} in queue "${queueName}"?`);
     if (r) {
       $.ajax({
         method: 'DELETE',
