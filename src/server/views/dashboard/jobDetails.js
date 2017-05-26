@@ -4,7 +4,6 @@ const Queues = require('../../bull');
 async function handler(req, res) {
   const { queueName, id } = req.params;
   const { json } = req.query;
-  const jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
 
   const queue = await Queues.get(queueName);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
@@ -16,8 +15,11 @@ async function handler(req, res) {
     return res.json(job);
   }
 
+  const isFailed = await job.isFailed();
+
   return res.render('dashboard/templates/jobDetails.hbs', {
     queueName,
+    isFailed,
     job: job.toJSON() // toJSON() automatically converts progress to a number
   });
 }

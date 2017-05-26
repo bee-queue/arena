@@ -1,6 +1,15 @@
 {{#unless displayJobInline}}
-  <h4>{{ this.name }} <small>(#{{ this.id }})</small></h4>
+  <h3>{{ this.name }} <small>(#{{ this.id }})</small></h3>
 {{/unless}}
+
+{{#if isFailed}}
+  <h5>Actions</h5>
+  <form class="js-retryjob-form">
+    <input type="hidden" name="queueName" value="{{ queueName }}" />
+    <input type="hidden" name="jobId" value="{{ this.id }}" />
+    <button class="btn btn-success">Retry</button>
+  </form>
+{{/if}}
 
 <div class="row">
   <div class="col-sm-4">
