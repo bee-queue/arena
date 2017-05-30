@@ -3,7 +3,8 @@ const path = require('path');
 const basicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser');
 
-const hbs = require('./hbshelpers');
+const hbs = require('express-hbs');
+require('handlebars-helpers')({handlebars: hbs});
 require('./views/helpers/handlebars')(hbs);
 const hbsutils = require('hbs-utils')(hbs);
 

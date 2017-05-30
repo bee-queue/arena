@@ -7,11 +7,15 @@ const helpers = {
       return d;
     }
     return JSON.stringify(obj);
+  },
+  adjustedPage(currentPage, pageSize, newPageSize) {
+    const firstId = (currentPage - 1) * pageSize;
+    return _.ceil(firstId / newPageSize) + 1;
   }
 };
 
 module.exports = function registerHelpers(hbs) {
-  _.each(helpers,(fn, helper) => {
+  _.each(helpers, (fn, helper) => {
     hbs.registerHelper(helper, fn);
   });
 };
