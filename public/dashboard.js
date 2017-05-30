@@ -118,4 +118,45 @@ $(document).ready(() => {
       $(this).prop('disabled', false);
     }
   });
+
+  // Set up bulk "retry job" handler
+  $('.js-retry-jobs').on('click', function(e) {
+    $(this).prop('disabled', true);
+
+    const queueName = $('.js-queue-name').val();
+    const queueState = $('.js-queue-state').val();
+    const $jobBulkCheckboxesForm = $('.js-bulk-job-container');
+
+    let data = {
+      queueName,
+      action: 'remove',
+      jobsToRetry: []
+    };
+
+    $jobBulkCheckboxesForm.each((index, value) => {
+      const isChecked = $(value).find('[name=jobChecked]').is(':checked');
+      const id = parseInt($(value).find('[name=jobId]').val(), 10);
+
+      if (isChecked) {
+        data.jobsToRetry.push(id);
+      }
+    });
+
+    const r = window.confirm(`Retry ${data.jobsToRetry.length} ${data.jobsToRetry.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
+    if (r) {
+      $.ajax({
+        method: 'PATCH',
+        url: `/dashboard/${queueName}/${queueState}/bulk`,
+        data: JSON.stringify(data),
+        contentType: 'application/json'
+      }).done(() => {
+        window.location.reload();
+      }).fail((jqXHR) => {
+        window.alert(`Request failed, check console for error.`);
+        console.error(jqXHR.responseText);
+      });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });  
 });
