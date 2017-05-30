@@ -29,6 +29,7 @@ async function handler(req, res) {
     name: queueName,
     state,
     jobs,
+    jobsInStateCount: jobCounts[state],
     currentPage: page,
     pages,
     pageSize,

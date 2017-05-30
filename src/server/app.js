@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const basicAuth = require('express-basic-auth');
+const bodyParser = require('body-parser');
 
 const hbs = require('./hbshelpers');
 require('./views/helpers/handlebars')(hbs);
@@ -21,6 +22,7 @@ app.engine('hbs', hbs.express4({
 }));
 
 app.use(express.static(path.join(__dirname, '/../../public')));
+app.use(bodyParser.json());
 
 hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/

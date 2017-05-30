@@ -15,7 +15,7 @@ async function handler(req, res) {
   } catch (e) {
     const body = {
       error: 'bull error',
-      details: e
+      details: e.stack
     };
     return res.status(500).send(body);
   }

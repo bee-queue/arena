@@ -119,5 +119,17 @@ body {
  * Collapsing
  */
 .header-collapse {
-  margin: 0;
+  display: inline;
+  margin: 0 0 0 .5em;
+}
+
+/*
+ * Bulk job selection
+ */
+.bulk-job-container {
+  display: inline-block;
+}
+
+.select-all-text {
+  font-weight: 400;
 }
