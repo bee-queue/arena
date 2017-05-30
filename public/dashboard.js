@@ -2,6 +2,7 @@ $(document).ready(() => {
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
+    $(this).prop('disabled', true);
 
     const jobId = $(this).data('job-id');
     const queueName = $(this).data('queue-name');
@@ -17,12 +18,15 @@ $(document).ready(() => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
       });
+    } else {
+      $(this).prop('disabled', false);
     }
   });
 
   // Set up individual "remove job" handler
   $('.js-remove-job').on('click', function(e) {
     e.preventDefault();
+    $(this).prop('disabled', true);
 
     const jobId = $(this).data('job-id');
     const queueName = $(this).data('queue-name');
@@ -39,6 +43,8 @@ $(document).ready(() => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
       });
+    } else {
+      $(this).prop('disabled', false);
     }
   });
 
