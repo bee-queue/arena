@@ -3,16 +3,12 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function getField($form, fieldName) {
-    return $form.serializeArray().find((field) => field.name === fieldName).value;
-  }
-
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
 
-    const jobId = getField($(this).closest('.js-individual-action'), 'jobId')
-    const queueName = getField($(this).closest('.js-individual-action'), 'queueName');
+    const jobId = $(this).data('job-id');
+    const queueName = $(this).data('queue-name');
 
     const r = window.confirm(`Retry job #${jobId} in queue "${queueName}"?`);
     if (r) {
@@ -32,9 +28,9 @@ $(document).ready(() => {
   $('.js-remove-job').on('click', function(e) {
     e.preventDefault();
 
-    const jobId = getField($(this).closest('.js-individual-action'), 'jobId')
-    const queueName = getField($(this).closest('.js-individual-action'), 'queueName');
-    const jobState = getField($(this).closest('.js-individual-action'), 'jobState');
+    const jobId = $(this).data('job-id');
+    const queueName = $(this).data('queue-name');
+    const jobState = $(this).data('job-state');
 
     const r = window.confirm(`Remove job #${jobId} in queue "${queueName}"?`);
     if (r) {

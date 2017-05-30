@@ -4,21 +4,16 @@
 
 {{#eq jobState 'failed'}}
   <h5>Actions</h5>
-  <form class="js-individual-action">
-    <input type="hidden" name="queueName" value="{{ queueName }}" />
-    <input type="hidden" name="jobId" value="{{ this.id }}" />
-    <button class="btn btn-success js-retry-job">Retry</button>
-  </form>
+  <button class="btn btn-success js-retry-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}">
+    Retry
+  </button>
 {{/eq}}
 
 {{#eq jobState 'completed'}}
   <h5>Actions</h5>
-  <form class="js-individual-action">
-    <input type="hidden" name="queueName" value="{{ queueName }}" />
-    <input type="hidden" name="jobState" value="{{ jobState }}" />
-    <input type="hidden" name="jobId" value="{{ this.id }}" />
-    <button class="btn btn-danger js-remove-job">Remove</button>
-  </form>
+  <button class="btn btn-danger js-remove-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
+    Remove
+  </button>
 {{/eq}}
 
 <div class="row">
