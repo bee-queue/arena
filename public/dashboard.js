@@ -1,4 +1,8 @@
 $(document).ready(() => {
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
@@ -79,73 +83,34 @@ $(document).ready(() => {
     });
   })();
 
-  // Set up bulk "remove job" handler
-  $('.js-remove-jobs').on('click', function(e) {
+  // Set up bulk actions handler
+  $('.js-bulk-action').on('click', function(e) {
     $(this).prop('disabled', true);
 
+    const $bulkActionContainer = $('.js-bulk-action-container');
+    const action = $(this).data('action');
     const queueName = $('.js-queue-name').val();
     const queueState = $('.js-queue-state').val();
-    const $jobBulkCheckboxesForm = $('.js-bulk-job-container');
 
     let data = {
       queueName,
       action: 'remove',
-      jobsToRemove: []
+      jobs: []
     };
 
-    $jobBulkCheckboxesForm.each((index, value) => {
+    $bulkActionContainer.each((index, value) => {
       const isChecked = $(value).find('[name=jobChecked]').is(':checked');
       const id = parseInt($(value).find('[name=jobId]').val(), 10);
 
       if (isChecked) {
-        data.jobsToRemove.push(id);
+        data.jobs.push(id);
       }
     });
 
-    const r = window.confirm(`Remove ${data.jobsToRemove.length} ${data.jobsToRemove.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
-    if (r) {
-      $.post({
-        url: `/dashboard/${queueName}/${queueState}/bulk`,
-        data: JSON.stringify(data),
-        contentType: 'application/json'
-      }).done(() => {
-        window.location.reload();
-      }).fail((jqXHR) => {
-        window.alert(`Request failed, check console for error.`);
-        console.error(jqXHR.responseText);
-      });
-    } else {
-      $(this).prop('disabled', false);
-    }
-  });
-
-  // Set up bulk "retry job" handler
-  $('.js-retry-jobs').on('click', function(e) {
-    $(this).prop('disabled', true);
-
-    const queueName = $('.js-queue-name').val();
-    const queueState = $('.js-queue-state').val();
-    const $jobBulkCheckboxesForm = $('.js-bulk-job-container');
-
-    let data = {
-      queueName,
-      action: 'remove',
-      jobsToRetry: []
-    };
-
-    $jobBulkCheckboxesForm.each((index, value) => {
-      const isChecked = $(value).find('[name=jobChecked]').is(':checked');
-      const id = parseInt($(value).find('[name=jobId]').val(), 10);
-
-      if (isChecked) {
-        data.jobsToRetry.push(id);
-      }
-    });
-
-    const r = window.confirm(`Retry ${data.jobsToRetry.length} ${data.jobsToRetry.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
+    const r = window.confirm(`${capitalize(action)} ${data.jobs.length} ${data.jobs.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
     if (r) {
       $.ajax({
-        method: 'PATCH',
+        method: action === 'remove' ? 'POST' : 'PATCH',
         url: `/dashboard/${queueName}/${queueState}/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'

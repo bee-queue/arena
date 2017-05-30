@@ -46,12 +46,12 @@
   </div>
   <div class="col-sm-6 text-right">
     {{#eq state 'completed'}}
-      <button type="button" class="js-remove-jobs btn btn-danger">
+      <button type="button" data-action="remove" class="js-bulk-action btn btn-danger">
         Remove Jobs
       </button>
     {{/eq}}
     {{#eq state 'failed'}}
-      <button type="button" class="js-retry-jobs btn btn-success">
+      <button type="button" data-action="retry" class="js-bulk-action btn btn-success">
         Retry Jobs
       </button>
     {{/eq}}
@@ -82,7 +82,7 @@
 
         {{#each jobs}}
           <li class="list-group-item">
-            <div class="js-bulk-job-container bulk-job-container">
+            <div class="js-bulk-action-container bulk-job-container">
               <input type="hidden" name="jobId" value="{{ this.id }}" />
               <input class="js-bulk-job" name="jobChecked" type="checkbox" />
             </div>
