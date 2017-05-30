@@ -85,10 +85,15 @@ $(document).ready(() => {
 
     const queueName = $('.js-queue-name').val();
     const queueState = $('.js-queue-state').val();
-    const $jobBulkCheckboxesForm = $('.js-bulk-job-form');
+    const $jobBulkCheckboxesForm = $('.js-bulk-job-container');
 
-    let data = {queueName, action: 'remove', jobsToRemove: []};
-    $('.js-bulk-job-container').each((index, value) => {
+    let data = {
+      queueName,
+      action: 'remove',
+      jobsToRemove: []
+    };
+
+    $jobBulkCheckboxesForm.each((index, value) => {
       const isChecked = $(value).find('[name=jobChecked]').is(':checked');
       const id = parseInt($(value).find('[name=jobId]').val(), 10);
 
@@ -97,15 +102,20 @@ $(document).ready(() => {
       }
     });
 
-    $.post({
-      url: `/dashboard/${queueName}/${queueState}/bulk`,
-      data: JSON.stringify(data),
-      contentType: 'application/json'
-    }).done(() => {
-      window.location.reload();
-    }).fail((jqXHR) => {
-      window.alert(`Request failed, check console for error.`);
-      console.error(jqXHR.responseText);
-    });
+    const r = window.confirm(`Remove ${data.jobsToRemove.length} ${data.jobsToRemove.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
+    if (r) {
+      $.post({
+        url: `/dashboard/${queueName}/${queueState}/bulk`,
+        data: JSON.stringify(data),
+        contentType: 'application/json'
+      }).done(() => {
+        window.location.reload();
+      }).fail((jqXHR) => {
+        window.alert(`Request failed, check console for error.`);
+        console.error(jqXHR.responseText);
+      });
+    } else {
+      $(this).prop('disabled', false);
+    }
   });
 });
