@@ -1,8 +1,4 @@
 $(document).ready(() => {
-  function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
