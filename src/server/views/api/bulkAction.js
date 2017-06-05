@@ -5,8 +5,14 @@ const ACTIONS = ['remove', 'retry'];
 
 function bulkAction(action) {
   return async function handler(req, res) {
-    const { queueName } = req.params;
+    if (!_.includes(ACTIONS, action)) {
+      res.status(401).send({
+        error: 'unauthorized action',
+        details: `action ${action} not permitted`
+      });
+    }
 
+    const { queueName } = req.params;
     const queue = await Queues.get(queueName);
     if (!queue) return res.status(404).send({error: 'queue not found'});
 
@@ -17,12 +23,6 @@ function bulkAction(action) {
         const jobsPromises = jobs.map((id) => queue.getJob(id));
         const fetchedJobs = await Promise.all(jobsPromises);
 
-        if (!_.includes(ACTIONS, action)) {
-          res.status(401).send({
-            error: 'unauthorized action',
-            details: `action ${action} not permitted`
-          });
-        }
 
         const actionPromises = fetchedJobs.map((job) => job[action]());
         await Promise.all(actionPromises);
