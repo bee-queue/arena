@@ -15,7 +15,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/dashboard/${queueName}/${jobId}`
+        url: `/api/queue/${queueName}/job/${jobId}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -40,7 +40,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/dashboard/${queueName}/${jobId}`
+        url: `/api/queue/${queueName}/job/${jobId}`
       }).done(() => {
         window.location.href = `/dashboard/${queueName}/${jobState}`;
       }).fail((jqXHR) => {
@@ -111,7 +111,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `/dashboard/${queueName}/${queueState}/bulk`,
+        url: `/api/queue/${queueName}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'
       }).done(() => {
