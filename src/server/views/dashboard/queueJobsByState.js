@@ -33,7 +33,6 @@ async function handler(req, res) {
     currentPage: page,
     pages,
     pageSize,
-    jobState: state,
     lastPage: _.last(pages)
   });
 }

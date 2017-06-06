@@ -23,13 +23,11 @@ function bulkAction(action) {
         const jobsPromises = jobs.map((id) => queue.getJob(id));
         const fetchedJobs = await Promise.all(jobsPromises);
 
-
-        const actionPromises = fetchedJobs.map((job) => job[action]());
+        const actionPromises = fetchedJobs.map(job => job[action]());
         await Promise.all(actionPromises);
         return res.sendStatus(200);
       }
     } catch(e) {
-      debugger
       const body = {
         error: 'bull error',
         details: e.stack

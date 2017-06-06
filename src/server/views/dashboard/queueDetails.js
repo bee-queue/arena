@@ -29,17 +29,7 @@ async function handler(req, res) {
     }
   */
 
-  const getStats = queue.client
-    .info()
-    .then((doc) => {
-      return _mapToObject(new Map(
-        doc.split('\r\n')
-          .map((line) => line.split(':'))
-          .filter((line) => _.includes(metrics, line[0]))
-      ));
-    });
-
-  const [jobCounts, stats] = await Promise.all([queue.getJobCounts(), getStats]);
+  const [jobCounts, stats] = await Promise.all([queue.getJobCounts(), getStats(queue)]);
 
   return res.render('dashboard/templates/queueDetails.hbs', {
     name,
@@ -48,12 +38,15 @@ async function handler(req, res) {
   });
 }
 
-function _mapToObject(map) {
-  let obj = {};
-  for (let [k, v] of map) {
-    obj[k] = v;
-  }
-  return obj;
+async function getStats(queue) {
+  const info = await queue.client.info();
+
+  const dataPairs = info
+    .split('\r\n')
+    .map((line) => line.split(':'))
+    .filter((line) => _.includes(metrics, line[0]));
+
+  return _.fromPairs(dataPairs);
 }
 
 module.exports = handler;

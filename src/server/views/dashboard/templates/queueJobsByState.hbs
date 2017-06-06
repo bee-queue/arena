@@ -5,7 +5,7 @@
 <form>
   <input type="hidden" class="js-jobs-count" value="{{ jobsInStateCount }}" />
   <input type="hidden" class="js-queue-name" value="{{ name }}" />
-  <input type="hidden" class="js-queue-state" value="{{ jobState }}" />
+  <input type="hidden" class="js-queue-state" value="{{ state }}" />
 </form>
 
 <div class="row pagination-container">
@@ -91,7 +91,7 @@
               <h4 class="header-collapse">{{ this.name }} <small>(#{{ this.id }})</small></h4>
             </a>
             <div id="collapse{{this.id}}" class="collapse">
-              {{> dashboard/jobDetails this displayJobInline=true queueName=../name jobState=../jobState }}
+              {{> dashboard/jobDetails this displayJobInline=true queueName=../name jobState=../state }}
             </div>
           </li>
         {{/each}}
