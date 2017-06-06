@@ -75,17 +75,21 @@
   <div class="col-sm-12">
     <form class="js-bulk-job-form">
       <ul class="list-group">
-        <li class="list-group-item">
-          <input class="js-select-all-jobs" type="checkbox" />
-          <h5 class="header-collapse select-all-text">Select All</h5>
-        </li>
+        {{#contains statesWithBulkActions state}}
+          <li class="list-group-item">
+            <input class="js-select-all-jobs" type="checkbox" />
+            <h5 class="header-collapse select-all-text">Select All</h5>
+          </li>
+        {{/contains}}
 
         {{#each jobs}}
           <li class="list-group-item">
-            <div class="js-bulk-action-container bulk-job-container">
-              <input type="hidden" name="jobId" value="{{ this.id }}" />
-              <input class="js-bulk-job" name="jobChecked" type="checkbox" />
-            </div>
+            {{#contains ../statesWithBulkActions ../state}}
+              <div class="js-bulk-action-container bulk-job-container">
+                <input type="hidden" name="jobId" value="{{ this.id }}" />
+                <input class="js-bulk-job" name="jobChecked" type="checkbox" />
+              </div>
+            {{/contains}}
 
             <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
               <h4 class="header-collapse">{{ this.name }} <small>(#{{ this.id }})</small></h4>
