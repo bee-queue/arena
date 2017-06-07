@@ -86,15 +86,15 @@
           <li class="list-group-item">
             {{#contains ../statesWithBulkActions ../state}}
               <div class="js-bulk-action-container bulk-job-container">
-                <input type="hidden" name="jobId" value="{{ this.id }}" />
+                <input type="hidden" name="jobId" value="{{ this.jobId }}" />
                 <input class="js-bulk-job" name="jobChecked" type="checkbox" />
               </div>
             {{/contains}}
 
-            <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
-              <h4 class="header-collapse">{{ this.name }} <small>(#{{ this.id }})</small></h4>
+            <a role="button" data-toggle="collapse" href="#collapse{{this.jobId}}">
+              <h4 class="header-collapse">#{{ this.jobId }}</h4>
             </a>
-            <div id="collapse{{this.id}}" class="collapse">
+            <div id="collapse{{this.jobId}}" class="collapse">
               {{> dashboard/jobDetails this displayJobInline=true queueName=../name jobState=../state }}
             </div>
           </li>

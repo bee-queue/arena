@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "bull": "^3.0.0-rc.1",
+    "bull": "mixmaxhq/bull#1.0.0-mixmax8",
     "express": "^4.15.2",
     "express-basic-auth": "^1.0.2",
     "express-hbs": "^1.0.4",

@@ -6,5 +6,5 @@
   <li><a href="/dashboard">Queues Overview</a></li>
   <li><a href="/dashboard/{{ queueName }}">Queue <code>{{ queueName }}</code></a></li>
   <li><a href="/dashboard/{{ queueName }}/{{ jobState }}">{{capitalize jobState}} Jobs</a></li>
-  <li class="active"><a href="#">Job #{{ job.id }}</a></li>
+  <li class="active"><a href="#">Job #{{ job.jobId }}</a></li>
 {{/contentFor}}

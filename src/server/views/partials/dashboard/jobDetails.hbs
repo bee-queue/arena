@@ -1,17 +1,17 @@
 {{#unless displayJobInline}}
-  <h3>{{ this.name }} <small>(#{{ this.id }})</small></h3>
+  <h3>#{{ this.jobId }}</h3>
 {{/unless}}
 
 {{#eq jobState 'failed'}}
   <h5>Actions</h5>
-  <button class="btn btn-success js-retry-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}">
+  <button class="btn btn-success js-retry-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.jobId }}">
     Retry
   </button>
 {{/eq}}
 
 {{#eq jobState 'completed'}}
   <h5>Actions</h5>
-  <button class="btn btn-danger js-remove-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
+  <button class="btn btn-danger js-remove-job" data-queue-name="{{ queueName }}" data-job-id="{{ this.jobId }}" data-job-state="{{ jobState }}">
     Remove
   </button>
 {{/eq}}
@@ -34,8 +34,8 @@
 
   <div class="col-sm-3">
     <h5>Permalinks</h5>
-    <a href="/dashboard/{{ queueName }}/{{ this.id }}" class="btn btn-info">Job #{{ this.id }}</a>
-    <a href="/dashboard/{{ queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
+    <a href="/dashboard/{{ queueName }}/{{ this.jobId }}" class="btn btn-info">Job #{{ this.jobId }}</a>
+    <a href="/dashboard/{{ queueName }}/{{ this.jobId }}?json=true" class="btn btn-info">JSON</a>
   </div>
 </div>
 
@@ -46,11 +46,11 @@
               progress-bar-danger
               {{/eq}}"
        role="progressbar"
-       aria-valuenow="{{ this.progress }}"
+       aria-valuenow="{{ this._progress }}"
        aria-valuemin="0"
        aria-valuemax="100"
-       style="width: {{ this.progress }}%; min-width: 2em;">
-    {{ this.progress }}%
+       style="width: {{ this._progress }}%; min-width: 2em;">
+    {{ this._progress }}%
   </div>
 </div>
 

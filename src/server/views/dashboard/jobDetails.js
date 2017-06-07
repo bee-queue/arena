@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const util = require('util');
 const Queues = require('../../bull');
 
 async function handler(req, res) {
@@ -12,6 +13,7 @@ async function handler(req, res) {
   if (!job) return res.status(404).render('dashboard/templates/jobNotFound.hbs', {id, queueName});
 
   if (json === 'true') {
+    delete job.queue; // avoid circular references parsing error
     return res.json(job);
   }
 
@@ -20,7 +22,7 @@ async function handler(req, res) {
   return res.render('dashboard/templates/jobDetails.hbs', {
     queueName,
     jobState,
-    job: job.toJSON() // toJSON() automatically converts progress to a number
+    job
   });
 }
 

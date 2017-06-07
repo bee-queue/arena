@@ -8,15 +8,21 @@ async function handler(req, res) {
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
   if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {name: queueName, state});
 
-  const jobCounts = await queue.getJobCounts();
+  const jobCounts = {
+    failed: await queue.getFailedCount(),
+    delayed: await queue.getDelayedCount(),
+    paused: await queue.getActiveCount(),
+    waiting: await queue.getWaitingCount(),
+    active: await queue.getActiveCount(),
+    completed: await queue.getCompletedCount()
+  };
 
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;
 
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
-  let jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
-  jobs = _.invokeMap(jobs, 'toJSON');
+  const jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
 
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);

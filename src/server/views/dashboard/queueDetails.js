@@ -29,7 +29,15 @@ async function handler(req, res) {
     }
   */
 
-  const [jobCounts, stats] = await Promise.all([queue.getJobCounts(), getStats(queue)]);
+  const jobCounts = {
+    failed: await queue.getFailedCount(),
+    delayed: await queue.getDelayedCount(),
+    paused: await queue.getActiveCount(),
+    waiting: await queue.getWaitingCount(),
+    active: await queue.getActiveCount(),
+    completed: await queue.getCompletedCount()
+  };
+  const stats = await getStats(queue);
 
   return res.render('dashboard/templates/queueDetails.hbs', {
     name,
@@ -41,12 +49,7 @@ async function handler(req, res) {
 async function getStats(queue) {
   const info = await queue.client.info();
 
-  const dataPairs = info
-    .split('\r\n')
-    .map((line) => line.split(':'))
-    .filter((line) => _.includes(metrics, line[0]));
-
-  return _.fromPairs(dataPairs);
+  return _.pickBy(queue.client.server_info, (value, key) => _.includes(metrics, key));
 }
 
 module.exports = handler;
