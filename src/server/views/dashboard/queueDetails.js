@@ -1,14 +1,6 @@
 const _ = require('lodash');
 const Queues = require('../../bull');
-
-const metrics = [
-  'redis_version',
-  'total_system_memory',
-  'used_memory',
-  'mem_fragmentation_ratio',
-  'connected_clients',
-  'blocked_clients'
-];
+const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const name = req.params.queueName;
@@ -29,27 +21,14 @@ async function handler(req, res) {
     }
   */
 
-  const jobCounts = {
-    failed: await queue.getFailedCount(),
-    delayed: await queue.getDelayedCount(),
-    paused: await queue.getActiveCount(),
-    waiting: await queue.getWaitingCount(),
-    active: await queue.getActiveCount(),
-    completed: await queue.getCompletedCount()
-  };
-  const stats = await getStats(queue);
+  const jobCounts = await QueueHelpers.getJobCounts(queue);
+  const stats = await QueueHelpers.getStats(queue);
 
   return res.render('dashboard/templates/queueDetails.hbs', {
     name,
     jobCounts,
     stats
   });
-}
-
-async function getStats(queue) {
-  const info = await queue.client.info();
-
-  return _.pickBy(queue.client.server_info, (value, key) => _.includes(metrics, key));
 }
 
 module.exports = handler;
