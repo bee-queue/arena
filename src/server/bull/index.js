@@ -1,6 +1,11 @@
 const _ = require('lodash');
 const Bull = require('bull');
-const config = require('../config');
+
+if (process.env.BULL_UI_CONFIG) {
+  var config = JSON.parse(require('fs').readFileSync(process.env.BULL_UI_CONFIG));
+} else {
+  var config = require('../config');
+}
 
 /**
  * This function simply throws an exception when called, this is used to protect

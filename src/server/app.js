@@ -9,7 +9,12 @@ require('./views/helpers/handlebars')(hbs);
 const hbsutils = require('hbs-utils')(hbs);
 
 const routes = require('./views/routes');
-const {users} = require('./config/index.json');
+
+if (process.env.BULL_UI_CONFIG) {
+  var {users} = JSON.parse(require('fs').readFileSync(process.env.BULL_UI_CONFIG));
+} else {
+  var {users} = require('./config');
+}
 
 const app = express();
 
