@@ -104,3 +104,32 @@ body {
   border-radius: 50%;
 }
 
+/*
+ * Pagination
+ */
+.pagination-container {
+  margin: 20px 0;
+}
+
+.pagination {
+  margin: 0;
+}
+
+/*
+ * Collapsing
+ */
+.header-collapse {
+  display: inline;
+  margin: 0 0 0 .5em;
+}
+
+/*
+ * Bulk job selection
+ */
+.bulk-job-container {
+  display: inline-block;
+}
+
+.select-all-text {
+  font-weight: 400;
+}

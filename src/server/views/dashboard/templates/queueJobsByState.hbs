@@ -1,14 +1,115 @@
-<h2>Queue: {{ name }}</h2>
-<h3>List of jobs in {{ state }} state</h3>
-<ul class="list-group">
-  {{#each jobs}}
-    <li class="list-group-item">
-      <a role="button" data-toggle="collapse" href="#collapse{{this.id}}">
-        Job: {{ this.id }} {{ this.name }}
-      </a>
-      <div id="collapse{{this.id}}" class="collapse">
-        <pre>{{{ json this true }}}</pre>
-      </div>
-    </li>
-  {{/each}}
-</ul>
+<h2>Queue <code>{{ name }}</code></h2>
+
+<h3>{{capitalize state}} Jobs</h3>
+
+<form>
+  <input type="hidden" class="js-jobs-count" value="{{ jobsInStateCount }}" />
+  <input type="hidden" class="js-queue-name" value="{{ name }}" />
+  <input type="hidden" class="js-queue-state" value="{{ state }}" />
+</form>
+
+<div class="row pagination-container">
+  <div class="col-sm-6">
+    <nav aria-label="Job navigation">
+      <ul class="pagination">
+        <li
+          {{#eq currentPage 1}}
+            class="disabled">
+              <span>&laquo;</span>
+          {{else}}
+            ><a href="/dashboard/{{ name }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          {{/eq}}
+        </li>
+        {{#each pages}}
+          <li
+            {{#eq this ../currentPage}}
+              class="active"
+            {{/eq}}>
+
+            <a href="/dashboard/{{ ../name }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+          </li>
+        {{/each}}
+        <li
+          {{#eq currentPage lastPage}}
+            class="disabled">
+              <span>&raquo;</span>
+          {{else}}
+            ><a href="/dashboard/{{ name }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          {{/eq}}
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-sm-6 text-right">
+    {{#eq state 'completed'}}
+      <button type="button" data-action="remove" class="js-bulk-action btn btn-danger">
+        Remove Jobs
+      </button>
+    {{/eq}}
+    {{#eq state 'failed'}}
+      <button type="button" data-action="retry" class="js-bulk-action btn btn-success">
+        Retry Jobs
+      </button>
+    {{/eq}}
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Page Size <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
+        <li><a href="/dashboard/{{ name }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form class="js-bulk-job-form">
+      <ul class="list-group">
+        {{#contains statesWithBulkActions state}}
+          <li class="list-group-item">
+            <input class="js-select-all-jobs" type="checkbox" />
+            <h5 class="header-collapse select-all-text">Select All</h5>
+          </li>
+        {{/contains}}
+
+        {{#each jobs}}
+          <li class="list-group-item">
+            {{#contains ../statesWithBulkActions ../state}}
+              <div class="js-bulk-action-container bulk-job-container">
+                <input type="hidden" name="jobId" value="{{ this.jobId }}" />
+                <input class="js-bulk-job" name="jobChecked" type="checkbox" />
+              </div>
+            {{/contains}}
+
+            <a role="button" data-toggle="collapse" href="#collapse{{this.jobId}}">
+              <h4 class="header-collapse">#{{ this.jobId }}</h4>
+            </a>
+            <div id="collapse{{this.jobId}}" class="collapse">
+              {{> dashboard/jobDetails this displayJobInline=true queueName=../name jobState=../state }}
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </form>
+  </div>
+</div>
+
+<p>
+  <em>Hint: </em><kbd><span style="font-family: sans-serif;">&#8679;</span> + Click</kbd><em> to select a range of jobs.</em>
+</p>
+
+{{#contentFor 'sidebar'}}
+  <li><a href="/dashboard">Queues Overview</a></li>
+  <li><a href="/dashboard/{{ name }}">Queue <code>{{ name }}</code></a></li>
+  <li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
+{{/contentFor}}

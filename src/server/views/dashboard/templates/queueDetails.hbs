@@ -1,10 +1,36 @@
-<h2>Queue {{ name }}</h2>
-<ul class="list-group">
-  {{#each groups }}
-    <li class="list-group-item">
-      <a href="{{ ../name }}/{{ this.[0] }}">
-        <span class="text-capitalize">{{ this.[0] }}</span>: {{ this.[1] }}
-      </a>
-    </li>
-  {{/each}}
-</ul>
+<h2>Queue <code>{{ name }}</code></h2>
+
+<h3>Job Types</h3>
+<div class="row">
+  <div class="col-sm-4 no-padding">
+    <ul class="list-group">
+      {{#each jobCounts}}
+        <li class="list-group-item">
+          <span class="badge">{{ this }}</span>
+          <a href="{{ ../name }}/{{ @key }}">
+            <span class="text-capitalize">{{ @key }}</span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<h3>Redis Statistics</h3>
+<div class="row">
+  <div class="col-sm-4 no-padding">
+    <table class="table">
+      {{#each stats}}
+        <tr>
+          <th>{{ @key }}</th>
+          <th>{{ this }}</th>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+</div>
+
+{{#contentFor 'sidebar'}}
+  <li><a href="/dashboard">Queues Overview</a></li>
+  <li class="active"><a href="#">Queue <code>{{ name }}</code></a></li>
+{{/contentFor}}

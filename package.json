@@ -7,10 +7,12 @@
   "author": "Chuy Martinez <chuy@mixmax.com>",
   "license": "MIT",
   "dependencies": {
-    "bull": "^3.0.0-alpha.4",
+    "body-parser": "^1.17.2",
+    "bull": "mixmaxhq/bull#1.0.0-mixmax8",
     "express": "^4.15.2",
     "express-basic-auth": "^1.0.2",
     "express-hbs": "^1.0.4",
+    "handlebars-helpers": "^0.8.2",
     "hbs-utils": "^0.0.4",
     "lodash": "^4.17.4",
     "nodemon": "^1.11.0"

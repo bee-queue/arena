@@ -1,7 +1,18 @@
-<ul class="list-group">
-  {{#each queues}}
-    <li class="list-group-item">
-      <a href="/dashboard/{{ this }}">{{ this }}</a>
-    </li>
-  {{/each}}
-</ul>
+<h2>Queues</h2>
+<h3>Overview</h3>
+
+<div class="row">
+  <div class="col-sm-4 no-padding">
+    <ul class="list-group">
+      {{#each queues}}
+        <li class="list-group-item">
+          <a href="/dashboard/{{ this }}">{{ this }}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+{{#contentFor 'sidebar'}}
+  <li class="active"><a href="#">Queues Overview</a></li>
+{{/contentFor}}
