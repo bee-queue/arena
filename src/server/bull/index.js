@@ -1,11 +1,10 @@
 const _ = require('lodash');
 const Bull = require('bull');
+const path = require('path');
 
-if (process.env.BULL_UI_CONFIG) {
-  var config = JSON.parse(require('fs').readFileSync(process.env.BULL_UI_CONFIG));
-} else {
-  var config = require('../config');
-}
+const envVarConfig = process.env.BULL_UI_CONFIG;
+const defaultConfig = path.join(__dirname, '..', 'config', 'index.json');
+const config = JSON.parse(require('fs').readFileSync(envVarConfig || defaultConfig));
 
 /**
  * This function simply throws an exception when called, this is used to protect

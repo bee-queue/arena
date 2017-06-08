@@ -10,11 +10,9 @@ const hbsutils = require('hbs-utils')(hbs);
 
 const routes = require('./views/routes');
 
-if (process.env.BULL_UI_CONFIG) {
-  var {users} = JSON.parse(require('fs').readFileSync(process.env.BULL_UI_CONFIG));
-} else {
-  var {users} = require('./config');
-}
+const envVarConfig = process.env.BULL_UI_CONFIG;
+const defaultConfig = path.join(__dirname, 'config', 'index.json');
+const {users} = JSON.parse(require('fs').readFileSync(envVarConfig || defaultConfig));
 
 const app = express();
 
