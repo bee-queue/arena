@@ -1,12 +1,14 @@
 {
-  "users": {
+  "__example_users": {
     "admin@example.com": "password"
   },
-  "queues": [
+  "__example_queues": [
     {
       "name": "my_queue",
       "port": 6381,
       "host": "127.0.0.1"
     }
-  ]
+  ],
+  "users": {},
+  "queues": []
 }

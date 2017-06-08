@@ -10,11 +10,10 @@ const hbsutils = require('hbs-utils')(hbs);
 
 const routes = require('./views/routes');
 
-const envVarConfig = process.env.BULL_UI_CONFIG;
-const defaultConfig = path.join(__dirname, 'config', 'index.json');
-const {users} = JSON.parse(require('fs').readFileSync(envVarConfig || defaultConfig));
-
 const app = express();
+
+const defaultConfig = path.join(__dirname, 'config', 'index.json');
+app.set('bull config', require(defaultConfig));
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
@@ -32,8 +31,9 @@ hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/
 });
 
+const authorizer = require('./authorizer')(app);
 app.use(basicAuth({
-  users,
+  authorizer,
   challenge: true
 }));
 
