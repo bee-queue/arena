@@ -1,7 +1,7 @@
 {
   "name": "bull-ui",
   "private": "true",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Dashboard for the Bull worker queue",
   "main": "index.js",
   "author": "Chuy Martinez <chuy@mixmax.com>",
