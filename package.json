@@ -1,6 +1,6 @@
 {
   "name": "bull-ui",
-  "private": "true",
+  "private": "false",
   "version": "1.0.0",
   "description": "Dashboard for the Bull worker queue",
   "main": "index.js",
