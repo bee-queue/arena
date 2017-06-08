@@ -23,5 +23,6 @@
   },
   "engines": {
     "node": ">=7.10"
-  }
+  },
+  "repository": "git@github.com:mixmaxhq/bull-ui.git"
 }
