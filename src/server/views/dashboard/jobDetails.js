@@ -6,6 +6,7 @@ async function handler(req, res) {
   const { queueName, id } = req.params;
   const { json } = req.query;
 
+  Queues.setConfig(req.app.get('bull config'));
   const queue = await Queues.get(queueName);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
 

@@ -4,6 +4,7 @@ const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const name = req.params.queueName;
+  Queues.setConfig(req.app.get('bull config'));
   const queue = await Queues.get(name);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name});
 

@@ -9,9 +9,11 @@ require('./views/helpers/handlebars')(hbs);
 const hbsutils = require('hbs-utils')(hbs);
 
 const routes = require('./views/routes');
-const {users} = require('./config/index.json');
 
 const app = express();
+
+const defaultConfig = path.join(__dirname, 'config', 'index.json');
+app.set('bull config', require(defaultConfig));
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
@@ -29,15 +31,16 @@ hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/
 });
 
+const authorizer = require('./authorizer')(app);
 app.use(basicAuth({
-  users,
+  authorizer,
   challenge: true
 }));
 
 app.use('/', routes);
 
 app.listen(4567, () => {
-  console.log('Bull UI is running on port 4567');
+  console.log('Bull Arena is running on port 4567');
 });
 
 module.exports = app;
