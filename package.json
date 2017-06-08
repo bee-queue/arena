@@ -20,7 +20,7 @@
     "inspect": "nodemon --inspect src/server/app.js"
   },
   "engines": {
-    "node": ">=7.10"
+    "node": ">=6.9.1"
   },
   "repository": "https://github.com/mixmaxhq/bull-arena.git",
   "version": "1.0.0"
