@@ -23,5 +23,5 @@
     "node": ">=6.9.1"
   },
   "repository": "https://github.com/mixmaxhq/bull-arena.git",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
