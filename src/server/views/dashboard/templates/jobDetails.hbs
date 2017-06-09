@@ -4,7 +4,7 @@
 
 {{#contentFor 'sidebar'}}
   <li><a href="/dashboard">Queues Overview</a></li>
-  <li><a href="/dashboard/{{ queueHost }}/{{ queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
-  <li><a href="/dashboard/{{ queueHost }}/{{ queueName }}/{{ jobState }}">{{capitalize jobState}} Jobs</a></li>
+  <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
+  <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ jobState }}">{{capitalize jobState}} Jobs</a></li>
   <li class="active"><a href="#">Job #{{ job.jobId }}</a></li>
 {{/contentFor}}

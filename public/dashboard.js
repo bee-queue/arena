@@ -16,7 +16,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/api/queue/${queueHost}/${queueName}/job/${jobId}`
+        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${jobId}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -42,9 +42,9 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/api/queue/${queueHost}/${queueName}/job/${jobId}`
+        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${jobId}`
       }).done(() => {
-        window.location.href = `/dashboard/${queueHost}/${queueName}/${jobState}`;
+        window.location.href = `/dashboard/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
       }).fail((jqXHR) => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
@@ -114,7 +114,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `/api/queue/${queueHost}/${queueName}/job/bulk`,
+        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'
       }).done(() => {

@@ -7,7 +7,7 @@
       {{#each jobCounts}}
         <li class="list-group-item">
           <span class="badge">{{ this }}</span>
-          <a href="/dashboard/{{ ../queueHost }}/{{ ../queueName }}/{{ @key }}">
+          <a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ @key }}">
             <span class="text-capitalize">{{ @key }}</span>
           </a>
         </li>
