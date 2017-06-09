@@ -40,7 +40,7 @@ app.use(basicAuth({
 app.use('/', routes);
 
 app.listen(4567, () => {
-  console.log('Bull Arena is running on port 4567');
+  console.log('Arena is running on port 4567');
 });
 
 module.exports = app;

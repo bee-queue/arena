@@ -22,6 +22,6 @@
   "engines": {
     "node": ">=6.9.1"
   },
-  "repository": "https://github.com/mixmaxhq/bull-arena.git",
+  "repository": "https://github.com/mixmaxhq/arena.git",
   "version": "1.0.2"
 }
