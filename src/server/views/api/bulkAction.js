@@ -12,9 +12,9 @@ function bulkAction(action) {
       });
     }
 
-    const { queueName } = req.params;
+    const { queueName, queueHost } = req.params;
     Queues.setConfig(req.app.get('bull config'));
-    const queue = await Queues.get(queueName);
+    const queue = await Queues.get(queueName, queueHost);
     if (!queue) return res.status(404).send({error: 'queue not found'});
 
     const {jobs} = req.body;

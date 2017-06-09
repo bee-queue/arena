@@ -10,12 +10,13 @@ $(document).ready(() => {
 
     const jobId = $(this).data('job-id');
     const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
 
-    const r = window.confirm(`Retry job #${jobId} in queue "${queueName}"?`);
+    const r = window.confirm(`Retry job #${jobId} in queue "${queueHost}/${queueName}"?`);
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/api/queue/${queueName}/job/${jobId}`
+        url: `/api/queue/${queueHost}/${queueName}/job/${jobId}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -34,15 +35,16 @@ $(document).ready(() => {
 
     const jobId = $(this).data('job-id');
     const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
     const jobState = $(this).data('job-state');
 
-    const r = window.confirm(`Remove job #${jobId} in queue "${queueName}"?`);
+    const r = window.confirm(`Remove job #${jobId} in queue "${queueHost}/${queueName}"?`);
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/api/queue/${queueName}/job/${jobId}`
+        url: `/api/queue/${queueHost}/${queueName}/job/${jobId}`
       }).done(() => {
-        window.location.href = `/dashboard/${queueName}/${jobState}`;
+        window.location.href = `/dashboard/${queueHost}/${queueName}/${jobState}`;
       }).fail((jqXHR) => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
@@ -89,8 +91,9 @@ $(document).ready(() => {
 
     const $bulkActionContainer = $('.js-bulk-action-container');
     const action = $(this).data('action');
-    const queueName = $('.js-queue-name').val();
-    const queueState = $('.js-queue-state').val();
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+    const queueState = $(this).data('queue-state');
 
     let data = {
       queueName,
@@ -107,11 +110,11 @@ $(document).ready(() => {
       }
     });
 
-    const r = window.confirm(`${capitalize(action)} ${data.jobs.length} ${data.jobs.length > 1 ? 'jobs' : 'job'} in queue "${queueName}"?`);
+    const r = window.confirm(`${capitalize(action)} ${data.jobs.length} ${data.jobs.length > 1 ? 'jobs' : 'job'} in queue "${queueHost}/${queueName}"?`);
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `/api/queue/${queueName}/job/bulk`,
+        url: `/api/queue/${queueHost}/${queueName}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'
       }).done(() => {

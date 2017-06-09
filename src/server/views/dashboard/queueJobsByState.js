@@ -3,13 +3,13 @@ const Queues = require('../../bull');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
-  const { queueName, state } = req.params;
+  const { queueName, queueHost, state } = req.params;
   const jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
 
   Queues.setConfig(req.app.get('bull config'));
-  const queue = await Queues.get(queueName);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name: queueName});
-  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {name: queueName, state});
+  const queue = await Queues.get(queueName, queueHost);
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
+  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {queueName, queueHost, state});
 
   const jobCounts = await QueueHelpers.getJobCounts(queue);
 
@@ -28,7 +28,8 @@ async function handler(req, res) {
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
   return res.render('dashboard/templates/queueJobsByState.hbs', {
-    name: queueName,
+    queueName,
+    queueHost,
     state,
     jobs,
     jobsInStateCount: jobCounts[state],

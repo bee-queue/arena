@@ -14,14 +14,12 @@ const protectedFunctions = ['process','start','add','setHandler','empty','run','
 
 class Queues {
   constructor() {
-    this._queues = new Map();
+    this._queues = {};
     this._config = null;
   }
 
   list() {
-    const names = _.map(this._config.queues, 'name');
-
-    return names;
+    return this._config.queues;
   }
 
   setConfig(config) {
@@ -30,14 +28,15 @@ class Queues {
     }
   }
 
-  async get(queueName) {
-    if (this._queues.has(queueName)) {
-      return this._queues.get(queueName);
-    }
+  async get(queueName, queueHost) {
+    const queueConfig = _.find(this._config.queues, {
+      name: queueName,
+      hostId: queueHost
+    });
+    if (!queueConfig) return null;
 
-    const queueConfig = _.find(this._config.queues, { name: queueName });
-    if (!queueConfig) {
-      return null;
+    if (this._queues[queueHost] && this._queues[queueHost][queueName]) {
+      return this._queues[queueHost][queueName];
     }
 
     const { name, port, host, options } = queueConfig;
@@ -45,7 +44,9 @@ class Queues {
       redis: { port, host }
     });
     protectedFunctions.forEach(fn => bull[fn] = protectFunction);
-    this._queues.set(name, bull);
+
+    this._queues[queueHost] = this._queues[queueHost] || {};
+    this._queues[queueHost][queueName] = bull;
 
     return bull;
   }
