@@ -8,9 +8,9 @@ const bulkJobsRetry = require('./bulkJobsRetry');
 router.get('/', function handler(req, res) {
   return res.status(200).send('asdf')
 })
-router.post('/queue/:queueName/job/bulk', bulkJobsRemove);
-router.patch('/queue/:queueName/job/bulk', bulkJobsRetry);
-router.patch('/queue/:queueName/job/:id(\\d+)', jobRetry);
-router.delete('/queue/:queueName/job/:id(\\d+)', jobRemove);
+router.post('/queue/:queueHost/:queueName/job/bulk', bulkJobsRemove);
+router.patch('/queue/:queueHost/:queueName/job/bulk', bulkJobsRetry);
+router.patch('/queue/:queueHost/:queueName/job/:id(\\d+)', jobRetry);
+router.delete('/queue/:queueHost/:queueName/job/:id(\\d+)', jobRemove);
 
 module.exports = router;

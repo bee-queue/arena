@@ -1,4 +1,4 @@
-<h2>Queue <code>{{ name }}</code></h2>
+<h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
 
 <h3>Job Types</h3>
 <div class="row">
@@ -7,7 +7,7 @@
       {{#each jobCounts}}
         <li class="list-group-item">
           <span class="badge">{{ this }}</span>
-          <a href="{{ ../name }}/{{ @key }}">
+          <a href="/dashboard/{{ ../queueHost }}/{{ ../queueName }}/{{ @key }}">
             <span class="text-capitalize">{{ @key }}</span>
           </a>
         </li>
@@ -32,5 +32,5 @@
 
 {{#contentFor 'sidebar'}}
   <li><a href="/dashboard">Queues Overview</a></li>
-  <li class="active"><a href="#">Queue <code>{{ name }}</code></a></li>
+  <li class="active"><a href="#">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
 {{/contentFor}}

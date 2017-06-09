@@ -3,10 +3,10 @@ const Queues = require('../../bull');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
-  const name = req.params.queueName;
+  const {queueName, queueHost} = req.params;
   Queues.setConfig(req.app.get('bull config'));
-  const queue = await Queues.get(name);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {name});
+  const queue = await Queues.get(queueName, queueHost);
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
 
   /*
     TODO(randall): get feedback on practicality of this idea
@@ -26,7 +26,8 @@ async function handler(req, res) {
   const stats = await QueueHelpers.getStats(queue);
 
   return res.render('dashboard/templates/queueDetails.hbs', {
-    name,
+    queueName,
+    queueHost,
     jobCounts,
     stats
   });
