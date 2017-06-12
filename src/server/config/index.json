@@ -1,7 +1,4 @@
 {
-  "__example_users": {
-    "admin": "password"
-  },
   "__example_queues": [
     {
       "name": "my_queue",
@@ -10,6 +7,5 @@
       "hostId": "AWS Server 2"
     }
   ],
-  "users": {},
   "queues": []
 }

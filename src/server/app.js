@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const basicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser');
 
 const hbs = require('express-hbs');
@@ -30,12 +29,6 @@ app.use(bodyParser.json());
 hbsutils.registerPartials(`${__dirname}/views'`, {
   match: /(^|\/)_[^\/]+\.hbs$/
 });
-
-const authorizer = require('./authorizer')(app);
-app.use(basicAuth({
-  authorizer,
-  challenge: true
-}));
 
 app.use('/', routes);
 

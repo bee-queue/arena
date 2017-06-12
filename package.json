@@ -8,7 +8,6 @@
     "body-parser": "^1.17.2",
     "bull": "mixmaxhq/bull#1.0.0-mixmax8",
     "express": "^4.15.2",
-    "express-basic-auth": "^1.0.2",
     "express-hbs": "^1.0.4",
     "handlebars-helpers": "^0.8.2",
     "hbs-utils": "^0.0.4",
