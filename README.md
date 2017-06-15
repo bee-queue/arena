@@ -4,7 +4,7 @@ An intuitive Web GUI for [Bull](https://github.com/optimalbits/bull). Built on E
 
 ### Screenshots
 
-[![](screen1_sm.png)](screen1.png) [![](screen2_sm.png)](screen2.png)
+[![](screen1_sm.png)](screen1.png) [![](screen2_sm.png)](screen2.png) [![](screen3_sm.png)](screen3.png)
 
 ### Features
 
