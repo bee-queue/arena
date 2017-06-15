@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "bull": "mixmaxhq/bull#1.0.0-mixmax8",
+    "bull": "^3.0.0-rc.2",
     "express": "^4.15.2",
     "express-hbs": "^1.0.4",
     "handlebars-helpers": "^0.8.2",

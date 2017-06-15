@@ -2,6 +2,8 @@
 
 An intuitive Web GUI for [Bull](https://github.com/optimalbits/bull). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
 
+For a quick introduction to the motivations for creating Arena, read *[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www-local.mixmax.com/blog/introducing-bull-arena)*.
+
 ### Screenshots
 
 [![](screen1_sm.png)](screen1.png) [![](screen2_sm.png)](screen2.png) [![](screen3_sm.png)](screen3.png)

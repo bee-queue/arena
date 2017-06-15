@@ -5,7 +5,6 @@ const Helpers = {
     return {
       failed: await queue.getFailedCount(),
       delayed: await queue.getDelayedCount(),
-      paused: await queue.getActiveCount(),
       waiting: await queue.getWaitingCount(),
       active: await queue.getActiveCount(),
       completed: await queue.getCompletedCount()
@@ -13,9 +12,9 @@ const Helpers = {
   },
 
   getStats: async function(queue) {
-    await queue.client.info(); // update queue.client.server_info
+    await queue.client.info(); // update queue.client.serverInfo
 
-    return _.pickBy(queue.client.server_info, (value, key) => _.includes(this._usefulMetrics, key));
+    return _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
   },
 
   _usefulMetrics: [
