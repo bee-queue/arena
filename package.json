@@ -22,5 +22,5 @@
     "node": ">=7.6.0"
   },
   "repository": "https://github.com/mixmaxhq/arena.git",
-  "version": "1.3.0"
+  "version": "1.3.1"
 }
