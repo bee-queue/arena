@@ -39,7 +39,7 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-	const { name, port, host, db, password, options } = queueConfig;
+    const { name, port, host, db, password, options } = queueConfig;
     const bull = new Bull(name, {
       redis: { port, host, db, password }
     });
