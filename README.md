@@ -30,7 +30,8 @@ Configure your queues in the "queues" key of [`index.json`](src/server/config/in
 }
 ```
 
-The `name`, `port`, `host`, and `hostId` fields are required. `hostId` can be given any name, so it is recommended to give it a helpful name for reference. Optionally, you can also pass in `db` and `password` to configure redis credentials.
+The `name`, `port`, `host`, and `hostId` fields are required. `hostId` can be given any name, so it is recommended to give it a helpful name for reference. 
+Optionally, you can also pass in `db` and `password` to configure redis credentials, or `prefix` to specify the customized prefix of the queue.
 
 To specify a custom file location, see "Running Arena as a node module".
 
