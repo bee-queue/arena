@@ -63,13 +63,12 @@
 <pre>{{ this.failedReason }}</pre>
 {{/if}}
 
-{{#isEmpty this.stacktrace}}
-{{else}}
+{{#eq jobState 'failed'}}
   <h5>Stacktraces</h5>
   {{#each this.stacktrace}}
     <pre>{{ this }}</pre>
   {{/each}}
-{{/isEmpty}}
+{{/eq}}
 
 <h5>Data</h5>
 <pre>{{ json this.data }}</pre>
