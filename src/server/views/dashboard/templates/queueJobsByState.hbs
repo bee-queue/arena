@@ -39,11 +39,9 @@
     </nav>
   </div>
   <div class="col-sm-6 text-right">
-    {{#eq state 'completed'}}
-      <button type="button" data-action="remove" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
-        Remove Jobs
-      </button>
-    {{/eq}}
+    <button type="button" data-action="remove" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
+      Remove Jobs
+    </button>
     {{#eq state 'failed'}}
       <button type="button" data-action="retry" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
         Retry Jobs
