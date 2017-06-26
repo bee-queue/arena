@@ -35,7 +35,7 @@ Optionally, you can also pass in `db` and `password` to configure redis credenti
 
 To specify a custom file location, see "Running Arena as a node module".
 
-Note that if you happen to use Amazon Web Services' Elasticache as your Redis host, consider using plugin [Arena AWS](https://github.com/mixmaxhq/arena-aws) to automatically wire up Arena to your queues.
+*Note that if you happen to use Amazon Web Services' Elasticache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery*
 
 #### Running the server
 
