@@ -6,7 +6,7 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 ### Screenshots
 
-[![](screen1_sm.png)](screen1.png) [![](screen2_sm.png)](screen2.png) [![](screen3_sm.png)](screen3.png)
+[![](screenshots/screen1_sm.png)](screen1.png) [![](screenshots/screen2_sm.png)](screen2.png) [![](screenshots/screen3_sm.png)](screen3.png)
 
 ### Features
 
@@ -73,6 +73,18 @@ router.use('/', arena);
 Arena is written using Express, with simple jQuery and Handlebars on the front end.
 
 If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
+
+### Docker image
+
+For build the image simply run
+```shell
+docker build -t <name-image>
+```
+The configuration file of this image `index.json` is dynamic, so it's needed to be setted via volume. The way to run this container follow like this:
+
+```shell
+docker run -p 4567:4567 -v /opt/arena/src/server/config/index.json:</local/route/to/index.json> <name-image>
+```
 
 ### License
 
