@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "nodemon src/server/app.js",
-    "inspect": "nodemon --inspect src/server/app.js"
+    "inspect": "nodemon --inspect --trace-warnings src/server/app.js"
   },
   "engines": {
     "node": ">=7.6.0"

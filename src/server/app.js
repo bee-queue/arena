@@ -32,8 +32,8 @@ hbsutils.registerPartials(`${__dirname}/views'`, {
 
 app.use('/', routes);
 
-app.listen(4567, () => {
+const server = app.listen(4567, () => {
   console.log('Arena is running on port 4567');
 });
 
-module.exports = app;
+module.exports = {app, server};
