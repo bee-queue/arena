@@ -11,7 +11,7 @@ async function handler(req, res) {
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
   if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {queueName, queueHost, state});
 
-  const jobCounts = await QueueHelpers.getJobCounts(queue);
+  const jobCounts = await queue.getJobCounts(queue);
 
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;

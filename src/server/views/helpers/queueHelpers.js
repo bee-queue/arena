@@ -1,16 +1,6 @@
 const _ = require('lodash');
 
 const Helpers = {
-  getJobCounts: async function(queue) {
-    return {
-      failed: await queue.getFailedCount(),
-      delayed: await queue.getDelayedCount(),
-      waiting: await queue.getWaitingCount(),
-      active: await queue.getActiveCount(),
-      completed: await queue.getCompletedCount()
-    };
-  },
-
   getStats: async function(queue) {
     await queue.client.info(); // update queue.client.serverInfo
 
