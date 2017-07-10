@@ -103,7 +103,7 @@ $(document).ready(() => {
 
     $bulkActionContainer.each((index, value) => {
       const isChecked = $(value).find('[name=jobChecked]').is(':checked');
-      const id = parseInt($(value).find('[name=jobId]').val(), 10);
+      const id = $(value).find('[name=jobId]').val();
 
       if (isChecked) {
         data.jobs.push(id);
