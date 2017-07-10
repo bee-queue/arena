@@ -6,7 +6,7 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 ### Screenshots
 
-[![](screenshots/screen1_sm.png)](screen1.png) [![](screenshots/screen2_sm.png)](screen2.png) [![](screenshots/screen3_sm.png)](screen3.png)
+[![](screenshots/screen1_sm.png)](screenshots/screen1.png) [![](screenshots/screen2_sm.png)](screenshots/screen2.png) [![](screenshots/screen3_sm.png)](screenshots/screen3.png)
 
 ### Features
 
