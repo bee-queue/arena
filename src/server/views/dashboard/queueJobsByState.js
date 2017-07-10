@@ -36,8 +36,7 @@ async function handler(req, res) {
     currentPage: page,
     pages,
     pageSize,
-    lastPage: _.last(pages),
-    statesWithBulkActions: ['completed', 'failed']
+    lastPage: _.last(pages)
   });
 }
 
