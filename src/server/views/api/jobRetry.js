@@ -1,10 +1,11 @@
 const Queues = require('../../bull');
 
 async function handler(req, res) {
-  const { queueName, id } = req.params;
+  const { queueName, queueHost, id } = req.params;
 
   Queues.setConfig(req.app.get('bull config'));
-  const queue = await Queues.get(queueName);
+
+  const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).send({error: 'queue not found'});
 
   const job = await queue.getJob(id);
