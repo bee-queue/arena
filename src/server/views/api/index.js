@@ -10,7 +10,7 @@ router.get('/', function handler(req, res) {
 })
 router.post('/queue/:queueHost/:queueName/job/bulk', bulkJobsRemove);
 router.patch('/queue/:queueHost/:queueName/job/bulk', bulkJobsRetry);
-router.patch('/queue/:queueHost/:queueName/job/:id(\\d+)', jobRetry);
-router.delete('/queue/:queueHost/:queueName/job/:id(\\d+)', jobRemove);
+router.patch('/queue/:queueHost/:queueName/job/:id', jobRetry);
+router.delete('/queue/:queueHost/:queueName/job/:id', jobRemove);
 
 module.exports = router;

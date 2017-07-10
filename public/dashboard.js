@@ -16,7 +16,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${jobId}`
+        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -42,7 +42,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${jobId}`
+        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
         window.location.href = `/dashboard/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
       }).fail((jqXHR) => {
@@ -103,7 +103,7 @@ $(document).ready(() => {
 
     $bulkActionContainer.each((index, value) => {
       const isChecked = $(value).find('[name=jobChecked]').is(':checked');
-      const id = parseInt($(value).find('[name=jobId]').val(), 10);
+      const id = encodeURIComponent($(value).find('[name=jobId]').val());
 
       if (isChecked) {
         data.jobs.push(id);

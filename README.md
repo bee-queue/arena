@@ -6,7 +6,7 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 ### Screenshots
 
-[![](screenshots/screen1_sm.png)](screen1.png) [![](screenshots/screen2_sm.png)](screen2.png) [![](screenshots/screen3_sm.png)](screen3.png)
+[![](screenshots/screen1_sm.png)](screenshots/screen1.png) [![](screenshots/screen2_sm.png)](screenshots/screen2.png) [![](screenshots/screen3_sm.png)](screenshots/screen3.png)
 
 ### Features
 
@@ -56,8 +56,8 @@ Usage:
 
 In project folder:
 
-```
-> npm install --save-dev bull-arena
+```shell
+yarn add bull-arena
 ```
 
 In router.js:
@@ -78,11 +78,13 @@ If updating dependencies, please use Yarn and update the `yarn.lock` file before
 
 ### Docker image
 
-For build the image simply run
+To build the image simply run:
+
 ```shell
-docker build -t <name-image>
+docker build -t <name-image> .
 ```
-The configuration file of this image `index.json` is dynamic, so it's needed to be setted via volume. The way to run this container follow like this:
+
+To run a container, execute the following command. Note that we need to settle the location of `index.json` in this container via volume mounting:
 
 ```shell
 docker run -p 4567:4567 -v /opt/arena/src/server/config/index.json:</local/route/to/index.json> <name-image>
