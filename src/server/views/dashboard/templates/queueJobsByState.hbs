@@ -4,39 +4,41 @@
 
 <div class="row pagination-container">
   <div class="col-sm-6">
-    <nav aria-label="Job navigation">
-      <ul class="pagination">
-        <li
-          {{#eq currentPage 1}}
-            class="disabled">
-              <span>&laquo;</span>
-          {{else}}
-            ><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          {{/eq}}
-        </li>
-        {{#each pages}}
+    {{#unless disablePagination}}
+      <nav aria-label="Job navigation">
+        <ul class="pagination">
           <li
-            {{#eq this ../currentPage}}
-              class="active"
-            {{/eq}}>
-
-            <a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+            {{#eq currentPage 1}}
+              class="disabled">
+                <span>&laquo;</span>
+            {{else}}
+              ><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            {{/eq}}
           </li>
-        {{/each}}
-        <li
-          {{#eq currentPage lastPage}}
-            class="disabled">
-              <span>&raquo;</span>
-          {{else}}
-            ><a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          {{/eq}}
-        </li>
-      </ul>
-    </nav>
+          {{#each pages}}
+            <li
+              {{#eq this ../currentPage}}
+                class="active"
+              {{/eq}}>
+
+              <a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+            </li>
+          {{/each}}
+          <li
+            {{#eq currentPage lastPage}}
+              class="disabled">
+                <span>&raquo;</span>
+            {{else}}
+              ><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            {{/eq}}
+          </li>
+        </ul>
+      </nav>
+    {{/unless}}
   </div>
   <div class="col-sm-6 text-right">
     <button type="button" data-action="remove" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
@@ -47,19 +49,22 @@
         Retry Jobs
       </button>
     {{/eq}}
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Page Size <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
-      </ul>
-    </div>
+
+    {{#unless disablePagination}}
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Page Size <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
+          <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
+          <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
+          <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
+        </ul>
+      </div>
+    {{/unless}}
   </div>
 </div>
 

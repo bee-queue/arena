@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const Bull = require('bull');
+const Queue = require('@mixmaxhq/bee-queue');
 const path = require('path');
 
 class Queues {
@@ -29,16 +29,22 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-    const { name, port, host, db, password, prefix } = queueConfig;
-    const bull = new Bull(name, {
-      redis: { port, host, db, password },
-      prefix: prefix
+    const { name, port, host, db, prefix } = queueConfig;
+
+    const queue = new Queue(name, {
+      redis: {
+        host,
+        port,
+        db,
+        prefix,
+        db
+      }
     });
 
     this._queues[queueHost] = this._queues[queueHost] || {};
-    this._queues[queueHost][queueName] = bull;
+    this._queues[queueHost][queueName] = queue;
 
-    return bull;
+    return queue;
   }
 }
 

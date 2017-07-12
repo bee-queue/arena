@@ -12,7 +12,7 @@ const routes = require('./views/routes');
 const app = express();
 
 const defaultConfig = path.join(__dirname, 'config', 'index.json');
-app.set('bull config', require(defaultConfig));
+app.set('queue config', require(defaultConfig));
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');

@@ -1,9 +1,9 @@
-const Queues = require('../../bull');
+const Queues = require('../../queue');
 
 async function handler(req, res) {
   const { queueName, queueHost, id } = req.params;
 
-  Queues.setConfig(req.app.get('bull config'));
+  Queues.setConfig(req.app.get('queue config'));
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).send({error: 'queue not found'});
 
@@ -15,7 +15,7 @@ async function handler(req, res) {
     return res.sendStatus(200);
   } catch (e) {
     const body = {
-      error: 'bull error',
+      error: 'queue error',
       details: e.stack
     };
     return res.status(500).send(body);
