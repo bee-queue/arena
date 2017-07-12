@@ -6,12 +6,14 @@
     <ul class="list-group">
       {{#each queues}}
         <li class="list-group-item">
-          <a href="/dashboard/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.hostId }}/{{ this.name }}</a>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.hostId }}/{{ this.name }}</a>
         </li>
       {{/each}}
     </ul>
   </div>
 </div>
+
+{{hello}}
 
 {{#contentFor 'sidebar'}}
   <li class="active"><a href="#">Queues Overview</a></li>

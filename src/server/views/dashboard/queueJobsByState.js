@@ -8,8 +8,8 @@ async function handler(req, res) {
 
   Queues.setConfig(req.app.get('queue config'));
   const queue = await Queues.get(queueName, queueHost);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
-  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {queueName, queueHost, state});
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
+  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound', {queueName, queueHost, state});
 
   const jobCounts = await queue.checkHealth();
 
@@ -19,7 +19,7 @@ async function handler(req, res) {
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
 
-  const jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+  const jobs = await queue.getJobs(state, startId, endId);
 
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);
@@ -28,7 +28,7 @@ async function handler(req, res) {
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
-  return res.render('dashboard/templates/queueJobsByState.hbs', {
+  return res.render('dashboard/templates/queueJobsByState', {
     queueName,
     queueHost,
     state,

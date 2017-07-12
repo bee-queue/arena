@@ -8,10 +8,10 @@ async function handler(req, res) {
 
   Queues.setConfig(req.app.get('queue config'));
   const queue = await Queues.get(queueName, queueHost);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
 
   const job = await queue.getJob(id);
-  if (!job) return res.status(404).render('dashboard/templates/jobNotFound.hbs', {id, queueName, queueHost});
+  if (!job) return res.status(404).render('dashboard/templates/jobNotFound', {id, queueName, queueHost});
 
   if (json === 'true') {
     delete job.queue; // avoid circular references parsing error
@@ -20,7 +20,7 @@ async function handler(req, res) {
 
   const jobState = job.status || await job.getState();
 
-  return res.render('dashboard/templates/jobDetails.hbs', {
+  return res.render('dashboard/templates/jobDetails', {
     queueName,
     queueHost,
     jobState,

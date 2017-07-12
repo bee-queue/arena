@@ -8,9 +8,8 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
   </head>
-
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -21,12 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/dashboard">Arena</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/dashboard">Dashboard</a></li>
-          </ul>
+          <a class="navbar-brand" href="{{ basePath }}/">Arena</a>
         </div>
       </div>
     </nav>
@@ -45,7 +39,10 @@
         </div>
       </div>
     </div>
+
+    <input type="hidden" id="basePath" value="{{ basePath }}">
+
     <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
-    <script type="text/javascript" src="/dashboard.js"></script>
+    <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
   </body>
 </html>

@@ -26,13 +26,13 @@
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
-    {{ this.options.attemptsMade }}
+    {{length this.options.stacktraces}}
   </div>
 
   <div class="col-sm-3">
     <h5>Permalinks</h5>
-    <a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job {{ this.id }}</a>
-    <a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job {{ this.id }}</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
   </div>
 </div>
 

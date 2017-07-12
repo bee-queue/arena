@@ -8,9 +8,22 @@ const helpers = {
     }
     return JSON.stringify(obj);
   },
+
   adjustedPage(currentPage, pageSize, newPageSize) {
     const firstId = (currentPage - 1) * pageSize;
     return _.ceil(firstId / newPageSize) + 1;
+  },
+
+  block(name) {
+    var blocks = this._blocks;
+        content = blocks && blocks[name];
+    return content ? content.join('\n') : null;
+  },
+
+  contentFor: function(name, options) {
+    var blocks = this._blocks || (this._blocks = {});
+        block = blocks[name] || (blocks[name] = []);
+    block.push(options.fn(this));
   }
 };
 

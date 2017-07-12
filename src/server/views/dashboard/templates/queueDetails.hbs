@@ -7,7 +7,7 @@
       {{#each jobCounts}}
         <li class="list-group-item">
           <span class="badge">{{ this }}</span>
-          <a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ @key }}">
+          <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ @key }}">
             <span class="text-capitalize">{{ @key }}</span>
           </a>
         </li>
@@ -31,6 +31,6 @@
 </div>
 
 {{#contentFor 'sidebar'}}
-  <li><a href="/dashboard">Queues Overview</a></li>
+  <li><a href="{{ basePath }}">Queues Overview</a></li>
   <li class="active"><a href="#">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
 {{/contentFor}}
