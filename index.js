@@ -1,8 +1,9 @@
 const appConstructor = require('./src/server/app');
 
-module.exports = function(config, listenOpts) {
+function run(config, listenOpts) {
   const app = appConstructor();
-  app.set('queue config', config);
+
+  if (config) app.set('queue config', config);
 
   const port = (listenOpts && listenOpts.port) || 4567;
 
@@ -16,4 +17,8 @@ module.exports = function(config, listenOpts) {
   });
 
   return app;
-};
+}
+
+if (require.main === module) run();
+
+module.exports = run;
