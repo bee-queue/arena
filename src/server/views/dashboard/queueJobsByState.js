@@ -19,7 +19,7 @@ async function handler(req, res) {
   let jobCounts;
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
-    delete jobCounts.NewestJob;
+    delete jobCounts.newestJob;
   } else {
     jobCounts = await QueueHelpers.getJobCounts(queue);
   }
@@ -36,6 +36,10 @@ async function handler(req, res) {
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
   }
+
+  // filter out jobs that have already been deleted by the time promise resolves
+  // TODO: clean this up
+  jobs = jobs.filter((job) => job);
   for (let job of jobs) {
     // TODO(randall): polyfill for Bull 1.x, remove when we upgrade fully to Bee
     if (!job.id) job.id = job.jobId;

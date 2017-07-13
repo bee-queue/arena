@@ -10,7 +10,7 @@ async function handler(req, res) {
   let jobCounts;
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
-    delete jobCounts.NewestJob;
+    delete jobCounts.newestJob;
   } else {
     jobCounts = await QueueHelpers.getJobCounts(queue);
   }

@@ -32,7 +32,8 @@
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{this.attemptsMade}}
-    {{#if this.options.stacktraces}}
+
+    {{#if this.options}}
       {{length this.options.stacktraces}}
     {{/if}}
   </div>
