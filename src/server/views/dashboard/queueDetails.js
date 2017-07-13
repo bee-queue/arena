@@ -11,7 +11,7 @@ async function handler(req, res) {
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
   } else {
-    jobCounts = await queue.getJobCounts();
+    jobCounts = await QueueHelpers.getJobCounts(queue);
   }
   const stats = await QueueHelpers.getStats(queue);
 

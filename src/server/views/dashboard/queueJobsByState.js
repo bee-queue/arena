@@ -20,7 +20,7 @@ async function handler(req, res) {
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
   } else {
-    jobCounts = await queue.getJobCounts();
+    jobCounts = await QueueHelpers.getJobCounts(queue);
   }
 
   const page = parseInt(req.query.page, 10) || 1;
@@ -34,6 +34,9 @@ async function handler(req, res) {
     jobs = await queue.getJobs(state, startId, endId);
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+  }
+  for (let job of jobs) {
+    job.id = job.jobId;
   }
 
   let pages = _.range(page - 6, page + 7)
