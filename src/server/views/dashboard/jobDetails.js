@@ -1,12 +1,11 @@
 const _ = require('lodash');
 const util = require('util');
-const Queues = require('../../queue');
 
 async function handler(req, res) {
   const { queueName, queueHost, id } = req.params;
   const { json } = req.query;
 
-  Queues.setConfig(req.app.get('queue config'));
+  const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
 
@@ -18,7 +17,12 @@ async function handler(req, res) {
     return res.json(job);
   }
 
-  const jobState = job.status || await job.getState();
+  let jobState;
+  if (queue.IS_BEE) {
+    jobState = job.status;
+  } else {
+    jobState = await job.getState();
+  }
 
   return res.render('dashboard/templates/jobDetails', {
     queueName,

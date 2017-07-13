@@ -1,17 +1,13 @@
-const appConstructor = require('./src/server/app');
+const Arena = require('./src/server/app');
 
 function run(config, listenOpts) {
-  const app = appConstructor();
+  const {app, Queues} = Arena();
 
-  if (config) app.set('queue config', config);
+  if (config) Queues.setConfig(config);
+
+  app.locals.basePath = (listenOpts && listenOpts.prefix) || app.locals.basePath;
 
   const port = (listenOpts && listenOpts.port) || 4567;
-
-  if (listenOpts) {
-    const {prefix} = listenOpts;
-    if (prefix) app.locals.basePath = prefix;
-  }
-
   app.listen(port, () => {
     console.log(`Arena is running on port ${port}`);
   });

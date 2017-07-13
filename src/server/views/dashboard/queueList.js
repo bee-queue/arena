@@ -1,7 +1,5 @@
-const Queues = require('../../queue');
-
 function handler(req, res) {
-  Queues.setConfig(req.app.get('queue config'));
+  const {Queues} = req.app.locals;
   const queues = Queues.list();
 
   return res.render('dashboard/templates/queueList', { queues });

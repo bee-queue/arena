@@ -1,17 +1,27 @@
 const _ = require('lodash');
-const Queues = require('../../queue');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const { queueName, queueHost, state } = req.params;
-  const jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
 
-  Queues.setConfig(req.app.get('queue config'));
+  const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
+
+  let jobTypes;
+  if (queue.IS_BEE) {
+    jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
+  } else {
+    jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
+  }
   if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound', {queueName, queueHost, state});
 
-  const jobCounts = await queue.checkHealth();
+  let jobCounts;
+  if (queue.IS_BEE) {
+    jobCounts = await queue.checkHealth();
+  } else {
+    jobCounts = await queue.getJobCounts();
+  }
 
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;
@@ -19,7 +29,12 @@ async function handler(req, res) {
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
 
-  const jobs = await queue.getJobs(state, startId, endId);
+  let jobs;
+  if (queue.IS_BEE) {
+    jobs = await queue.getJobs(state, startId, endId);
+  } else {
+    jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+  }
 
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);

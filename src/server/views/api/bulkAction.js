@@ -13,7 +13,7 @@ function bulkAction(action) {
     }
 
     const { queueName, queueHost } = req.params;
-    Queues.setConfig(req.app.get('queue config'));
+    const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
     if (!queue) return res.status(404).send({error: 'queue not found'});
 
