@@ -5,6 +5,7 @@
   "author": "Chuy Martinez <chuy@mixmax.com>",
   "license": "MIT",
   "dependencies": {
+    "@mixmaxhq/bee-queue": "^1.0.7",
     "body-parser": "^1.17.2",
     "bull": "mixmaxhq/bull#1.0.0-mixmax8a",
     "express": "^4.15.2",
