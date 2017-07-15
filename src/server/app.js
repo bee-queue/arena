@@ -20,7 +20,8 @@ app.set('json spaces', 2);
 
 app.engine('hbs', hbs.express4({
   defaultLayout: `${__dirname}/views/layout.hbs`,
-  partialsDir: `${__dirname}/views/partials`
+  partialsDir: `${__dirname}/views/partials`,
+  templateOptions: { baseURL: app.get('baseURL') }
 }));
 
 app.use(express.static(path.join(__dirname, '/../../public')));

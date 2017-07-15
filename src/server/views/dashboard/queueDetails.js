@@ -10,11 +10,13 @@ async function handler(req, res) {
 
   const jobCounts = await queue.getJobCounts(queue);
   const stats = await QueueHelpers.getStats(queue);
+  const baseURL = req.app.get('baseURL');
 
   return res.render('dashboard/templates/queueDetails.hbs', {
     queueName,
     queueHost,
     jobCounts,
+    baseURL,
     stats
   });
 }

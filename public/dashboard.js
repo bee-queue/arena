@@ -3,6 +3,8 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  const baseURL = $('body').data('baseUrl')
+
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
@@ -16,7 +18,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+        url: `${baseURL}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -42,9 +44,9 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+        url: `${baseURL}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
-        window.location.href = `/dashboard/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
+        window.location.href = `${baseURL}/dashboard/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
       }).fail((jqXHR) => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
@@ -114,7 +116,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/bulk`,
+        url: `${baseURL}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'
       }).done(() => {
@@ -126,5 +128,5 @@ $(document).ready(() => {
     } else {
       $(this).prop('disabled', false);
     }
-  });  
+  });
 });
