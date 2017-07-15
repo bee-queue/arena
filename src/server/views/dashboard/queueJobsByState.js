@@ -20,6 +20,8 @@ async function handler(req, res) {
   const endId = startId + pageSize - 1;
   const jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
 
+  const baseURL = req.app.get('baseURL');
+
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);
   while (pages.length < 12) {
@@ -30,6 +32,7 @@ async function handler(req, res) {
   return res.render('dashboard/templates/queueJobsByState.hbs', {
     queueName,
     queueHost,
+    baseURL,
     state,
     jobs,
     jobsInStateCount: jobCounts[state],

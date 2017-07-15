@@ -11,7 +11,7 @@
             class="disabled">
               <span>&laquo;</span>
           {{else}}
-            ><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+            ><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           {{/eq}}
@@ -22,7 +22,7 @@
               class="active"
             {{/eq}}>
 
-            <a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+            <a href="{{ ../baseURL }}/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
           </li>
         {{/each}}
         <li
@@ -30,7 +30,7 @@
             class="disabled">
               <span>&raquo;</span>
           {{else}}
-            ><a href="/dashboard/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
+            ><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
               <span aria-hidden="true">&raquo;</span>
             </a>
           {{/eq}}
@@ -52,12 +52,12 @@
         Page Size <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
+        <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
-        <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
+        <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
+        <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
+        <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
+        <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
       </ul>
     </div>
   </div>
@@ -83,7 +83,7 @@
               <h4 class="header-collapse">{{ this.id }}</h4>
             </a>
             <div id="collapse{{this.id}}" class="collapse">
-              {{> dashboard/jobDetails this displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
+              {{> dashboard/jobDetails this displayJobInline=true queueName=../queueName baseURL=../baseURL queueHost=../queueHost jobState=../state }}
             </div>
           </li>
         {{/each}}
@@ -97,7 +97,7 @@
 </p>
 
 {{#contentFor 'sidebar'}}
-  <li><a href="/dashboard">Queues Overview</a></li>
-  <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
+  <li><a href="{{ baseURL }}/dashboard">Queues Overview</a></li>
+  <li><a href="{{ baseURL }}/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
   <li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
 {{/contentFor}}

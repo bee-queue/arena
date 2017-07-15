@@ -10,6 +10,8 @@ async function handler(req, res) {
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
 
+  const baseURL = req.app.get('baseURL');
+
   const job = await queue.getJob(id);
   if (!job) return res.status(404).render('dashboard/templates/jobNotFound.hbs', {id, queueName, queueHost});
 
@@ -24,6 +26,7 @@ async function handler(req, res) {
     queueName,
     queueHost,
     jobState,
+    baseURL,
     job
   });
 }

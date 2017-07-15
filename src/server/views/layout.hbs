@@ -8,10 +8,10 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="{{ baseURL }}/dashboard.css">
   </head>
 
-  <body>
+  <body data-base-url="{{ baseURL }}">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -21,11 +21,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/dashboard">Arena</a>
+          <a class="navbar-brand" href="{{ baseURL }}/dashboard">Arena</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="{{ baseURL }}/dashboard">Dashboard</a></li>
           </ul>
         </div>
       </div>
@@ -46,6 +46,6 @@
       </div>
     </div>
     <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
-    <script type="text/javascript" src="/dashboard.js"></script>
+    <script type="text/javascript" src="{{ baseURL }}/dashboard.js"></script>
   </body>
 </html>
