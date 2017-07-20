@@ -78,11 +78,9 @@ router.use('/', arena);
 * `basePath` - specify custom path to mount server on (default: '/')
 * `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 
-### Development
+### Bee Queue support
 
-Arena is written using Express, with simple jQuery and Handlebars on the front end.
-
-If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
+Arena is dual-compatible with Bull 3.x and the [1.0.0 pre-release of bee-queue](https://github.com/bee-queue/bee-queue/pull/64). To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configation object.
 
 ### Docker image
 
@@ -97,6 +95,12 @@ To run a container, execute the following command. Note that we need to settle t
 ```shell
 docker run -p 4567:4567 -v /opt/arena/src/server/config/index.json:</local/route/to/index.json> <name-image>
 ```
+
+### Development
+
+Arena is written using Express, with simple jQuery and Handlebars on the front end.
+
+If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
 
 ### License
 

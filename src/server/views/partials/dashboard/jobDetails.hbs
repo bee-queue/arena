@@ -21,12 +21,21 @@
 
   <div class="col-sm-3">
     <h5>Timestamp</h5>
-    {{moment this.timestamp "llll"}}
+    {{#if this.options.timestamp}}
+      {{moment this.options.timestamp "llll"}}
+    {{/if}}
+    {{#if this.timestamp}}
+      {{moment this.timestamp "llll"}}
+    {{/if}}
   </div>
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
-    {{ this.attemptsMade }}
+    {{this.attemptsMade}}
+
+    {{#if this.options}}
+      {{length this.options.stacktraces}}
+    {{/if}}
   </div>
 
   <div class="col-sm-3">
@@ -62,9 +71,17 @@
 
 {{#eq jobState 'failed'}}
   <h5>Stacktraces</h5>
-  {{#each this.stacktrace}}
-    <pre>{{ this }}</pre>
-  {{/each}}
+  {{#if this.options.stacktraces}}
+    {{#each this.options.stacktraces}}
+      <pre>{{ this }}</pre>
+    {{/each}}
+  {{/if}}
+
+  {{#if this.stacktrace}}
+    {{#each this.stacktrace}}
+      <pre>{{ this }}</pre>
+    {{/each}}
+  {{/if}}
 {{/eq}}
 
 <h5>Data</h5>

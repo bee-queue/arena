@@ -17,7 +17,12 @@ async function handler(req, res) {
     return res.json(job);
   }
 
-  const jobState = await job.getState();
+  let jobState;
+  if (queue.IS_BEE) {
+    jobState = job.status;
+  } else {
+    jobState = await job.getState();
+  }
 
   return res.render('dashboard/templates/jobDetails', {
     queueName,

@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const Bull = require('bull');
+const Bee = require('bee-queue');
 const path = require('path');
 
 class Queues {
@@ -30,12 +31,19 @@ class Queues {
 
     const { type, name, port, host, db, password, prefix } = queueConfig;
 
-    const Queue = Bull;
+    let Queue;
+    if (type === 'bee') {
+      Queue = Bee;
+    } else {
+      Queue = Bull;
+    }
 
     const queue = new Queue(name, {
       prefix,
       redis: { port, host, db, password }
     });
+    queue.IS_BEE = type === 'bee';
+
     this._queues[queueHost] = this._queues[queueHost] || {};
     this._queues[queueHost][queueName] = queue;
 
