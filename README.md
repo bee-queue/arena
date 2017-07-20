@@ -63,20 +63,28 @@ yarn add bull-arena
 In router.js:
 
 ```js
+const Arena = require('bull-arena');
+
 const express = require('express');
 const router = express.Router();
 
-const arena = require('bull-arena')({queues});
+const arena = Arena({queues});
 router.use('/', arena);
 ```
 
-### Development
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
-Arena is written using Express, with simple jQuery and Handlebars on the front end.
+* `port` - specify custom port to listen on (default: 4567)
+* `basePath` - specify custom path to mount server on (default: '/')
+* `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 
-If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
+### Bee Queue support
+
+Arena is dual-compatible with Bull 3.x and the [1.0.0 pre-release of bee-queue](https://github.com/bee-queue/bee-queue/pull/64). To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configation object.
 
 ### Docker image
+
+You can now `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
 
 To build the image simply run:
 
@@ -89,6 +97,12 @@ To run a container, execute the following command. Note that we need to settle t
 ```shell
 docker run -p 4567:4567 -v /opt/arena/src/server/config/index.json:</local/route/to/index.json> <name-image>
 ```
+
+### Development
+
+Arena is written using Express, with simple jQuery and Handlebars on the front end.
+
+If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
 
 ### License
 

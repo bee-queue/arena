@@ -1,24 +1,43 @@
 const _ = require('lodash');
-const Queues = require('../../bull');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const { queueName, queueHost, state } = req.params;
-  const jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
 
-  Queues.setConfig(req.app.get('bull config'));
+  const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound.hbs', {queueName, queueHost});
-  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound.hbs', {queueName, queueHost, state});
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
 
-  const jobCounts = await queue.getJobCounts(queue);
+  let jobTypes;
+  if (queue.IS_BEE) {
+    jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
+  } else {
+    jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
+  }
+  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound', {queueName, queueHost, state});
+
+  let jobCounts;
+  if (queue.IS_BEE) {
+    jobCounts = await queue.checkHealth();
+    delete jobCounts.newestJob;
+  } else {
+    jobCounts = await queue.getJobCounts(queue);
+  }
 
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;
 
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
-  const jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+
+  let jobs;
+  if (queue.IS_BEE) {
+    jobs = await queue.getJobs(state, startId, endId);
+    // Filter out Bee jobs that have already been removed by the time the promise resolves
+    jobs = jobs.filter((job) => job);
+  } else {
+    jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+  }
 
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);
@@ -27,12 +46,15 @@ async function handler(req, res) {
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
-  return res.render('dashboard/templates/queueJobsByState.hbs', {
+  return res.render('dashboard/templates/queueJobsByState', {
     queueName,
     queueHost,
     state,
     jobs,
     jobsInStateCount: jobCounts[state],
+    // TODO: Remove disablePagination once pagination for SET types in Bee is implemented:
+    // https://github.com/bee-queue/bee-queue/pull/64
+    disablePagination: queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
     currentPage: page,
     pages,
     pageSize,

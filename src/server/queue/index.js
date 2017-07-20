@@ -1,11 +1,13 @@
 const _ = require('lodash');
 const Bull = require('bull');
+const Bee = require('bee-queue');
 const path = require('path');
 
 class Queues {
-  constructor() {
+  constructor(config) {
     this._queues = {};
-    this._config = null;
+
+    this.setConfig(config);
   }
 
   list() {
@@ -13,9 +15,7 @@ class Queues {
   }
 
   setConfig(config) {
-    if (!this._config) {
-      this._config = config;
-    }
+    this._config = config;
   }
 
   async get(queueName, queueHost) {
@@ -29,17 +29,26 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-    const { name, port, host, db, password, prefix } = queueConfig;
-    const bull = new Bull(name, {
-      redis: { port, host, db, password },
-      prefix: prefix
+    const { type, name, port, host, db, password, prefix } = queueConfig;
+
+    let Queue;
+    if (type === 'bee') {
+      Queue = Bee;
+    } else {
+      Queue = Bull;
+    }
+
+    const queue = new Queue(name, {
+      prefix,
+      redis: { port, host, db, password }
     });
+    queue.IS_BEE = type === 'bee';
 
     this._queues[queueHost] = this._queues[queueHost] || {};
-    this._queues[queueHost][queueName] = bull;
+    this._queues[queueHost][queueName] = queue;
 
-    return bull;
+    return queue;
   }
 }
 
-module.exports = new Queues();
+module.exports = Queues;
