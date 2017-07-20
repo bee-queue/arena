@@ -84,6 +84,8 @@ Arena is dual-compatible with Bull 3.x and the [1.0.0 pre-release of bee-queue](
 
 ### Docker image
 
+You can now `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
+
 To build the image simply run:
 
 ```shell
