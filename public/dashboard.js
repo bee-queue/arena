@@ -1,4 +1,6 @@
 $(document).ready(() => {
+  const basePath = $('#basePath').val();
+
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -16,7 +18,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
         window.location.reload();
       }).fail((jqXHR) => {
@@ -42,9 +44,9 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
       }).done(() => {
-        window.location.href = `/dashboard/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
+        window.location.href = `${basePath}/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/${jobState}`;
       }).fail((jqXHR) => {
         window.alert(`Request failed, check console for error.`);
         console.error(jqXHR.responseText);
@@ -114,7 +116,7 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/bulk`,
+        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json'
       }).done(() => {

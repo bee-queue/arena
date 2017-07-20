@@ -63,12 +63,20 @@ yarn add bull-arena
 In router.js:
 
 ```js
+const Arena = require('bull-arena');
+
 const express = require('express');
 const router = express.Router();
 
-const arena = require('bull-arena')({queues});
+const arena = Arena({queues});
 router.use('/', arena);
 ```
+
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
+
+* `port` - specify custom port to listen on (default: 4567)
+* `basePath` - specify custom path to mount server on (default: '/')
+* `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 
 ### Development
 

@@ -8,15 +8,15 @@
     "body-parser": "^1.17.2",
     "bull": "^3.0.0-rc.2",
     "express": "^4.15.2",
-    "express-hbs": "^1.0.4",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.10",
     "handlebars-helpers": "^0.8.2",
-    "hbs-utils": "^0.0.4",
     "lodash": "^4.17.4",
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "nodemon src/server/app.js",
-    "inspect": "nodemon --inspect --trace-warnings src/server/app.js"
+    "start": "nodemon index.js",
+    "inspect": "nodemon --inspect --trace-warnings index.js"
   },
   "engines": {
     "node": ">=7.6.0"

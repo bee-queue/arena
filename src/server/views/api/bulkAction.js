@@ -1,4 +1,4 @@
-const Queues = require('../../bull');
+const Queues = require('../../queue');
 const _ = require('lodash');
 
 const ACTIONS = ['remove', 'retry'];
@@ -13,7 +13,7 @@ function bulkAction(action) {
     }
 
     const { queueName, queueHost } = req.params;
-    Queues.setConfig(req.app.get('bull config'));
+    const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
     if (!queue) return res.status(404).send({error: 'queue not found'});
 
@@ -30,7 +30,7 @@ function bulkAction(action) {
       }
     } catch(e) {
       const body = {
-        error: 'bull error',
+        error: 'queue error',
         details: e.stack
       };
       return res.status(500).send(body);

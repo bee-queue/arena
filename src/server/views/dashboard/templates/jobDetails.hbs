@@ -1,10 +1,10 @@
 <h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
 
-{{> dashboard/jobDetails job queueName=queueName queueHost=queueHost jobState=jobState }}
+{{> dashboard/jobDetails job basePath=basePath queueName=queueName queueHost=queueHost jobState=jobState }}
 
 {{#contentFor 'sidebar'}}
-  <li><a href="/dashboard">Queues Overview</a></li>
-  <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
-  <li><a href="/dashboard/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ jobState }}">{{capitalize jobState}} Jobs</a></li>
+  <li><a href="{{ basePath }}/">Queues Overview</a></li>
+  <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
+  <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ jobState }}">{{capitalize jobState}} Jobs</a></li>
   <li class="active"><a href="#">Job {{ job.id }}</a></li>
 {{/contentFor}}
