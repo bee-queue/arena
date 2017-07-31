@@ -38,6 +38,8 @@
           </li>
         </ul>
       </nav>
+    {{else}}
+      Bee-queue does not support pagination for {{ state }} queues &mdash; currently displaying up to <b>{{ pageSize }} jobs</b>. To change count, use "Size" dropdown.
     {{/unless}}
   </div>
   <div class="col-sm-6 text-right">
@@ -50,11 +52,16 @@
       </button>
     {{/eq}}
 
-    {{#unless disablePagination}}
       <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Page Size <span class="caret"></span>
-        </button>
+        {{#if disablePagination}}
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Size <span class="caret"></span>
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Page Size <span class="caret"></span>
+          </button>
+        {{/if}}
         <ul class="dropdown-menu">
           <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
           <li role="separator" class="divider"></li>
@@ -64,7 +71,6 @@
           <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
         </ul>
       </div>
-    {{/unless}}
   </div>
 </div>
 
