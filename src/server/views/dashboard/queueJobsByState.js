@@ -32,7 +32,17 @@ async function handler(req, res) {
 
   let jobs;
   if (queue.IS_BEE) {
-    jobs = await queue.getJobs(state, startId, endId);
+    const page = {};
+
+    if (['failed', 'succeeded'].includes(state)) {
+      page.size = pageSize;
+    } else {
+      page.start = startId;
+      page.end = endId;
+    }
+
+    jobs = await queue.getJobs(state, page);
+
     // Filter out Bee jobs that have already been removed by the time the promise resolves
     jobs = jobs.filter((job) => job);
   } else {
@@ -52,8 +62,6 @@ async function handler(req, res) {
     state,
     jobs,
     jobsInStateCount: jobCounts[state],
-    // TODO: Remove disablePagination once pagination for SET types in Bee is implemented:
-    // https://github.com/bee-queue/bee-queue/pull/64
     disablePagination: queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
     currentPage: page,
     pages,

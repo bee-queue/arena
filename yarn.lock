@@ -152,7 +152,7 @@ bcrypt-pbkdf@^1.0.0:
 
 "bee-queue@https://github.com/mixmaxhq/bee-queue":
   version "1.0.0"
-  resolved "https://github.com/mixmaxhq/bee-queue#fad6899c69d7763bf1ae0600e3b2585253b755d4"
+  resolved "https://github.com/mixmaxhq/bee-queue#e55c89b206dcb8d60fe6d67bc753e4428d965893"
   dependencies:
     promise-callbacks "^3.0.0"
     redis "^2.7.1"
