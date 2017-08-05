@@ -95,7 +95,7 @@ docker build -t <name-image> .
 To run a container, execute the following command. Note that we need to settle the location of `index.json` in this container via volume mounting:
 
 ```shell
-docker run -p 4567:4567 -v /opt/arena/src/server/config/index.json:</local/route/to/index.json> <name-image>
+docker run -p 4567:4567 -v </local/route/to/index.json>:/opt/arena/src/server/config/index.json <name-image>
 ```
 
 ### Development
