@@ -31,18 +31,27 @@ class Queues {
 
     const { type, name, port, host, db, password, prefix } = queueConfig;
 
-    let Queue;
-    if (type === 'bee') {
-      Queue = Bee;
-    } else {
-      Queue = Bull;
-    }
+    const isBee = type === 'bee';
 
-    const queue = new Queue(name, {
+    const options = {
       prefix,
       redis: { port, host, db, password }
-    });
-    queue.IS_BEE = type === 'bee';
+    };
+
+    let queue;
+    if (isBee) {
+      Object.assign(options, {
+        isWorker: false,
+        getEvents: false,
+        sendEvents: false,
+        storeJobs: false
+      });
+      queue = new Bee(name, options);
+    } else {
+      queue = new Bull(name, options);
+    }
+
+    queue.IS_BEE = isBee;
 
     this._queues[queueHost] = this._queues[queueHost] || {};
     this._queues[queueHost][queueName] = queue;
