@@ -80,7 +80,7 @@ router.use('/', arena);
 
 ### Bee Queue support
 
-Arena is dual-compatible with Bull 3.x and the [1.0.0 pre-release of bee-queue](https://github.com/bee-queue/bee-queue/pull/64). To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configation object.
+Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configation object.
 
 ### Docker image
 
