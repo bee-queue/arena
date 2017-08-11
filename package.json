@@ -5,7 +5,7 @@
   "author": "Mixmax <hello@mixmax.com>",
   "license": "MIT",
   "dependencies": {
-    "bee-queue": "https://github.com/mixmaxhq/bee-queue",
+    "bee-queue": "^1.0.0",
     "body-parser": "^1.17.2",
     "bull": "^3.0.0-rc.2",
     "express": "^4.15.2",
