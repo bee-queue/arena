@@ -12,7 +12,7 @@ async function handler(req, res) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
   } else {
-    jobCounts = await queue.getJobCounts(queue);
+    jobCounts = await queue.getJobCounts();
   }
   const stats = await QueueHelpers.getStats(queue);
 
