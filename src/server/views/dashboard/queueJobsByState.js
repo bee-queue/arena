@@ -21,7 +21,7 @@ async function handler(req, res) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
   } else {
-    jobCounts = await queue.getJobCounts(queue);
+    jobCounts = await queue.getJobCounts();
   }
 
   const page = parseInt(req.query.page, 10) || 1;
