@@ -24,6 +24,10 @@ const helpers = {
     var blocks = this._blocks || (this._blocks = {});
         block = blocks[name] || (blocks[name] = []);
     block.push(options.fn(this));
+  },
+  
+  encodeIdAttr: function (id) {
+      return id.replace(/:| /g, "");
   }
 };
 
