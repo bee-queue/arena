@@ -45,6 +45,7 @@
   </div>
 </div>
 
+{{#unless this.queue.IS_BEE}}
 <h5>Progress</h5>
 <div class="progress">
   <div class="progress-bar
@@ -52,13 +53,14 @@
               progress-bar-danger
               {{/eq}}"
        role="progressbar"
-       aria-valuenow="{{ this.progress }}"
+       aria-valuenow="{{ this._progress }}"
        aria-valuemin="0"
        aria-valuemax="100"
-       style="width: {{ this.progress }}%; min-width: 2em;">
-    {{ this.progress }}%
+       style="width: {{ this._progress }}%; min-width: 2em;">
+    {{ this._progress }}%
   </div>
 </div>
+{{/unless}}
 
 {{#if this.returnvalue}}
 <pre>{{ this.returnvalue }}</pre>
