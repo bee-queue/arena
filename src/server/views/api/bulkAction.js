@@ -21,7 +21,7 @@ function bulkAction(action) {
 
     try {
       if (!_.isEmpty(jobs)) {
-        const jobsPromises = jobs.map((id) => queue.getJob(id));
+        const jobsPromises = jobs.map((id) => queue.getJob(decodeURIComponent(id)));
         const fetchedJobs = await Promise.all(jobsPromises);
 
         const actionPromises = fetchedJobs.map(job => job[action]());
