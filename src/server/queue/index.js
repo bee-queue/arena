@@ -29,13 +29,13 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-    const { type, name, port, host, db, password, prefix } = queueConfig;
+    const { type, name, port, host, db, password, prefix, url } = queueConfig;
 
     const isBee = type === 'bee';
 
     const options = {
       prefix,
-      redis: { port, host, db, password }
+      redis: url || { port, host, db, password }
     };
 
     let queue;
