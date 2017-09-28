@@ -60,15 +60,25 @@
   
   var toggleJsonEditor = function(){
     $(".jsoneditorx").toggleClass("hide");
-    jsonEditor.set({ id: "" });
+    var data = localStorage.getItem('ArenaSavedJobData') || "{ id: '' }";
+    try {
+      data = JSON.parse(data);
+    } catch (e) {
+      data = { id: "" };
+    }
+    jsonEditor.set(data);
   };
+  
   var addJob = function(){
+    var data = jsonEditor.get();
+    localStorage.setItem('ArenaSavedJobData', JSON.stringify(data));
     $.ajax({
       url: "/api/queue/{{queueHost}}/{{queueName}}/job/new",
       type: "POST",
-      data: {
-        data: jsonEditor.get()
+      data: data,
+      success: function(res) {
+        alert("Job successfully added!");
       }
-    })
+    });
   };
 {{/contentFor}}

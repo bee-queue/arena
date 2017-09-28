@@ -1,5 +1,6 @@
 async function handler(req, res) {
-  const { queueName, queueHost, data } = req.params;
+  const { queueName, queueHost } = req.params;
+  const data = req.body;
 
   const {Queues} = req.app.locals;
 
