@@ -133,3 +133,7 @@ body {
 .select-all-text {
   font-weight: 400;
 }
+
+.overflow {
+  overflow: hidden;
+}

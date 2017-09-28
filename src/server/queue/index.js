@@ -58,6 +58,17 @@ class Queues {
 
     return queue;
   }
+  
+  set(queue, data) {
+    if (queue.IS_BEE) {
+      queue.createJob(data).save();
+    } else {
+      queue.add(data, {
+        removeOnComplete: false,
+        removeOnFail: false
+      });
+    }
+  }
 }
 
 module.exports = Queues;

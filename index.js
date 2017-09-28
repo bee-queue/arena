@@ -32,6 +32,7 @@ function copyVendorAssets(filePath, targetFileName) {
 copyVendorAssets("tablesort/dist/tablesort.min.js");
 copyVendorAssets("jsoneditor/dist/jsoneditor.min.js");
 copyVendorAssets("jsoneditor/dist/jsoneditor.min.css");
+copyVendorAssets("jsoneditor/dist/img/jsoneditor-icons.svg", "img/jsoneditor-icons.svg");
 copyVendorAssets("tablesort/tablesort.css");
 
 module.exports = run;

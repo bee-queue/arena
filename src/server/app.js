@@ -22,7 +22,7 @@ module.exports = function() {
   const Queues = require('./queue');
   app.locals.Queues = new Queues(defaultConfig);
   app.locals.basePath = '';
-  app.locals.vendorPath = '/vendor/';
+  app.locals.vendorPath = '/vendor';
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');
