@@ -75,7 +75,8 @@
     $.ajax({
       url: "/api/queue/{{queueHost}}/{{queueName}}/job/new",
       type: "POST",
-      data: data,
+      data: JSON.stringify(data),
+      contentType: 'application/json',
       success: function(res) {
         alert("Job successfully added!");
       }
