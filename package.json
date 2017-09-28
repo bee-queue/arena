@@ -12,12 +12,15 @@
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
     "handlebars-helpers": "^0.8.2",
+    "jsoneditor": "^5.9.6",
     "lodash": "^4.17.4",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "pretty-bytes": "^4.0.2",
+    "tablesort": "^5.0.1"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "inspect": "nodemon --inspect --trace-warnings index.js"
+    "start": "nodemon index.js --ignore 'public/vendor/*'",
+    "inspect": "nodemon --inspect --trace-warnings --ignore 'public/vendor/*' index.js"
   },
   "engines": {
     "node": ">=7.6.0"

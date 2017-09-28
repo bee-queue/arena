@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const Arena = require('./src/server/app');
 const routes = require('./src/server/views/routes');
@@ -22,5 +23,15 @@ function run(config, listenOpts = {}) {
 }
 
 if (require.main === module) run();
+
+function copyVendorAssets(filePath, targetFileName) {
+  targetFileName = targetFileName || filePath.slice(filePath.lastIndexOf('/') + 1);
+  fs.createReadStream(path.join('./node_modules', filePath)).pipe(fs.createWriteStream(path.join('./public/vendor', targetFileName)));
+}
+
+copyVendorAssets("tablesort/dist/tablesort.min.js");
+copyVendorAssets("jsoneditor/dist/jsoneditor.min.js");
+copyVendorAssets("jsoneditor/dist/jsoneditor.min.css");
+copyVendorAssets("tablesort/tablesort.css");
 
 module.exports = run;

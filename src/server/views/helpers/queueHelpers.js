@@ -1,10 +1,14 @@
 const _ = require('lodash');
+const prettyBytes = require('pretty-bytes');
 
 const Helpers = {
   getStats: async function(queue) {
     await queue.client.info(); // update queue.client.serverInfo
 
-    return _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    const stats = _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    stats['used_memory'] = prettyBytes(parseInt(stats['used_memory']));
+    stats['total_system_memory'] = prettyBytes(parseInt(stats['total_system_memory']));
+    return stats;
   },
 
   _usefulMetrics: [

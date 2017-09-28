@@ -9,6 +9,8 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
+    <link rel="stylesheet" href="{{ vendorPath }}/jsoneditor.min.css">
+    <link rel="stylesheet" href="{{ vendorPath }}/tablesort.css">
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -26,23 +28,23 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <h4>Queue Navigation Tree</h4>
-          <ul class="nav nav-sidebar">
-            {{{block "sidebar"}}}
-          </ul>
+      <br />
+      <div class="container">
+        <div class="breadcrumb">
+          {{{block "sidebar"}}}
         </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          {{{ body }}}
-        </div>
+        {{{ body }}}
       </div>
     </div>
 
     <input type="hidden" id="basePath" value="{{ basePath }}">
 
     <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
+    <script type="text/javascript" src="{{ vendorPath }}/jsoneditor.min.js"></script>
+    <script type="text/javascript" src="{{ vendorPath }}/tablesort.min.js"></script>
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
+    <script>
+      {{{block "script"}}}
+    </script>
   </body>
 </html>
