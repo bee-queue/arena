@@ -1,4 +1,4 @@
 node_modules
 *.DS_Store
-public/*.*
-public/img/*.*
+public/vendor/*.*
+public/vendor/img/*.*
