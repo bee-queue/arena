@@ -1,4 +1,5 @@
 node_modules
 *.DS_Store
-public/vendor/*.*
-public/vendor/img/*.*
+public/vendor/*.js
+public/vendor/*.css
+public/vendor/img/*.svg
