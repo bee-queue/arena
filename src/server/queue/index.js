@@ -21,7 +21,7 @@ class Queues {
   async get(queueName, queueHost) {
     const queueConfig = _.find(this._config.queues, {
       name: queueName,
-      hostId: queueHost
+      host: queueHost
     });
     if (!queueConfig) return null;
 
