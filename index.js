@@ -26,7 +26,7 @@ if (require.main === module) run();
 
 function copyVendorAssets(filePath, targetFileName) {
   targetFileName = targetFileName || path.basename(filePath);
-  fs.createReadStream(path.join(__dirname, 'node_modules', filePath)).pipe(fs.createWriteStream(path.join(__dirname, 'public/vendor', targetFileName)));
+  fs.createReadStream(path.join('./node_modules', filePath)).pipe(fs.createWriteStream(path.join(__dirname, './public/vendor', targetFileName)));
 }
 
 copyVendorAssets("tablesort/dist/tablesort.min.js");
