@@ -55,16 +55,16 @@
   
   (function(){
     var options = {};
-    jsonEditor = new JSONEditor(document.getElementById("jsoneditor"), options);
+    jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), options);
   })()
   
   var toggleJsonEditor = function(){
-    $(".jsoneditorx").toggleClass("hide");
-    var data = localStorage.getItem('ArenaSavedJobData') || "{ id: '' }";
+    $('.jsoneditorx').toggleClass('hide');
+    var data = localStorage.getItem('ArenaSavedJobData') || '{ id: \'\' }';
     try {
       data = JSON.parse(data);
     } catch (e) {
-      data = { id: "" };
+      data = { id: '' };
     }
     jsonEditor.set(data);
   };
@@ -73,12 +73,12 @@
     var data = jsonEditor.get();
     localStorage.setItem('ArenaSavedJobData', JSON.stringify(data));
     $.ajax({
-      url: "/api/queue/{{queueHost}}/{{queueName}}/job/new",
-      type: "POST",
+      url: '/api/queue/{{queueHost}}/{{queueName}}/job/new',
+      type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: function(res) {
-        alert("Job successfully added!");
+        alert('Job successfully added!');
       }
     });
   };

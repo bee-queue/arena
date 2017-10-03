@@ -1,13 +1,35 @@
 const _ = require('lodash');
-const prettyBytes = require('pretty-bytes');
+const prettyBytes = (num) => {
+    const UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+	if (!Number.isFinite(num)) {
+		return "Could not retrieve value"
+	}
+
+	const neg = num < 0;
+
+	if (neg) {
+		num = -num;
+	}
+
+	if (num < 1) {
+		return (neg ? '-' : '') + num + ' B';
+	}
+
+	const exponent = Math.min(Math.floor(Math.log(num) / Math.log(1000)), UNITS.length - 1);
+	const numStr = Number((num / Math.pow(1000, exponent)).toPrecision(3));
+	const unit = UNITS[exponent];
+
+	return (neg ? '-' : '') + numStr + ' ' + unit;
+}
 
 const Helpers = {
   getStats: async function(queue) {
     await queue.client.info(); // update queue.client.serverInfo
 
     const stats = _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
-    stats['used_memory'] = prettyBytes(parseInt(stats['used_memory']));
-    stats['total_system_memory'] = prettyBytes(parseInt(stats['total_system_memory']));
+    stats.used_memory = prettyBytes(parseInt(stats.used_memory, 10));
+    stats.total_system_memory = prettyBytes(parseInt(stats.total_system_memory, 10));
     return stats;
   },
 

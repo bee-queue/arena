@@ -15,7 +15,6 @@
     "jsoneditor": "^5.9.6",
     "lodash": "^4.17.4",
     "nodemon": "^1.11.0",
-    "pretty-bytes": "^4.0.2",
     "tablesort": "^5.0.1"
   },
   "scripts": {

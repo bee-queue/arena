@@ -1,4 +1,5 @@
 node_modules
+package-lock.json
 *.DS_Store
 public/vendor/*.js
 public/vendor/*.css

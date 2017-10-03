@@ -25,7 +25,7 @@ function run(config, listenOpts = {}) {
 if (require.main === module) run();
 
 function copyVendorAssets(filePath, targetFileName) {
-  targetFileName = targetFileName || filePath.slice(filePath.lastIndexOf('/') + 1);
+  targetFileName = targetFileName || path.basename(filePath);
   fs.createReadStream(path.join('./node_modules', filePath)).pipe(fs.createWriteStream(path.join('./public/vendor', targetFileName)));
 }
 
