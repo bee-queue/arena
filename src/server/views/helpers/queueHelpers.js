@@ -1,26 +1,26 @@
 const _ = require('lodash');
-const prettyBytes = (num) => {
-    const UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+function prettyBytes(num) {
+  const UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-	if (!Number.isFinite(num)) {
-		return "Could not retrieve value"
-	}
+  if (!Number.isFinite(num)) {
+  	return "Could not retrieve value"
+  }
 
-	const neg = num < 0;
+  const neg = num < 0;
 
-	if (neg) {
-		num = -num;
-	}
+  if (neg) {
+  	num = -num;
+  }
 
-	if (num < 1) {
-		return (neg ? '-' : '') + num + ' B';
-	}
+  if (num < 1) {
+  	return (neg ? '-' : '') + num + ' B';
+  }
 
-	const exponent = Math.min(Math.floor(Math.log(num) / Math.log(1000)), UNITS.length - 1);
-	const numStr = Number((num / Math.pow(1000, exponent)).toPrecision(3));
-	const unit = UNITS[exponent];
+  const exponent = Math.min(Math.floor(Math.log(num) / Math.log(1000)), UNITS.length - 1);
+  const numStr = Number((num / Math.pow(1000, exponent)).toPrecision(3));
+  const unit = UNITS[exponent];
 
-	return (neg ? '-' : '') + numStr + ' ' + unit;
+  return (neg ? '-' : '') + numStr + ' ' + unit;
 }
 
 const Helpers = {

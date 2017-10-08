@@ -6,5 +6,6 @@
       "host": "127.0.0.1",
       "hostId": "AWS Server 2"
     }
-  ]
+],
+"queues": []
 }

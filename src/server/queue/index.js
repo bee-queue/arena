@@ -58,10 +58,10 @@ class Queues {
 
     return queue;
   }
-  
+
   /**
-    * @param queue A bee or bull queue class
-    * @param data The data to be used within the job
+    * @param {Object} queue A bee or bull queue class
+    * @param {Object} data The data to be used within the job
     */
   set(queue, data) {
     if (queue.IS_BEE) {

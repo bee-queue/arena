@@ -52,23 +52,18 @@
 
 {{#contentFor 'script'}}
   var jsonEditor = false;
-  
+
   (function(){
     var options = {};
     jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), options);
   })()
-  
+
   var toggleJsonEditor = function(){
     $('.jsoneditorx').toggleClass('hide');
     var data = localStorage.getItem('ArenaSavedJobData') || '{ id: \'\' }';
-    try {
-      data = JSON.parse(data);
-    } catch (e) {
-      data = { id: '' };
-    }
-    jsonEditor.set(data);
+    jsonEditor.set(JSON.parse(data));
   };
-  
+
   var addJob = function(){
     var data = jsonEditor.get();
     localStorage.setItem('ArenaSavedJobData', JSON.stringify(data));
