@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.2.1 Fixed links in interface
+
 * 2.2.0 Added `uri` coneection parameter.
 
 * 2.1.3 Fixed issue where [progress bar didn't work in Bull](https://github.com/bee-queue/arena/pull/46) in Bull
