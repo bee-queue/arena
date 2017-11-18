@@ -23,7 +23,7 @@
                 class="active"
               {{/eq}}>
 
-              <a href="{{ basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
+              <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
             </li>
           {{/each}}
           <li
