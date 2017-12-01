@@ -71,13 +71,17 @@ const express = require('express');
 const router = express.Router();
 
 const arena = Arena({
-  queues: [{
-    // First queue configuration
-  }, {
-    // Second queue configuration
-  }, {
-    // And so on...
-  }]
+  queues: [
+    {
+      // First queue configuration
+    },
+    {
+      // Second queue configuration
+    },
+    {
+      // And so on...
+    }
+  ]
 });
 router.use('/', arena);
 ```
