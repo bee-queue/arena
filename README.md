@@ -70,7 +70,19 @@ const Arena = require('bull-arena');
 const express = require('express');
 const router = express.Router();
 
-const arena = Arena({queues});
+const arena = Arena({
+  queues: [
+    {
+      // First queue configuration
+    },
+    {
+      // Second queue configuration
+    },
+    {
+      // And so on...
+    }
+  ]
+});
 router.use('/', arena);
 ```
 
