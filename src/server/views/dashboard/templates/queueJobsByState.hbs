@@ -95,6 +95,8 @@
                 <span class="label label-default">{{ this.id }}</span>
                 {{#if this.data.name}}
                   <span style="margin-left: 8px">{{ this.data.name }}</span>
+                {{else if this.name}}
+                    <span style="margin-left: 8px">{{ this.name }}</span>
                 {{/if}}
               </h4>
             </a>
