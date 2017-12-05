@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.2.2 Include name in description per [#74](https://github.com/bee-queue/arena/pull/74).
+
 * 2.2.1 Fixed links in interface
 
 * 2.2.0 Added `uri` coneection parameter.
