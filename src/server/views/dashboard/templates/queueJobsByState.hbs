@@ -91,7 +91,12 @@
             </div>
 
             <a role="button" data-toggle="collapse" href="#collapse{{encodeIdAttr this.id}}">
-              <h4 class="header-collapse"><small>N°{{this.id }}</small> - {{ this.name }}</h4>
+              <h4 class="header-collapse">
+                <span class="label label-default">{{ this.id }}</span>
+                {{#if this.data.name}}
+                  <span style="margin-left: 8px">{{ this.data.name }}</span>
+                {{/if}}
+              </h4>
             </a>
             <div id="collapse{{encodeIdAttr this.id}}" class="collapse">
               {{> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
