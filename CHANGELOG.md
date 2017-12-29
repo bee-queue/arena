@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.3.0 Upgraded Bull to v3.3.7
+
 * 2.2.2 Include name in description per [#74](https://github.com/bee-queue/arena/pull/74).
 
 * 2.2.1 Fixed links in interface
