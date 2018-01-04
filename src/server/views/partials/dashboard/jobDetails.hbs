@@ -37,8 +37,9 @@
       {{length this.options.stacktraces}}
     {{/if}}
   </div>
-
-  <div class="col-sm-3">
+</div>
+<div class="row">
+  <div class="col-sm-4">
     <h5>Permalinks</h5>
     <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job {{ this.id }}</a>
     <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
@@ -63,12 +64,13 @@
 {{/unless}}
 
 {{#if this.returnvalue}}
-<pre>{{ this.returnvalue }}</pre>
+<h5>Return Value</h5>
+<pre><code class="json">{{json this.returnvalue true}}</code></pre>
 {{/if}}
 
 {{#if this.failedReason}}
 <h5>Reason for failure</h5>
-<pre>{{ this.failedReason }}</pre>
+<pre><code>{{this.failedReason}}</code></pre>
 {{/if}}
 
 {{#eq jobState 'failed'}}
@@ -87,4 +89,4 @@
 {{/eq}}
 
 <h5>Data</h5>
-<pre>{{ json this.data }}</pre>
+<pre><code class="json">{{json this.data true}}</code></pre>

@@ -133,3 +133,8 @@ body {
 .select-all-text {
   font-weight: 400;
 }
+
+pre {
+  max-height: 250px;
+  overflow-y: auto;
+}
