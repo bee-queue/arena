@@ -1,12 +1,15 @@
 const _ = require('lodash');
+const Handlerbars = require('handlebars');
 
 const helpers = {
   json(obj, pretty = false) {
+    var d;
     if (pretty) {
-      var d = JSON.stringify(obj, null, 2);
-      return d;
+      d = JSON.stringify(obj, null, 2);
+    } else {
+      d = JSON.stringify(obj);
     }
-    return JSON.stringify(obj);
+    return new Handlerbars.SafeString(d);
   },
 
   adjustedPage(currentPage, pageSize, newPageSize) {
@@ -25,7 +28,7 @@ const helpers = {
         block = blocks[name] || (blocks[name] = []);
     block.push(options.fn(this));
   },
-  
+
   encodeIdAttr: function (id) {
       return id.replace(/:| /g, "");
   }
