@@ -29,29 +29,36 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-    const { type, name, port, host, db, password, prefix, url } = queueConfig;
+    const { type, name, port, host, db, password, prefix, url, redis } = queueConfig;
+
+    const redisHost = { host };
+    if (password) redisHost.password = password;
+    if (port) redisHost.port = port;
+    if (db) redisHost.db = db;
 
     const isBee = type === 'bee';
 
-    const options = {
-      prefix,
-      redis: url || { port, host, db, password }
-    };
-
     let queue;
     if (isBee) {
-      Object.assign(options, {
+      const options = {
+        redis: redis || url || redisHost,
         isWorker: false,
         getEvents: false,
         sendEvents: false,
         storeJobs: false
-      });
-      queue = new Bee(name, options);
-    } else {
-      queue = new Bull(name, options);
-    }
+      };
+      if (prefix) options.prefix = prefix;
 
-    queue.IS_BEE = isBee;
+      queue = new Bee(name, options);
+      queue.IS_BEE = true;
+    } else {
+      const options = {
+        redis: redis || redisHost
+      };
+      if (prefix) options.prefix = prefix;
+
+      queue = new Bull(name, options || url);
+    }
 
     this._queues[queueHost] = this._queues[queueHost] || {};
     this._queues[queueHost][queueName] = queue;
