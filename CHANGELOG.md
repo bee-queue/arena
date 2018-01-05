@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.4.0 Custom Redis configurations and documentation improvements ([#81](https://github.com/bee-queue/arena/pull/81) - @vhf)
+
 * 2.3.1 UI improvement: [add syntax highlighting to JSON](https://github.com/bee-queue/arena/pull/80) - thanks @emhagman!
 
 * 2.3.0 Upgraded Bull to v3.3.7
