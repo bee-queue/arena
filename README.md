@@ -19,31 +19,94 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 #### Prerequisites
 
-Configure your queues in the "queues" key of [`index.json`](src/server/config/index.json). Queues take the following format:
+Configure your queues in the "queues" key of [`index.json`](src/server/config/index.json).
 
-```json
+Queues are JSON objects. Here are the configuration keys that are common to all three configuration ways:
+
+```js
 {
+  // required string
   "name": "my_queue",
-  "port": 6381,
-  "host": "127.0.0.1",
-  "hostId": "AWS Server 2"
+
+  // host display name, give it a helpful name for reference
+  // required string
+  "hostId": "Queue Server 1",
+
+  // optional string
+  // default: null (will assume Bull)
+  "type": "bee",
+
+  // queue keys prefix
+  // optional string
+  // default: "bq" for Bee, "bull" for Bull
+  "prefix": "foo"
 }
 ```
 
-The `name`, `port`, `host`, and `hostId` fields are required. `hostId` can be given any name, so it is recommended to give it a helpful name for reference. 
-Optionally, you can also pass in `db` and `password` to configure redis credentials, or `prefix` to specify the customized prefix of the queue.
+The required `name` and `hostId` have to be present in any of the following JSON objects, the optional keys can be present in them.
 
-You can also provide a `url` field instead of `host`, `port` `db` and `password`.
+The three ways in which you can configure the client are:
 
-To specify a custom file location, see "Running Arena as a node module".
+##### 1. port/host
 
-*Note that if you happen to use Amazon Web Services' Elasticache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery*
+```js
+{
+  // hostname or IP
+  // required string
+  "host": "127.0.0.1",
+
+  // optional number
+  // default: 6379
+  "port": 6379,
+
+  // optional string
+  "password": "hello",
+
+  // optional number
+  // default: 0
+  "db": 1,
+}
+```
+
+##### 2. URL
+
+You can also provide a `url` field instead of `host`, `port`, `db` and `password`.
+
+```js
+{
+  "url": "[redis:]//[[user][:password@]][host][:port][/db-number][?db=db-number[&password=bar[&option=value]]]"
+}
+```
+
+##### 3. Redis client options
+
+Arena is compatible with both Bee and Bull.
+If you need to pass some specific configuration options directly to the redis client library your queue uses, you can also do so.
+
+Bee uses node [redis](https://www.npmjs.com/package/redis) client, Bull uses [ioredis](https://www.npmjs.com/package/ioredis) client.
+These clients expect different configurations options.
+
+```js
+{
+  "redis": {}
+}
+```
+
+For Bee, the `redis` key will be directly passed to [`redis.createClient`](https://github.com/NodeRedis/node_redis#rediscreateclient), as explained [here](https://github.com/bee-queue/bee-queue#settings).
+
+For Bull, the `redis` key will be directly passed to [`ioredis`](https://github.com/luin/ioredis/blob/master/API.md#new_Redis_new), as explained [here](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#queue). To use this to connect to a Sentinel cluster, see [here](https://github.com/luin/ioredis/blob/master/README.md#sentinel).
+
+##### Custom configuration file
+
+To specify a custom configuration file location, see [Running Arena as a node module](#running-arena-as-a-node-module).
+
+*Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery*
 
 #### Running the server
 
 Run `npm install` to fetch Arena's dependencies. Then run `npm start` to start the server.
 
-Note that because Arena is dependent on `async`/`await`, Arena only currently supports Node `>7`.
+Note that because Arena is implemented using `async`/`await`, Arena only currently supports Node `>=7.6`.
 
 #### Running Arena as a node module
 
@@ -94,7 +157,7 @@ router.use('/', arena);
 
 ### Bee Queue support
 
-Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configation object.
+Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configuration object.
 
 ### Docker image
 
