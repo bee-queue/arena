@@ -1,15 +1,16 @@
 const _ = require('lodash');
-const Handlerbars = require('handlebars');
+const Handlebars = require('handlebars');
+
+const replacer = (key, value) =>
+    _.isString(value) ? Handlebars.Utils.escapeExpression(value) : value;
 
 const helpers = {
   json(obj, pretty = false) {
-    var d;
+    const args = [obj, replacer];
     if (pretty) {
-      d = JSON.stringify(obj, null, 2);
-    } else {
-      d = JSON.stringify(obj);
+      args.push(2);
     }
-    return new Handlerbars.SafeString(d);
+    return new Handlebars.SafeString(JSON.stringify(...args));
   },
 
   adjustedPage(currentPage, pageSize, newPageSize) {
