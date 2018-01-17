@@ -38,26 +38,24 @@ class Queues {
 
     const isBee = type === 'bee';
 
+    const options = {
+      redis: redis || url || redisHost
+    };
+    if (prefix) options.prefix = prefix;
+
     let queue;
     if (isBee) {
-      const options = {
-        redis: redis || url || redisHost,
+      _.extend(options, {
         isWorker: false,
         getEvents: false,
         sendEvents: false,
         storeJobs: false
-      };
-      if (prefix) options.prefix = prefix;
+      });
 
       queue = new Bee(name, options);
       queue.IS_BEE = true;
     } else {
-      const options = {
-        redis: redis || redisHost
-      };
-      if (prefix) options.prefix = prefix;
-
-      queue = new Bull(name, options || url);
+      queue = new Bull(name, options);
     }
 
     this._queues[queueHost] = this._queues[queueHost] || {};
