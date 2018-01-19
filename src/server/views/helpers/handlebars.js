@@ -1,5 +1,5 @@
-const _ = require("lodash");
-const Handlebars = require("handlebars");
+const _ = require('lodash');
+const Handlebars = require('handlebars');
 
 const replacer = (key, value) => {
   if (_.isObject(value)) {
@@ -30,7 +30,7 @@ const helpers = {
   block(name) {
     const blocks = this._blocks;
     const content = blocks && blocks[name];
-    return content ? content.join("\n") : null;
+    return content ? content.join('\n') : null;
   },
 
   contentFor(name, options) {
@@ -40,7 +40,7 @@ const helpers = {
   },
 
   encodeIdAttr(id) {
-    return id.replace(/:| /g, "");
+    return id.replace(/:| /g, '');
   }
 };
 
