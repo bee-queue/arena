@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.4.2 Fix XSS issue https://github.com/bee-queue/arena/pull/84 (thanks @ohwillie)
+
 * 2.4.1 Fix regression where 'url' parameter wasn't respected ([#85](https://github.com/bee-queue/arena/pull/85) - @ohwillie)
 
 * 2.4.0 Custom Redis configurations and documentation improvements ([#81](https://github.com/bee-queue/arena/pull/81) - @vhf)
