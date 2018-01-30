@@ -6,7 +6,7 @@ const routes = require('./src/server/views/routes');
 function run(config, listenOpts = {}) {
   const {app, Queues} = Arena();
 
-  if (config) Queues.setConfig(config);
+  if (config) Queues.config = config;
 
   app.locals.basePath = listenOpts.basePath || app.locals.basePath;
 

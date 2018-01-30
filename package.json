@@ -23,5 +23,11 @@
     "node": ">=7.6.0"
   },
   "repository": "https://github.com/bee-queue/arena.git",
-  "version": "2.4.2"
+  "version": "2.4.2",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "ava-spec": "^1.1.1",
+    "sandboxed-module": "^2.0.3",
+    "sinon": "^4.2.2"
+  }
 }
