@@ -48,10 +48,10 @@ class Builder {
   get isBee() {
     return this._isBee || (this._isBee = this.config.type === 'bee');
   }
-}
 
-module.exports = Object.assign(Builder, {
-  queue(...args) {
+  static queue(...args) {
     return new this(...args).queue();
   }
-});
+}
+
+module.exports = Builder;
