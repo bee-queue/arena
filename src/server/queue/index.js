@@ -1,67 +1,25 @@
+const Builder = require('./builder');
 const _ = require('lodash');
-const Bull = require('bull');
-const Bee = require('bee-queue');
-const path = require('path');
 
 class Queues {
   constructor(config) {
-    this._queues = {};
-
-    this.setConfig(config);
+    Object.assign(this, {queues: {}, config});
   }
 
   list() {
-    return this._config.queues;
+    return this.config.queues;
   }
 
-  setConfig(config) {
-    this._config = config;
-  }
+  get(name, hostId) {
+    const config = _.find(this.list(), {name, hostId});
 
-  async get(queueName, queueHost) {
-    const queueConfig = _.find(this._config.queues, {
-      name: queueName,
-      hostId: queueHost
-    });
-    if (!queueConfig) return null;
-
-    if (this._queues[queueHost] && this._queues[queueHost][queueName]) {
-      return this._queues[queueHost][queueName];
+    if (!config) {
+      return;
     }
 
-    const { type, name, port, host, db, password, prefix, url, redis } = queueConfig;
-
-    const redisHost = { host };
-    if (password) redisHost.password = password;
-    if (port) redisHost.port = port;
-    if (db) redisHost.db = db;
-
-    const isBee = type === 'bee';
-
-    const options = {
-      redis: redis || url || redisHost
-    };
-    if (prefix) options.prefix = prefix;
-
-    let queue;
-    if (isBee) {
-      _.extend(options, {
-        isWorker: false,
-        getEvents: false,
-        sendEvents: false,
-        storeJobs: false
-      });
-
-      queue = new Bee(name, options);
-      queue.IS_BEE = true;
-    } else {
-      queue = new Bull(name, options);
-    }
-
-    this._queues[queueHost] = this._queues[queueHost] || {};
-    this._queues[queueHost][queueName] = queue;
-
-    return queue;
+    const {queues} = this;
+    const hostQueues = queues[hostId] || (queues[hostId] = {});
+    return hostQueues[name] || (hostQueues[name] = Builder.queue(config));
   }
 }
 
