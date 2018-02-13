@@ -1,4 +1,4 @@
-FROM node:8.1.2
+FROM node:alpine
 
 EXPOSE 4567
 
