@@ -95,9 +95,17 @@
                 <span class="label label-default">{{ this.id }}</span>
                 {{#if this.data.name}}
                   <span style="margin-left: 8px">{{ this.data.name }}</span>
+                {{else if this.data.title}}
+                <span style="margin-left: 8px">{{ this.data.title }}</span>
                 {{else if this.name}}
                   <span style="margin-left: 8px">{{ this.name }}</span>
                 {{/if}}
+                {{# if this.data.datasource}}
+                  - {{this.data.datasource.name}}
+                {{/if}}
+                <span style="color:#afafaf">
+                ({{ this.scheduledTimeToExecute }})
+                </span>
               </h4>
             </a>
             <div id="collapse{{encodeIdAttr this.id}}" class="collapse">
