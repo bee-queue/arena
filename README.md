@@ -154,7 +154,7 @@ router.use('/', arena);
 * `port` - specify custom port to listen on (default: 4567)
 * `basePath` - specify custom path to mount server on (default: '/')
 * `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
-* useCdn - set false to use the bundled js and css files (default: true)
+* `useCdn` - set false to use the bundled js and css files (default: true)
 
 ### Bee Queue support
 
