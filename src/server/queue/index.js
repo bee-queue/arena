@@ -6,6 +6,7 @@ const path = require('path');
 class Queues {
   constructor(config) {
     this._queues = {};
+    this._useCdn = true;
 
     this.setConfig(config);
   }
@@ -16,6 +17,14 @@ class Queues {
 
   setConfig(config) {
     this._config = config;
+  }
+
+  setUseCdn(useCdn) {
+    this._useCdn = useCdn;
+  }
+
+  getUseCdn() {
+    return this._useCdn;
   }
 
   async get(queueName, queueHost) {

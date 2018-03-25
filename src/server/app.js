@@ -13,14 +13,14 @@ module.exports = function() {
   });
 
   require('handlebars-helpers')({handlebars});
-  require('./views/helpers/handlebars')(handlebars);
 
   const app = express();
 
   const defaultConfig = require(path.join(__dirname, 'config', 'index.json'));
 
   const Queues = require('./queue');
-  app.locals.Queues = new Queues(defaultConfig);
+  const queues = new Queues(defaultConfig);
+  require('./views/helpers/handlebars')(handlebars, queues);
   app.locals.basePath = '';
 
   app.set('views', `${__dirname}/views`);
