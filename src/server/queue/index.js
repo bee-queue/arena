@@ -28,14 +28,6 @@ class Queues {
     this._config = config;
   }
 
-  setUseCdn(useCdn) {
-    this._useCdn = useCdn;
-  }
-
-  getUseCdn() {
-    return this._useCdn;
-  }
-
   async get(queueName, queueHost) {
     const queueConfig = _.find(this._config.queues, {
       name: queueName,
