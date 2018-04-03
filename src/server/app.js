@@ -20,7 +20,7 @@ module.exports = function() {
 
   const Queues = require('./queue');
   const queues = new Queues(defaultConfig);
-  require('./views/helpers/handlebars')(handlebars, queues);
+  require('./views/helpers/handlebars')(handlebars, { queues });
   app.locals.Queues = queues;
   app.locals.basePath = '';
 

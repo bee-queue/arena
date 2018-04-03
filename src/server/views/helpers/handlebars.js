@@ -44,12 +44,12 @@ const helpers = {
   },
 };
 
-module.exports = function registerHelpers(hbs, queues) {
+module.exports = function registerHelpers(hbs, { queues }) {
   _.each(helpers, (fn, helper) => {
     hbs.registerHelper(helper, fn);
   });
 
   hbs.registerHelper('useCdn', () => {
-    return queues.getUseCdn();
+    return queues.useCdn;
   });
 };
