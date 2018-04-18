@@ -10,7 +10,7 @@ class Queues {
     this.useCdn = {
       value: true,
       get useCdn() {
-        return value;
+        return this.value;
       },
       set useCdn(newValue) {
         this.value = newValue;
