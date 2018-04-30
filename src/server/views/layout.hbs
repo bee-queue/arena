@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- JSON Viewer -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> {{else}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    {{else}}
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ basePath }}/bootstrap.min.css">
     <!-- JSON Viewer -->
     <link rel="stylesheet" href="{{ basePath }}/highlight.default.min.css">
-    <script src="{{ basePath }}/highlight.min.js"></script> {{/if}}
+    <script src="{{ basePath }}/highlight.min.js"></script>
+    {{/if}}
     <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
     <script>hljs.initHighlightingOnLoad();</script>
 
@@ -54,10 +56,13 @@
       </div>
     </div>
 
-    <input type="hidden" id="basePath" value="{{ basePath }}"> {{#if (useCdn)}}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script> {{else}}
+    <input type="hidden" id="basePath" value="{{ basePath }}">
+    {{#if (useCdn)}}
+    <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
+    {{else}}
     <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script> {{/if}}
+    <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
+    {{/if}}
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
   </body>
 
