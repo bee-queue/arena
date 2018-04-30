@@ -41,7 +41,7 @@ const helpers = {
 
   encodeIdAttr(id) {
     return id.replace(/:| /g, '');
-  },
+  }
 };
 
 module.exports = function registerHelpers(hbs, { queues }) {
