@@ -7,6 +7,16 @@ class Queues {
   constructor(config) {
     this._queues = {};
 
+    this.useCdn = {
+      value: true,
+      get useCdn() {
+        return this.value;
+      },
+      set useCdn(newValue) {
+        this.value = newValue;
+      }
+    };
+
     this.setConfig(config);
   }
 
