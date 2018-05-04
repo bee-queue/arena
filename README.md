@@ -156,6 +156,42 @@ router.use('/', arena);
 * `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 * `useCdn` - set false to use the bundled js and css files (default: true)
 
+##### Example config (for bull)
+
+```js
+import Arena from 'bull-arena';
+
+const arenaConfig = Arena({
+  queues: [
+    {
+      // Name of the bull queue, this name must match up exactly with what you've defined in bull.
+      name: "Notification_Emailer",
+
+      // Hostname or queue prefix, you can put whatever you want.
+      hostId: "MyAwesomeQueues",
+
+      // Redis auth.
+      redis: {
+        port: /* Your redis port */,
+        host: /* Your redis host domain*/,
+        password: /* Your redis password */,
+      },
+    },
+  ],
+},
+{
+  // Make the arena dashboard become available at {my-site.com}/arena.
+  basePath: '/arena',
+
+  // Let express handle the listening.
+  disableListen: true
+});
+
+// Make arena's resources (js/css deps) available at the base app route
+app.use('/', arenaConfig);
+```
+(Credit to [tim-soft](https://github.com/tim-soft) for the example config.)
+
 ### Bee Queue support
 
 Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configuration object.
