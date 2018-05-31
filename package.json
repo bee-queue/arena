@@ -20,7 +20,8 @@
     "inspect": "nodemon --inspect --trace-warnings index.js"
   },
   "engines": {
-    "node": ">=7.6.0"
+    "node": ">=7.6.0",
+    "yarn": "YARN NO LONGER USED - use npm instead."
   },
   "repository": "https://github.com/bee-queue/arena.git",
   "version": "2.4.3"

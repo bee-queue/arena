@@ -5,9 +5,9 @@ EXPOSE 4567
 RUN mkdir -p /opt/arena
 WORKDIR /opt/arena
 COPY package.json /opt/arena
-COPY yarn.lock /opt/arena
-RUN yarn --production
+COPY package-lock.json /opt/arena
+RUN npm install --production
 
 COPY . /opt/arena/
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
