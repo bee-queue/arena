@@ -122,7 +122,7 @@ Usage:
 In project folder:
 
 ```shell
-yarn add bull-arena
+npm install bull-arena
 ```
 
 In router.js:
@@ -215,8 +215,6 @@ docker run -p 4567:4567 -v </local/route/to/index.json>:/opt/arena/src/server/co
 ### Development
 
 Arena is written using Express, with simple jQuery and Handlebars on the front end.
-
-If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
 
 ### License
 
