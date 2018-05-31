@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.4.4 deyarn
+
 * 2.4.3 Fix progress indicator for Bill 3.x https://github.com/bee-queue/arena/pull/96
 
 * 2.4.2 Fix XSS issue https://github.com/bee-queue/arena/pull/84 (thanks @ohwillie)
