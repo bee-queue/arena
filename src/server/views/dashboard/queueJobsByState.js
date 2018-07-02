@@ -1,7 +1,9 @@
 const _ = require('lodash');
+const moment = require('moment');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
+
   const { queueName, queueHost, state } = req.params;
 
   const {Queues} = req.app.locals;
@@ -55,7 +57,10 @@ async function handler(req, res) {
     pages.push(_.last(pages) + 1);
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
-
+  jobs = jobs.map((job) => {
+      job.scheduledTimeToExecute = moment(new Date(job.timestamp + job.delay)).fromNow(true);
+      return job;
+  });
   return res.render('dashboard/templates/queueJobsByState', {
     queueName,
     queueHost,
