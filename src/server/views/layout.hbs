@@ -1,4 +1,5 @@
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,17 +7,43 @@
 
     <title>Arena</title>
 
+    {{#if (useCdn)}}
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
-
     <!-- JSON Viewer -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    {{else}}
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ basePath }}/bootstrap.min.css">
+    <!-- JSON Viewer -->
+    <link rel="stylesheet" href="{{ basePath }}/highlight.default.min.css">
+    <script src="{{ basePath }}/highlight.min.js"></script>
+    {{/if}}
+    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
     <script>hljs.initHighlightingOnLoad();</script>
 
   </head>
+
   <body>
+<<<<<<< HEAD
+=======
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ basePath }}/">Arena</a>
+        </div>
+      </div>
+    </nav>
+
+>>>>>>> eef2b1a0c8ccb7a202260cd6ca419195b28c60fc
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -33,8 +60,13 @@
     </div>
 
     <input type="hidden" id="basePath" value="{{ basePath }}">
-
+    {{#if (useCdn)}}
     <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
+    {{else}}
+    <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
+    {{/if}}
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
   </body>
+
 </html>

@@ -7,6 +7,7 @@ function run(config, listenOpts = {}) {
   const {app, Queues} = Arena();
 
   if (config) Queues.setConfig(config);
+  Queues.useCdn = typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
 
   app.locals.basePath = listenOpts.basePath || app.locals.basePath;
 

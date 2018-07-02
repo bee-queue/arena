@@ -54,11 +54,11 @@
               progress-bar-danger
               {{/eq}}"
        role="progressbar"
-       aria-valuenow="{{ this._progress }}"
+       aria-valuenow="{{ this.progress }}"
        aria-valuemin="0"
        aria-valuemax="100"
-       style="width: {{ this._progress }}%; min-width: 2em;">
-    {{ this._progress }}%
+       style="width: {{ this.progress }}%; min-width: 2em;">
+    {{ this.progress }}%
   </div>
 </div>
 {{/unless}}

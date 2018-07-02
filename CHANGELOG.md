@@ -1,5 +1,11 @@
 ## Release History
 
+* 2.4.5 Allow the package to be once again installed using Yarn (#99)
+
+* 2.4.4 deyarn
+
+* 2.4.3 Fix progress indicator for Bill 3.x https://github.com/bee-queue/arena/pull/96
+
 * 2.4.2 Fix XSS issue https://github.com/bee-queue/arena/pull/84 (thanks @ohwillie)
 
 * 2.4.1 Fix regression where 'url' parameter wasn't respected ([#85](https://github.com/bee-queue/arena/pull/85) - @ohwillie)
