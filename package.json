@@ -23,9 +23,5 @@
     "node": ">=7.6.0"
   },
   "repository": "https://github.com/bee-queue/arena.git",
-<<<<<<< HEAD
-  "version": "2.5.0"
-=======
-  "version": "2.4.5"
->>>>>>> eef2b1a0c8ccb7a202260cd6ca419195b28c60fc
+  "version": "2.5.1"
 }
