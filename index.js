@@ -11,8 +11,8 @@ function run(config, listenOpts = {}) {
 
   app.locals.basePath = listenOpts.basePath || app.locals.basePath;
 
-  app.use(app.locals.basePath, express.static(path.join(__dirname, 'public')));
-  app.use(app.locals.basePath, routes);
+  app.use('/', express.static(path.join(__dirname, 'public')));
+  app.use('/', routes);
 
   const port = listenOpts.port || 4567;
   if (!listenOpts.disableListen) {
