@@ -1,20 +1,68 @@
 const _ = require('lodash');
-const QueueHelpers = require('../helpers/queueHelpers');
+const { BEE_STATES, BULL_STATES } = require('../helpers/queueHelpers');
+
+/**
+ * Determines if the requested job state lookup is valid.
+ *
+ * @param {String} state
+ * @param {Boolean} isBee States vary between bull and bee
+ *
+ * @return {Boolean}
+ */
+function isValidState(state, isBee) {
+  const validStates = isBee ? BEE_STATES : BULL_STATES;
+  return _.includes(jobTypes, state);
+}
 
 async function handler(req, res) {
-  const { queueName, queueHost, state } = req.params;
+  if (req.params.ext === 'json') return _json(req, res);
 
+  return _html(req, res);
+}
+
+/**
+ * Returns the queue jobs in the requested state as a json document.
+ *
+ * @prop {Object} req express request object
+ * @prop {Object} res express response object
+ */
+async function _json(req, res) {
+  const { queueName, queueHost, state } = req.params;
+  const {Queues} = req.app.locals;
+  const queue = await Queues.get(queueName, queueHost);
+  if (!queue) return res.status(404).json({ message: 'Queue not found' });
+
+  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
+
+  let jobs;
+  if (queue.IS_BEE) {
+    jobs = await queue.getJobs(state, { size: 1000 });
+    jobs = jobs.map((j) => _.pick(j, 'id', 'progress', 'data', 'options', 'status'));
+  } else {
+    jobs = await queue[`get${_.capitalize(state)}`](0, 1000);
+    jobs = jobs.map((j) => j.toJSON());
+  }
+
+  const filename = `${queueName}-${state}-dump.json`;
+
+  res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+  res.setHeader('Content-type', 'application/json');
+  res.write(JSON.stringify(jobs, null, 2), () => res.end());
+}
+
+/**
+ * Renders an html view of the queue jobs in the requested state.
+ *
+ * @prop {Object} req express request object
+ * @prop {Object} res express response object
+ */
+async function _html(req, res) {
+  const { queueName, queueHost, state } = req.params;
   const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
 
-  let jobTypes;
-  if (queue.IS_BEE) {
-    jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
-  } else {
-    jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
-  }
-  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound', {queueName, queueHost, state});
+  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
   let jobCounts;
   if (queue.IS_BEE) {
