@@ -1,20 +1,54 @@
 const _ = require('lodash');
 const QueueHelpers = require('../helpers/queueHelpers');
 
-async function handler(req, res) {
-  const { queueName, queueHost, state } = req.params;
-
-  const {Queues} = req.app.locals;
-  const queue = await Queues.get(queueName, queueHost);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
-
+function isValidState(state, isBee) {
   let jobTypes;
-  if (queue.IS_BEE) {
+  if (isBee) {
     jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
   } else {
     jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
   }
-  if (!_.includes(jobTypes, state)) return res.status(400).render('dashboard/templates/jobStateNotFound', {queueName, queueHost, state});
+
+  return _.includes(jobTypes, state);
+}
+
+async function handler(req, res) {
+  if (req.params.ext === 'json') return _json(req, res);
+
+  return _html(req, res);
+}
+
+async function _json(req, res) {
+  const { queueName, queueHost, state } = req.params;
+  const {Queues} = req.app.locals;
+  const queue = await Queues.get(queueName, queueHost);
+  if (!queue) return res.status(404).json({ message: 'Queue not found' });
+
+  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
+
+  let jobs;
+  if (queue.IS_BEE) {
+    jobs = await queue.getJobs(state, { size: 1000 });
+    jobs = jobs.map((j) => _.pick(j, 'id', 'progress', 'data', 'options', 'status'));
+  } else {
+    jobs = await queue[`get${_.capitalize(state)}`](0, 1000);
+    jobs = jobs.map((j) => j.toJSON());
+  }
+
+  const filename = `${queueName}-${state}-dump.json`;
+
+  res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+  res.setHeader('Content-type', 'application/json');
+  res.write(JSON.stringify(jobs, null, 2), () => res.end());
+}
+
+async function _html(req, res) {
+  const { queueName, queueHost, state } = req.params;
+  const {Queues} = req.app.locals;
+  const queue = await Queues.get(queueName, queueHost);
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
+
+  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
   let jobCounts;
   if (queue.IS_BEE) {
