@@ -14,7 +14,17 @@ const Helpers = {
     'mem_fragmentation_ratio',
     'connected_clients',
     'blocked_clients'
-  ]
+  ],
+
+  /**
+   * Valid states for a job in bee queue
+   */
+  BEE_STATES: ['waiting', 'active', 'succeeded', 'failed', 'delayed'],
+
+  /**
+   * Valid states for a job in bull queue
+   */
+  BULL_STATES: ['waiting', 'active', 'completed', 'failed', 'delayed']
 };
 
 module.exports = Helpers;

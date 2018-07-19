@@ -1,14 +1,16 @@
 const _ = require('lodash');
-const QueueHelpers = require('../helpers/queueHelpers');
+const { BEE_STATES, BULL_STATES } = require('../helpers/queueHelpers');
 
+/**
+ * Determines if the requested job state lookup is valid.
+ *
+ * @param {String} state
+ * @param {Boolean} isBee States vary between bull and bee
+ *
+ * @return {Boolean}
+ */
 function isValidState(state, isBee) {
-  let jobTypes;
-  if (isBee) {
-    jobTypes = ['waiting', 'active', 'succeeded', 'failed', 'delayed'];
-  } else {
-    jobTypes = ['waiting', 'active', 'completed', 'failed', 'delayed'];
-  }
-
+  const validStates = isBee ? BEE_STATES : BULL_STATES;
   return _.includes(jobTypes, state);
 }
 
@@ -18,6 +20,12 @@ async function handler(req, res) {
   return _html(req, res);
 }
 
+/**
+ * Returns the queue jobs in the requested state as a json document.
+ *
+ * @prop {Object} req express request object
+ * @prop {Object} res express response object
+ */
 async function _json(req, res) {
   const { queueName, queueHost, state } = req.params;
   const {Queues} = req.app.locals;
@@ -42,6 +50,12 @@ async function _json(req, res) {
   res.write(JSON.stringify(jobs, null, 2), () => res.end());
 }
 
+/**
+ * Renders an html view of the queue jobs in the requested state.
+ *
+ * @prop {Object} req express request object
+ * @prop {Object} res express response object
+ */
 async function _html(req, res) {
   const { queueName, queueHost, state } = req.params;
   const {Queues} = req.app.locals;
