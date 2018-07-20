@@ -10,4 +10,4 @@ router.get('/healthz', (req, res) => {
   res.status(200).send(':)');
 })
 
-module.exports = router
+module.exports = router;
