@@ -11,7 +11,7 @@ const { BEE_STATES, BULL_STATES } = require('../helpers/queueHelpers');
  */
 function isValidState(state, isBee) {
   const validStates = isBee ? BEE_STATES : BULL_STATES;
-  return _.includes(jobTypes, state);
+  return _.includes(validStates, state);
 }
 
 async function handler(req, res) {
