@@ -45,7 +45,8 @@ class Queues {
     if (password) redisHost.password = password;
     if (port) redisHost.port = port;
     if (db) redisHost.db = db;
-
+    if (!!redis) redis = Object.assign(redisHost, redis);
+    
     const isBee = type === 'bee';
 
     const options = {
