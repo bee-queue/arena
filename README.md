@@ -152,6 +152,7 @@ router.use('/', arena);
 `Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
 * `port` - specify custom port to listen on (default: 4567)
+* `host` - specify custom ip to listen on (default: '0.0.0.0')
 * `basePath` - specify custom path to mount server on (default: '/')
 * `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 * `useCdn` - set false to use the bundled js and css files (default: true)
