@@ -9,10 +9,10 @@ function run(config, listenOpts = {}) {
   if (config) Queues.setConfig(config);
   Queues.useCdn = typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
 
-  app.locals.basePath = listenOpts.basePath || app.locals.basePath;
+  app.locals.appBasePath = listenOpts.basePath || app.locals.appBasePath;
 
-  app.use(app.locals.basePath, express.static(path.join(__dirname, 'public')));
-  app.use(app.locals.basePath, routes);
+  app.use(app.locals.appBasePath, express.static(path.join(__dirname, 'public')));
+  app.use(app.locals.appBasePath, routes);
 
   const port = listenOpts.port || 4567;
   const host= listenOpts.host || '0.0.0.0'; // Default: listen to all network interfaces.
