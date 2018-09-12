@@ -60,7 +60,8 @@ async function _html(req, res) {
   const { queueName, queueHost, state } = req.params;
   const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {queueName, queueHost});
+  const basePath = req.baseUrl;
+  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {basePath, queueName, queueHost});
 
   if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
@@ -105,6 +106,7 @@ async function _html(req, res) {
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
   return res.render('dashboard/templates/queueJobsByState', {
+    basePath,
     queueName,
     queueHost,
     state,

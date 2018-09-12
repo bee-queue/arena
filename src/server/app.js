@@ -22,7 +22,7 @@ module.exports = function() {
   const queues = new Queues(defaultConfig);
   require('./views/helpers/handlebars')(handlebars, { queues });
   app.locals.Queues = queues;
-  app.locals.basePath = '';
+  app.locals.appBasePath = '';
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');
