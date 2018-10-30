@@ -12,8 +12,7 @@
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
     "handlebars-helpers": "^0.8.2",
-    "lodash": "^4.17.4",
-    "nodemon": "^1.11.0"
+    "lodash": "^4.17.4"
   },
   "scripts": {
     "start": "nodemon index.js",
@@ -23,5 +22,8 @@
     "node": ">=7.6.0"
   },
   "repository": "https://github.com/bee-queue/arena.git",
-  "version": "2.5.0"
+  "version": "2.5.0",
+  "devDependencies": {
+    "nodemon": "^1.18.5"
+  }
 }
