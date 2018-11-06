@@ -66,6 +66,7 @@ class Queues {
       queue = new Bee(name, options);
       queue.IS_BEE = true;
     } else {
+      if (queueConfig.createClient) options.createClient = queueConfig.createClient;
       queue = new Bull(name, options);
     }
 
