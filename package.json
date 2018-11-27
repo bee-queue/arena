@@ -22,7 +22,7 @@
     "node": ">=7.6.0"
   },
   "repository": "https://github.com/bee-queue/arena.git",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "devDependencies": {
     "nodemon": "^1.18.7"
   }
