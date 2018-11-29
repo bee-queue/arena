@@ -1,13 +1,20 @@
-FROM node:8.1.2
+FROM node:8-alpine
 
-EXPOSE 4567
+# - Upgrade alpine packages to avoid possible os vulnerabilities
+# - Tini for Handling Kernel Signals https://github.com/krallin/tini
+#   https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#handling-kernel-signals
+RUN apk --no-cache upgrade && apk add --no-cache tini
 
-RUN mkdir -p /opt/arena
 WORKDIR /opt/arena
-COPY package.json /opt/arena
-COPY package-lock.json /opt/arena
-RUN npm install --production
+
+COPY package.json package-lock.json /opt/arena/
+RUN npm ci --production && npm cache clean --force
 
 COPY . /opt/arena/
 
+EXPOSE 4567
+
+USER node
+
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["npm", "start"]
