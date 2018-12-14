@@ -11,7 +11,7 @@
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
-    "handlebars-helpers": "^0.8.2",
+    "handlebars-helpers": "^0.10.0",
     "lodash": "^4.17.4",
     "nodemon": "^1.18.7"
   },
