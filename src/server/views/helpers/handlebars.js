@@ -41,7 +41,7 @@ const helpers = {
   },
 
   hashIdAttr(id) {
-    return crypto.createHash('md5').update(id).digest('hex');
+    return crypto.createHash('sha256').update(id).digest('hex');
   }
 };
 
