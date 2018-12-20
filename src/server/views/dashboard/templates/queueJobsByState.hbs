@@ -93,7 +93,7 @@
               <input class="js-bulk-job" name="jobChecked" type="checkbox" />
             </div>
 
-            <a role="button" data-toggle="collapse" href="#collapse{{encodeIdAttr this.id}}">
+            <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this.id}}">
               <h4 class="header-collapse">
                 <span class="label label-default">{{ this.id }}</span>
                 {{#if this.data.name}}
@@ -103,7 +103,7 @@
                 {{/if}}
               </h4>
             </a>
-            <div id="collapse{{encodeIdAttr this.id}}" class="collapse">
+            <div id="collapse{{hashIdAttr this.id}}" class="collapse">
               {{~> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
             </div>
           </li>
