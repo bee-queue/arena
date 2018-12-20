@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.5.2 Support custom job IDs in arena (#126) - thanks @gcox
+
 * 2.5.1 Upgrade nodemon to avoid the vulnerable event-stream (#136)
 
 * 2.5.0 Support redis over TLS. (#122) - thanks @timcosta!
