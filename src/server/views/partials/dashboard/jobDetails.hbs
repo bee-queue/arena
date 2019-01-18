@@ -48,19 +48,23 @@
 
 {{#unless this.queue.IS_BEE}}
 <h5>Progress</h5>
-<div class="progress">
-  <div class="progress-bar
-              {{#eq jobState 'failed'}}
-              progress-bar-danger
-              {{/eq}}"
-       role="progressbar"
-       aria-valuenow="{{ this._progress }}"
-       aria-valuemin="0"
-       aria-valuemax="100"
-       style="width: {{ this._progress }}%; min-width: 2em;">
-    {{ this._progress }}%
+{{#ifIsNumber this._progress}}
+  <div class="progress">
+    <div class="progress-bar
+                {{#eq jobState 'failed'}}
+                progress-bar-danger
+                {{/eq}}"
+        role="progressbar"
+        aria-valuenow="{{ this._progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: {{ this._progress }}%; min-width: 2em;">
+      {{ this._progress }}%
+    </div>
   </div>
-</div>
+{{else}}
+  <pre>{{json this._progress true}}</pre>
+{{/ifIsNumber}}
 {{/unless}}
 
 {{#if this.returnvalue}}
