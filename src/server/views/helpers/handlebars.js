@@ -23,6 +23,10 @@ const helpers = {
     return new Handlebars.SafeString(JSON.stringify(...args));
   },
 
+  isNumber(operand) {
+    return parseInt(operand, 10).toString() === String(operand);
+  },
+
   adjustedPage(currentPage, pageSize, newPageSize) {
     const firstId = (currentPage - 1) * pageSize;
     return _.ceil(firstId / newPageSize) + 1;
