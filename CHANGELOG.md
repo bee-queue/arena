@@ -1,6 +1,8 @@
 ## Release History
 
-* 2.5.2 Support custom job IDs in arena (#126) - thanks @gcox
+* 2.5.3 Fix `navbar` reference (#146) - thanks @anurag-rai!
+
+* 2.5.2 Support custom job IDs in arena (#126) - thanks @gcox!
 
 * 2.5.1 Upgrade nodemon to avoid the vulnerable event-stream (#136)
 
