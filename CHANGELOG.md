@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.5.4 Upgrade handlerbars-helpers to fix flagged vulnerability (#151) - thanks, @eeVoskos!
+
 * 2.5.3 Fix `navbar` reference (#146) - thanks @anurag-rai!
 
 * 2.5.2 Support custom job IDs in arena (#126) - thanks @gcox!
