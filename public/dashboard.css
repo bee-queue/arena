@@ -138,3 +138,8 @@ pre {
   max-height: 250px;
   overflow-y: auto;
 }
+
+.overflow {
+  overflow: hidden;
+}
+

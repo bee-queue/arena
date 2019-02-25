@@ -1,3 +1,9 @@
 node_modules
+package-lock.json
 *.DS_Store
 .vscode
+
+# Ignore checking in public assets.
+public/vendor/*.js
+public/vendor/*.css
+public/vendor/img/*.svg

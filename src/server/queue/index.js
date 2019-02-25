@@ -75,6 +75,21 @@ class Queues {
 
     return queue;
   }
+
+  /**
+    * @param {Object} queue A bee or bull queue class
+    * @param {Object} data The data to be used within the job
+    */
+  set(queue, data) {
+    if (queue.IS_BEE) {
+      queue.createJob(data).save();
+    } else {
+      queue.add(data, {
+        removeOnComplete: false,
+        removeOnFail: false
+      });
+    }
+  }
 }
 
 module.exports = Queues;
