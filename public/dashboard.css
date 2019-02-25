@@ -73,6 +73,7 @@ body {
 
 .main {
   padding: 20px;
+  margin-top: 50px;
 }
 @media (min-width: 768px) {
   .main {
@@ -138,3 +139,8 @@ pre {
   max-height: 250px;
   overflow-y: auto;
 }
+
+.overflow-hidden {
+  overflow: hidden;
+}
+

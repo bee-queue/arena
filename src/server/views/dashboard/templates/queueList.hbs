@@ -1,18 +1,27 @@
 <h2>Queues</h2>
 <h3>Overview</h3>
 
-<div class="row">
-  <div class="no-padding">
-    <ul class="list-group">
+<div class="no-padding">
+  <table id="queueList" class="table">
+    <thead>
+      <th>Host</th>
+      <th>Name</th>
+    </thead>
+    <tbody>
       {{#each queues}}
-        <li class="list-group-item">
-          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.hostId }}/{{ this.name }}</a>
-        </li>
+        <tr>
+          <td>{{ this.hostId }}</td>
+          <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
+        </tr>
       {{/each}}
-    </ul>
-  </div>
+    </tbody>
+  </table>
 </div>
 
 {{#contentFor 'sidebar'}}
   <li class="active"><a href="#">Queues Overview</a></li>
+{{/contentFor}}
+
+{{#contentFor 'script'}}
+  new Tablesort(document.getElementById('queueList'));
 {{/contentFor}}

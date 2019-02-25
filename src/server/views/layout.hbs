@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
     <script>hljs.initHighlightingOnLoad();</script>
 
+    <link rel="stylesheet" href="{{ vendorPath }}/jsoneditor.min.css">
+    <link rel="stylesheet" href="{{ vendorPath }}/tablesort.css">
   </head>
 
   <body>
@@ -63,7 +65,14 @@
     <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
     <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
     {{/if}}
+
+    <script type="text/javascript" src="{{ vendorPath }}/jsoneditor.min.js"></script>
+    <script type="text/javascript" src="{{ vendorPath }}/tablesort.min.js"></script>
+
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
+    <script>
+      {{{block "script"}}}
+    </script>
   </body>
 
 </html>

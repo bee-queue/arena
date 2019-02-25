@@ -128,5 +128,29 @@ $(document).ready(() => {
     } else {
       $(this).prop('disabled', false);
     }
-  });  
+  });
+
+  $('.js-toggle-add-job-editor').on('click', function() {
+    $('.jsoneditorx').toggleClass('hide');
+    const data = localStorage.getItem('arena:savedJobData') || '{ id: \'\' }';
+    window.jsonEditor.set(JSON.parse(data));
+  });
+  
+  $('.js-add-job').on('click', function() {
+    const data = window.jsonEditor.get();
+    localStorage.setItem('arena:savedJobData', JSON.stringify(data));
+    const { queueHost, queueName } = window.arenaInitialPayload;
+    $.ajax({
+      url: `/api/queue/${queueHost}/${queueName}/job`,
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(() => {
+      alert('Job successfully added!');
+      localStorage.removeItem('arena:savedJobData');
+    }).fail((jqXHR) => {
+      window.alert('Failed to save job, check console for error.');
+      console.error(jqXHR.responseText);
+    });
+  });
 });

@@ -19,10 +19,12 @@ module.exports = function() {
   const defaultConfig = require(path.join(__dirname, 'config', 'index.json'));
 
   const Queues = require('./queue');
+
   const queues = new Queues(defaultConfig);
   require('./views/helpers/handlebars')(handlebars, { queues });
   app.locals.Queues = queues;
   app.locals.appBasePath = '';
+  app.locals.vendorPath = '/vendor';
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');
