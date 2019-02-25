@@ -10,7 +10,7 @@ async function handler(req, res) {
   try {
     await Queues.set(queue, data);
   } catch (err) {
-    return res.status(500).json({ err: err.message });
+    return res.status(500).json({ error: err.message });
   }
   return res.sendStatus(200);
 }

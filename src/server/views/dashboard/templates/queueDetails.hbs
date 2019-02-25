@@ -50,3 +50,10 @@
   <li class="active"><a href="#">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
 {{/contentFor}}
 
+{{#contentFor 'script'}}
+  window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), {});
+  window.arenaInitialPayload = {
+    queueHost: "{{ queueHost }}",
+    queueName: "{{ queueName }}"
+  };
+{{/contentFor}}
