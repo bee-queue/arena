@@ -2,6 +2,7 @@ node_modules
 package-lock.json
 *.DS_Store
 .vscode
+*.tern-port
 
 # Ignore checking in public assets.
 public/vendor/*.js

@@ -77,14 +77,16 @@ class Queues {
   }
 
   /**
-    * @param {Object} queue A bee or bull queue class
-    * @param {Object} data The data to be used within the job
-    */
-  set(queue, data) {
+   * Creates and adds a job with the given `data` to the given `queue`.
+   *
+   * @param {Object} queue A bee or bull queue class
+   * @param {Object} data The data to be used within the job
+   */
+  async set(queue, data) {
     if (queue.IS_BEE) {
-      queue.createJob(data).save();
+      return queue.createJob(data).save();
     } else {
-      queue.add(data, {
+      return queue.add(data, {
         removeOnComplete: false,
         removeOnFail: false
       });

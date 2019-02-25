@@ -7,7 +7,11 @@ async function handler(req, res) {
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).json({ error: 'queue not found' });
 
-  Queues.set(queue, data);
+  try {
+    await Queues.set(queue, data);
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
   return res.sendStatus(200);
 }
 

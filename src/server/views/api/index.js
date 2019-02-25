@@ -6,7 +6,7 @@ const jobRemove = require('./jobRemove');
 const bulkJobsRemove = require('./bulkJobsRemove');
 const bulkJobsRetry = require('./bulkJobsRetry');
 
-router.post('/queue/:queueHost/:queueName/job/new', jobAdd);
+router.post('/queue/:queueHost/:queueName/job', jobAdd);
 router.post('/queue/:queueHost/:queueName/job/bulk', bulkJobsRemove);
 router.patch('/queue/:queueHost/:queueName/job/bulk', bulkJobsRetry);
 router.patch('/queue/:queueHost/:queueName/job/:id', jobRetry);

@@ -4,14 +4,14 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="btn btn-default btn-xs pull-right" onClick="toggleJsonEditor()">Add Job</div>
+        <div class="js-toggle-add-job-editor  btn btn-default btn-xs pull-right">Add Job</div>
         <h4 class="panel-title">Job Types</h4>
       </div>
       <div class="panel-body">
-        <div class="jsoneditorx form-group hide overflow">
+        <div class="jsoneditorx form-group hide overflow-hidden">
           <div class="jsoneditorx hide" id="jsoneditor" style="height:200px;"></div>
           <br />
-          <div class="btn btn-primary btn-sm pull-right" onClick="addJob()">Create</div>
+          <div class="js-add-job  btn btn-primary btn-sm pull-right">Create</div>
         </div>
         <ul class="list-group">
           {{#each jobCounts}}
@@ -50,31 +50,3 @@
   <li class="active"><a href="#">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
 {{/contentFor}}
 
-{{#contentFor 'script'}}
-  var jsonEditor = false;
-
-  (function(){
-    var options = {};
-    jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), options);
-  })()
-
-  var toggleJsonEditor = function(){
-    $('.jsoneditorx').toggleClass('hide');
-    var data = localStorage.getItem('ArenaSavedJobData') || '{ id: \'\' }';
-    jsonEditor.set(JSON.parse(data));
-  };
-
-  var addJob = function(){
-    var data = jsonEditor.get();
-    localStorage.setItem('ArenaSavedJobData', JSON.stringify(data));
-    $.ajax({
-      url: '/api/queue/{{queueHost}}/{{queueName}}/job/new',
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      success: function(res) {
-        alert('Job successfully added!');
-      }
-    });
-  };
-{{/contentFor}}

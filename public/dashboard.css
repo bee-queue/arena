@@ -1,4 +1,4 @@
-/*
+p/*
  * Base structure
  */
 
@@ -139,7 +139,7 @@ pre {
   overflow-y: auto;
 }
 
-.overflow {
+.overflow-hidden {
   overflow: hidden;
 }
 
