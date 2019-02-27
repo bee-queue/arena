@@ -3,8 +3,3 @@ package-lock.json
 *.DS_Store
 .vscode
 *.tern-port
-
-# Ignore checking in public assets.
-public/vendor/*.js
-public/vendor/*.css
-public/vendor/img/*.svg
