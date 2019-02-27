@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.6.1 Hot patch: commit /vendor assets to fix new UI.
+
 * 2.6.0 Add the ability to add jobs via Arena (#55/#153) - thanks, @krazyjakee!
 
 * 2.5.4 Upgrade handlerbars-helpers to fix flagged vulnerability (#151) - thanks, @eeVoskos!
