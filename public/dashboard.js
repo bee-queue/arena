@@ -135,13 +135,13 @@ $(document).ready(() => {
     const data = localStorage.getItem('arena:savedJobData') || '{ id: \'\' }';
     window.jsonEditor.set(JSON.parse(data));
   });
-  
+
   $('.js-add-job').on('click', function() {
     const data = window.jsonEditor.get();
     localStorage.setItem('arena:savedJobData', JSON.stringify(data));
     const { queueHost, queueName } = window.arenaInitialPayload;
     $.ajax({
-      url: `/api/queue/${queueHost}/${queueName}/job`,
+      url: `${basePath}/api/queue/${queueHost}/${queueName}/job`,
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json'
