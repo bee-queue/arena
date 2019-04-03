@@ -60,7 +60,7 @@ async function _html(req, res) {
   const { queueName, queueHost, state } = req.params;
   const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
-  const basePath = req.baseUrl;
+  const basePath = req.app.locals.appBasePath + req.baseUrl;
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {basePath, queueName, queueHost});
 
   if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
