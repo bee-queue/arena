@@ -28,6 +28,18 @@
       {{moment this.timestamp "llll"}}
     {{/if}}
   </div>
+  
+  <div class="col-sm-3">
+    {{#if this.delay}}
+    <h5>Execute at</h5>
+    {{#if this.options.timestamp}}
+    {{moment (plus this.options.timestamp this.delay) "llll"}}
+    {{/if}}
+    {{#if this.timestamp}}
+    {{moment (plus this.timestamp this.delay) "llll"}}
+    {{/if}}
+    {{/if}}
+  </div>
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
