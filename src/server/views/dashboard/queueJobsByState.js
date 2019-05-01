@@ -34,12 +34,27 @@ async function _json(req, res) {
 
   if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
+  const page = parseInt(req.query.page, 10) || 1;
+  const pageSize = parseInt(req.query.pageSize, 10) || 1000;
+
+  const startId = (page - 1) * pageSize;
+  const endId = startId + pageSize - 1;
+
   let jobs;
   if (queue.IS_BEE) {
-    jobs = await queue.getJobs(state, { size: 1000 });
+    const page = {};
+
+    if (['failed', 'succeeded'].includes(state)) {
+      page.size = pageSize;
+    } else {
+      page.start = startId;
+      page.end = endId;
+    }
+
+    jobs = await queue.getJobs(state, page);
     jobs = jobs.map((j) => _.pick(j, 'id', 'progress', 'data', 'options', 'status'));
   } else {
-    jobs = await queue[`get${_.capitalize(state)}`](0, 1000);
+    jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
     jobs = jobs.map((j) => j.toJSON());
   }
 
