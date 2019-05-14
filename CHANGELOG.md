@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.6.3 Pull in handlebars security advisory patch (#168) - thanks @pklingem!
+
 * 2.6.2 Fix "add job" vendor/API path when basePath is set (#157) - thanks, @jacobpgn
 
 * 2.6.1 Hot patch: commit /vendor assets to fix new UI.
