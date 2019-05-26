@@ -81,15 +81,23 @@ class Queues {
    *
    * @param {Object} queue A bee or bull queue class
    * @param {Object} data The data to be used within the job
+   * @param {String} data.name Job name (optional)
+   * @param {String} data.body Job body
    */
   async set(queue, data) {
+    const {name, body} = data;
     if (queue.IS_BEE) {
-      return queue.createJob(data).save();
+      return queue.createJob(body).save();
     } else {
-      return queue.add(data, {
+      const opts = {
         removeOnComplete: false,
         removeOnFail: false
-      });
+      };
+      if (name) {
+        return queue.add(name, body, opts);
+      } else {
+        return queue.add(body, opts);
+      }
     }
   }
 }
