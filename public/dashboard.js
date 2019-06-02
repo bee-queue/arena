@@ -153,4 +153,32 @@ $(document).ready(() => {
       console.error(jqXHR.responseText);
     });
   });
+
+  $('.js-queue-pause').on('click', function() {
+    const { queueHost, queueName } = window.arenaInitialPayload;
+    $.ajax({
+      url: `${basePath}/api/queue/${queueHost}/${queueName}/queue/pause`,
+      type: 'POST',
+      contentType: 'application/json'
+    }).done(() => {
+      alert('Queue successfully paused!');
+    }).fail((jqXHR) => {
+      window.alert('Failed to pause queue, check console for error.');
+      console.error(jqXHR.responseText);
+    });
+  });
+
+  $('.js-queue-resume').on('click', function() {
+    const { queueHost, queueName } = window.arenaInitialPayload;
+    $.ajax({
+      url: `${basePath}/api/queue/${queueHost}/${queueName}/queue/resume`,
+      type: 'POST',
+      contentType: 'application/json'
+    }).done(() => {
+      alert('Queue successfully resumed!');
+    }).fail((jqXHR) => {
+      window.alert('Failed to resume queue, check console for error.');
+      console.error(jqXHR.responseText);
+    });
+  });
 });

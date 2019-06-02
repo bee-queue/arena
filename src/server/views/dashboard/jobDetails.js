@@ -30,7 +30,8 @@ async function handler(req, res) {
     queueName,
     queueHost,
     jobState,
-    job
+    job,
+    IS_BEE: !!queue.IS_BEE
   });
 }
 
