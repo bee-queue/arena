@@ -3,3 +3,4 @@ package-lock.json
 *.DS_Store
 .vscode
 *.tern-port
+.idea

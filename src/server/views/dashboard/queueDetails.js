@@ -22,7 +22,8 @@ async function handler(req, res) {
     queueName,
     queueHost,
     jobCounts,
-    stats
+    stats,
+    IS_BEE: !!queue.IS_BEE
   });
 }
 

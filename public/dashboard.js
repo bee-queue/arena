@@ -137,8 +137,10 @@ $(document).ready(() => {
   });
 
   $('.js-add-job').on('click', function() {
-    const data = window.jsonEditor.get();
-    localStorage.setItem('arena:savedJobData', JSON.stringify(data));
+    const body = window.jsonEditor.get();
+    const name = $('#job_name').val().trim();
+    localStorage.setItem('arena:savedJobData', JSON.stringify(body));
+    const data = {body, name};
     const { queueHost, queueName } = window.arenaInitialPayload;
     $.ajax({
       url: `${basePath}/api/queue/${queueHost}/${queueName}/job`,
