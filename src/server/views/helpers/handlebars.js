@@ -22,7 +22,16 @@ const helpers = {
     }
     return new Handlebars.SafeString(JSON.stringify(...args));
   },
-
+  getClassByState: function(state) {
+    switch (state) {
+      case 'active': return 'btn-info';
+      case 'completed': return 'btn-success';
+      case 'paused':
+      case 'failed': return 'btn-danger';
+      case 'waiting':
+      case 'delayed': return 'btn-warning';
+      }
+  },
   adjustedPage(currentPage, pageSize, newPageSize) {
     const firstId = (currentPage - 1) * pageSize;
     return _.ceil(firstId / newPageSize) + 1;

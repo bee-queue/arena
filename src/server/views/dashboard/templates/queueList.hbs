@@ -6,12 +6,26 @@
     <thead>
       <th>Host</th>
       <th>Name</th>
+      <th>Stats</th>
     </thead>
     <tbody>
       {{#each queues}}
         <tr>
           <td>{{ this.hostId }}</td>
           <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
+          <td>
+            {{#unless IS_BEE}}
+              <div class="btn-group" role="group">
+                {{#each stats}}
+                  <a href="{{ ../../basePath }}/{{ encodeURI ../hostId }}/{{ encodeURI ../this.name }}/{{ @key }}">
+                    <button type="button" class="btn btn-primary btn-sm {{{getClassByState @key}}}">
+                      {{@key}}&nbsp;<span class="badge badge-light">{{@this}}</span>
+                    </button>
+                  </a>
+                {{/each}}
+              </div>
+            {{/unless}}
+          </td>
         </tr>
       {{/each}}
     </tbody>
