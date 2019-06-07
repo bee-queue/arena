@@ -26,8 +26,8 @@ const helpers = {
     switch (state) {
       case 'active': return 'btn-info';
       case 'completed': return 'btn-success';
-      case 'failed': return 'btn-danger';
       case 'paused':
+      case 'failed': return 'btn-danger';
       case 'waiting':
       case 'delayed': return 'btn-warning';
       }

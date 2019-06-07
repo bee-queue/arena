@@ -4,9 +4,13 @@ async function handler(req, res) {
   const basePath = req.baseUrl;
   let queuesList = [];
   for (const queueList of queues) {
+    let stats = {};
     const queue = await Queues.get(queueList.name, queueList.hostId);
-    const stats = await queue.getJobCounts();
-    queuesList.push(Object.assign({}, queueList, {stats}));
+    const IS_BEE = queue.IS_BEE;
+    if (!IS_BEE) {
+      stats = await queue.getJobCounts();
+    }
+    queuesList.push(Object.assign({IS_BEE}, queueList, {stats}));
   }
   return res.render('dashboard/templates/queueList', {basePath, queues: queuesList});
 }
