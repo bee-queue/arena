@@ -4,7 +4,13 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="js-toggle-add-job-editor  btn btn-default btn-xs pull-right">Add Job</div>
+        <div class="btn-group pull-right" role="group">
+          <div class="js-toggle-add-job-editor  btn btn-default btn-xs">Add Job</div>
+          {{#unless IS_BEE}}
+            <div class="js-queue-pause  btn btn-primary btn-xs">Pause</div>
+            <div class="js-queue-resume btn btn-warning btn-xs">Resume</div>
+          {{/unless}}
+        </div>
         <h4 class="panel-title">Job Types</h4>
       </div>
       <div class="panel-body">
