@@ -183,4 +183,8 @@ $(document).ready(() => {
       console.error(jqXHR.responseText);
     });
   });
+
+  $('.js-toggle-collapse').on('click', function () {
+    $('.collapse').collapse('toggle');
+  });
 });

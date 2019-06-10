@@ -3,7 +3,7 @@
 <h3>{{capitalize state}} Jobs</h3>
 
 <div class="row pagination-container">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     {{#unless disablePagination}}
       <nav aria-label="Job navigation">
         <ul class="pagination">
@@ -42,7 +42,8 @@
       Bee-queue does not support pagination for {{ state }} queues &mdash; currently displaying up to <b>{{ pageSize }} jobs</b>. To change count, use "Size" dropdown.
     {{/unless}}
   </div>
-  <div class="col-sm-6 text-right">
+  <div class="col-sm-8 text-right">
+    <button type="button" class="js-toggle-collapse btn btn-info">toggle task details</button>
     <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}.json" type="button" class="btn btn-primary">
       Dump jobs to JSON (limited to 1000)
     </a>
