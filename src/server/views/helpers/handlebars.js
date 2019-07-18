@@ -42,6 +42,10 @@ const helpers = {
 
   hashIdAttr(id) {
     return crypto.createHash('sha256').update(id).digest('hex');
+  },
+
+  getDelayDate(opts) {
+    return opts.timestamp + opts.delay;
   }
 };
 

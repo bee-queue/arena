@@ -30,6 +30,29 @@ $(document).ready(() => {
     }
   });
 
+  $('.js-promote-job').on('click', function(e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+    const jobId = $(this).data('job-id');
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const r = window.confirm(`Promote #${jobId} in queue "${queueHost}/${queueName}"?`);
+    if (r) {
+      $.ajax({
+        method: 'PUT',
+        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+      }).done(() => {
+        window.location.reload();
+      }).fail((jqXHR) => {
+        window.alert(`Request failed, check console for error.`);
+        console.error(jqXHR.responseText);
+      });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  })
+
   // Set up individual "remove job" handler
   $('.js-remove-job').on('click', function(e) {
     e.preventDefault();
