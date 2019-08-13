@@ -52,6 +52,10 @@
 
 {{#contentFor 'script'}}
   window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), {});
+  window.jsonEditor.set({
+      jobName: 'jobName',
+      optionalJobData: 'blabla...'
+  })
   window.arenaInitialPayload = {
     queueHost: "{{ queueHost }}",
     queueName: "{{ queueName }}"

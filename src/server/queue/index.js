@@ -86,10 +86,17 @@ class Queues {
     if (queue.IS_BEE) {
       return queue.createJob(data).save();
     } else {
-      return queue.add(data, {
-        removeOnComplete: false,
-        removeOnFail: false
-      });
+      const jobName = data.jobName || undefined
+      delete data.jobName
+      return jobName ?
+        queue.add(jobName, data, {
+          removeOnComplete: false,
+          removeOnFail: false
+        }) :
+        queue.add(data, {
+          removeOnComplete: false,
+          removeOnFail: false
+        })
     }
   }
 }

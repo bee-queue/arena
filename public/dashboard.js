@@ -132,8 +132,10 @@ $(document).ready(() => {
 
   $('.js-toggle-add-job-editor').on('click', function() {
     $('.jsoneditorx').toggleClass('hide');
-    const data = localStorage.getItem('arena:savedJobData') || '{ id: \'\' }';
-    window.jsonEditor.set(JSON.parse(data));
+    const data = localStorage.getItem('arena:savedJobData');
+    if (data) {
+      window.jsonEditor.set(JSON.parse(data));
+    }
   });
 
   $('.js-add-job').on('click', function() {
