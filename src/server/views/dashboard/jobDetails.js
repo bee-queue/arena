@@ -14,8 +14,9 @@ async function handler(req, res) {
   if (!job) return res.status(404).render('dashboard/templates/jobNotFound', {basePath, id, queueName, queueHost});
 
   if (json === 'true') {
-    delete job.queue; // avoid circular references parsing error
-    return res.json(job);
+    // Omit these private and non-stringifyable properties to avoid circular
+    // references parsing errors.
+    return res.json(_.omit(job, 'domain', 'queue', '_events', '_eventsCount'));
   }
 
   let jobState;
