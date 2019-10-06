@@ -105,6 +105,14 @@ async function _html(req, res) {
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
 
+  if (state === 'delayed') {
+    jobs.forEach(job => {
+      if (!isNaN(job.delay)) {
+        job.nextRun = (job.timestamp || job.options.timestamp) + job.delay;
+      }
+    });
+  }
+
   return res.render('dashboard/templates/queueJobsByState', {
     basePath,
     queueName,
