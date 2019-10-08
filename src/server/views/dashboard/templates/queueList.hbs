@@ -6,12 +6,36 @@
     <thead>
       <th>Host</th>
       <th>Name</th>
+      <th>Waiting</th>
+      <th>Active</th>
+      <th>Completed</th>
+      <th>Failed</th>
+      <th>Delayed</th>
+      <th>Paused</th>
     </thead>
     <tbody>
       {{#each queues}}
         <tr>
           <td>{{ this.hostId }}</td>
           <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
+          <td>
+            <span class="badge">{{ this.jobs.waiting }}</span>
+            </td>
+          <td>
+            <span class="badge">{{ this.jobs.active }}</span>
+            </td>
+          <td>
+            <span class="badge">{{ this.jobs.completed }}</span>
+            </td>
+          <td>
+            <span class="badge">{{ this.jobs.failed }}</span>
+            </td>
+          <td>
+            <span class="badge">{{ this.jobs.delayed }}</span>
+            </td>
+          <td>
+            <span class="badge">{{ this.jobs.paused }}</span>
+            </td>
         </tr>
       {{/each}}
     </tbody>
