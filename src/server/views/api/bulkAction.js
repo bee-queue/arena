@@ -1,4 +1,3 @@
-const Queues = require('../../queue');
 const _ = require('lodash');
 
 const ACTIONS = ['remove', 'retry'];
