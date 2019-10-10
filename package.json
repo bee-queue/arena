@@ -7,13 +7,13 @@
   "dependencies": {
     "bee-queue": "^1.0.0",
     "body-parser": "^1.17.2",
-    "bull": "^3.3.7",
+    "bull": "^3.4.2",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.0.14",
+    "handlebars": "^4.3.0",
     "handlebars-helpers": "^0.10.0",
     "jsoneditor": "^5.9.6",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.2",
     "nodemon": "^1.18.7",
     "tablesort": "^5.0.1"
   },
