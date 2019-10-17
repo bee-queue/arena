@@ -16,27 +16,39 @@
     <tbody>
       {{#each queues}}
         <tr>
-          <td>{{ this.hostId }}</td>
-          <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
-          <td>
+        <td>{{ this.hostId }}</td>
+        <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/waiting">
             <span class="badge">{{ this.jobs.waiting }}</span>
-            </td>
-          <td>
+          </a>
+        </td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/active">
             <span class="badge">{{ this.jobs.active }}</span>
-            </td>
-          <td>
+          </a>
+        </td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/completed">
             <span class="badge">{{ this.jobs.completed }}</span>
-            </td>
-          <td>
+          </a>
+        </td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/failed">
             <span class="badge">{{ this.jobs.failed }}</span>
-            </td>
-          <td>
+          </a>
+        </td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/delayed">
             <span class="badge">{{ this.jobs.delayed }}</span>
-            </td>
-          <td>
+          </a>
+        </td>
+        <td>
+          <a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}/paused">
             <span class="badge">{{ this.jobs.paused }}</span>
-            </td>
-        </tr>
+          </a>
+        </td>
+      </tr>
       {{/each}}
     </tbody>
   </table>
