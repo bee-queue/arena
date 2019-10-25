@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const Bull = require('bull');
 const Bee = require('bee-queue');
-const path = require('path');
 
 class Queues {
   constructor(config) {

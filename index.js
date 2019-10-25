@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
 const Arena = require('./src/server/app');
 const routes = require('./src/server/views/routes');
