@@ -88,5 +88,14 @@
   {{/if}}
 {{/eq}}
 
+{{#if jobLogs }}
+<h5>Job Logs</h5>
+<pre>
+  {{#each jobLogs}}
+    {{this}}
+  {{/each}}
+</pre>
+{{/if}}
+
 <h5>Data</h5>
 <pre><code class="json">{{json this.data true}}</code></pre>

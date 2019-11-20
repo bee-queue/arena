@@ -20,10 +20,13 @@ async function handler(req, res) {
   }
 
   let jobState;
+  let jobLogs;
   if (queue.IS_BEE) {
     jobState = job.status;
   } else {
     jobState = await job.getState();
+    jobLogs = await queue.getJobLogs(id);
+    jobLogs = jobLogs.logs;
   }
 
   return res.render('dashboard/templates/jobDetails', {
@@ -31,7 +34,8 @@ async function handler(req, res) {
     queueName,
     queueHost,
     jobState,
-    job
+    job,
+    jobLogs,
   });
 }
 
