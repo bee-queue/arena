@@ -40,6 +40,10 @@ async function _json(req, res) {
     jobs = jobs.map((j) => _.pick(j, 'id', 'progress', 'data', 'options', 'status'));
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](0, 1000);
+    jobs.forEach(async (job) => {
+      const jobLogs = await queue.getJobLogs(job.id);
+      job['logs'] = jobLogs.logs;
+    });
     jobs = jobs.map((j) => j.toJSON());
   }
 
@@ -96,6 +100,10 @@ async function _html(req, res) {
     jobs = jobs.filter((job) => job);
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+    jobs.forEach(async (job) => {
+      const jobLogs = await queue.getJobLogs(job.id);
+      job['logs'] = jobLogs.logs;
+    });
   }
 
   let pages = _.range(page - 6, page + 7)

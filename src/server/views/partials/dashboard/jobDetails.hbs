@@ -88,10 +88,10 @@
   {{/if}}
 {{/eq}}
 
-{{#if jobLogs }}
+{{#if this.logs }}
 <h5>Job Logs</h5>
 <pre>
-  {{#each jobLogs}}
+  {{#each this.logs}}
     {{this}}
   {{/each}}
 </pre>

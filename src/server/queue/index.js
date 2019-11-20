@@ -67,6 +67,7 @@ class Queues {
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
       queue = new Bull(name, options);
+      queue.IS_BEE = false;
     }
 
     this._queues[queueHost] = this._queues[queueHost] || {};

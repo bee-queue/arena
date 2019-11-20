@@ -13,6 +13,11 @@ async function handler(req, res) {
   const job = await queue.getJob(id);
   if (!job) return res.status(404).render('dashboard/templates/jobNotFound', {basePath, id, queueName, queueHost});
 
+  if (!queue.IS_BEE) {
+    const jobLogs = await queue.getJobLogs(id);
+    job['logs'] = jobLogs.logs;
+  }
+
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
     // references parsing errors.
@@ -20,13 +25,10 @@ async function handler(req, res) {
   }
 
   let jobState;
-  let jobLogs;
   if (queue.IS_BEE) {
     jobState = job.status;
   } else {
     jobState = await job.getState();
-    jobLogs = await queue.getJobLogs(id);
-    jobLogs = jobLogs.logs;
   }
 
   return res.render('dashboard/templates/jobDetails', {
@@ -35,7 +37,6 @@ async function handler(req, res) {
     queueHost,
     jobState,
     job,
-    jobLogs,
   });
 }
 
