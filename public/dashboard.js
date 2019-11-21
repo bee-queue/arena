@@ -141,7 +141,7 @@ $(document).ready(() => {
     localStorage.setItem('arena:savedJobData', JSON.stringify(data));
     const { queueHost, queueName } = window.arenaInitialPayload;
     $.ajax({
-      url: `${basePath}/api/queue/${queueHost}/${queueName}/job`,
+      url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/job`,
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json'
