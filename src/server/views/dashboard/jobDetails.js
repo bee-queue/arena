@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 async function handler(req, res) {
   const { queueName, queueHost, id } = req.params;
   const { json } = req.query;
