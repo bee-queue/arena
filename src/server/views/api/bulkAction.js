@@ -1,20 +1,18 @@
 const _ = require('lodash');
 
-const ACTIONS = ['remove', 'retry'];
-
 function bulkAction(action) {
   return async function handler(req, res) {
-    if (!_.includes(ACTIONS, action)) {
-      res.status(401).send({
-        error: 'unauthorized action',
-        details: `action ${action} not permitted`
-      });
-    }
-
     const { queueName, queueHost } = req.params;
     const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
     if (!queue) return res.status(404).send({error: 'queue not found'});
+
+    if (!queue.isActionSupported(action)) {
+      return res.status(401).send({
+        error: 'unauthorized action',
+        details: `queue does not support action ${action}`
+      });
+    }
 
     const {jobs} = req.body;
 

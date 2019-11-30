@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const util = require('util');
 
 async function handler(req, res) {
   const { queueName, queueHost, id } = req.params;
@@ -12,26 +11,22 @@ async function handler(req, res) {
 
   const job = await queue.getJob(id);
   if (!job) return res.status(404).render('dashboard/templates/jobNotFound', {basePath, id, queueName, queueHost});
+  const jobData = await job.toJSON();
 
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
     // references parsing errors.
-    return res.json(_.omit(job, 'domain', 'queue', '_events', '_eventsCount'));
+    return res.json(jobData);
   }
 
-  let jobState;
-  if (queue.IS_BEE) {
-    jobState = job.status;
-  } else {
-    jobState = await job.getState();
-  }
+  const jobState = await job.getStatus();
 
   return res.render('dashboard/templates/jobDetails', {
     basePath,
     queueName,
     queueHost,
     jobState,
-    job
+    job: jobData
   });
 }
 
