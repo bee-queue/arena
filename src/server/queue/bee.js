@@ -3,10 +3,6 @@ const Job = require('./job');
 const JobData = require('./jobData');
 
 class BeeJob extends Job {
-  constructor(job) {
-    super(job);
-  }
-
   async remove() {
     await this._job.remove();
   }

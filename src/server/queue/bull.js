@@ -8,10 +8,6 @@ const VALID_STATES = ['waiting', 'active', 'completed', 'failed', 'delayed'];
 const SUPPORTED_ACTIONS = ['remove', 'retry'];
 
 class BullJob extends Job {
-  constructor(job) {
-    super(job);
-  }
-
   async remove() {
     await this._job.remove();
   }
