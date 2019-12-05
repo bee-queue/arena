@@ -1,3 +1,5 @@
+const NotImplementedError = require('../error/NotImplementedError');
+
 module.exports = class Queue {
   constructor(queue) {
     this._queue = queue;
@@ -19,22 +21,28 @@ module.exports = class Queue {
     return this._queue.client;
   }
 
-  async getJob(id) {
+  async getJob(_id) {
+    throw new NotImplementedError();
   }
 
   async getJobCounts() {
+    throw new NotImplementedError();
   }
 
-  async getJobs(state, start, size) {
+  async getJobs(_state, _start, _size) {
+    throw new NotImplementedError();
   }
 
-  async addJob(data, options) {
+  async addJob(_data, _options) {
+    throw new NotImplementedError();
   }
 
-  isValidState(state) {
+  isValidState(_state) {
+    throw new NotImplementedError();
   }
 
-  isActionSupported(action) {
+  isActionSupported(_action) {
+    throw new NotImplementedError();
   }
 
   isPaginationSupported(_state) {

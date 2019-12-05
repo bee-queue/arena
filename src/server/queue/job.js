@@ -1,3 +1,5 @@
+const NotImplementedError = require('../error/NotImplementedError');
+
 module.exports = class Job {
   constructor(job) {
     this._job = job;
@@ -7,11 +9,14 @@ module.exports = class Job {
   }
 
   async remove() {
+    throw new NotImplementedError();
   }
 
   async getStatus() {
+    throw new NotImplementedError();
   }
 
   async toJSON() {
+    throw new NotImplementedError();
   }
 };
