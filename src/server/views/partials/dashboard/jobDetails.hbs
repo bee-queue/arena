@@ -24,17 +24,14 @@
     {{#if this.options.timestamp}}
       {{moment this.options.timestamp "llll"}}
     {{/if}}
-    {{#if this.timestamp}}
-      {{moment this.timestamp "llll"}}
-    {{/if}}
   </div>
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{this.attemptsMade}}
 
-    {{#if this.options}}
-      {{length this.options.stacktraces}}
+    {{#if this.options.stacktrace}}
+      {{length this.options.stacktrace}}
     {{/if}}
   </div>
 </div>
@@ -46,7 +43,6 @@
   </div>
 </div>
 
-{{#unless this.queue.IS_BEE}}
 <h5>Progress</h5>
 <div class="progress">
   <div class="progress-bar
@@ -54,18 +50,17 @@
               progress-bar-danger
               {{/eq}}"
        role="progressbar"
-       aria-valuenow="{{ this._progress }}"
+       aria-valuenow="{{ this.progress }}"
        aria-valuemin="0"
        aria-valuemax="100"
-       style="width: {{ this._progress }}%; min-width: 2em;">
-    {{ this._progress }}%
+       style="width: {{ this.progress }}%; min-width: 2em;">
+    {{ this.progress }}%
   </div>
 </div>
-{{/unless}}
 
-{{#if this.returnvalue}}
+{{#if this.returnValue}}
 <h5>Return Value</h5>
-<pre><code class="json">{{json this.returnvalue true}}</code></pre>
+<pre><code class="json">{{json this.returnValue true}}</code></pre>
 {{/if}}
 
 {{#if this.failedReason}}
@@ -75,14 +70,8 @@
 
 {{#eq jobState 'failed'}}
   <h5>Stacktraces</h5>
-  {{#if this.options.stacktraces}}
-    {{#each this.options.stacktraces}}
-      <pre>{{ this }}</pre>
-    {{/each}}
-  {{/if}}
-
-  {{#if this.stacktrace}}
-    {{#each this.stacktrace}}
+  {{#if this.options.stacktrace}}
+    {{#each this.options.stacktrace}}
       <pre>{{ this }}</pre>
     {{/each}}
   {{/if}}
