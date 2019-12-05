@@ -43,7 +43,7 @@ async function _html(req, res) {
   const basePath = req.baseUrl;
   if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {basePath, queueName, queueHost});
 
-  if (!queue.isValidState(state)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
+  if (!queue.isValidState(state)) return void res.status(400).json({ message: `Invalid state requested: ${state}` });
 
   const jobCounts = await queue.getJobCounts();
   const page = parseInt(req.query.page, 10) || 1;

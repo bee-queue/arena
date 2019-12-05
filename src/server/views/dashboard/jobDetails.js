@@ -14,7 +14,7 @@ async function handler(req, res) {
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
     // references parsing errors.
-    return res.json(jobData);
+    return void res.json(jobData);
   }
 
   const jobState = await job.getStatus();

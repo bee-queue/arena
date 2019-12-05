@@ -4,27 +4,27 @@ module.exports = function performAction(action) {
 
     const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
-    if (!queue) return res.status(404).send({error: 'queue not found'});
+    if (!queue) return void res.status(404).json({error: 'queue not found'});
 
     if (!queue.isActionSupported(action)) {
-      return res.status(401).send({
+      return void res.status(401).json({
         error: 'unauthorized action',
         details: `queue does not support action ${action}`
       });
     }
 
     const job = await queue.getJob(id);
-    if (!job) return res.status(404).send({error: 'job not found'});
+    if (!job) return void res.status(404).json({error: 'job not found'});
 
     try {
       await job[action]();
-      return res.sendStatus(200);
+      return void res.sendStatus(204);
     } catch (e) {
       const body = {
         error: 'queue error',
         details: e.stack
       };
-      return res.status(500).send(body);
+      return void res.status(500).send(body);
     }
   };
 };

@@ -5,10 +5,10 @@ function bulkAction(action) {
     const { queueName, queueHost } = req.params;
     const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
-    if (!queue) return res.status(404).send({error: 'queue not found'});
+    if (!queue) return void res.status(404).json({error: 'queue not found'});
 
     if (!queue.isActionSupported(action)) {
-      return res.status(401).send({
+      return void res.status(401).json({
         error: 'unauthorized action',
         details: `queue does not support action ${action}`
       });
