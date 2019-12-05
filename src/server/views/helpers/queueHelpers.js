@@ -32,7 +32,7 @@ const Helpers = {
   getStats: async function(queue) {
     await queue.redisClient.info(); // update queue.client.serverInfo
 
-    const stats = _.pickBy(queue.redisClient.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    const stats = _.pickBy(queue.redisClient.serverInfo, (value, key) => this._usefulMetrics.includes(key));
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
     stats.total_system_memory = formatBytes(parseInt(stats.total_system_memory, 10));
     return stats;

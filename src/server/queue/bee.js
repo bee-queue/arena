@@ -12,7 +12,7 @@ class BeeJob extends Job {
   }
 
   async getStatus() {
-    return Promise.resolve(this._job.status);
+    return this._job.status;
   }
 
   async toJSON() {
