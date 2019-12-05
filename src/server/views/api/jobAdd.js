@@ -8,7 +8,7 @@ async function handler(req, res) {
   if (!queue) return res.status(404).json({ error: 'queue not found' });
 
   try {
-    await Queues.set(queue, data);
+    await queue.addJob(data);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
