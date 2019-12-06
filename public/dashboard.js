@@ -66,8 +66,7 @@ $(document).ready(() => {
     e.preventDefault();
     $(this).prop('disabled', true);
 
-    const queueName = $(this).data('queue-name');
-    const queueHost = $(this).data('queue-host');
+    const { queueHost, queueName } = window.arenaInitialPayload;
 
     const r = window.confirm(`Retry all failed jobs queue "${queueHost}/${queueName}"?`);
     if (r) {

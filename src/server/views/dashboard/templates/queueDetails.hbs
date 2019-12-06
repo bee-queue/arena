@@ -1,13 +1,10 @@
 <h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
 
-<button class="btn btn-success js-retry-all-failed" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}">
-  Retry all failed jobs
-</button>
-
 <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
+        <div class="js-retry-all-failed  btn btn-warning btn-xs pull-right">Retry all failed Jobs</div>
         <div class="js-toggle-add-job-editor  btn btn-default btn-xs pull-right">Add Job</div>
         <h4 class="panel-title">Job Types</h4>
       </div>

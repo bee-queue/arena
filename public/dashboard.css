@@ -144,3 +144,7 @@ pre {
   overflow: hidden;
 }
 
+.panel-heading .btn {
+  margin-left: 5px;
+}
+
