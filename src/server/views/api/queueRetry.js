@@ -12,7 +12,12 @@ async function handler(req, res) {
   if (!queue) return res.status(404).send({error: 'queue not found'});
 
   const promises = [];
-  const jobs = await queue.getFailed();
+  let jobs;
+  if (queue.IS_BEE) {
+    jobs = await queue.getJobs('failed');
+  } else {
+    jobs = await queue.getFailed();
+  }
   jobs.forEach(job => promises.push(job.retry()));
 
   try {
