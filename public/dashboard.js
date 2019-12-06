@@ -62,6 +62,30 @@ $(document).ready(() => {
     $jobBulkCheckboxes.prop('checked', this.checked);
   });
 
+  $('.js-retry-all-failed').on('click', function(e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const r = window.confirm(`Retry all failed jobs queue "${queueHost}/${queueName}"?`);
+    if (r) {
+      $.ajax({
+        method: 'POST',
+        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/retry-all`
+      }).done(() => {
+        window.location.reload();
+      }).fail((jqXHR) => {
+        window.alert(`Request failed, check console for error.`);
+        console.error(jqXHR.responseText);
+      });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
+
+
   // Set up "shift-click" multiple checkbox selection handler
   (function() {
     // https://stackoverflow.com/questions/659508/how-can-i-shift-select-multiple-checkboxes-like-gmail
