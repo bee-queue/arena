@@ -21,7 +21,7 @@ async function handler(req, res) {
   jobs.forEach(job => promises.push(job.retry()));
 
   try {
-    await await Promise.all(promises);
+    await Promise.all(promises);
     return res.sendStatus(200);
   } catch (e) {
     const body = {
