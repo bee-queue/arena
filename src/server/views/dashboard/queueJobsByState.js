@@ -96,7 +96,7 @@ async function _html(req, res) {
     jobs = jobs.filter((job) => job);
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
-    jobs.map(async (job) => {
+    await jobs.map(async (job) => {
       let logs = await queue.getJobLogs(job.id);
       job.logs = (logs.logs || "No Logs");
       return job;
