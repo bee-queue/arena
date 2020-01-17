@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.7.1 Fix add job functionality (#197) - thanks @bogdan!
+
 * 2.7.0 Job logs show up for bull queue jobs (#210) - thanks @ganeshcse2991!
 
 * 2.6.4 Fix circular dependency issue when viewing failed jobs (#183) - thanks @ghmeier!
