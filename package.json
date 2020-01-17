@@ -7,7 +7,7 @@
   "dependencies": {
     "bee-queue": "^1.0.0",
     "body-parser": "^1.17.2",
-    "bull": "^3.4.2",
+    "bull": "^3.12.1",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.3.0",
