@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {

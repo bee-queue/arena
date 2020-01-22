@@ -24,6 +24,8 @@ async function handler(req, res) {
     jobState = job.status;
   } else {
     jobState = await job.getState();
+    let logs = await queue.getJobLogs(job.id);
+    job.logs = (logs.logs || "No Logs");
   }
 
   return res.render('dashboard/templates/jobDetails', {
