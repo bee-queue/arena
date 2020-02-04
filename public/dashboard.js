@@ -68,7 +68,7 @@ $(document).ready(() => {
 
     const { queueHost, queueName } = window.arenaInitialPayload;
 
-    const r = window.confirm(`Retry all failed jobs queue "${queueHost}/${queueName}"?`);
+    const r = window.confirm(`Retry all failed jobs in queue "${queueHost}/${queueName}"?`);
     if (r) {
       $.ajax({
         method: 'POST',
