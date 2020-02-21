@@ -1,4 +1,6 @@
 {
+  "__example_title": "Arena",
+  "__example_brand": "Arena",
   "__example_queues": [
     {
       "name": "my_queue",
@@ -7,5 +9,12 @@
       "hostId": "AWS Server 2"
     }
   ],
-  "queues": []
+  "queues": [
+    {
+      "name": "my_queue",
+      "port": 6381,
+      "host": "127.0.0.1",
+      "hostId": "AWS Server 2"
+    }
+  ]
 }

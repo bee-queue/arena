@@ -96,6 +96,17 @@ For Bee, the `redis` key will be directly passed to [`redis.createClient`](https
 
 For Bull, the `redis` key will be directly passed to [`ioredis`](https://github.com/luin/ioredis/blob/master/API.md#new_Redis_new), as explained [here](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#queue). To use this to connect to a Sentinel cluster, see [here](https://github.com/luin/ioredis/blob/master/README.md#sentinel).
 
+##### Cutomize Title and Navbar Brand
+You can change *title* and *navbar brand* of your dashboard by providing *title* and *arena* value in the root of config object:
+```js
+{
+  title: 'Your dashboard title',
+  brand: 'Your brand',
+  queues: []
+}
+```
+if not provided, *Arena* will be used as default.
+
 ##### Custom configuration file
 
 To specify a custom configuration file location, see [Running Arena as a node module](#running-arena-as-a-node-module).
