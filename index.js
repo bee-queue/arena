@@ -9,6 +9,8 @@ function run(config, listenOpts = {}) {
   if (config) Queues.setConfig(config);
   Queues.useCdn = typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
 
+  app.locals.title = config.title || 'Arena';
+  app.locals.brand = config.brand || 'Arena';
   app.locals.appBasePath = listenOpts.basePath || app.locals.appBasePath;
 
   app.use(app.locals.appBasePath, express.static(path.join(__dirname, 'public')));

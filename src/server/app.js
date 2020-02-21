@@ -22,6 +22,8 @@ module.exports = function() {
 
   const queues = new Queues(defaultConfig);
   require('./views/helpers/handlebars')(handlebars, { queues });
+  app.locals.title = defaultConfig.title || 'Arena';
+  app.locals.brand = defaultConfig.brand || 'Arena';
   app.locals.Queues = queues;
   app.locals.appBasePath = '';
   app.locals.vendorPath = '/vendor';
