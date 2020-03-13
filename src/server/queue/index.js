@@ -106,8 +106,9 @@ class Queues {
    *
    * @param {Object} queue A bee or bull queue class
    * @param {Object} data The data to be used within the job
+   * @param {String} name The name of the Bull job (optional)
    */
-  async set(queue, data) {
+  async set(queue, data, name) {
     if (queue.IS_BEE) {
       return queue.createJob(data).save();
     } else {
@@ -119,7 +120,7 @@ class Queues {
         },
       ];
 
-      if (data.name) args.unshift(data.name);
+      if (name) args.unshift(name);
       return queue.add.apply(queue, args);
     }
   }
