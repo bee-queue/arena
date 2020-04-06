@@ -5,17 +5,21 @@
   "author": "Mixmax <hello@mixmax.com>",
   "license": "MIT",
   "dependencies": {
-    "bee-queue": "^1.0.0",
     "body-parser": "^1.17.2",
-    "bull": "^3.12.1",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.3.0",
     "handlebars-helpers": "^0.10.0",
     "jsoneditor": "^5.9.6",
     "lodash": "^4.17.15",
-    "nodemon": "^1.18.7",
     "tablesort": "^5.0.1"
+  },
+  "peerDependencies": {
+    "bee-queue": "^1.0.0",
+    "bull": "^3.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
   },
   "scripts": {
     "start": "nodemon index.js --ignore 'public/vendor/*'",
