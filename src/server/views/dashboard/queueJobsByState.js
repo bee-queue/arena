@@ -103,6 +103,12 @@ async function _html(req, res) {
     })
   }
 
+  for (const job of jobs) {
+    const jobState = queue.IS_BEE ? job.status : await job.getState();
+    job.showRetryButton = !queue.IS_BEE || jobState == 'failed';
+    job.retryButtonText = jobState == 'failed' ? 'Retry' : 'Trigger';
+  }
+
   let pages = _.range(page - 6, page + 7)
     .filter((page) => page >= 1);
   while (pages.length < 12) {

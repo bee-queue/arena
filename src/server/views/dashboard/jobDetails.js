@@ -19,14 +19,9 @@ async function handler(req, res) {
     return res.json(_.omit(job, 'domain', 'queue', '_events', '_eventsCount'));
   }
 
-  let jobState;
-  if (queue.IS_BEE) {
-    jobState = job.status;
-  } else {
-    jobState = await job.getState();
-    let logs = await queue.getJobLogs(job.id);
-    job.logs = (logs.logs || "No Logs");
-  }
+  const jobState = queue.IS_BEE ? job.status : await job.getState();
+  job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
+  job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
 
   return res.render('dashboard/templates/jobDetails', {
     basePath,

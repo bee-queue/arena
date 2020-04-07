@@ -10,7 +10,14 @@ async function handler(req, res) {
   if (!job) return res.status(404).send({error: 'job not found'});
 
   try {
-    await job.retry();
+    const jobState = queue.IS_BEE ? job.status : await job.getState();
+
+    if(jobState === 'failed' && typeof job.retry === 'function') {
+      await job.retry();
+    } else {
+      await Queues.set(queue, job);
+    }
+
     return res.sendStatus(200);
   } catch (e) {
     const body = {
