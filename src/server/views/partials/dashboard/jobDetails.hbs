@@ -23,23 +23,25 @@
     <h5>Timestamp</h5>
     {{#if this.options.timestamp}}
       {{moment this.options.timestamp "llll"}}
-    {{/if}}
-    {{#if this.timestamp}}
+    {{else if this.timestamp}}
       {{moment this.timestamp "llll"}}
+    {{else}}
+      Malformed job.
     {{/if}}
   </div>
   
-  <div class="col-sm-3">
-    {{#if this.delay}}
-    <h5>Execute at</h5>
-    {{#if this.options.timestamp}}
-    {{moment (plus this.options.timestamp this.delay) "llll"}}
-    {{/if}}
-    {{#if this.timestamp}}
-    {{moment (plus this.timestamp this.delay) "llll"}}
-    {{/if}}
-    {{/if}}
-  </div>
+  {{#if this.delay}}
+    <div class="col-sm-3">
+      <h5>Execute at</h5>
+      {{#if this.options.timestamp}}
+        {{moment (plus this.options.timestamp this.delay) "llll"}}
+      {{else if this.timestamp}}
+        {{moment (plus this.timestamp this.delay) "llll"}}
+      {{else}}
+        Malformed job.
+      {{/if}}
+    </div>
+  {{/if}}
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
