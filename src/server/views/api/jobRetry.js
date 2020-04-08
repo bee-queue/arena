@@ -12,7 +12,7 @@ async function handler(req, res) {
   try {
     const jobState = queue.IS_BEE ? job.status : await job.getState();
 
-    if(jobState === 'failed' && typeof job.retry === 'function') {
+    if (jobState === 'failed' && typeof job.retry === 'function') {
       await job.retry();
     } else {
       await Queues.set(queue, job);
