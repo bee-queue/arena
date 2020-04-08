@@ -1,5 +1,7 @@
 ## Release History
 
+* 2.8.0 Add ability to run jobs on demand (#211) - thanks @bvallelunga!
+
 * 2.7.1 Fix add job functionality (#197) - thanks @bogdan!
 
 * 2.7.0 Job logs show up for bull queue jobs (#201) - thanks @ganeshcse2991!
