@@ -85,10 +85,16 @@ class Queues {
     if (queue.IS_BEE) {
       return queue.createJob(data).save();
     } else {
-      return queue.add(data, {
-        removeOnComplete: false,
-        removeOnFail: false
-      });
+      const args = [
+        data,
+        {
+          removeOnComplete: false,
+          removeOnFail: false
+        }
+      ];
+
+      if (data.name) args.unshift(data.name)
+      return queue.add.apply(queue, data);
     }
   }
 }
