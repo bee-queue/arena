@@ -86,14 +86,14 @@ class Queues {
       return queue.createJob(data).save();
     } else {
       const args = [
-        data,
-        {
+        data.name,
+        data.data,
+        Object.assign({
           removeOnComplete: false,
           removeOnFail: false
-        }
-      ];
+        }, data.opts || {})
+      ].filter((arg) => arg !== null && arg !== undefined);
 
-      if (data.name) args.unshift(data.name)
       return queue.add.apply(queue, args);
     }
   }

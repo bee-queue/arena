@@ -15,6 +15,11 @@ async function handler(req, res) {
     if (jobState === 'failed' && typeof job.retry === 'function') {
       await job.retry();
     } else {
+      // On-demand jobs should not have repeat settings
+      if (job.opts) {
+        job.opts.repeat = undefined;
+      }
+
       await Queues.set(queue, job);
     }
 
