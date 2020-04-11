@@ -4,7 +4,7 @@ const util = require('util');
 async function handler(req, res) {
   const { queueName, queueHost, id } = req.params;
   const { json } = req.query;
-  const basePath = req.baseUrl;
+  const basePath = req.app.locals.appBasePath + req.baseUrl;
 
   const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
