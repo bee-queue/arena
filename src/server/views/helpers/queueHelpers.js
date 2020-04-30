@@ -28,11 +28,49 @@ function formatBytes(num) {
   return (neg ? '-' : '') + numStr + ' ' + unit;
 }
 
+/**
+ * Parses a Redis server info string as returned by `INFO`, generating an
+ * output object populated with fields based upon key-value pairs read.
+ * 
+ * @param {string} rawServerInfo - Redis server info as returned from the
+ * `INFO` command.
+ * 
+ * @returns {object} Returns a dictionary with key-value pairs based upon
+ * the parsed server info. 
+ */
+function parseRedisServerInfo(rawServerInfo) {
+  // Return just an empty object if we've not been given a proper string.
+  if (typeof rawServerInfo !== 'string') {
+    return {};
+  }
+
+  const out = {};
+  const lines = rawServerInfo.split('\r\n');
+  for (const line of lines) {
+    // Skip section names and empty lines.
+    if (line.startsWith('#') || !line.length) {
+      continue;
+    }
+    // Split our line into key:value components. Note that it is possible
+    // for the value to contain the colon character, so we must take care
+    // to have all potential components joined rather than assuming there
+    // is only one.
+    const [key, ...valueComponents] = line.split(':');
+    const value = valueComponents.join(':');
+    if (value) {
+      out[key] = value;
+    }
+  }
+
+  return out;
+}
+
 const Helpers = {
   getStats: async function(queue) {
-    await queue.client.info(); // update queue.client.serverInfo
+    const rawServerInfo = await queue.client.info();
+    const serverInfo = parseRedisServerInfo(rawServerInfo);
 
-    const stats = _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    const stats = _.pickBy(serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
     stats.total_system_memory = formatBytes(parseInt(stats.total_system_memory, 10));
     return stats;
