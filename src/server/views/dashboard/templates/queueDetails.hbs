@@ -9,7 +9,7 @@
       </div>
       <div class="panel-body">
         <div class="jsoneditorx form-group hide overflow-hidden">
-          <div class="jsoneditorx hide" id="jsoneditor" style="height:200px;"></div>
+          <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
           <br />
           <div class="js-add-job  btn btn-primary btn-sm pull-right">Create</div>
         </div>
@@ -51,7 +51,7 @@
 {{/contentFor}}
 
 {{#contentFor 'script'}}
-  window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), {});
+  window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
   window.arenaInitialPayload = {
     queueHost: "{{ queueHost }}",
     queueName: "{{ queueName }}"
