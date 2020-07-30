@@ -9,17 +9,21 @@
     "body-parser": "^1.17.2",
     "bull": "^3.16.0",
     "express": "^4.15.2",
-    "express-handlebars": "^3.0.0",
-    "handlebars": "^4.3.0",
+    "express-handlebars": "^5.1.0",
+    "handlebars": "^4.7.6",
     "handlebars-helpers": "^0.10.0",
     "jsoneditor": "^5.9.6",
     "lodash": "^4.17.15",
     "tablesort": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "@mixmaxhq/prettier-config": "^1.0.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
   },
   "scripts": {
+    "ci": "npm run lint",
+    "lint": "prettier -c .",
     "start": "nodemon index.js --ignore 'public/vendor/*'",
     "inspect": "nodemon --inspect --trace-warnings --ignore 'public/vendor/*' index.js"
   },
