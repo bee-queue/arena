@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
+const moment = require('moment');
 
 module.exports = function () {
   const hbs = exphbs.create({
@@ -11,8 +12,6 @@ module.exports = function () {
     partialsDir: `${__dirname}/views/partials/`,
     extname: 'hbs',
   });
-
-  require('handlebars-helpers')({ handlebars });
 
   const app = express();
 
