@@ -28,11 +28,12 @@ async function handler(req, res) {
  */
 async function _json(req, res) {
   const { queueName, queueHost, state } = req.params;
-  const {Queues} = req.app.locals;
+  const { Queues } = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).json({ message: 'Queue not found' });
 
-  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
+  if (!isValidState(state, queue.IS_BEE))
+    return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
   let jobs;
   if (queue.IS_BEE) {
@@ -58,12 +59,16 @@ async function _json(req, res) {
  */
 async function _html(req, res) {
   const { queueName, queueHost, state } = req.params;
-  const {Queues} = req.app.locals;
+  const { Queues } = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   const basePath = req.baseUrl;
-  if (!queue) return res.status(404).render('dashboard/templates/queueNotFound', {basePath, queueName, queueHost});
+  if (!queue)
+    return res
+      .status(404)
+      .render('dashboard/templates/queueNotFound', { basePath, queueName, queueHost });
 
-  if (!isValidState(state, queue.IS_BEE)) return res.status(400).json({ message: `Invalid state requested: ${state}` });
+  if (!isValidState(state, queue.IS_BEE))
+    return res.status(400).json({ message: `Invalid state requested: ${state}` });
 
   let jobCounts;
   if (queue.IS_BEE) {
@@ -98,9 +103,9 @@ async function _html(req, res) {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
     await jobs.map(async (job) => {
       let logs = await queue.getJobLogs(job.id);
-      job.logs = (logs.logs || "No Logs");
+      job.logs = logs.logs || 'No Logs';
       return job;
-    })
+    });
   }
 
   for (const job of jobs) {
@@ -109,8 +114,7 @@ async function _html(req, res) {
     job.retryButtonText = jobState == 'failed' ? 'Retry' : 'Trigger';
   }
 
-  let pages = _.range(page - 6, page + 7)
-    .filter((page) => page >= 1);
+  let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);
   while (pages.length < 12) {
     pages.push(_.last(pages) + 1);
   }
@@ -127,7 +131,7 @@ async function _html(req, res) {
     currentPage: page,
     pages,
     pageSize,
-    lastPage: _.last(pages)
+    lastPage: _.last(pages),
   });
 }
 

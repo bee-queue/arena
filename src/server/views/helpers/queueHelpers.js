@@ -29,10 +29,12 @@ function formatBytes(num) {
 }
 
 const Helpers = {
-  getStats: async function(queue) {
+  getStats: async function (queue) {
     await queue.client.info(); // update queue.client.serverInfo
 
-    const stats = _.pickBy(queue.client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    const stats = _.pickBy(queue.client.serverInfo, (value, key) =>
+      _.includes(this._usefulMetrics, key)
+    );
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
     stats.total_system_memory = formatBytes(parseInt(stats.total_system_memory, 10));
     return stats;
@@ -44,7 +46,7 @@ const Helpers = {
     'used_memory',
     'mem_fragmentation_ratio',
     'connected_clients',
-    'blocked_clients'
+    'blocked_clients',
   ],
 
   /**
@@ -55,7 +57,7 @@ const Helpers = {
   /**
    * Valid states for a job in bull queue
    */
-  BULL_STATES: ['waiting', 'active', 'completed', 'failed', 'delayed']
+  BULL_STATES: ['waiting', 'active', 'completed', 'failed', 'delayed'],
 };
 
 module.exports = Helpers;

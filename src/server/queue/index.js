@@ -13,7 +13,7 @@ class Queues {
       },
       set useCdn(newValue) {
         this.value = newValue;
-      }
+      },
     };
 
     this.setConfig(config);
@@ -30,7 +30,7 @@ class Queues {
   async get(queueName, queueHost) {
     const queueConfig = _.find(this._config.queues, {
       name: queueName,
-      hostId: queueHost
+      hostId: queueHost,
     });
     if (!queueConfig) return null;
 
@@ -49,7 +49,7 @@ class Queues {
     const isBee = type === 'bee';
 
     const options = {
-      redis: redis || url || redisHost
+      redis: redis || url || redisHost,
     };
     if (prefix) options.prefix = prefix;
 
@@ -59,7 +59,7 @@ class Queues {
         isWorker: false,
         getEvents: false,
         sendEvents: false,
-        storeJobs: false
+        storeJobs: false,
       });
 
       queue = new Bee(name, options);
@@ -89,11 +89,11 @@ class Queues {
         data,
         {
           removeOnComplete: false,
-          removeOnFail: false
-        }
+          removeOnFail: false,
+        },
       ];
 
-      if (data.name) args.unshift(data.name)
+      if (data.name) args.unshift(data.name);
       return queue.add.apply(queue, args);
     }
   }

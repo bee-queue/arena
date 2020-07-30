@@ -2,7 +2,7 @@
 
 An intuitive Web GUI for [Bee Queue](https://github.com/bee-queue/bee-queue) and [Bull](https://github.com/optimalbits/bull). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
 
-For a quick introduction to the motivations for creating Arena, read *[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www.mixmax.com/blog/introducing-bull-arena)*.
+For a quick introduction to the motivations for creating Arena, read _[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www.mixmax.com/blog/introducing-bull-arena)_.
 
 ### Screenshots
 
@@ -10,10 +10,10 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 ### Features
 
-* Check the health of a queue and its jobs at a glance
-* Paginate and filter jobs by their state
-* View details and stacktraces of jobs with permalinks
-* Restart and retry jobs with one click
+- Check the health of a queue and its jobs at a glance
+- Paginate and filter jobs by their state
+- View details and stacktraces of jobs with permalinks
+- Restart and retry jobs with one click
 
 ### Usage
 
@@ -100,7 +100,7 @@ For Bull, the `redis` key will be directly passed to [`ioredis`](https://github.
 
 To specify a custom configuration file location, see [Running Arena as a node module](#running-arena-as-a-node-module).
 
-*Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery*
+_Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery_
 
 #### Running the server
 
@@ -112,10 +112,10 @@ Note that because Arena is implemented using `async`/`await`, Arena only current
 
 Alternatively, you can use Arena as a node module. This has potential benefits:
 
-* Arena can be configured to use any method of server/queue configuration desired
-  * for example, fetching available redis queues from an AWS instance on server start
-  * or even just plain old reading from environment variables
-* Arena can be mounted in other express apps as middleware
+- Arena can be configured to use any method of server/queue configuration desired
+  - for example, fetching available redis queues from an AWS instance on server start
+  - or even just plain old reading from environment variables
+- Arena can be mounted in other express apps as middleware
 
 Usage:
 
@@ -143,19 +143,19 @@ const arena = Arena({
     },
     {
       // And so on...
-    }
-  ]
+    },
+  ],
 });
 router.use('/', arena);
 ```
 
 `Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
-* `port` - specify custom port to listen on (default: 4567)
-* `host` - specify custom ip to listen on (default: '0.0.0.0')
-* `basePath` - specify custom path to mount server on (default: '/')
-* `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
-* `useCdn` - set false to use the bundled js and css files (default: true)
+- `port` - specify custom port to listen on (default: 4567)
+- `host` - specify custom ip to listen on (default: '0.0.0.0')
+- `basePath` - specify custom path to mount server on (default: '/')
+- `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
+- `useCdn` - set false to use the bundled js and css files (default: true)
 
 ##### Example config (for bull)
 
@@ -191,6 +191,7 @@ const arenaConfig = Arena({
 // Make arena's resources (js/css deps) available at the base app route
 app.use('/', arenaConfig);
 ```
+
 (Credit to [tim-soft](https://github.com/tim-soft) for the example config.)
 
 ### Bee Queue support

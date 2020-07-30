@@ -4,7 +4,7 @@ const Arena = require('./src/server/app');
 const routes = require('./src/server/views/routes');
 
 function run(config, listenOpts = {}) {
-  const {app, Queues} = Arena();
+  const { app, Queues } = Arena();
 
   if (config) Queues.setConfig(config);
   Queues.useCdn = typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
@@ -15,7 +15,7 @@ function run(config, listenOpts = {}) {
   app.use(app.locals.appBasePath, routes);
 
   const port = listenOpts.port || 4567;
-  const host= listenOpts.host || '0.0.0.0'; // Default: listen to all network interfaces.
+  const host = listenOpts.host || '0.0.0.0'; // Default: listen to all network interfaces.
   if (!listenOpts.disableListen) {
     app.listen(port, host, () => console.log(`Arena is running on port ${port} at host ${host}`));
   }

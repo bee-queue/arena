@@ -7,7 +7,6 @@ body {
   padding-top: 50px;
 }
 
-
 /*
  * Global add-ons
  */
@@ -66,7 +65,6 @@ body {
   background-color: #428bca;
 }
 
-
 /*
  * Main content
  */
@@ -84,7 +82,6 @@ body {
 .main .page-header {
   margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
@@ -121,7 +118,7 @@ body {
  */
 .header-collapse {
   display: inline;
-  margin: 0 0 0 .5em;
+  margin: 0 0 0 0.5em;
 }
 
 /*
@@ -143,4 +140,3 @@ pre {
 .overflow-hidden {
   overflow: hidden;
 }
-

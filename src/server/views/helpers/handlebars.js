@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const crypto = require('crypto');
 const _ = require('lodash');
 const Handlebars = require('handlebars');
 
@@ -42,7 +42,7 @@ const helpers = {
 
   hashIdAttr(id) {
     return crypto.createHash('sha256').update(id).digest('hex');
-  }
+  },
 };
 
 module.exports = function registerHelpers(hbs, { queues }) {

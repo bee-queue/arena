@@ -1,5 +1,5 @@
 function handler(req, res) {
-  const {Queues} = req.app.locals;
+  const { Queues } = req.app.locals;
   const queues = Queues.list();
   const basePath = req.baseUrl;
 

@@ -4,15 +4,15 @@ const bodyParser = require('body-parser');
 const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 
-module.exports = function() {
+module.exports = function () {
   const hbs = exphbs.create({
     defaultLayout: `${__dirname}/views/layout`,
     handlebars,
     partialsDir: `${__dirname}/views/partials/`,
-    extname: 'hbs'
+    extname: 'hbs',
   });
 
-  require('handlebars-helpers')({handlebars});
+  require('handlebars-helpers')({ handlebars });
 
   const app = express();
 
@@ -36,6 +36,6 @@ module.exports = function() {
 
   return {
     app,
-    Queues: app.locals.Queues
+    Queues: app.locals.Queues,
   };
 };
