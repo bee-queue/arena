@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const _ = require('lodash');
 const Handlebars = require('handlebars');
+const moment = require('moment');
 
 const replacer = (key, value) => {
   if (_.isObject(value)) {
@@ -12,6 +13,16 @@ const replacer = (key, value) => {
   } else {
     return value;
   }
+};
+
+const isNumber = (n) => {
+  if (typeof num === "number") {
+    return num - num === 0;
+  }
+  if (typeof num === "string" && num.trim() !== "") {
+    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
+  }
+  return false;
 };
 
 const helpers = {
@@ -42,6 +53,56 @@ const helpers = {
 
   hashIdAttr(id) {
     return crypto.createHash('sha256').update(id).digest('hex');
+  },
+
+  encodeURI(url) {
+    if (typeof value === "string") {
+      return encodeURIComponent(url);
+    }
+  },
+
+  capitalize(s) {
+    if (typeof value !== "string") {
+      return "";
+    }
+
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  },
+
+  add(a, b) {
+    if (isNumber(a) && isNumber(b)) {
+      return Number(a) + Number(b);
+    }
+
+    if (typeof a === "string" && typeof b === "string") {
+      return a + b;
+    }
+
+    return "";
+  },
+
+  subtract(a, b) {
+    if (!isNumber(a)) {
+      throw new TypeError("expected the first argument to be a number");
+    }
+    if (!isNumber(b)) {
+      throw new TypeError("expected the second argument to be a number");
+    }
+    return Number(a) - Number(b);
+  },
+
+  length(value) {
+    if (util.isObject(value) && !util.isOptions(value)) {
+      value = Object.keys(value);
+    }
+    if (typeof value === "string" || Array.isArray(value)) {
+      return value.length;
+    }
+    return 0;
+  },
+
+  moment(date, format) {
+    moment(date).format(format)
   },
 };
 
