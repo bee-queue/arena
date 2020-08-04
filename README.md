@@ -17,58 +17,62 @@ For a quick introduction to the motivations for creating Arena, read _[Interacti
 
 ### Usage
 
-#### Prerequisites
-
-Configure your queues in the "queues" key of [`index.json`](src/server/config/index.json).
-
-Queues are JSON objects. Here are the configuration keys that are common to all three configuration ways:
+Arena accepts a the following options:
 
 ```js
-{
-  // required string
-  "name": "my_queue",
+const Arena = require('bull-arena');
 
-  // host display name, give it a helpful name for reference
-  // required string
-  "hostId": "Queue Server 1",
+// Mandatory import of queue library.
+const Bee = require('bee-queue');
 
-  // optional string
-  // default: null (will assume Bull)
-  "type": "bee",
+Arena({
+  // All queue libraries used must be explicitly imported and included.
+  Bee,
 
-  // queue keys prefix
-  // optional string
-  // default: "bq" for Bee, "bull" for Bull
-  "prefix": "foo"
-}
+  // Set `Bull` when using bull.
+
+  queues: [
+    {
+      // Required for each queue definition.
+      name: 'name_of_my_queue',
+
+      // User-readable display name for the host. Required.
+      hostId: 'Queue Server 1',
+
+      // Queue type (Bull or Bee - default Bull).
+      type: 'bee',
+
+      // Queue key prefix. Defaults to "bq" for Bee and "bull" for Bull.
+      prefix: 'foo',
+    },
+  ],
+});
 ```
 
-The required `name` and `hostId` have to be present in any of the following JSON objects, the optional keys can be present in them.
+The required `name` and `hostId` in each queue object have to be present in each queue object. Additional keys can be present in them, to configure the redis client itself.
 
 The three ways in which you can configure the client are:
 
-##### 1. port/host
+#### 1. port/host
 
-```js
+```jsonc
+// In a queue object.
 {
-  // hostname or IP
-  // required string
+  // Hostname or IP. Required.
   "host": "127.0.0.1",
 
-  // optional number
-  // default: 6379
+  // Bound port. Optional, default: 6379.
   "port": 6379,
 
-  // optional string
+  // Optional, to issue a redis AUTH command.
   "password": "hello",
 
-  // optional number
-  // default: 0
-  "db": 1,
+  // Optional; default 0. Most of the time, you'll leave this absent.
+  "db": 1
 }
 ```
 
-##### 2. URL
+#### 2. URL
 
 You can also provide a `url` field instead of `host`, `port`, `db` and `password`.
 
@@ -78,7 +82,7 @@ You can also provide a `url` field instead of `host`, `port`, `db` and `password
 }
 ```
 
-##### 3. Redis client options
+#### 3. Redis client options
 
 Arena is compatible with both Bee and Bull.
 If you need to pass some specific configuration options directly to the redis client library your queue uses, you can also do so.
@@ -96,21 +100,19 @@ For Bee, the `redis` key will be directly passed to [`redis.createClient`](https
 
 For Bull, the `redis` key will be directly passed to [`ioredis`](https://github.com/luin/ioredis/blob/master/API.md#new_Redis_new), as explained [here](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#queue). To use this to connect to a Sentinel cluster, see [here](https://github.com/luin/ioredis/blob/master/README.md#sentinel).
 
-##### Custom configuration file
+#### Custom configuration file
 
 To specify a custom configuration file location, see [Running Arena as a node module](#running-arena-as-a-node-module).
 
 _Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery_
 
-#### Running the server
+#### Running Arena as a node module
 
-Run `npm install` to fetch Arena's dependencies. Then run `npm start` to start the server.
+See the [Docker image](#docker-image) section or the [docker-arena] repository for information about running this standalone.
 
 Note that because Arena is implemented using `async`/`await`, Arena only currently supports Node `>=7.6`.
 
-#### Running Arena as a node module
-
-Alternatively, you can use Arena as a node module. This has potential benefits:
+Using Arena as a node module has potential benefits:
 
 - Arena can be configured to use any method of server/queue configuration desired
   - for example, fetching available redis queues from an AWS instance on server start
@@ -122,7 +124,7 @@ Usage:
 In project folder:
 
 ```shell
-npm install bull-arena
+$ npm install bull-arena
 ```
 
 In router.js:
@@ -146,10 +148,11 @@ const arena = Arena({
     },
   ],
 });
+
 router.use('/', arena);
 ```
 
-`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
 - `port` - specify custom port to listen on (default: 4567)
 - `host` - specify custom ip to listen on (default: '0.0.0.0')
@@ -196,23 +199,13 @@ app.use('/', arenaConfig);
 
 ### Bee Queue support
 
-Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configuration object.
+Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: 'bee'` property with an individual queue's configuration object.
 
 ### Docker image
 
-You can now `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
+You can `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
 
-To build the image simply run:
-
-```shell
-docker build -t <name-image> .
-```
-
-To run a container, execute the following command. Note that we need to settle the location of `index.json` in this container via volume mounting:
-
-```shell
-docker run -p 4567:4567 -v </local/route/to/index.json>:/opt/arena/src/server/config/index.json <name-image>
-```
+Please see the [docker-arena] repository for details.
 
 ### Development
 
@@ -221,3 +214,5 @@ Arena is written using Express, with simple jQuery and Handlebars on the front e
 ### License
 
 The [MIT License](LICENSE).
+
+[docker-arena]: https://github.com/bee-queue/docker-arena

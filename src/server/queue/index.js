@@ -1,6 +1,4 @@
 const _ = require('lodash');
-const Bull = require('bull');
-const Bee = require('bee-queue');
 
 class Queues {
   constructor(config) {
@@ -24,7 +22,28 @@ class Queues {
   }
 
   setConfig(config) {
-    this._config = config;
+    this._config = { ...config, queues: config.queues.slice() };
+
+    if (!this._checkConstructors()) {
+      throw new TypeError(
+        'as of 3.0.0, bull-arena requires that the queue constructors be provided to Arena'
+      );
+    }
+  }
+
+  _checkConstructors() {
+    let hasBull = false,
+      hasBee = false;
+    for (const queue of this._config.queues) {
+      if (queue.type === 'bee') hasBee = true;
+      else hasBull = true;
+
+      if (hasBull && hasBee) break;
+    }
+
+    return (
+      (hasBull || hasBee) && (!hasBull || !!this._config.Bull) && (!hasBee || !!this._config.Bee)
+    );
   }
 
   async get(queueName, queueHost) {
@@ -62,10 +81,13 @@ class Queues {
         storeJobs: false,
       });
 
+      const { Bee } = this._config;
       queue = new Bee(name, options);
       queue.IS_BEE = true;
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
+
+      const { Bull } = this._config;
       queue = new Bull(name, options);
     }
 

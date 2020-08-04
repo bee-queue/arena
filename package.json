@@ -5,9 +5,7 @@
   "author": "Mixmax <hello@mixmax.com>",
   "license": "MIT",
   "dependencies": {
-    "bee-queue": "^1.2.3",
     "body-parser": "^1.17.2",
-    "bull": "^3.16.0",
     "express": "^4.15.2",
     "express-handlebars": "^5.1.0",
     "handlebars": "^4.7.6",
@@ -17,22 +15,29 @@
     "tablesort": "^5.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "@mixmaxhq/prettier-config": "^1.0.0",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "bee-queue": "^1.2.3",
+    "bull": "^3.16.0",
+    "conventional-changelog-conventionalcommits": "^4.3.0",
+    "prettier": "^2.0.5",
+    "semantic-release": "^17.1.1"
   },
   "scripts": {
-    "ci": "npm run lint",
-    "lint": "prettier -c .",
-    "start": "nodemon index.js --ignore 'public/vendor/*'",
-    "inspect": "nodemon --inspect --trace-warnings --ignore 'public/vendor/*' index.js"
+    "ci": "npm run lint && commitlint --from origin/master",
+    "lint": "prettier -c ."
   },
   "engines": {
     "node": ">=7.6.0"
   },
   "files": [
-    ".dockerignore",
-    "Dockerfile",
     "index.js",
     "public",
     "src"
