@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 
-module.exports = function () {
+module.exports = function (config) {
   const hbs = exphbs.create({
     defaultLayout: `${__dirname}/views/layout`,
     handlebars,
@@ -20,7 +20,7 @@ module.exports = function () {
 
   const Queues = require('./queue');
 
-  const queues = new Queues(defaultConfig);
+  const queues = new Queues({ ...defaultConfig, ...config });
   require('./views/helpers/handlebars')(handlebars, { queues });
   app.locals.Queues = queues;
   app.locals.appBasePath = '';
