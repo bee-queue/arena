@@ -1,5 +1,11 @@
 ## Release History
 
+- 2.8.2
+
+  - [Fix] Move nodemon to dev dependencies and update (#184) - thanks @Jimmysh!
+  - [Fix] Encode url for the action 'add job' (#194) - thanks @pluschnikow!
+  - [Fix] Fix job retry (#223) - thanks @roychri!
+
 - 2.8.1 Fix bull queue job publishing
 
 - 2.8.0 Add ability to run jobs on demand (#211) - thanks @bvallelunga!
