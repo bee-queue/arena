@@ -200,19 +200,9 @@ Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to 
 
 ### Docker image
 
-You can now `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
+You can `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
 
-To build the image simply run:
-
-```shell
-docker build -t <name-image> .
-```
-
-To run a container, execute the following command. Note that we need to settle the location of `index.json` in this container via volume mounting:
-
-```shell
-docker run -p 4567:4567 -v </local/route/to/index.json>:/opt/arena/src/server/config/index.json <name-image>
-```
+Please see the [docker-arena] repository for details.
 
 ### Development
 
@@ -221,3 +211,5 @@ Arena is written using Express, with simple jQuery and Handlebars on the front e
 ### License
 
 The [MIT License](LICENSE).
+
+[docker-arena]: https://github.com/bee-queue/docker-arena

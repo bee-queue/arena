@@ -18,21 +18,16 @@
   },
   "devDependencies": {
     "@mixmaxhq/prettier-config": "^1.0.0",
-    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   },
   "scripts": {
     "ci": "npm run lint",
-    "lint": "prettier -c .",
-    "start": "nodemon index.js --ignore 'public/vendor/*'",
-    "inspect": "nodemon --inspect --trace-warnings --ignore 'public/vendor/*' index.js"
+    "lint": "prettier -c ."
   },
   "engines": {
     "node": ">=7.6.0"
   },
   "files": [
-    ".dockerignore",
-    "Dockerfile",
     "index.js",
     "public",
     "src"
