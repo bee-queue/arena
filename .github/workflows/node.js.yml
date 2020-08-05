@@ -4,10 +4,13 @@
 name: Node.js CI
 
 on:
+  # Any additional branches here will currently be treated as release (or maintenance) branches.
+  # if the need to run jobs on other branches emerges, then the release job will need a better
+  # condition expression.
   push:
-    branches: [master]
+    branches: [master, v*.*.*]
   pull_request:
-    branches: [master]
+    branches: [master, v*.*.*]
 
 jobs:
   lint:
@@ -31,7 +34,7 @@ jobs:
       - run: npm run ci --if-present
 
   release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     needs: [lint]
