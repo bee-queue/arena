@@ -1,15 +1,14 @@
 ## [3.0.0](https://github.com/bee-queue/arena/compare/v2.8.2...v3.0.0) (2020-08-05)
 
-
 ### ⚠ BREAKING CHANGES
 
-* all users must now pass in the queue constructor(s)
-for the configuration.
+- all users must now pass in the queue constructor(s)
+  for the configuration.
 
 ### Features
 
-* remove direct application execution support ([95ecf42](https://github.com/bee-queue/arena/commit/95ecf420f360c270d8db623ecad9d572e3891f4f))
-* remove explicit queue dependencies ([ba190a4](https://github.com/bee-queue/arena/commit/ba190a480f1f2139380cee09f91a77aea0f7e926))
+- remove direct application execution support ([95ecf42](https://github.com/bee-queue/arena/commit/95ecf420f360c270d8db623ecad9d572e3891f4f))
+- remove explicit queue dependencies ([ba190a4](https://github.com/bee-queue/arena/commit/ba190a480f1f2139380cee09f91a77aea0f7e926))
 
 ## Release History
 
