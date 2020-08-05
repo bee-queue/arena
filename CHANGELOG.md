@@ -1,3 +1,9 @@
+### [3.0.2](https://github.com/bee-queue/arena/compare/v3.0.1...v3.0.2) (2020-08-05)
+
+### Bug Fixes
+
+- use normal require path for defaultConfig ([#196](https://github.com/bee-queue/arena/issues/196)) ([533f702](https://github.com/bee-queue/arena/commit/533f702079dced5986cc69d245e8a337acb6e657))
+
 ### [3.0.1](https://github.com/bee-queue/arena/compare/v3.0.0...v3.0.1) (2020-08-05)
 
 ### Bug Fixes
