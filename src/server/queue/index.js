@@ -24,6 +24,10 @@ class Queues {
   setConfig(config) {
     this._config = { ...config, queues: config.queues.slice() };
 
+    if (!this._config.queues.length) {
+      throw new Error('unsupported configuration: no queues configured');
+    }
+
     if (!this._checkConstructors()) {
       throw new TypeError(
         'as of 3.0.0, bull-arena requires that the queue constructors be provided to Arena'
