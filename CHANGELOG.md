@@ -1,3 +1,9 @@
+## [3.2.0](https://github.com/bee-queue/arena/compare/v3.1.0...v3.2.0) (2020-08-05)
+
+### Features
+
+- **add-job:** improve named job support ([#209](https://github.com/bee-queue/arena/issues/209)) ([1c131a9](https://github.com/bee-queue/arena/commit/1c131a9d143bdf8c2ef3c7bc2c1353b6f62346b1))
+
 ## [3.1.0](https://github.com/bee-queue/arena/compare/v3.0.2...v3.1.0) (2020-08-05)
 
 ### Features
