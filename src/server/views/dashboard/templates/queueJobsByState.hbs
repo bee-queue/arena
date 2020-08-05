@@ -93,9 +93,9 @@
               <input class="js-bulk-job" name="jobChecked" type="checkbox" />
             </div>
 
-            <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this.id}}">
+            <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this}}">
               <h4 class="header-collapse">
-                <span class="label label-default">{{ this.id }}</span>
+                <span class="label label-default">{{#if this.id}}{{ this.id }}{{else}}<em>missing id</em>{{/if}}</span>
                 {{#if this.data.name}}
                   <span style="margin-left: 8px">{{ this.data.name }}</span>
                 {{else if this.name}}
@@ -103,7 +103,7 @@
                 {{/if}}
               </h4>
             </a>
-            <div id="collapse{{hashIdAttr this.id}}" class="collapse">
+            <div id="collapse{{hashIdAttr this}}" class="collapse">
               {{~> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
             </div>
           </li>

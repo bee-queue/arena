@@ -14,6 +14,9 @@ const replacer = (key, value) => {
   }
 };
 
+// For jobs that don't have a valid ID, produce a random ID we can use in its place.
+const idMapping = new WeakMap();
+
 const helpers = {
   json(obj, pretty = false) {
     const args = [obj, replacer];
@@ -44,8 +47,17 @@ const helpers = {
     block.push(options.fn(this));
   },
 
-  hashIdAttr(id) {
-    return crypto.createHash('sha256').update(id).digest('hex');
+  hashIdAttr(obj) {
+    const { id } = obj;
+    if (typeof id === 'string') {
+      return crypto.createHash('sha256').update(id).digest('hex');
+    }
+    let mapping = idMapping.get(obj);
+    if (!mapping) {
+      mapping = crypto.randomBytes(32).toString('hex');
+      idMapping.set(obj, mapping);
+    }
+    return mapping;
   },
 };
 
