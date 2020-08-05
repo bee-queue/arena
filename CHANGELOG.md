@@ -1,3 +1,9 @@
+### [3.2.1](https://github.com/bee-queue/arena/compare/v3.2.0...v3.2.1) (2020-08-05)
+
+### Bug Fixes
+
+- **queue-view:** improve handling of falsy job.id values ([9415643](https://github.com/bee-queue/arena/commit/94156434685bc02e0119d1233220246d153180d9)), closes [#181](https://github.com/bee-queue/arena/issues/181)
+
 ## [3.2.0](https://github.com/bee-queue/arena/compare/v3.1.0...v3.2.0) (2020-08-05)
 
 ### Features
