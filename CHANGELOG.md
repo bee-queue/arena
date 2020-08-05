@@ -1,3 +1,9 @@
+### [3.0.1](https://github.com/bee-queue/arena/compare/v3.0.0...v3.0.1) (2020-08-05)
+
+### Bug Fixes
+
+- improve error message for no queues ([b8f2afc](https://github.com/bee-queue/arena/commit/b8f2afc3a9a9e5f8802a8dc4147139e52eb6128a))
+
 ## [3.0.0](https://github.com/bee-queue/arena/compare/v2.8.2...v3.0.0) (2020-08-05)
 
 ### ⚠ BREAKING CHANGES
