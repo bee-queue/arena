@@ -23,6 +23,7 @@ async function handler(req, res) {
     basePath,
     queueName,
     queueHost,
+    queueIsBee: !!queue.IS_BEE,
     jobCounts,
     stats,
   });

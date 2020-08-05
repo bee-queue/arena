@@ -11,7 +11,12 @@
         <div class="jsoneditorx form-group hide overflow-hidden">
           <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
           <br />
-          <div class="js-add-job  btn btn-primary btn-sm pull-right">Create</div>
+          <div class="form-inline pull-right">
+            {{#unless queueIsBee}}
+              <input type="text" class="js-add-job-name form-control input-sm" style="margin-right: 10px;" placeholder="Job name (optional)">
+            {{/unless}}
+            <div class="js-add-job btn btn-primary btn-sm">Create</div>
+          </div>
         </div>
         <ul class="list-group">
           {{#each jobCounts}}

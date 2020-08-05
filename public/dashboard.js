@@ -149,25 +149,33 @@ $(document).ready(() => {
 
   $('.js-toggle-add-job-editor').on('click', function () {
     $('.jsoneditorx').toggleClass('hide');
-    const data = localStorage.getItem('arena:savedJobData');
-    window.jsonEditor.set(data ? JSON.parse(data) : { id: '' });
+    const job = localStorage.getItem('arena:savedJob');
+    if (job) {
+      const { name, data } = JSON.parse(job);
+      window.jsonEditor.set(data);
+      $('input.js-add-job-name').val(name);
+    } else {
+      window.jsonEditor.set({ id: '' });
+    }
   });
 
   $('.js-add-job').on('click', function () {
+    const name = $('input.js-add-job-name').val() || null;
     const data = window.jsonEditor.get();
-    localStorage.setItem('arena:savedJobData', JSON.stringify(data));
+    const job = JSON.stringify({ name, data });
+    localStorage.setItem('arena:savedJob', job);
     const { queueHost, queueName } = window.arenaInitialPayload;
     $.ajax({
       url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
         queueName
       )}/job`,
       type: 'POST',
-      data: JSON.stringify(data),
+      data: job,
       contentType: 'application/json',
     })
       .done(() => {
         alert('Job successfully added!');
-        localStorage.removeItem('arena:savedJobData');
+        localStorage.removeItem('arena:savedJob');
       })
       .fail((jqXHR) => {
         window.alert('Failed to save job, check console for error.');
