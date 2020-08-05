@@ -53,7 +53,7 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - name: Release
-        run: npx semantic-release
+        run: npx semantic-release -b master,2.x
         env:
           # Need to use a separate token so we can push to the protected default branch.
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
