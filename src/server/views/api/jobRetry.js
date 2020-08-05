@@ -15,7 +15,7 @@ async function handler(req, res) {
     if (jobState === 'failed' && typeof job.retry === 'function') {
       await job.retry();
     } else {
-      await Queues.set(queue, job.data);
+      await Queues.set(queue, job.data, job.name);
     }
 
     return res.sendStatus(200);
