@@ -1,3 +1,10 @@
+## [3.1.0](https://github.com/bee-queue/arena/compare/v3.0.2...v3.1.0) (2020-08-05)
+
+### Features
+
+- **add-job:** add jsoneditor code and text modes ([#217](https://github.com/bee-queue/arena/issues/217)) ([63ca0c8](https://github.com/bee-queue/arena/commit/63ca0c8623486a2b665d33de8bda5ff437f8f2ab))
+- **job-details:** show raw progress when not numeric ([bd0d697](https://github.com/bee-queue/arena/commit/bd0d6970b6cf046c898569c8f0acbee88dfd642a))
+
 ### [3.0.2](https://github.com/bee-queue/arena/compare/v3.0.1...v3.0.2) (2020-08-05)
 
 ### Bug Fixes
