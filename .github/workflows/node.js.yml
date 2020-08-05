@@ -23,11 +23,6 @@ jobs:
           # For commitlint; ideally this would only check out the feature branch's history, but
           # that's not currently an option.
           fetch-depth: ${{ github.event_name == 'push' }}
-          # Necessary to prevent the checkout action from writing credentials to .git/config, which
-          # semantic-release attempts to use to push despite those credentials being denied the
-          # push.
-          # See https://github.com/semantic-release/git/issues/196#issuecomment-601310576.
-          persist-credentials: false
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -43,6 +38,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          # Necessary to prevent the checkout action from writing credentials to .git/config, which
+          # semantic-release attempts to use to push despite those credentials being denied the
+          # push.
+          # See https://github.com/semantic-release/git/issues/196#issuecomment-601310576.
+          persist-credentials: false
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
