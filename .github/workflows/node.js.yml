@@ -8,9 +8,9 @@ on:
   # if the need to run jobs on other branches emerges, then the release job will need a better
   # condition expression.
   push:
-    branches: [master, v*.*.*]
+    branches: [master, v*.*]
   pull_request:
-    branches: [master, v*.*.*]
+    branches: [master, v*.*]
 
 jobs:
   lint:
