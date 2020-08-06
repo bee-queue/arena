@@ -36,7 +36,7 @@
   },
   "scripts": {
     "ci": "npm run lint && if [ \"$GITHUB_EVENT_NAME\" != push ]; then npm run ci:commitlint; fi",
-    "ci:commitlint": "HEAD_NAME=\"${GITHUB_HEAD_REF#refs/heads/}\" && commitlint --from \"origin/${HEAD_NAME:-master}\"",
+    "ci:commitlint": "commitlint --from \"origin/${GITHUB_BASE_REF:-master}\"",
     "lint": "prettier -c .",
     "start": "nodemon index.js --ignore 'public/vendor/*'",
     "inspect": "nodemon --inspect --trace-warnings --ignore 'public/vendor/*' index.js"
