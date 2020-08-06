@@ -35,7 +35,7 @@ jobs:
       - run: npm ci
       - run: npm run ci --if-present
         env:
-          GITHUB_HEAD_REF: ${{ context.payload.pull_request.head.ref }}
+          GITHUB_BASE_REF: ${{ github.event.pull_request.base.ref }}
 
   release:
     # https://github.community/t/github-actions-does-not-respect-skip-ci/17325/9
