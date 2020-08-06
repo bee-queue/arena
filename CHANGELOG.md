@@ -1,3 +1,9 @@
+### [2.8.3](https://github.com/bee-queue/arena/compare/v2.8.2...v2.8.3) (2020-08-06)
+
+### Bug Fixes
+
+- **retry-job:** include job name ([#236](https://github.com/bee-queue/arena/issues/236)) ([4ccaf7e](https://github.com/bee-queue/arena/commit/4ccaf7ee029384753855d3b7399bdcfc0a93ca5a))
+
 ## Release History
 
 - 2.8.1 Fix bull queue job publishing
