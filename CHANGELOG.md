@@ -1,3 +1,9 @@
+### [3.2.2](https://github.com/bee-queue/arena/compare/v3.2.1...v3.2.2) (2020-08-06)
+
+### Bug Fixes
+
+- **retry-job:** include job name ([#235](https://github.com/bee-queue/arena/issues/235)) ([c145fe5](https://github.com/bee-queue/arena/commit/c145fe5c91eaec90a3694fc2fa1d105c470b11e4))
+
 ### [3.2.1](https://github.com/bee-queue/arena/compare/v3.2.0...v3.2.1) (2020-08-05)
 
 ### Bug Fixes
