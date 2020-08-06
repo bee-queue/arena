@@ -32,7 +32,8 @@
     "semantic-release": "^17.1.1"
   },
   "scripts": {
-    "ci": "npm run lint && commitlint --from origin/master",
+    "ci": "npm run lint && if [ \"$GITHUB_EVENT_NAME\" != push ]; then npm run ci:commitlint; fi",
+    "ci:commitlint": "HEAD_NAME=\"${GITHUB_HEAD_REF#refs/heads/}\" && commitlint --from \"origin/${HEAD_NAME:-master}\"",
     "lint": "prettier -c ."
   },
   "engines": {
