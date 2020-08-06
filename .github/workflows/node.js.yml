@@ -14,6 +14,8 @@ on:
 
 jobs:
   lint:
+    # https://github.community/t/github-actions-does-not-respect-skip-ci/17325/9
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,7 +36,8 @@ jobs:
       - run: npm run ci --if-present
 
   release:
-    if: github.event_name == 'push'
+    # https://github.community/t/github-actions-does-not-respect-skip-ci/17325/9
+    if: "github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
 
     needs: [lint]
