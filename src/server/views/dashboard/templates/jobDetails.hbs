@@ -1,6 +1,6 @@
 <h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
 
-{{> dashboard/jobDetails job basePath=basePath queueName=queueName queueHost=queueHost jobState=jobState }}
+{{> dashboard/jobDetails job basePath=basePath queueName=queueName queueHost=queueHost jobState=jobState stacktraces=stacktraces}}
 
 {{#contentFor 'sidebar'}}
   <li><a href="{{ basePath }}/">Queues Overview</a></li>
