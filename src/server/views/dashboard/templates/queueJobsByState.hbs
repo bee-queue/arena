@@ -96,9 +96,7 @@
             <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this}}">
               <h4 class="header-collapse">
                 <span class="label label-default">{{#if this.id}}{{ this.id }}{{else}}<em>missing id</em>{{/if}}</span>
-                {{#if this.data.name}}
-                  <span style="margin-left: 8px">{{ this.data.name }}</span>
-                {{else if this.name}}
+                {{#if this.name}}
                   <span style="margin-left: 8px">{{ this.name }}</span>
                 {{/if}}
               </h4>
