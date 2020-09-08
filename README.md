@@ -131,11 +131,13 @@ In router.js:
 
 ```js
 const Arena = require('bull-arena');
+const Bull = require('bull');
 
 const express = require('express');
 const router = express.Router();
 
 const arena = Arena({
+  Bull,
   queues: [
     {
       // First queue configuration
@@ -164,8 +166,11 @@ router.use('/', arena);
 
 ```js
 import Arena from 'bull-arena';
+import Bull from 'bull';
+
 
 const arenaConfig = Arena({
+  Bull,
   queues: [
     {
       // Name of the bull queue, this name must match up exactly with what you've defined in bull.
