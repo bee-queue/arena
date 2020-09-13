@@ -30,7 +30,7 @@ class Queues {
 
     if (!this._checkConstructors()) {
       throw new TypeError(
-        'as of 3.0.0, bull-arena requires that the queue constructors be provided to Arena'
+        'as of 3.0.0, bull-arena requires that the queue constructors be provided to Arena as Bull or Bee'
       );
     }
   }

@@ -24,12 +24,11 @@ const Arena = require('bull-arena');
 
 // Mandatory import of queue library.
 const Bee = require('bee-queue');
+// const Bull = require('bull');
 
 Arena({
   // All queue libraries used must be explicitly imported and included.
-  Bee,
-
-  // Set `Bull` when using bull.
+  Bee, // Set `Bull` when using bull.
 
   queues: [
     {
@@ -164,8 +163,10 @@ router.use('/', arena);
 
 ```js
 import Arena from 'bull-arena';
+import Bull from 'bull';
 
 const arenaConfig = Arena({
+  Bull,
   queues: [
     {
       // Name of the bull queue, this name must match up exactly with what you've defined in bull.
