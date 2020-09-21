@@ -98,6 +98,8 @@
                 <span class="label label-default">{{#if this.id}}{{ this.id }}{{else}}<em>missing id</em>{{/if}}</span>
                 {{#if this.name}}
                   <span style="margin-left: 8px">{{ this.name }}</span>
+                {{else if this.data.name}}
+                  <span style="margin-left: 8px">{{ this.data.name }}</span>
                 {{/if}}
               </h4>
             </a>
