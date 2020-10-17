@@ -37,16 +37,21 @@ class Queues {
 
   _checkConstructors() {
     let hasBull = false,
-      hasBee = false;
+      hasBee = false,
+      hasBullMQ = false;
     for (const queue of this._config.queues) {
       if (queue.type === 'bee') hasBee = true;
+      else if (queue.type === 'bullmq') hasBullMQ = true;
       else hasBull = true;
 
-      if (hasBull && hasBee) break;
+      if (hasBull && hasBee && hasBullMQ) break;
     }
 
     return (
-      (hasBull || hasBee) && (!hasBull || !!this._config.Bull) && (!hasBee || !!this._config.Bee)
+      (hasBull || hasBee || hasBullMQ) &&
+      (!hasBull || !!this._config.Bull) &&
+      (!hasBee || !!this._config.Bee) &&
+      (!hasBullMQ || !!this._config.BullMQ)
     );
   }
 
