@@ -1,3 +1,9 @@
+### [3.2.3](https://github.com/bee-queue/arena/compare/v3.2.2...v3.2.3) (2020-10-17)
+
+### Bug Fixes
+
+- **security:** upgrade jQuery to v3.5.1 ([#249](https://github.com/bee-queue/arena/issues/249)) ([c124a47](https://github.com/bee-queue/arena/commit/c124a472cfcceeb2e53502219b51d5bb0a69c2e4))
+
 ### [3.2.2](https://github.com/bee-queue/arena/compare/v3.2.1...v3.2.2) (2020-08-06)
 
 ### Bug Fixes
