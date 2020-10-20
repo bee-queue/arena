@@ -9,7 +9,7 @@
 
     {{#if (useCdn)}}
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- JSON Viewer -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
@@ -60,7 +60,7 @@
 
     <input type="hidden" id="basePath" value="{{ basePath }}">
     {{#if (useCdn)}}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
     {{else}}
     <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
     <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
