@@ -75,6 +75,7 @@ class Queues {
     if (tls) redisHost.tls = tls;
 
     const isBee = type === 'bee';
+    const isBullMQ = type === 'bullmq';
 
     const options = {
       redis: redis || url || redisHost,
@@ -93,6 +94,11 @@ class Queues {
       const { Bee } = this._config;
       queue = new Bee(name, options);
       queue.IS_BEE = true;
+    } else if (isBullMQ) {
+      if (queueConfig.createClient) options.createClient = queueConfig.createClient;
+
+      const { BullMQ } = this._config;
+      queue = new BullMQ(name, options);
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
 
