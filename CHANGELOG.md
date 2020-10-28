@@ -1,3 +1,10 @@
+### [3.2.4](https://github.com/bee-queue/arena/compare/v3.2.3...v3.2.4) (2020-10-28)
+
+### Bug Fixes
+
+- **security:** upgrade jquery and bootstrap ([#253](https://github.com/bee-queue/arena/issues/253)) ([14b317b](https://github.com/bee-queue/arena/commit/14b317b956f099fc6c1d2fdc3719abbdcfc87925))
+- revert jQuery upgrade ([#252](https://github.com/bee-queue/arena/issues/252)) ([2a268c3](https://github.com/bee-queue/arena/commit/2a268c3d8fc6a799126669a8fdd77815b0dc72e8))
+
 ### [3.2.3](https://github.com/bee-queue/arena/compare/v3.2.2...v3.2.3) (2020-10-17)
 
 ### Bug Fixes
