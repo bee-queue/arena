@@ -1,3 +1,9 @@
+### [3.3.1](https://github.com/bee-queue/arena/compare/v3.3.0...v3.3.1) (2020-10-28)
+
+### Bug Fixes
+
+- **deps:** use correct bootstrap css ([#266](https://github.com/bee-queue/arena/issues/266)) ([a5a5e23](https://github.com/bee-queue/arena/commit/a5a5e23b7e8d775b245f3b226790600d07d73650))
+
 ## [3.3.0](https://github.com/bee-queue/arena/compare/v3.2.4...v3.3.0) (2020-10-28)
 
 ### Features
