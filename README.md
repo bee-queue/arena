@@ -136,6 +136,8 @@ const express = require('express');
 const router = express.Router();
 
 const arena = Arena({
+  // Include a reference to the bee-queue or bull libraries, depending on the library being used.
+
   queues: [
     {
       // First queue configuration
