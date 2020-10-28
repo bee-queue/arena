@@ -29,7 +29,7 @@ Arena({
   // All queue libraries used must be explicitly imported and included.
   Bee,
 
-  // Set `Bull` when using bull.
+  // Provide a `Bull` option when using bull, similar to the `Bee` option above.
 
   queues: [
     {
@@ -164,8 +164,10 @@ router.use('/', arena);
 
 ```js
 import Arena from 'bull-arena';
+import Bull from 'bull';
 
 const arenaConfig = Arena({
+  Bull,
   queues: [
     {
       // Name of the bull queue, this name must match up exactly with what you've defined in bull.
