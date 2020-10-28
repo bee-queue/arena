@@ -1,3 +1,9 @@
+## [3.3.0](https://github.com/bee-queue/arena/compare/v3.2.4...v3.3.0) (2020-10-28)
+
+### Features
+
+- **job-details:** show stacktraces when job is delayed or done ([#238](https://github.com/bee-queue/arena/issues/238)) ([6b3dd6f](https://github.com/bee-queue/arena/commit/6b3dd6f3117cdd8296c4eec9c2b39da90acea77e))
+
 ### [3.2.4](https://github.com/bee-queue/arena/compare/v3.2.3...v3.2.4) (2020-10-28)
 
 ### Bug Fixes
