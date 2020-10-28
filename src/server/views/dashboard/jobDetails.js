@@ -28,6 +28,7 @@ async function handler(req, res) {
   const jobState = queue.IS_BEE ? job.status : await job.getState();
   job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
   job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
+  const stacktraces = queue.IS_BEE ? job.options.stacktraces : job.stacktrace;
 
   return res.render('dashboard/templates/jobDetails', {
     basePath,
@@ -35,6 +36,7 @@ async function handler(req, res) {
     queueHost,
     jobState,
     job,
+    stacktraces,
   });
 }
 

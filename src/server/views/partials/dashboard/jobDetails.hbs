@@ -78,20 +78,13 @@
 <pre><code>{{this.failedReason}}</code></pre>
 {{/if}}
 
-{{#eq jobState 'failed'}}
+{{#if stacktraces}}
   <h5>Stacktraces</h5>
-  {{#if this.options.stacktraces}}
-    {{#each this.options.stacktraces}}
-      <pre>{{ this }}</pre>
-    {{/each}}
-  {{/if}}
+  {{#each stacktraces}}
+    <pre>{{ this }}</pre>
+  {{/each}}
+{{/if}}
 
-  {{#if this.stacktrace}}
-    {{#each this.stacktrace}}
-      <pre>{{ this }}</pre>
-    {{/each}}
-  {{/if}}
-{{/eq}}
 
 <h5>Data</h5>
 <pre><code class="json">{{json this.data true}}</code></pre>
