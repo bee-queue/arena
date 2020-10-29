@@ -1,3 +1,9 @@
+### [3.3.2](https://github.com/bee-queue/arena/compare/v3.3.1...v3.3.2) (2020-10-29)
+
+### Bug Fixes
+
+- **job-details:** correctly wait for promises ([#254](https://github.com/bee-queue/arena/issues/254)) ([934e92a](https://github.com/bee-queue/arena/commit/934e92ab840fdd63e1d88b1584447f493bd10e94))
+
 ### [3.3.1](https://github.com/bee-queue/arena/compare/v3.3.0...v3.3.1) (2020-10-28)
 
 ### Bug Fixes
