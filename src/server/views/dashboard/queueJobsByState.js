@@ -101,13 +101,11 @@ async function _html(req, res) {
     jobs = jobs.filter((job) => job);
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
-    await jobs.map(
-      Promise.all(async (job) => {
-        let logs = await queue.getJobLogs(job.id);
-        job.logs = logs.logs || 'No Logs';
-        return job;
-      })
-    );
+    await Promise.all(jobs.map(async job => {
+      let logs = await queue.getJobLogs(job.id);
+      job.logs = logs.logs || 'No Logs';
+      return job;
+    }));
   }
 
   for (const job of jobs) {
