@@ -102,7 +102,7 @@ async function _html(req, res) {
   } else {
     jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
     await Promise.all(
-      jobs.map(async job => {
+      jobs.map(async (job) => {
         const logs = await queue.getJobLogs(job.id);
         job.logs = logs.logs || 'No Logs';
         return job;
