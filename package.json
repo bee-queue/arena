@@ -32,7 +32,7 @@
     "semantic-release": "^17.1.1"
   },
   "scripts": {
-    "ci": "npm run lint && if [ \"$GITHUB_EVENT_NAME\" != push ]; then npm run ci:commitlint; fi",
+    "ci": "npm run lint && if [ -z \"$CI\" ]; then npm run ci:commitlint; fi",
     "ci:commitlint": "commitlint --from \"origin/${GITHUB_BASE_REF:-master}\"",
     "lint": "prettier -c ."
   },

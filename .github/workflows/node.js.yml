@@ -34,6 +34,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run ci --if-present
+      - run: npm run ci:commitlint
+        if: "github.event_name != 'push'"
         env:
           GITHUB_BASE_REF: ${{ github.event.pull_request.base.ref }}
 
