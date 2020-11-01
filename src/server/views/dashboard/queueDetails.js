@@ -14,6 +14,8 @@ async function handler(req, res) {
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
+  } else if (queue.IS_BULLMQ) {
+    jobCounts = await queue.getJobCounts(...QueueHelpers.BULL_STATES);
   } else {
     jobCounts = await queue.getJobCounts();
   }

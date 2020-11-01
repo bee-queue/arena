@@ -37,16 +37,21 @@ class Queues {
 
   _checkConstructors() {
     let hasBull = false,
-      hasBee = false;
+      hasBee = false,
+      hasBullMQ = false;
     for (const queue of this._config.queues) {
       if (queue.type === 'bee') hasBee = true;
+      else if (queue.type === 'bullmq') hasBullMQ = true;
       else hasBull = true;
 
-      if (hasBull && hasBee) break;
+      if (hasBull && hasBee && hasBullMQ) break;
     }
 
     return (
-      (hasBull || hasBee) && (!hasBull || !!this._config.Bull) && (!hasBee || !!this._config.Bee)
+      (hasBull || hasBee || hasBullMQ) &&
+      (!hasBull || !!this._config.Bull) &&
+      (!hasBee || !!this._config.Bee) &&
+      (!hasBullMQ || !!this._config.BullMQ)
     );
   }
 
@@ -70,6 +75,7 @@ class Queues {
     if (tls) redisHost.tls = tls;
 
     const isBee = type === 'bee';
+    const isBullMQ = type === 'bullmq';
 
     const options = {
       redis: redis || url || redisHost,
@@ -88,6 +94,12 @@ class Queues {
       const { Bee } = this._config;
       queue = new Bee(name, options);
       queue.IS_BEE = true;
+    } else if (isBullMQ) {
+      if (queueConfig.createClient) options.createClient = queueConfig.createClient;
+
+      const { BullMQ } = this._config;
+      queue = new BullMQ(name, options);
+      queue.IS_BULLMQ = true;
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
 
