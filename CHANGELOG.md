@@ -1,3 +1,9 @@
+## [3.4.0](https://github.com/bee-queue/arena/compare/v3.3.3...v3.4.0) (2020-11-01)
+
+### Features
+
+- **bullmq:** initial support for bullmq ([#251](https://github.com/bee-queue/arena/issues/251)) ([1159dde](https://github.com/bee-queue/arena/commit/1159dde1223259c21d260ba4491026f6020e367f))
+
 ### [3.3.3](https://github.com/bee-queue/arena/compare/v3.3.2...v3.3.3) (2020-10-29)
 
 ### Bug Fixes
