@@ -99,6 +99,7 @@ class Queues {
 
       const { BullMQ } = this._config;
       queue = new BullMQ(name, options);
+      queue.IS_BULLMQ = true;
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
 
