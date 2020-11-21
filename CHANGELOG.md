@@ -1,3 +1,9 @@
+## [3.5.0](https://github.com/bee-queue/arena/compare/v3.4.0...v3.5.0) (2020-11-21)
+
+### Features
+
+- **job-details:** support arenaName display field ([332fb3a](https://github.com/bee-queue/arena/commit/332fb3af0d6a3af802b5e2f52ceaaa2f6fa7613f))
+
 ## [3.4.0](https://github.com/bee-queue/arena/compare/v3.3.3...v3.4.0) (2020-11-01)
 
 ### Features
