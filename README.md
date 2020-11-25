@@ -172,6 +172,8 @@ const arenaConfig = Arena({
   Bull,
   queues: [
     {
+      type: 'bull',
+
       // Name of the bull queue, this name must match up exactly with what you've defined in bull.
       name: "Notification_Emailer",
 
@@ -211,6 +213,8 @@ const arenaConfig = Arena({
   BullMQ: Queue,
   queues: [
     {
+      type: 'bullmq',
+
       // Name of the bullmq queue, this name must match up exactly with what you've defined in bullmq.
       name: "testQueue",
 
