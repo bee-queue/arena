@@ -1,3 +1,9 @@
+## [3.6.0](https://github.com/bee-queue/arena/compare/v3.5.0...v3.6.0) (2020-11-25)
+
+### Features
+
+- support bullmq in docker image ([c10a294](https://github.com/bee-queue/arena/commit/c10a29448de701fece6efeac3d82d577d1683701)), closes [bee-queue/docker-arena#50](https://github.com/bee-queue/docker-arena/issues/50)
+
 ## [3.5.0](https://github.com/bee-queue/arena/compare/v3.4.0...v3.5.0) (2020-11-21)
 
 ### Features
