@@ -98,7 +98,11 @@ class Queues {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
 
       const { BullMQ } = this._config;
-      queue = new BullMQ(name, options);
+      const { redis, ...rest } = options;
+      queue = new BullMQ(name, {
+        connection: redis,
+        ...rest,
+      });
       queue.IS_BULLMQ = true;
     } else {
       if (queueConfig.createClient) options.createClient = queueConfig.createClient;
