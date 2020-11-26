@@ -1,3 +1,9 @@
+### [3.6.1](https://github.com/bee-queue/arena/compare/v3.6.0...v3.6.1) (2020-11-26)
+
+### Bug Fixes
+
+- support redis configuration with bullmq ([#294](https://github.com/bee-queue/arena/issues/294)) ([ab4b806](https://github.com/bee-queue/arena/commit/ab4b806308abec5d1824ee9b44f71bafcf8c6e3a))
+
 ## [3.6.0](https://github.com/bee-queue/arena/compare/v3.5.0...v3.6.0) (2020-11-25)
 
 ### Features
