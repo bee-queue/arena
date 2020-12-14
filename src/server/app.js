@@ -12,7 +12,7 @@ module.exports = function (config) {
     extname: 'hbs',
   });
 
-  require('handlebars-helpers')({ handlebars });
+  require('./handlebars-helpers')({ handlebars });
 
   const app = express();
 
