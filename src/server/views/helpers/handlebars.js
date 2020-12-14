@@ -62,49 +62,49 @@ const helpers = {
   },
 
   encodeURI(url) {
-    if (typeof url !== "string") {
-      return "";
+    if (typeof url !== 'string') {
+      return '';
     }
     return encodeURIComponent(url);
   },
 
   capitalize(s) {
-    if (typeof value !== "string") {
-      return "";
+    if (typeof value !== 'string') {
+      return '';
     }
     return s.charAt(0).toUpperCase() + s.slice(1);
   },
 
   add(a, b) {
-    if ( Handlebars.helpers.isNumber(a) && Handlebars.helpers.isNumber(b) ) {
+    if (Handlebars.helpers.isNumber(a) && Handlebars.helpers.isNumber(b)) {
       return parseInt(a, 10) + parseInt(b, 10);
     }
 
-    if (typeof a === "string" && typeof b === "string") {
+    if (typeof a === 'string' && typeof b === 'string') {
       return a + b;
     }
 
-    return "";
+    return '';
   },
 
   subtract(a, b) {
     if (!Handlebars.helpers.isNumber(a)) {
-      throw new TypeError("expected the first argument to be a number");
+      throw new TypeError('expected the first argument to be a number');
     }
     if (!Handlebars.helpers.isNumber(b)) {
-      throw new TypeError("expected the second argument to be a number");
+      throw new TypeError('expected the second argument to be a number');
     }
     return parseInt(a, 10) - parseInt(b, 10);
   },
 
   length(value) {
-    if (typeof value === "string" || Array.isArray(value)) {
+    if (typeof value === 'string' || Array.isArray(value)) {
       return value.length;
     }
     return 0;
   },
 
-  moment(date,format) {
+  moment(date, format) {
     return moment(date).format(format);
   },
 
