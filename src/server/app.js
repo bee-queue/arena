@@ -12,8 +12,6 @@ module.exports = function (config) {
     extname: 'hbs',
   });
 
-  require('./handlebars-helpers')({ handlebars });
-
   const app = express();
 
   const defaultConfig = require('./config/index.json');

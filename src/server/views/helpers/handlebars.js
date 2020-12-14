@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const _ = require('lodash');
 const Handlebars = require('handlebars');
+const moment = require('moment');
 
 const replacer = (key, value) => {
   if (_.isObject(value)) {
@@ -58,6 +59,57 @@ const helpers = {
       idMapping.set(obj, mapping);
     }
     return mapping;
+  },
+
+  encodeURI(url) {
+    if (typeof url !== "string") {
+      return "";
+    }
+    return encodeURIComponent(url);
+  },
+
+  capitalize(s) {
+    if (typeof value !== "string") {
+      return "";
+    }
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  },
+
+  add(a, b) {
+    if ( Handlebars.helpers.isNumber(a) && Handlebars.helpers.isNumber(b) ) {
+      return parseInt(a, 10) + parseInt(b, 10);
+    }
+
+    if (typeof a === "string" && typeof b === "string") {
+      return a + b;
+    }
+
+    return "";
+  },
+
+  subtract(a, b) {
+    if (!Handlebars.helpers.isNumber(a)) {
+      throw new TypeError("expected the first argument to be a number");
+    }
+    if (!Handlebars.helpers.isNumber(b)) {
+      throw new TypeError("expected the second argument to be a number");
+    }
+    return parseInt(a, 10) - parseInt(b, 10);
+  },
+
+  length(value) {
+    if (typeof value === "string" || Array.isArray(value)) {
+      return value.length;
+    }
+    return 0;
+  },
+
+  moment(date,format) {
+    return moment(date).format(format);
+  },
+
+  eq(a, b, options) {
+    return a === b ? options.fn(this) : options.inverse(this);
   },
 };
 
