@@ -9,7 +9,7 @@
     "express": "^4.15.2",
     "express-handlebars": "^5.1.0",
     "handlebars": "^4.7.6",
-    "jsoneditor": "^5.9.6",
+    "jsoneditor": "^9.1.6",
     "lodash": "^4.17.15",
     "moment": "^2.29.1",
     "tablesort": "^5.0.1"
