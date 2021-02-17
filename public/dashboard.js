@@ -150,8 +150,9 @@ $(document).ready(() => {
   $('.js-toggle-add-job-editor').on('click', function () {
     const addJobText = $('.js-toggle-add-job-editor').text();
     const shouldHide = addJobText !== 'Add Job';
+    const newAddJobText = shouldHide ? 'Cancel' : 'Add Job';
     $('.jsoneditorx').toggleClass('hide', shouldHide);
-    $('.js-toggle-add-job-editor').text('Cancel');
+    $('.js-toggle-add-job-editor').text(newAddJobText);
 
     const job = localStorage.getItem('arena:savedJob');
     if (job) {
