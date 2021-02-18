@@ -1,3 +1,10 @@
+### [3.7.1](https://github.com/bee-queue/arena/compare/v3.7.0...v3.7.1) (2021-02-18)
+
+### Bug Fixes
+
+- **dashboard:** change shouldHide condition ([5722b55](https://github.com/bee-queue/arena/commit/5722b551be4b7142806d39cc4c4297eb19cd3f13))
+- **dashboard:** refresh page when adding a new job ([0fa5d02](https://github.com/bee-queue/arena/commit/0fa5d02ec03a53909de5519b0a2aa8f5f38065de))
+
 ## [3.7.0](https://github.com/bee-queue/arena/compare/v3.6.1...v3.7.0) (2020-12-16)
 
 ### Features
