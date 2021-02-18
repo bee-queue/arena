@@ -181,7 +181,6 @@ $(document).ready(() => {
       .done(() => {
         alert('Job successfully added!');
         localStorage.removeItem('arena:savedJob');
-        window.location.reload();
       })
       .fail((jqXHR) => {
         window.alert('Failed to save job, check console for error.');
