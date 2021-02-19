@@ -100,7 +100,7 @@ async function _html(req, res) {
     // Filter out Bee jobs that have already been removed by the time the promise resolves
     jobs = jobs.filter((job) => job);
   } else {
-    jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+    jobs = await queue.getJobs([_.lowerCase(state)], startId, endId, false);
     await Promise.all(
       jobs.map(async (job) => {
         const logs = await queue.getJobLogs(job.id);
