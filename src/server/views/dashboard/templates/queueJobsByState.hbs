@@ -21,7 +21,7 @@
         <li {{#eq this ../currentPage}} class="active" {{/eq}}>
 
           <a
-            href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}&amp;order={{ order }}">{{ this }}</a>
+            href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}&amp;order={{ ../order }}">{{ this }}</a>
         </li>
         {{/each}}
         <li {{#eq currentPage lastPage}} class="disabled">
@@ -74,7 +74,7 @@
           <ul class="dropdown-menu">
             <li><a
                 href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}<&amp;order={{ order }}<&amp;pageSize={{ pageSize }}">{{ pageSize }}
-                jobs</a></li>>
+                jobs</a></li>
             <li role="separator" class="divider"></li>
             <li><a
                 href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}<&amp;order={{ order }}&amp;pageSize=5">5
