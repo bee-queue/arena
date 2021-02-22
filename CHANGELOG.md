@@ -1,3 +1,13 @@
+## [3.8.0](https://github.com/bee-queue/arena/compare/v3.7.1...v3.8.0) (2021-02-22)
+
+### Features
+
+- **queuejobsbystate:** adding order dropdown ([c5d21a0](https://github.com/bee-queue/arena/commit/c5d21a0d4e15cb2444f904d199440707cf8fac6d))
+
+### Bug Fixes
+
+- **queuejobsbystate:** apply descending ordering for jobs when using bull queue ([1e1f891](https://github.com/bee-queue/arena/commit/1e1f8910bc3499419f4370dd45998df7b9317b8a))
+
 ### [3.7.1](https://github.com/bee-queue/arena/compare/v3.7.0...v3.7.1) (2021-02-18)
 
 ### Bug Fixes
