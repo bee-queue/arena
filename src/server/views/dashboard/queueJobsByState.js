@@ -80,6 +80,7 @@ async function _html(req, res) {
 
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;
+  const order = req.query.order || 'desc';
 
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
@@ -100,7 +101,8 @@ async function _html(req, res) {
     // Filter out Bee jobs that have already been removed by the time the promise resolves
     jobs = jobs.filter((job) => job);
   } else {
-    jobs = await queue[`get${_.capitalize(state)}`](startId, endId);
+    const stateTypes = state === 'waiting' ? ['wait', 'paused'] : state;
+    jobs = await queue.getJobs(stateTypes, startId, endId, order === 'asc');
     await Promise.all(
       jobs.map(async (job) => {
         const logs = await queue.getJobLogs(job.id);
@@ -130,10 +132,12 @@ async function _html(req, res) {
     jobs,
     jobsInStateCount: jobCounts[state],
     disablePagination: queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
+    disableOrdering: queue.IS_BEE,
     currentPage: page,
     pages,
     pageSize,
     lastPage: _.last(pages),
+    order,
   });
 }
 
