@@ -1,3 +1,14 @@
+## [3.10.0](https://github.com/bee-queue/arena/compare/v3.9.0...v3.10.0) (2021-03-02)
+
+### Features
+
+- **bull:** adding bull in example ([da1ad97](https://github.com/bee-queue/arena/commit/da1ad97f6fd5ce765718c10bfec278f830c1f85b))
+- **queuejobsbystate:** retry bulk delayed jobs ([d3eb2bf](https://github.com/bee-queue/arena/commit/d3eb2bf3d2dedbe44f683f172cef121e59a45bca))
+
+### Bug Fixes
+
+- **bee-queue:** disable retry jobs button for bee-queue ([57dc1d6](https://github.com/bee-queue/arena/commit/57dc1d61100e1f2d6fa7d9a726287c21cd63c201))
+
 ## [3.9.0](https://github.com/bee-queue/arena/compare/v3.8.0...v3.9.0) (2021-02-25)
 
 ### Features
