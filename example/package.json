@@ -2,15 +2,17 @@
   "name": "arena-example-project",
   "version": "1.0.0",
   "description": "An example project that uses Arena",
-  "main": "index.js",
+  "main": "bee.js",
   "scripts": {
-    "start": "node index.js",
+    "start:bee": "node bee.js",
+    "start:bull": "node bull.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bee-queue": "^1.3.1",
+    "bull": "^3.20.1",
     "express": "^4.17.1",
     "redis-server": "^1.2.2"
   }
