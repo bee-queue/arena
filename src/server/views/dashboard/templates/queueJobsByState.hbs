@@ -50,14 +50,12 @@
       data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
       Remove Jobs
     </button>
-    {{#unless disableRetryButton}}
-    {{#if (or (eq state 'failed') (eq state 'delayed'))}}
+    {{#if (or (eq state 'failed') (and (eq state 'delayed') (eq queueType 'bull')))}}
     <button type="button" data-action="retry" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
       data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
       Retry Jobs
     </button>
     {{/if}}
-    {{/unless}}
 
     <div class="btn-group">
       <div class="btn-group">
