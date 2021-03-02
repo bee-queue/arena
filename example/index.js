@@ -1,5 +1,6 @@
 const Arena = require('../');
 const Bee = require('bee-queue');
+// const Bull = require('bull');
 const RedisServer = require('redis-server');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
@@ -15,6 +16,7 @@ async function main() {
   Arena(
     {
       Bee,
+      // Bull,
 
       queues: [
         {
@@ -26,6 +28,7 @@ async function main() {
 
           // Queue type (Bull or Bee - default Bull).
           type: 'bee',
+          // type: 'bull',
 
           redis: {
             // host: 'localhost',
