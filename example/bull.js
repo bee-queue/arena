@@ -1,4 +1,4 @@
-const Arena = require('..');
+const Arena = require('../');
 const Bull = require('bull');
 const RedisServer = require('redis-server');
 

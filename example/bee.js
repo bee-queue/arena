@@ -1,4 +1,4 @@
-const Arena = require('..');
+const Arena = require('../');
 const Bee = require('bee-queue');
 const RedisServer = require('redis-server');
 
