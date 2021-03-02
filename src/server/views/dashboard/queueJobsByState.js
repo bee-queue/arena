@@ -123,6 +123,7 @@ async function _html(req, res) {
     pages.push(_.last(pages) + 1);
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
+  const disableRetry = !(state === 'failed' || (state === 'delayed' && !queue.IS_BEE));
 
   return res.render('dashboard/templates/queueJobsByState', {
     basePath,
@@ -133,7 +134,7 @@ async function _html(req, res) {
     jobsInStateCount: jobCounts[state],
     disablePagination: queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
     disableOrdering: queue.IS_BEE,
-    queueType: queue.IS_BEE ? 'bee' : 'bull',
+    disableRetry,
     currentPage: page,
     pages,
     pageSize,

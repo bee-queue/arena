@@ -121,19 +121,4 @@ module.exports = function registerHelpers(hbs, { queues }) {
   hbs.registerHelper('useCdn', () => {
     return queues.useCdn;
   });
-
-  hbs.registerHelper({
-    eq: (value1, value2) => value1 === value2,
-    ne: (value1, value2) => value1 !== value2,
-    lt: (value1, value2) => value1 < value2,
-    gt: (value1, value2) => value1 > value2,
-    lte: (value1, value2) => value1 <= value2,
-    gte: (value1, value2) => value1 >= value2,
-    and() {
-      return Array.prototype.every.call(arguments, Boolean);
-    },
-    or() {
-      return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
-    },
-  });
 };

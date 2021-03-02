@@ -2,9 +2,10 @@
   "name": "arena-example-project",
   "version": "1.0.0",
   "description": "An example project that uses Arena",
-  "main": "index.js",
+  "main": "bee.js",
   "scripts": {
-    "start": "node index.js",
+    "start:bee": "node bee.js",
+    "start:bull": "node bull.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

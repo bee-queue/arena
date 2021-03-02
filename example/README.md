@@ -1,6 +1,6 @@
 ## Overview
 
-This is a simple demonstration of how to run Arena and connect it to [Bee Queue](https://github.com/mixmaxhq/bee-queue).
+This is a simple demonstration of how to run Arena and connect it to [Bee Queue](https://github.com/mixmaxhq/bee-queue) or [Bull Queue](https://github.com/OptimalBits/bull).
 
 ## Requirements
 
@@ -13,6 +13,10 @@ This is a simple demonstration of how to run Arena and connect it to [Bee Queue]
 
 ## Running
 
-`npm start`
+`npm start:bee`
+
+or
+
+`npm start:bull`
 
 Then open http://localhost:4735/ in your browser.
