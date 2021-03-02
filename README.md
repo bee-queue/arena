@@ -256,9 +256,9 @@ You can `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/
 
 Please see the [docker-arena] repository for details.
 
-### Development
+### Contributing
 
-Arena is written using Express, with simple jQuery and Handlebars on the front end.
+See [contributing guidelines](CONTRIBUTING.md) and [an example](example/README.md).
 
 ### License
 

@@ -1,3 +1,9 @@
+## [3.9.0](https://github.com/bee-queue/arena/compare/v3.8.0...v3.9.0) (2021-02-25)
+
+### Features
+
+- add contributing guidelines and working example ([8616383](https://github.com/bee-queue/arena/commit/86163830e3ed7d94c7b48ef21b9c058671ebd8f3))
+
 ## [3.8.0](https://github.com/bee-queue/arena/compare/v3.7.1...v3.8.0) (2021-02-22)
 
 ### Features
