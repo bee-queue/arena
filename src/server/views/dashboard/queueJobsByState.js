@@ -133,6 +133,7 @@ async function _html(req, res) {
     jobsInStateCount: jobCounts[state],
     disablePagination: queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
     disableOrdering: queue.IS_BEE,
+    disableRetryButton: queue.IS_BEE,
     currentPage: page,
     pages,
     pageSize,
