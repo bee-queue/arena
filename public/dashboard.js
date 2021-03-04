@@ -108,7 +108,7 @@ $(document).ready(() => {
 
     let data = {
       queueName,
-      action: 'remove',
+      action,
       jobs: [],
     };
 
