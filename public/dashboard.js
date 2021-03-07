@@ -108,8 +108,9 @@ $(document).ready(() => {
 
     let data = {
       queueName,
-      action: 'remove',
+      action,
       jobs: [],
+      queueState,
     };
 
     $bulkActionContainer.each((index, value) => {
