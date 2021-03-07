@@ -16,7 +16,7 @@ function bulkAction(action) {
     const queue = await Queues.get(queueName, queueHost);
     if (!queue) return res.status(404).send({ error: 'queue not found' });
 
-    const { jobs } = req.body;
+    const { jobs, queueState } = req.body;
 
     try {
       if (!_.isEmpty(jobs)) {
@@ -24,7 +24,13 @@ function bulkAction(action) {
         const fetchedJobs = await Promise.all(jobsPromises);
         const actionPromises =
           action === 'retry'
-            ? fetchedJobs.map((job) => Queues.set(queue, job.data, job.name))
+            ? fetchedJobs.map((job) => {
+                if (queueState === 'failed' && typeof job.retry === 'function') {
+                  return job.retry();
+                } else {
+                  return Queues.set(queue, job.data, job.name);
+                }
+              })
             : fetchedJobs.map((job) => job[action]());
         await Promise.all(actionPromises);
         return res.sendStatus(200);

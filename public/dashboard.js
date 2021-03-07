@@ -110,6 +110,7 @@ $(document).ready(() => {
       queueName,
       action,
       jobs: [],
+      queueState,
     };
 
     $bulkActionContainer.each((index, value) => {
