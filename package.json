@@ -9,13 +9,12 @@
     "express": "^4.15.2",
     "express-handlebars": "^5.1.0",
     "handlebars": "^4.7.6",
-    "jsoneditor": "^5.9.6",
     "lodash": "^4.17.15",
     "moment": "^2.29.1",
     "tablesort": "^5.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^11.0.0",
     "@mixmaxhq/prettier-config": "^1.0.0",
     "@semantic-release/changelog": "^5.0.1",
