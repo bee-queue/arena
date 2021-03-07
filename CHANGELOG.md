@@ -1,3 +1,15 @@
+## [3.11.0](https://github.com/bee-queue/arena/compare/v3.10.0...v3.11.0) (2021-03-07)
+
+### Features
+
+- **bull:** adding example for failed and completed jobs ([8e1fdbc](https://github.com/bee-queue/arena/commit/8e1fdbc4d493d61b2a6a2e0d585cfb7c82ffc098))
+
+### Bug Fixes
+
+- **bulkaction:** handling retry logic in bulk ([d396dac](https://github.com/bee-queue/arena/commit/d396dac9bd4588b74599ae8b5e87e7997c08f0b9))
+- **bulkaction:** use queuestate to differentiate logic ([62f72cf](https://github.com/bee-queue/arena/commit/62f72cf14d5a5ef68e59bbdbf1f2ba2e70763f23))
+- **deps:** delete jsoneditor dependency ([17bc341](https://github.com/bee-queue/arena/commit/17bc341deffd10c18ba4a8531d37b74953af90a9))
+
 ## [3.10.0](https://github.com/bee-queue/arena/compare/v3.9.0...v3.10.0) (2021-03-02)
 
 ### Features
