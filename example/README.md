@@ -13,10 +13,10 @@ This is a simple demonstration of how to run Arena and connect it to [Bee Queue]
 
 ## Running
 
-`npm start:bee`
+`npm run start:bee`
 
 or
 
-`npm start:bull`
+`npm run start:bull`
 
 Then open http://localhost:4735/ in your browser.
