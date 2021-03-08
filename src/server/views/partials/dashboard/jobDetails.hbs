@@ -32,6 +32,20 @@
     {{/if}}
   </div>
 
+  {{#if this.processedOn}}
+  <div class="col-sm-3">
+    <h5>Processed On</h5>
+    {{moment this.processedOn "llll"}}
+  </div>
+  {{/if}}
+
+  {{#if this.finishedOn}}
+  <div class="col-sm-3">
+    <h5>Finished On</h5>
+    {{moment this.finishedOn "llll"}}
+  </div>
+  {{/if}}
+
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{this.attemptsMade}}
