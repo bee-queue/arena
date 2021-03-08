@@ -1,3 +1,9 @@
+## [3.12.0](https://github.com/bee-queue/arena/compare/v3.11.0...v3.12.0) (2021-03-08)
+
+### Features
+
+- better example showing jobs move through states ([7c0bc7c](https://github.com/bee-queue/arena/commit/7c0bc7c8697d20513ebf8314295dd866f61112e7))
+
 ## [3.11.0](https://github.com/bee-queue/arena/compare/v3.10.0...v3.11.0) (2021-03-07)
 
 ### Features
