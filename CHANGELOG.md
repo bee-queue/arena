@@ -1,3 +1,13 @@
+## [3.13.0](https://github.com/bee-queue/arena/compare/v3.12.0...v3.13.0) (2021-03-08)
+
+### Features
+
+- **jobdetails:** showing processed on and finished on ([48ca96a](https://github.com/bee-queue/arena/commit/48ca96a655f503c294668f6680714208afd9351b))
+
+### Bug Fixes
+
+- **capitalize:** using passed value to be capitalized ([2d98fee](https://github.com/bee-queue/arena/commit/2d98fee0ebd1eeb7db4a5ab271ae8db8bc2394e8))
+
 ## [3.12.0](https://github.com/bee-queue/arena/compare/v3.11.0...v3.12.0) (2021-03-08)
 
 ### Features
