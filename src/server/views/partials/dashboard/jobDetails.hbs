@@ -1,16 +1,18 @@
 {{#unless displayJobInline}}
-  <h3>{{ this.id }}</h3>
+<h3>{{ this.id }}</h3>
 {{/unless}}
 
 <h5>Actions</h5>
-<button class="btn btn-danger js-remove-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
+<button class="btn btn-danger js-remove-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
   Remove
 </button>
 
 {{#if showRetryButton}}
-  <button class="btn btn-success js-retry-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}">
-    {{ retryButtonText }}
-  </button>
+<button class="btn btn-success js-retry-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}">
+  {{ retryButtonText }}
+</button>
 {{/if}}
 
 
@@ -23,10 +25,10 @@
   <div class="col-sm-3">
     <h5>Timestamp</h5>
     {{#if this.options.timestamp}}
-      {{moment this.options.timestamp "llll"}}
+    {{moment this.options.timestamp "llll"}}
     {{/if}}
     {{#if this.timestamp}}
-      {{moment this.timestamp "llll"}}
+    {{moment this.timestamp "llll"}}
     {{/if}}
   </div>
 
@@ -35,36 +37,34 @@
     {{this.attemptsMade}}
 
     {{#if this.options}}
-      {{length this.options.stacktraces}}
+    {{length this.options.stacktraces}}
     {{/if}}
   </div>
 </div>
 <div class="row">
   <div class="col-sm-4">
     <h5>Permalinks</h5>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job {{ this.id }}</a>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job
+      {{ this.id }}</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true"
+      class="btn btn-info">JSON</a>
   </div>
 </div>
 
 {{#unless this.queue.IS_BEE}}
 <h5>Progress</h5>
 {{#if (isNumber this._progress)}}
-  <div class="progress">
-    <div class="progress-bar
+<div class="progress">
+  <div class="progress-bar
                 {{#eq jobState 'failed'}}
                 progress-bar-danger
-                {{/eq}}"
-        role="progressbar"
-        aria-valuenow="{{ this._progress }}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        style="width: {{ this._progress }}%; min-width: 2em;">
-      {{ this._progress }}%
-    </div>
+                {{/eq}}" role="progressbar" aria-valuenow="{{ this._progress }}" aria-valuemin="0" aria-valuemax="100"
+    style="width: {{ this._progress }}%; min-width: 2em;">
+    {{ this._progress }}%
   </div>
+</div>
 {{else}}
-  <pre>{{json this._progress true}}</pre>
+<pre>{{json this._progress true}}</pre>
 {{/if}}
 {{/unless}}
 
@@ -79,10 +79,10 @@
 {{/if}}
 
 {{#if stacktraces}}
-  <h5>Stacktraces</h5>
-  {{#each stacktraces}}
-    <pre>{{ this }}</pre>
-  {{/each}}
+<h5>Stacktraces</h5>
+{{#each stacktraces}}
+<pre>{{ this }}</pre>
+{{/each}}
 {{/if}}
 
 

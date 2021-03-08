@@ -68,11 +68,11 @@ const helpers = {
     return encodeURIComponent(url);
   },
 
-  capitalize(s) {
+  capitalize(value) {
     if (typeof value !== 'string') {
       return '';
     }
-    return s.charAt(0).toUpperCase() + s.slice(1);
+    return value.charAt(0).toUpperCase() + value.slice(1);
   },
 
   add(a, b) {
