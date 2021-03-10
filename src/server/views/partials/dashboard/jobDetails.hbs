@@ -46,6 +46,13 @@
   </div>
   {{/if}}
 
+  {{#if this.delay}}
+  <div class="col-sm-3">
+    <h5>Executes At</h5>
+    {{moment (getDelayDate this) "llll"}}
+  </div>
+  {{/if}}
+
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{this.attemptsMade}}

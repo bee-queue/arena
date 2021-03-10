@@ -61,6 +61,10 @@ const helpers = {
     return mapping;
   },
 
+  getDelayDate(job) {
+    return job.timestamp + job.delay;
+  },
+
   encodeURI(url) {
     if (typeof url !== 'string') {
       return '';
