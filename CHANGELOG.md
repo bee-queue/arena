@@ -1,3 +1,10 @@
+## [3.14.0](https://github.com/bee-queue/arena/compare/v3.13.0...v3.14.0) (2021-03-10)
+
+### Features
+
+- **jobdetails:** adding executes at detail ([2e88919](https://github.com/bee-queue/arena/commit/2e88919d81c07f074b5ff8f035bdca5fadcc2225))
+- **jobdetails:** support executes at for bee queue ([03b4932](https://github.com/bee-queue/arena/commit/03b493293c316ae044c6cbb471f0048f0c1308e7))
+
 ## [3.13.0](https://github.com/bee-queue/arena/compare/v3.12.0...v3.13.0) (2021-03-08)
 
 ### Features
