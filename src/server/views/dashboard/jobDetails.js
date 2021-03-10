@@ -25,7 +25,6 @@ async function handler(req, res) {
     return res.json(_.omit(job, 'domain', 'queue', '_events', '_eventsCount'));
   }
 
-  console.log(job);
   const jobState = queue.IS_BEE ? job.status : await job.getState();
   job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
   job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
