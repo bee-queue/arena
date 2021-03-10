@@ -62,7 +62,7 @@ const helpers = {
   },
 
   getDelayDate(job) {
-    return job.timestamp + job.delay;
+    return job.options.timestamp ? job.options.timestamp : job.timestamp + job.delay;
   },
 
   encodeURI(url) {
