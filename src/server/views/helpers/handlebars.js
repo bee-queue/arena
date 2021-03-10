@@ -61,6 +61,10 @@ const helpers = {
     return mapping;
   },
 
+  getTimestamp(job) {
+    return job.timestamp ? job.timestamp : job.options.timestamp;
+  },
+
   encodeURI(url) {
     if (typeof url !== 'string') {
       return '';

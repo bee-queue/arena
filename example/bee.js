@@ -29,6 +29,12 @@ async function main() {
     }
   });
 
+  // adding delayed jobs
+  await queue
+    .createJob({})
+    .delayUntil(Date.now() + 60 * 1000)
+    .save();
+
   Arena(
     {
       Bee,

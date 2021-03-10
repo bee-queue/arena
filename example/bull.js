@@ -29,6 +29,9 @@ async function main() {
     }
   });
 
+  // adding delayed jobs
+  await queue.add({}, { delay: Date.now() + 60 * 1000 });
+
   Arena(
     {
       Bull,

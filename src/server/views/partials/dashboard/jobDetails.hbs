@@ -26,8 +26,7 @@
     <h5>Timestamp</h5>
     {{#if this.options.timestamp}}
     {{moment this.options.timestamp "llll"}}
-    {{/if}}
-    {{#if this.timestamp}}
+    {{else if this.timestamp}}
     {{moment this.timestamp "llll"}}
     {{/if}}
   </div>
@@ -43,6 +42,18 @@
   <div class="col-sm-3">
     <h5>Finished On</h5>
     {{moment this.finishedOn "llll"}}
+  </div>
+  {{/if}}
+
+  {{#if this.delay}}
+  <div class="col-sm-3">
+    <h5>Executes At</h5>
+    {{moment (add this.delay (getTimestamp this) ) "llll"}}
+  </div>
+  {{else if this.options.delay}}
+  <div class="col-sm-3">
+    <h5>Executes At</h5>
+    {{moment (add this.options.delay (getTimestamp this) ) "llll"}}
   </div>
   {{/if}}
 
