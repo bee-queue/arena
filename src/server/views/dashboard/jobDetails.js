@@ -30,6 +30,11 @@ async function handler(req, res) {
   job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
   const stacktraces = queue.IS_BEE ? job.options.stacktraces : job.stacktrace;
 
+  if (!queue.IS_BEE) {
+    const logs = await queue.getJobLogs(job.id);
+    job.logs = logs.logs || 'No Logs';
+  }
+
   return res.render('dashboard/templates/jobDetails', {
     basePath,
     queueName,

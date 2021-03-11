@@ -103,13 +103,6 @@ async function _html(req, res) {
   } else {
     const stateTypes = state === 'waiting' ? ['wait', 'paused'] : state;
     jobs = await queue.getJobs(stateTypes, startId, endId, order === 'asc');
-    await Promise.all(
-      jobs.map(async (job) => {
-        const logs = await queue.getJobLogs(job.id);
-        job.logs = logs.logs || 'No Logs';
-        return job;
-      })
-    );
   }
 
   for (const job of jobs) {
