@@ -46,7 +46,7 @@
   {{#if (getDelay this)}}
   <div class="col-sm-3">
     <h5>Executes At</h5>
-    {{moment (add (getDelay this) (getTimestamp this) ) "llll"}}
+    {{moment (getDelay this) "llll"}}
   </div>
   {{/if}}
 
