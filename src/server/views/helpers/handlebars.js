@@ -61,8 +61,20 @@ const helpers = {
     return mapping;
   },
 
+  getDelay(job) {
+    if (job.delay) {
+      return job.delay;
+    }
+
+    return job.options ? job.options.delay : undefined;
+  },
+
   getTimestamp(job) {
-    return job.timestamp ? job.timestamp : job.options.timestamp;
+    if (job.timestamp) {
+      return job.timestamp;
+    }
+
+    return job.options ? job.options.timestamp : undefined;
   },
 
   encodeURI(url) {
