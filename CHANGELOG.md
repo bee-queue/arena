@@ -1,3 +1,13 @@
+## [3.15.0](https://github.com/bee-queue/arena/compare/v3.14.0...v3.15.0) (2021-03-12)
+
+### Features
+
+- **bull:** adding log message in bull example ([eb12399](https://github.com/bee-queue/arena/commit/eb123997662adb832c3bceeff41d3de7332f70aa))
+
+### Bug Fixes
+
+- **queuejobsbystate:** bring logs only in job page ([8ebd5c0](https://github.com/bee-queue/arena/commit/8ebd5c04bfc10bba4d2b4d814cef1663d05e070a))
+
 ## [3.14.0](https://github.com/bee-queue/arena/compare/v3.13.0...v3.14.0) (2021-03-10)
 
 ### Features
