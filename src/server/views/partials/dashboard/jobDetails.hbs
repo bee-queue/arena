@@ -24,10 +24,8 @@
 
   <div class="col-sm-3">
     <h5>Timestamp</h5>
-    {{#if this.options.timestamp}}
-    {{moment this.options.timestamp "llll"}}
-    {{else if this.timestamp}}
-    {{moment this.timestamp "llll"}}
+    {{#if (getTimestamp this)}}
+    {{moment (getTimestamp this) "llll"}}
     {{/if}}
   </div>
 
@@ -45,15 +43,10 @@
   </div>
   {{/if}}
 
-  {{#if this.delay}}
+  {{#if (getDelay this)}}
   <div class="col-sm-3">
     <h5>Executes At</h5>
-    {{moment (add this.delay (getTimestamp this) ) "llll"}}
-  </div>
-  {{else if this.options.delay}}
-  <div class="col-sm-3">
-    <h5>Executes At</h5>
-    {{moment (add this.options.delay (getTimestamp this) ) "llll"}}
+    {{moment (getDelay this) "llll"}}
   </div>
   {{/if}}
 
@@ -114,5 +107,7 @@
 <h5>Data</h5>
 <pre><code class="json">{{json this.data true}}</code></pre>
 
+{{#if this.logs}}
 <h5>Logs</h5>
 <pre><code class="json">{{json this.logs true}}</code></pre>
+{{/if}}
