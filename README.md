@@ -48,6 +48,9 @@ Arena({
       prefix: 'foo',
     },
   ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 ```
 
@@ -196,7 +199,10 @@ const arenaConfig = Arena({
   basePath: '/arena',
 
   // Let express handle the listening.
-  disableListen: true
+  disableListen: true,
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route
@@ -237,7 +243,10 @@ const arenaConfig = Arena({
   basePath: '/arena',
 
   // Let express handle the listening.
-  disableListen: true
+  disableListen: true,
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route

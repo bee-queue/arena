@@ -56,6 +56,9 @@ async function main() {
           },
         },
       ],
+
+      // Optionally include your own stylesheet
+      customCssPath: 'https://example.com/custom-arena-styles.css'
     },
     {
       port: HTTP_SERVER_PORT,
