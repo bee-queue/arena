@@ -50,7 +50,7 @@ Arena({
   ],
 
   // Optionally include your own stylesheet
-  customCssPath: 'https://example.com/custom-arena-styles.css'
+  customCssPath: 'https://example.com/custom-arena-styles.css',
 });
 ```
 
