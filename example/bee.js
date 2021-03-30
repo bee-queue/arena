@@ -13,6 +13,7 @@ async function main() {
   await server.open();
 
   const queue = new Bee('name_of_my_queue', {
+    activateDelayedJobs: true,
     redis: {
       port: REDIS_SERVER_PORT,
     },
