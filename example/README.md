@@ -19,4 +19,4 @@ or
 
 `npm run start:bull`
 
-Then open http://localhost:4735/ in your browser.
+Then open http://localhost:4735 in your browser.
