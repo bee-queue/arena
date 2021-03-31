@@ -1,3 +1,9 @@
+## [3.16.0](https://github.com/bee-queue/arena/compare/v3.15.0...v3.16.0) (2021-03-31)
+
+### Features
+
+- add optional custom css ([3f68dc1](https://github.com/bee-queue/arena/commit/3f68dc11da5a57f6b298825d3118a8b244c60a90))
+
 ## [3.15.0](https://github.com/bee-queue/arena/compare/v3.14.0...v3.15.0) (2021-03-12)
 
 ### Features
