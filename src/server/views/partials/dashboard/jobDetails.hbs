@@ -31,24 +31,24 @@
 
   {{#if this.processedOn}}
   <div class="col-sm-3">
-    <h5>Processed On</h5>
+    <h5>Processed</h5>
     {{moment this.processedOn "llll"}}
   </div>
   {{/if}}
 
   {{#if this.finishedOn}}
   <div class="col-sm-3">
-    <h5>Finished On</h5>
+    <h5>Finished</h5>
     {{moment this.finishedOn "llll"}}
   </div>
   {{/if}}
 
-  {{#if (getDelay this)}}
+  {{#eq jobState 'delayed'}}
   <div class="col-sm-3">
     <h5>Executes At</h5>
-    {{moment (getDelay this) "llll"}}
+    {{moment (getDelayedExectionAt this) "llll"}}
   </div>
-  {{/if}}
+  {{/eq}}
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
