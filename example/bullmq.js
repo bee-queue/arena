@@ -13,10 +13,12 @@ async function main() {
   await server.open();
 
   const queue = new Queue('name_of_my_queue', {
-    redis: {
-      port: REDIS_SERVER_PORT,
-    },
+    connection: { port: REDIS_SERVER_PORT },
   });
+
+  // adding delayed jobs
+  const delayedJob = await queue.add('delayed', {}, { delay: 60 * 1000 });
+  delayedJob.log('Log message');
 
   Arena(
     {
