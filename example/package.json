@@ -6,6 +6,7 @@
   "scripts": {
     "start:bee": "node bee.js",
     "start:bull": "node bull.js",
+    "start:bullmq": "node bullmq.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

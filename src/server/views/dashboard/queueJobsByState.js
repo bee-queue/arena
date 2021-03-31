@@ -109,6 +109,7 @@ async function _html(req, res) {
     const jobState = queue.IS_BEE ? job.status : await job.getState();
     job.showRetryButton = !queue.IS_BEE || jobState == 'failed';
     job.retryButtonText = jobState == 'failed' ? 'Retry' : 'Trigger';
+    job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
   }
 
   let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);
