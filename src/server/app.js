@@ -23,6 +23,7 @@ module.exports = function (config) {
   app.locals.Queues = queues;
   app.locals.appBasePath = '';
   app.locals.vendorPath = '/vendor';
+  app.locals.customCssPath = config.customCssPath;
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');
