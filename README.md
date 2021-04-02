@@ -51,6 +51,9 @@ Arena({
 
   // Optionally include your own stylesheet
   customCssPath: 'https://example.com/custom-arena-styles.css',
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
 });
 ```
 
@@ -194,6 +197,9 @@ const arenaConfig = Arena({
       },
     },
   ],
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
 },
 {
   // Make the arena dashboard become available at {my-site.com}/arena.
@@ -238,6 +244,9 @@ const arenaConfig = Arena({
       },
     },
   ],
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
 },
 {
   // Make the arena dashboard become available at {my-site.com}/arena.

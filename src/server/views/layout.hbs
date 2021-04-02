@@ -1,81 +1,85 @@
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Arena</title>
+  <title>Arena</title>
 
-    {{#if (useCdn)}}
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <!-- JSON Viewer -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    {{else}}
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{ basePath }}/bootstrap.min.css">
-    <!-- JSON Viewer -->
-    <link rel="stylesheet" href="{{ basePath }}/highlight.default.min.css">
-    <script src="{{ basePath }}/highlight.min.js"></script>
-    {{/if}}
-    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
-    <script>hljs.initHighlightingOnLoad();</script>
+  {{#if (useCdn)}}
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+  <!-- JSON Viewer -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  {{else}}
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{{ basePath }}/bootstrap.min.css">
+  <!-- JSON Viewer -->
+  <link rel="stylesheet" href="{{ basePath }}/highlight.default.min.css">
+  <script src="{{ basePath }}/highlight.min.js"></script>
+  {{/if}}
+  <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
+  <script>hljs.initHighlightingOnLoad();</script>
 
-    <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/jsoneditor.min.css">
-    <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/tablesort.css">
-    {{#if customCssPath}}
-    <link rel="stylesheet" href="{{ customCssPath }}">
-    {{/if}}
-  </head>
+  <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/jsoneditor.min.css">
+  <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/tablesort.css">
+  {{#if customCssPath}}
+  <link rel="stylesheet" href="{{ customCssPath }}">
+  {{/if}}
+  {{#if customJsPath}}
+  <script src="{{ customJsPath }}"></script>
+  {{/if}}
+</head>
 
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-            aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{ basePath }}/">Arena</a>
-        </div>
-      </div>
-    </nav>
-
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-      <div class="row">
-        <div id="navbar" class="col-sm-3 col-md-2 sidebar">
-          <h4>Queue Navigation Tree</h4>
-          <ul class="nav nav-sidebar">
-            {{{block "sidebar"}}}
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          {{{ body }}}
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ basePath }}/">Arena</a>
       </div>
     </div>
+  </nav>
 
-    <input type="hidden" id="basePath" value="{{ basePath }}">
-    {{#if (useCdn)}}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
-    {{else}}
-    <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
-    {{/if}}
+  <div class="container-fluid">
+    <div class="row">
+      <div id="navbar" class="col-sm-3 col-md-2 sidebar">
+        <h4>Queue Navigation Tree</h4>
+        <ul class="nav nav-sidebar">
+          {{{block "sidebar"}}}
+        </ul>
+      </div>
 
-    <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/jsoneditor.min.js"></script>
-    <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/tablesort.min.js"></script>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {{{ body }}}
+      </div>
+    </div>
+  </div>
 
-    <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
-    <script>
-      {{{block "script"}}}
-    </script>
-  </body>
+  <input type="hidden" id="basePath" value="{{ basePath }}">
+  {{#if (useCdn)}}
+  <script type="text/javascript"
+    src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+  {{else}}
+  <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
+  {{/if}}
+
+  <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/jsoneditor.min.js"></script>
+  <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/tablesort.min.js"></script>
+
+  <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
+  <script>
+    { { { block "script" } } }
+  </script>
+</body>
 
 </html>
