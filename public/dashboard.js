@@ -43,7 +43,7 @@ $(document).ready(() => {
     const queueName = $(this).data('queue-name');
     const queueHost = $(this).data('queue-host');
 
-    const r = window.confirm(`Retry job #${jobId} in queue "${queueHost}/${queueName}"?`);
+    const r = window.confirm(`Promote job #${jobId} in queue "${queueHost}/${queueName}"?`);
     if (r) {
       $.ajax({
         method: 'PATCH',
