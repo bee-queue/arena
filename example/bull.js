@@ -1,3 +1,5 @@
+const express = require('express');
+const path = require('path');
 const Arena = require('../');
 const Bull = require('bull');
 const RedisServer = require('redis-server');
@@ -33,7 +35,7 @@ async function main() {
   const delayedJob = await queue.add({}, { delay: 60 * 1000 });
   delayedJob.log('Log message');
 
-  Arena(
+  const app = Arena(
     {
       Bull,
 
@@ -54,11 +56,14 @@ async function main() {
           },
         },
       ],
+      customJsPath: 'example.js',
     },
     {
       port: HTTP_SERVER_PORT,
     }
   );
+
+  app.use(express.static(path.join(__dirname, 'public')));
 }
 
 main().catch((err) => {
