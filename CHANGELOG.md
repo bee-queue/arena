@@ -1,3 +1,14 @@
+## [3.19.0](https://github.com/bee-queue/arena/compare/v3.18.0...v3.19.0) (2021-04-05)
+
+### Features
+
+- **bull:** add button to promote delayed job ([73031dd](https://github.com/bee-queue/arena/commit/73031dd8e9b59821e07c2da32ddaa638bcf722cf))
+
+### Bug Fixes
+
+- merge conflicts ([4484f3e](https://github.com/bee-queue/arena/commit/4484f3e81aac311f36f1b96fe0a6c256ee89380c))
+- solve merge conflicts ([1a5661c](https://github.com/bee-queue/arena/commit/1a5661c8b6d2da272b6335681abd451eb970102c))
+
 ## [3.18.0](https://github.com/bee-queue/arena/compare/v3.17.1...v3.18.0) (2021-04-05)
 
 ### Features
