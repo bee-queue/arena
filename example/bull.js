@@ -56,7 +56,7 @@ async function main() {
           },
         },
       ],
-      customJsPath: 'example.js',
+      customJsPath: 'http://localhost:4735/example.js',
     },
     {
       port: HTTP_SERVER_PORT,
