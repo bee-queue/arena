@@ -1,3 +1,9 @@
+### [3.17.1](https://github.com/bee-queue/arena/compare/v3.17.0...v3.17.1) (2021-04-05)
+
+### Bug Fixes
+
+- fixes misplaced parameters ([4b98628](https://github.com/bee-queue/arena/commit/4b986281786be13d6c7dda89d24776298edbf6b2))
+
 ## [3.17.0](https://github.com/bee-queue/arena/compare/v3.16.0...v3.17.0) (2021-03-31)
 
 ### Features
