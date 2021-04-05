@@ -1,3 +1,4 @@
 *.hbs
 *.min.js
 *.min.css
+pull_request_template.md
