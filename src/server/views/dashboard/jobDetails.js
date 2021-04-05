@@ -28,6 +28,7 @@ async function handler(req, res) {
   const jobState = queue.IS_BEE ? job.status : await job.getState();
   job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
   job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
+  job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
   const stacktraces = queue.IS_BEE ? job.options.stacktraces : job.stacktrace;
 
   if (!queue.IS_BEE) {

@@ -6,6 +6,7 @@
   "scripts": {
     "start:bee": "node bee.js",
     "start:bull": "node bull.js",
+    "start:bullmq": "node bullmq.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +14,7 @@
   "dependencies": {
     "bee-queue": "^1.3.1",
     "bull": "^3.20.1",
+    "bullmq": "^1.15.1",
     "express": "^4.17.1",
     "redis-server": "^1.2.2"
   }
