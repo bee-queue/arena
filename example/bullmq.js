@@ -22,9 +22,21 @@ async function main() {
     connection: { port: REDIS_SERVER_PORT },
   });
 
-  new Worker(queueName, async () => {
-    processed = true;
-  });
+  new Worker(
+    queueName,
+    async function (job) {
+      // Wait 5sec
+      await new Promise((res) => setTimeout(res, 5000));
+
+      // Randomly succeeds or fails the job to put some jobs in completed and some in failed.
+      if (Math.random() > 0.5) {
+        throw new Error('fake error');
+      }
+    },
+    {
+      connection: { port: REDIS_SERVER_PORT },
+    }
+  );
 
   // adding delayed jobs
   const delayedJob = await queue.add('delayed', {}, { delay: 60 * 1000 });
