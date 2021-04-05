@@ -1,3 +1,15 @@
+## [3.18.0](https://github.com/bee-queue/arena/compare/v3.17.1...v3.18.0) (2021-04-05)
+
+### Features
+
+- **customjspath:** customize layout by custom script ([b5e3651](https://github.com/bee-queue/arena/commit/b5e3651be5974aba783cb6d834c4c159baa1953a))
+
+### Bug Fixes
+
+- **bull:** link reference ([04e87f2](https://github.com/bee-queue/arena/commit/04e87f28c0081a18ef62aebe6607c4c212efe389))
+- merge conflicts ([1ce7788](https://github.com/bee-queue/arena/commit/1ce778833ba8638afbfb57af4a33b43e6ae25d6c))
+- merge conflicts ([fabdae3](https://github.com/bee-queue/arena/commit/fabdae3fff6f8123f0b0c97f96a2e35923cd06c9))
+
 ### [3.17.1](https://github.com/bee-queue/arena/compare/v3.17.0...v3.17.1) (2021-04-05)
 
 ### Bug Fixes
