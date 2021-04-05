@@ -159,7 +159,7 @@ const arena = Arena({
 router.use('/', arena);
 ```
 
-`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration and other optional parameters](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
 - `port` - specify custom port to listen on (default: 4567)
 - `host` - specify custom ip to listen on (default: '0.0.0.0')
@@ -194,6 +194,9 @@ const arenaConfig = Arena({
       },
     },
   ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 },
 {
   // Make the arena dashboard become available at {my-site.com}/arena.
@@ -201,9 +204,6 @@ const arenaConfig = Arena({
 
   // Let express handle the listening.
   disableListen: true,
-
-  // Optionally include your own stylesheet
-  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route
@@ -238,6 +238,9 @@ const arenaConfig = Arena({
       },
     },
   ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 },
 {
   // Make the arena dashboard become available at {my-site.com}/arena.
@@ -245,9 +248,6 @@ const arenaConfig = Arena({
 
   // Let express handle the listening.
   disableListen: true,
-
-  // Optionally include your own stylesheet
-  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route
