@@ -25,6 +25,9 @@
 
     <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/jsoneditor.min.css">
     <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/tablesort.css">
+    {{#if customCssPath}}
+    <link rel="stylesheet" href="{{ customCssPath }}">
+    {{/if}}
   </head>
 
   <body>

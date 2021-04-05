@@ -23,4 +23,4 @@ or
 
 `npm run start:bullmq`
 
-Then open http://localhost:4735/ in your browser.
+Then open http://localhost:4735 in your browser.

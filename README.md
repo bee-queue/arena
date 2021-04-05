@@ -48,6 +48,9 @@ Arena({
       prefix: 'foo',
     },
   ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css',
 });
 ```
 
@@ -163,6 +166,7 @@ router.use('/', arena);
 - `basePath` - specify custom path to mount server on (default: '/')
 - `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 - `useCdn` - set false to use the bundled js and css files (default: true)
+- `customCssPath` - an URL to an external stylesheet (default: null)
 
 ##### Example config (for bull)
 
@@ -196,7 +200,10 @@ const arenaConfig = Arena({
   basePath: '/arena',
 
   // Let express handle the listening.
-  disableListen: true
+  disableListen: true,
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route
@@ -237,7 +244,10 @@ const arenaConfig = Arena({
   basePath: '/arena',
 
   // Let express handle the listening.
-  disableListen: true
+  disableListen: true,
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css'
 });
 
 // Make arena's resources (js/css deps) available at the base app route

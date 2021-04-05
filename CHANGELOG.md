@@ -1,3 +1,19 @@
+## [3.17.0](https://github.com/bee-queue/arena/compare/v3.16.0...v3.17.0) (2021-03-31)
+
+### Features
+
+- simpler labels ([653bc7c](https://github.com/bee-queue/arena/commit/653bc7c48c57160d042b351388731285049721df))
+
+### Bug Fixes
+
+- wrong "execute at" date ([3d0a4d1](https://github.com/bee-queue/arena/commit/3d0a4d14511fc0a3f9a3101a2b94d812eb8f9bb9))
+
+## [3.16.0](https://github.com/bee-queue/arena/compare/v3.15.0...v3.16.0) (2021-03-31)
+
+### Features
+
+- add optional custom css ([3f68dc1](https://github.com/bee-queue/arena/commit/3f68dc11da5a57f6b298825d3118a8b244c60a90))
+
 ## [3.15.0](https://github.com/bee-queue/arena/compare/v3.14.0...v3.15.0) (2021-03-12)
 
 ### Features

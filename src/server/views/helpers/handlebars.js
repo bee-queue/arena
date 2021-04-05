@@ -73,7 +73,7 @@ const helpers = {
     return mapping;
   },
 
-  getDelay(job) {
+  getDelayedExectionAt(job) {
     // Bull
     if (job.delay) {
       return job.delay + getTimestamp(job);
@@ -81,7 +81,7 @@ const helpers = {
 
     // Bee
     if (job.options && job.options.delay) {
-      return job.options.delay + getTimestamp(job);
+      return job.options.delay;
     }
   },
 
