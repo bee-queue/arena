@@ -24,6 +24,7 @@ module.exports = function (config) {
   app.locals.appBasePath = '';
   app.locals.vendorPath = '/vendor';
   app.locals.customCssPath = config.customCssPath;
+  app.locals.customJsPath = config.customJsPath;
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');

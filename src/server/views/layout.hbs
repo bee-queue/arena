@@ -34,8 +34,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-            aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,7 +50,7 @@
       <div class="row">
         <div id="navbar" class="col-sm-3 col-md-2 sidebar">
           <h4>Queue Navigation Tree</h4>
-          <ul class="nav nav-sidebar">
+          <ul id="navbar-list" class="nav nav-sidebar">
             {{{block "sidebar"}}}
           </ul>
         </div>
@@ -63,7 +63,8 @@
 
     <input type="hidden" id="basePath" value="{{ basePath }}">
     {{#if (useCdn)}}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+      src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
     {{else}}
     <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
     <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
@@ -74,8 +75,11 @@
 
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
     <script>
-      {{{block "script"}}}
+      {{{ block "script" }}}
     </script>
+    {{#if customJsPath}}
+    <script type="text/javascript" src="{{ customJsPath }}"></script>
+    {{/if}}
   </body>
 
 </html>
