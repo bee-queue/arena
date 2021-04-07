@@ -16,7 +16,6 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@mixmaxhq/prettier-config": "^1.0.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/exec": "^5.0.0",
@@ -39,10 +38,11 @@
   "scripts": {
     "ci": "npm run lint && if [ -z \"$CI\" ]; then npm run ci:commitlint; fi",
     "ci:commitlint": "commitlint --from \"origin/${GITHUB_BASE_REF:-master}\"",
+    "dry:run": "npm publish --dry-run",
     "lint": "prettier -c .",
-    "prepare": "husky install",
     "lint:staged": "lint-staged",
-    "pretty:quick": "pretty-quick --ignore-path ./.gitignore --staged"
+    "prepare": "husky install",
+    "pretty:quick": "pretty-quick --ignore-path ./.prettierignore --staged"
   },
   "engines": {
     "node": ">=7.6.0"

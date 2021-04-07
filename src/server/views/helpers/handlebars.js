@@ -61,7 +61,7 @@ const helpers = {
   },
 
   hashIdAttr(obj) {
-    const { id } = obj;
+    const {id} = obj;
     if (typeof id === 'string') {
       return crypto.createHash('sha256').update(id).digest('hex');
     }
@@ -139,7 +139,7 @@ const helpers = {
   },
 };
 
-module.exports = function registerHelpers(hbs, { queues }) {
+module.exports = function registerHelpers(hbs, {queues}) {
   _.each(helpers, (fn, helper) => {
     hbs.registerHelper(helper, fn);
   });

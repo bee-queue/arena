@@ -1,5 +1,5 @@
 const Arena = require('../');
-const { Queue, QueueScheduler, Worker } = require('bullmq');
+const {Queue, QueueScheduler, Worker} = require('bullmq');
 const RedisServer = require('redis-server');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
@@ -14,17 +14,17 @@ async function main() {
   const queueName = 'name_of_my_queue';
 
   const queueScheduler = new QueueScheduler(queueName, {
-    connection: { port: REDIS_SERVER_PORT },
+    connection: {port: REDIS_SERVER_PORT},
   });
   await queueScheduler.waitUntilReady();
 
   const queue = new Queue(queueName, {
-    connection: { port: REDIS_SERVER_PORT },
+    connection: {port: REDIS_SERVER_PORT},
   });
 
   new Worker(
     queueName,
-    async function (job) {
+    async function () {
       // Wait 5sec
       await new Promise((res) => setTimeout(res, 5000));
 
@@ -34,12 +34,12 @@ async function main() {
       }
     },
     {
-      connection: { port: REDIS_SERVER_PORT },
+      connection: {port: REDIS_SERVER_PORT},
     }
   );
 
   // adding delayed jobs
-  const delayedJob = await queue.add('delayed', {}, { delay: 60 * 1000 });
+  const delayedJob = await queue.add('delayed', {}, {delay: 60 * 1000});
   delayedJob.log('Log message');
 
   Arena(
