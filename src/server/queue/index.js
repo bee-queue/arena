@@ -22,7 +22,7 @@ class Queues {
   }
 
   setConfig(config) {
-    this._config = { ...config, queues: config.queues.slice() };
+    this._config = {...config, queues: config.queues.slice()};
 
     if (!this._config.queues.length) {
       throw new Error('unsupported configuration: no queues configured');
@@ -66,9 +66,20 @@ class Queues {
       return this._queues[queueHost][queueName];
     }
 
-    const { type, name, port, host, db, password, prefix, url, redis, tls } = queueConfig;
+    const {
+      type,
+      name,
+      port,
+      host,
+      db,
+      password,
+      prefix,
+      url,
+      redis,
+      tls,
+    } = queueConfig;
 
-    const redisHost = { host };
+    const redisHost = {host};
     if (password) redisHost.password = password;
     if (port) redisHost.port = port;
     if (db) redisHost.db = db;
@@ -91,23 +102,25 @@ class Queues {
         storeJobs: false,
       });
 
-      const { Bee } = this._config;
+      const {Bee} = this._config;
       queue = new Bee(name, options);
       queue.IS_BEE = true;
     } else if (isBullMQ) {
-      if (queueConfig.createClient) options.createClient = queueConfig.createClient;
+      if (queueConfig.createClient)
+        options.createClient = queueConfig.createClient;
 
-      const { BullMQ } = this._config;
-      const { redis, ...rest } = options;
+      const {BullMQ} = this._config;
+      const {redis, ...rest} = options;
       queue = new BullMQ(name, {
         connection: redis,
         ...rest,
       });
       queue.IS_BULLMQ = true;
     } else {
-      if (queueConfig.createClient) options.createClient = queueConfig.createClient;
+      if (queueConfig.createClient)
+        options.createClient = queueConfig.createClient;
 
-      const { Bull } = this._config;
+      const {Bull} = this._config;
       queue = new Bull(name, options);
     }
 

@@ -14,13 +14,15 @@ $(document).ready(() => {
     const queueName = $(this).data('queue-name');
     const queueHost = $(this).data('queue-host');
 
-    const r = window.confirm(`Retry job #${jobId} in queue "${queueHost}/${queueName}"?`);
+    const r = window.confirm(
+      `Retry job #${jobId} in queue "${queueHost}/${queueName}"?`
+    );
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-          queueName
-        )}/job/${encodeURIComponent(jobId)}`,
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`,
       })
         .done(() => {
           window.location.reload();
@@ -43,13 +45,17 @@ $(document).ready(() => {
     const queueName = $(this).data('queue-name');
     const queueHost = $(this).data('queue-host');
 
-    const r = window.confirm(`Promote job #${jobId} in queue "${queueHost}/${queueName}"?`);
+    const r = window.confirm(
+      `Promote job #${jobId} in queue "${queueHost}/${queueName}"?`
+    );
     if (r) {
       $.ajax({
         method: 'PATCH',
-        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-          queueName
-        )}/delayed/job/${encodeURIComponent(jobId)}`,
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/delayed/job/${encodeURIComponent(
+          jobId
+        )}`,
       })
         .done(() => {
           window.location.reload();
@@ -73,18 +79,20 @@ $(document).ready(() => {
     const queueHost = $(this).data('queue-host');
     const jobState = $(this).data('job-state');
 
-    const r = window.confirm(`Remove job #${jobId} in queue "${queueHost}/${queueName}"?`);
+    const r = window.confirm(
+      `Remove job #${jobId} in queue "${queueHost}/${queueName}"?`
+    );
     if (r) {
       $.ajax({
         method: 'DELETE',
-        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-          queueName
-        )}/job/${encodeURIComponent(jobId)}`,
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`,
       })
         .done(() => {
-          window.location.href = `${basePath}/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-            queueName
-          )}/${jobState}`;
+          window.location.href = `${basePath}/${encodeURIComponent(
+            queueHost
+          )}/${encodeURIComponent(queueName)}/${jobState}`;
         })
         .fail((jqXHR) => {
           window.alert(`Request failed, check console for error.`);
@@ -159,9 +167,9 @@ $(document).ready(() => {
     if (r) {
       $.ajax({
         method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-          queueName
-        )}/job/bulk`,
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json',
       })
@@ -186,24 +194,24 @@ $(document).ready(() => {
 
     const job = localStorage.getItem('arena:savedJob');
     if (job) {
-      const { name, data } = JSON.parse(job);
+      const {name, data} = JSON.parse(job);
       window.jsonEditor.set(data);
       $('input.js-add-job-name').val(name);
     } else {
-      window.jsonEditor.set({ id: '' });
+      window.jsonEditor.set({id: ''});
     }
   });
 
   $('.js-add-job').on('click', function () {
     const name = $('input.js-add-job-name').val() || null;
     const data = window.jsonEditor.get();
-    const job = JSON.stringify({ name, data });
+    const job = JSON.stringify({name, data});
     localStorage.setItem('arena:savedJob', job);
-    const { queueHost, queueName } = window.arenaInitialPayload;
+    const {queueHost, queueName} = window.arenaInitialPayload;
     $.ajax({
-      url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(
-        queueName
-      )}/job`,
+      url: `${basePath}/api/queue/${encodeURIComponent(
+        queueHost
+      )}/${encodeURIComponent(queueName)}/job`,
       type: 'POST',
       data: job,
       contentType: 'application/json',

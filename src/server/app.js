@@ -18,8 +18,8 @@ module.exports = function (config) {
 
   const Queues = require('./queue');
 
-  const queues = new Queues({ ...defaultConfig, ...config });
-  require('./views/helpers/handlebars')(handlebars, { queues });
+  const queues = new Queues({...defaultConfig, ...config});
+  require('./views/helpers/handlebars')(handlebars, {queues});
   app.locals.Queues = queues;
   app.locals.appBasePath = '';
   app.locals.vendorPath = '/vendor';

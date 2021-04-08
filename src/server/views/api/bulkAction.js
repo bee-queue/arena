@@ -11,21 +11,26 @@ function bulkAction(action) {
       });
     }
 
-    const { queueName, queueHost } = req.params;
-    const { Queues } = req.app.locals;
+    const {queueName, queueHost} = req.params;
+    const {Queues} = req.app.locals;
     const queue = await Queues.get(queueName, queueHost);
-    if (!queue) return res.status(404).send({ error: 'queue not found' });
+    if (!queue) return res.status(404).send({error: 'queue not found'});
 
-    const { jobs, queueState } = req.body;
+    const {jobs, queueState} = req.body;
 
     try {
       if (!_.isEmpty(jobs)) {
-        const jobsPromises = jobs.map((id) => queue.getJob(decodeURIComponent(id)));
+        const jobsPromises = jobs.map((id) =>
+          queue.getJob(decodeURIComponent(id))
+        );
         const fetchedJobs = await Promise.all(jobsPromises);
         const actionPromises =
           action === 'retry'
             ? fetchedJobs.map((job) => {
-                if (queueState === 'failed' && typeof job.retry === 'function') {
+                if (
+                  queueState === 'failed' &&
+                  typeof job.retry === 'function'
+                ) {
                   return job.retry();
                 } else {
                   return Queues.set(queue, job.data, job.name);

@@ -1,0 +1,3 @@
+{
+  "*.{js,md}": "node_modules/.bin/eslint . --ignore-path ./.prettierignore --fix"
+}

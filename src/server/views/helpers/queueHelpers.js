@@ -21,7 +21,10 @@ function formatBytes(num) {
     return (neg ? '-' : '') + num + ' B';
   }
 
-  const exponent = Math.min(Math.floor(Math.log(num) / Math.log(1024)), UNITS.length - 1);
+  const exponent = Math.min(
+    Math.floor(Math.log(num) / Math.log(1024)),
+    UNITS.length - 1
+  );
   const numStr = Number((num / Math.pow(1024, exponent)).toPrecision(3));
   const unit = UNITS[exponent];
 
@@ -33,9 +36,13 @@ const Helpers = {
     const client = await queue.client;
     await client.info(); // update queue.client.serverInfo
 
-    const stats = _.pickBy(client.serverInfo, (value, key) => _.includes(this._usefulMetrics, key));
+    const stats = _.pickBy(client.serverInfo, (value, key) =>
+      _.includes(this._usefulMetrics, key)
+    );
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
-    stats.total_system_memory = formatBytes(parseInt(stats.total_system_memory, 10));
+    stats.total_system_memory = formatBytes(
+      parseInt(stats.total_system_memory, 10)
+    );
     return stats;
   },
 
