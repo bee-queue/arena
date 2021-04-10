@@ -19,7 +19,7 @@ For a quick introduction to the motivations for creating Arena, read _[Interacti
 
 ### Usage
 
-Arena accepts a the following options:
+Arena accepts the following options:
 
 ```js
 const Arena = require('bull-arena');
