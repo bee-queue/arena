@@ -56,6 +56,12 @@
       Retry Jobs
     </button>
     {{/unless}}
+    {{#unless disablePromote}}
+    <button type="button" data-action="promote" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
+      data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
+      Promote Jobs
+    </button>
+    {{/unless}}
 
     <div class="btn-group">
       <div class="btn-group">

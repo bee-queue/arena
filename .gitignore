@@ -5,3 +5,4 @@ package-lock.json
 .idea
 *.tern-port
 *.sublime-workspace
+dump.rdb
