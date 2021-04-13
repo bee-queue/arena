@@ -1,3 +1,13 @@
+## [3.20.0](https://github.com/bee-queue/arena/compare/v3.19.0...v3.20.0) (2021-04-13)
+
+### Features
+
+- **promote:** adding Promote Jobs button ([c0e0d59](https://github.com/bee-queue/arena/commit/c0e0d590c02f986d0671551fed28dbdcfb379e86))
+
+### Bug Fixes
+
+- **lintstage:** applying eslint only to js to avoid conflicts with changelog ([4914b10](https://github.com/bee-queue/arena/commit/4914b1042738a6365b09b2fe81364ad81b4c2af3))
+
 ## [3.19.0](https://github.com/bee-queue/arena/compare/v3.18.0...v3.19.0) (2021-04-05)
 
 ### Features
