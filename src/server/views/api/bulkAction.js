@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const ACTIONS = ['remove', 'retry'];
+const ACTIONS = ['remove', 'retry', 'promote'];
 
 function bulkAction(action) {
   return async function handler(req, res) {

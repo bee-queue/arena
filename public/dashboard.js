@@ -169,7 +169,9 @@ $(document).ready(() => {
         method: action === 'remove' ? 'POST' : 'PATCH',
         url: `${basePath}/api/queue/${encodeURIComponent(
           queueHost
-        )}/${encodeURIComponent(queueName)}/job/bulk`,
+        )}/${encodeURIComponent(queueName)}/${
+          action === 'promote' ? 'delayed/' : ''
+        }job/bulk`,
         data: JSON.stringify(data),
         contentType: 'application/json',
       })
