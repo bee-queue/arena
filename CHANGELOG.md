@@ -1,3 +1,9 @@
+### [3.20.1](https://github.com/bee-queue/arena/compare/v3.20.0...v3.20.1) (2021-04-15)
+
+### Bug Fixes
+
+- **jsoneditor:** adding map file ([f374f98](https://github.com/bee-queue/arena/commit/f374f98bdc2594dfea147a7309b306522557ac3d))
+
 ## [3.20.0](https://github.com/bee-queue/arena/compare/v3.19.0...v3.20.0) (2021-04-13)
 
 ### Features
