@@ -45,7 +45,12 @@ const Helpers = {
     );
     return stats;
   },
-
+  isPaused: async function (queue) {
+    const client = await queue.client;
+    const isPausedValue = await client.get(`bull:${queue.name}:meta-paused`);
+    // @source https://github.com/OptimalBits/bull/issues/1046
+    return isPausedValue == 1;
+  },
   _usefulMetrics: [
     'redis_version',
     'total_system_memory',

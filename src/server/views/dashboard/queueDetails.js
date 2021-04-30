@@ -22,11 +22,13 @@ async function handler(req, res) {
     jobCounts = await queue.getJobCounts();
   }
   const stats = await QueueHelpers.getStats(queue);
+  const isPaused = await QueueHelpers.isPaused(queue);
 
   return res.render('dashboard/templates/queueDetails', {
     basePath,
     queueName,
     queueHost,
+    isPaused: isPaused,
     queueIsBee: !!queue.IS_BEE,
     jobCounts,
     stats,

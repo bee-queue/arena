@@ -227,4 +227,58 @@ $(document).ready(() => {
         console.error(jqXHR.responseText);
       });
   });
+
+  $('.js-pause-queue').on('click', function () {
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const r = window.confirm(
+      `Do you really want to pause the queue "${queueHost}/${queueName}"?`
+    );
+    if (r) {
+      $.ajax({
+        method: 'PUT',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/pause`,
+      })
+        .done(() => {
+          window.alert(`Queue "${queueHost}/${queueName} paused.`);
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
+
+  $('.js-resume-queue').on('click', function () {
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const r = window.confirm(
+      `Do you want to resume the queue "${queueHost}/${queueName}"?`
+    );
+    if (r) {
+      $.ajax({
+        method: 'PUT',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/resume`,
+      })
+        .done(() => {
+          window.alert(`Queue "${queueHost}/${queueName} resumed.`);
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
 });
