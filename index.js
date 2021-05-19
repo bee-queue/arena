@@ -25,7 +25,18 @@ function run(config, listenOpts = {}) {
     });
   }
 
-  return app;
+  return {
+    app,
+    queues: Queues,
+  };
 }
 
-module.exports = run;
+function runDefault(config, listenOpts = {}) {
+  return run(config, listenOpts).app;
+}
+
+// default export remains unchanged
+module.exports = runDefault;
+
+// named exports
+module.exports.run = run;

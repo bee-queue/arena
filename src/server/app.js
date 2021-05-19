@@ -36,6 +36,6 @@ module.exports = function (config) {
 
   return {
     app,
-    Queues: app.locals.Queues,
+    Queues: queues,
   };
 };

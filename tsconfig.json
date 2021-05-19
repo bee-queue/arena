@@ -1,0 +1,10 @@
+{
+  "include": ["index.js","src"],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "composite": true,
+    "outDir": "dist",
+    "target": "es2017"
+  }
+}
