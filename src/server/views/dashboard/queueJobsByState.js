@@ -5,11 +5,11 @@ const {
   BULLMQ_STATES,
 } = require('../helpers/queueHelpers');
 
-function getStates(isBee, isBullmq) {
-  if (isBee) {
+function getStates(queue) {
+  if (queue.IS_BEE) {
     return BEE_STATES;
   }
-  if (isBullmq) {
+  if (queue.IS_BULLMQ) {
     return BULLMQ_STATES;
   }
   return BULL_STATES;
@@ -18,13 +18,12 @@ function getStates(isBee, isBullmq) {
  * Determines if the requested job state lookup is valid.
  *
  * @param {String} state
- * @param {Boolean} isBee States vary between bull, bullmq and bee
- * @param {Boolean} isBullMq States vary between bull, bullmq and bee
+ * @param {Object} queue Queue that contains which queue package is used (bee, bull or bullmq)
  *
  * @return {Boolean}
  */
-function isValidState(state, isBee, isBullMq) {
-  const validStates = getStates(isBee, isBullMq);
+function isValidState(state, queue) {
+  const validStates = getStates(queue);
   return _.includes(validStates, state);
 }
 
@@ -46,7 +45,7 @@ async function _json(req, res) {
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).json({message: 'Queue not found'});
 
-  if (!isValidState(state, queue.IS_BEE, queue.IS_BULLMQ))
+  if (!isValidState(state, queue))
     return res.status(400).json({message: `Invalid state requested: ${state}`});
 
   let jobs;
@@ -87,7 +86,7 @@ async function _html(req, res) {
       queueHost,
     });
 
-  if (!isValidState(state, queue.IS_BEE, queue.IS_BULLMQ))
+  if (!isValidState(state, queue))
     return res.status(400).json({message: `Invalid state requested: ${state}`});
 
   let jobCounts;
