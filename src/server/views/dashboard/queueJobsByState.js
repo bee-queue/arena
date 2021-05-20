@@ -1,16 +1,29 @@
 const _ = require('lodash');
-const {BEE_STATES, BULL_STATES} = require('../helpers/queueHelpers');
+const {
+  BEE_STATES,
+  BULL_STATES,
+  BULLMQ_STATES,
+} = require('../helpers/queueHelpers');
 
+function getStates(queue) {
+  if (queue.IS_BEE) {
+    return BEE_STATES;
+  }
+  if (queue.IS_BULLMQ) {
+    return BULLMQ_STATES;
+  }
+  return BULL_STATES;
+}
 /**
  * Determines if the requested job state lookup is valid.
  *
  * @param {String} state
- * @param {Boolean} isBee States vary between bull and bee
+ * @param {Object} queue Queue that contains which queue package is used (bee, bull or bullmq)
  *
  * @return {Boolean}
  */
-function isValidState(state, isBee) {
-  const validStates = isBee ? BEE_STATES : BULL_STATES;
+function isValidState(state, queue) {
+  const validStates = getStates(queue);
   return _.includes(validStates, state);
 }
 
@@ -32,7 +45,7 @@ async function _json(req, res) {
   const queue = await Queues.get(queueName, queueHost);
   if (!queue) return res.status(404).json({message: 'Queue not found'});
 
-  if (!isValidState(state, queue.IS_BEE))
+  if (!isValidState(state, queue))
     return res.status(400).json({message: `Invalid state requested: ${state}`});
 
   let jobs;
@@ -42,7 +55,9 @@ async function _json(req, res) {
       _.pick(j, 'id', 'progress', 'data', 'options', 'status')
     );
   } else {
-    jobs = await queue[`get${_.capitalize(state)}`](0, 1000);
+    const words = state.split('-');
+    const finalStateName = words.map((word) => _.capitalize(word)).join('');
+    jobs = await queue[`get${finalStateName}`](0, 1000);
     jobs = jobs.map((j) => j.toJSON());
   }
 
@@ -71,7 +86,7 @@ async function _html(req, res) {
       queueHost,
     });
 
-  if (!isValidState(state, queue.IS_BEE))
+  if (!isValidState(state, queue))
     return res.status(400).json({message: `Invalid state requested: ${state}`});
 
   let jobCounts;
