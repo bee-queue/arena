@@ -64,6 +64,18 @@ const Helpers = {
    * Valid states for a job in bull queue
    */
   BULL_STATES: ['waiting', 'active', 'completed', 'failed', 'delayed'],
+
+  /**
+   * Valid states for a job in bullmq queue
+   */
+  BULLMQ_STATES: [
+    'waiting',
+    'active',
+    'completed',
+    'failed',
+    'delayed',
+    'waiting-children',
+  ],
 };
 
 module.exports = Helpers;
