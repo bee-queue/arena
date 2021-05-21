@@ -17,11 +17,6 @@ $(document).ready(() => {
     const r = window.confirm(
       `Retry job #${jobId} in queue "${queueHost}/${queueName}"?`
     );
-    console.log(
-      `${basePath}/api/queue/${encodeURIComponent(
-        queueHost
-      )}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
-    );
     if (r) {
       $.ajax({
         method: 'PATCH',
@@ -215,12 +210,6 @@ $(document).ready(() => {
     const job = JSON.stringify({name, data});
     localStorage.setItem('arena:savedJob', job);
     const {queueHost, queueName} = window.arenaInitialPayload;
-    console.log(
-      'nie',
-      `${basePath}/api/queue/${encodeURIComponent(
-        queueHost
-      )}/${encodeURIComponent(queueName)}/job`
-    );
     $.ajax({
       url: `${basePath}/api/queue/${encodeURIComponent(
         queueHost
