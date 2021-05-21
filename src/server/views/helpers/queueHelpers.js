@@ -46,6 +46,10 @@ const Helpers = {
     return stats;
   },
 
+  isPaused: async function (queue) {
+    return queue.isPaused();
+  },
+
   _usefulMetrics: [
     'redis_version',
     'total_system_memory',

@@ -17,6 +17,11 @@ $(document).ready(() => {
     const r = window.confirm(
       `Retry job #${jobId} in queue "${queueHost}/${queueName}"?`
     );
+    console.log(
+      `${basePath}/api/queue/${encodeURIComponent(
+        queueHost
+      )}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(jobId)}`
+    );
     if (r) {
       $.ajax({
         method: 'PATCH',
@@ -210,6 +215,12 @@ $(document).ready(() => {
     const job = JSON.stringify({name, data});
     localStorage.setItem('arena:savedJob', job);
     const {queueHost, queueName} = window.arenaInitialPayload;
+    console.log(
+      'nie',
+      `${basePath}/api/queue/${encodeURIComponent(
+        queueHost
+      )}/${encodeURIComponent(queueName)}/job`
+    );
     $.ajax({
       url: `${basePath}/api/queue/${encodeURIComponent(
         queueHost
@@ -226,5 +237,60 @@ $(document).ready(() => {
         window.alert('Failed to save job, check console for error.');
         console.error(jqXHR.responseText);
       });
+  });
+
+  $('.js-pause-queue').on('click', function (e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const response = window.confirm(
+      `Do you really want to pause the queue "${queueHost}/${queueName}"?`
+    );
+    if (response) {
+      $.ajax({
+        method: 'PUT',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/pause`,
+      })
+        .done(() => {
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
+
+  $('.js-resume-queue').on('click', function (e) {
+    e.preventDefault();
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const response = window.confirm(
+      `Do you want to resume the queue "${queueHost}/${queueName}"?`
+    );
+    if (response) {
+      $.ajax({
+        method: 'PUT',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/resume`,
+      })
+        .done(() => {
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
   });
 });
