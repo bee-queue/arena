@@ -1,3 +1,9 @@
+## [3.21.0](https://github.com/bee-queue/arena/compare/v3.20.1...v3.21.0) (2021-05-20)
+
+### Features
+
+- **bullmq:** support waiting-children state ([8832821](https://github.com/bee-queue/arena/commit/8832821225f69b51f753f24aa76d72889515031f))
+
 ### [3.20.1](https://github.com/bee-queue/arena/compare/v3.20.0...v3.20.1) (2021-04-15)
 
 ### Bug Fixes
