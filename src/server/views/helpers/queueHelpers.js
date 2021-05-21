@@ -63,7 +63,14 @@ const Helpers = {
   /**
    * Valid states for a job in bull queue
    */
-  BULL_STATES: ['waiting', 'active', 'completed', 'failed', 'delayed'],
+  BULL_STATES: [
+    'waiting',
+    'active',
+    'completed',
+    'failed',
+    'delayed',
+    'paused',
+  ],
 
   /**
    * Valid states for a job in bullmq queue
@@ -74,6 +81,7 @@ const Helpers = {
     'completed',
     'failed',
     'delayed',
+    'paused',
     'waiting-children',
   ],
 };
