@@ -81,6 +81,8 @@ async function main() {
     {
       BullMQ: Queue,
 
+      FlowBullMQ: FlowProducer,
+
       queues: [
         {
           // Required for each queue definition.
@@ -103,6 +105,39 @@ async function main() {
 
           // User-readable display name for the host. Required.
           hostId: 'Queue Server 2',
+
+          // Queue type (Bull or Bullmq or Bee - default Bull).
+          type: 'bullmq',
+
+          redis: {
+            // host: 'localhost',
+            port: REDIS_SERVER_PORT,
+          },
+        },
+      ],
+
+      flows: [
+        {
+          // User-readable display name for the host. Required.
+          hostId: 'Flow server 1',
+
+          // Required for each flow definition.
+          name: 'Connection name 1',
+
+          // Queue type (Bull or Bullmq or Bee - default Bull).
+          type: 'bullmq',
+
+          redis: {
+            // host: 'localhost',
+            port: REDIS_SERVER_PORT,
+          },
+        },
+        {
+          // User-readable display name for the host. Required.
+          hostId: 'Flow server 2',
+
+          // Required for each flow definition.
+          name: 'Connection name 2',
 
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',

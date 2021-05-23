@@ -5,7 +5,7 @@ async function handler(req, res) {
   const {json} = req.query;
   const basePath = req.baseUrl;
 
-  const {Queues} = req.app.locals;
+  const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue)
     return res.status(404).render('dashboard/templates/queueNotFound', {
@@ -21,6 +21,7 @@ async function handler(req, res) {
       id,
       queueName,
       queueHost,
+      hasFlows: Flows.hasFlows(),
     });
 
   if (json === 'true') {
@@ -47,6 +48,7 @@ async function handler(req, res) {
     jobState,
     job,
     stacktraces,
+    hasFlows: Flows.hasFlows(),
   });
 }
 

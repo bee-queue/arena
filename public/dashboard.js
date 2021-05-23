@@ -204,6 +204,22 @@ $(document).ready(() => {
     }
   });
 
+  $('.js-toggle-add-flow-editor').on('click', function () {
+    const addFlowText = $('.js-toggle-add-flow-editor').text();
+    const shouldNotHide = addFlowText === 'Add Flow';
+    const newAddFlowText = shouldNotHide ? 'Cancel' : 'Add Flow';
+    $('.jsoneditorx').toggleClass('hide', !shouldNotHide);
+    $('.js-toggle-add-flow-editor').text(newAddFlowText);
+
+    const flow = localStorage.getItem('arena:savedFlow');
+    if (flow) {
+      const {data} = JSON.parse(flow);
+      window.jsonEditor.set(data);
+    } else {
+      window.jsonEditor.set({});
+    }
+  });
+
   $('.js-add-job').on('click', function () {
     const name = $('input.js-add-job-name').val() || null;
     const data = window.jsonEditor.get();
@@ -224,6 +240,29 @@ $(document).ready(() => {
       })
       .fail((jqXHR) => {
         window.alert('Failed to save job, check console for error.');
+        console.error(jqXHR.responseText);
+      });
+  });
+
+  $('.js-add-flow').on('click', function () {
+    const data = window.jsonEditor.get();
+    const flow = JSON.stringify({data});
+    localStorage.setItem('arena:savedFlow', flow);
+    const {flowHost, connectionName} = window.arenaInitialPayload;
+    $.ajax({
+      url: `${basePath}/api/flow/${encodeURIComponent(
+        flowHost
+      )}/${encodeURIComponent(connectionName)}/flow`,
+      type: 'POST',
+      data: flow,
+      contentType: 'application/json',
+    })
+      .done(() => {
+        alert('Flow successfully added!');
+        localStorage.removeItem('arena:savedFlow');
+      })
+      .fail((jqXHR) => {
+        window.alert('Failed to save flow, check console for error.');
         console.error(jqXHR.responseText);
       });
   });

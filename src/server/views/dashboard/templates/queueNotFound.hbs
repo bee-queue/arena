@@ -7,6 +7,9 @@
 </p>
 
 {{#contentFor 'sidebar'}}
-  <li><a href="{{ basePath }}/">Queues Overview</a></li>
-  <li class="active"><a href="#">404</a></li>
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li class="active"><a href="#">404</a></li>
+{{#if hasFlows}}
+<li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
+{{/if}}
 {{/contentFor}}

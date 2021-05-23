@@ -1,0 +1,35 @@
+<h2>Flow <code>{{ flowHost }}/{{ connectionName }}</code></h2>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="js-toggle-add-flow-editor  btn btn-default btn-xs pull-right">Add Flow</div>
+        <h4 class="panel-title">Flow Panel</h4>
+      </div>
+      <div class="panel-body">
+        <div class="jsoneditorx form-group hide overflow-hidden">
+          <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
+          <br />
+          <div class="form-inline pull-right">
+            <div class="js-add-flow btn btn-primary btn-sm">Create</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#contentFor 'sidebar'}}
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
+<li class="active"><a href="#">Flow <code>{{ flowHost }}/{{ connectionName }}</code></a></li>
+{{/contentFor}}
+
+{{#contentFor 'script'}}
+window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
+window.arenaInitialPayload = {
+flowHost: "{{ flowHost }}",
+connectionName: "{{ connectionName }}"
+};
+{{/contentFor}}
