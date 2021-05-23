@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/bull-arena.svg)](https://www.npmjs.com/package/bull-arena) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![NPM downloads](https://img.shields.io/npm/dm/bull-arena)](https://www.npmjs.com/package/bull-arena) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-An intuitive Web GUI for [Bee Queue](https://github.com/bee-queue/bee-queue) and [Bull](https://github.com/optimalbits/bull). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
+An intuitive Web GUI for [Bee Queue](https://github.com/bee-queue/bee-queue), [Bull](https://github.com/optimalbits/bull) and [BullMQ](https://github.com/taskforcesh/bullmq). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
 
 For a quick introduction to the motivations for creating Arena, read _[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www.mixmax.com/blog/introducing-bull-arena)_.
 
@@ -162,7 +162,7 @@ const arena = Arena({
 router.use('/', arena);
 ```
 
-`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration and other optional parameters](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration, flow configuration (just for bullmq for now) and other optional parameters](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
 - `port` - specify custom port to listen on (default: 4567)
 - `host` - specify custom ip to listen on (default: '0.0.0.0')
@@ -222,10 +222,11 @@ app.use('/', arenaConfig);
 
 ```js
 import Arena from 'bull-arena';
-import { Queue } from "bullmq";
+import { Queue, FlowProducer } from "bullmq";
 
 const arenaConfig = Arena({
   BullMQ: Queue,
+  FlowBullMQ: FlowProducer,
   queues: [
     {
       type: 'bullmq',
@@ -235,6 +236,25 @@ const arenaConfig = Arena({
 
       // Hostname or queue prefix, you can put whatever you want.
       hostId: "worker",
+
+      // Redis auth.
+      redis: {
+        port: /* Your redis port */,
+        host: /* Your redis host domain*/,
+        password: /* Your redis password */,
+      },
+    },
+  ],
+
+  flows: [
+    {
+      type: 'bullmq',
+
+      // Name of the bullmq flow connection, this name helps to identify different connections.
+      name: "testConnection",
+
+      // Hostname, you can put whatever you want.
+      hostId: "Flow",
 
       // Redis auth.
       redis: {
