@@ -18,6 +18,23 @@
       </div>
     </div>
   </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Redis Statistics</h4>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          {{#each stats}}
+          <tr>
+            <th>{{ @key }}</th>
+            <th>{{ this }}</th>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 {{#contentFor 'sidebar'}}

@@ -1,3 +1,5 @@
+const QueueHelpers = require('../helpers/queueHelpers');
+
 async function handler(req, res) {
   const {connectionName, flowHost} = req.params;
   const {Flows} = req.app.locals;
@@ -10,10 +12,13 @@ async function handler(req, res) {
       flowHost,
     });
 
+  const stats = await QueueHelpers.getStats(flow);
+
   return res.render('dashboard/templates/flowDetails', {
     basePath,
     connectionName,
     flowHost,
+    stats,
   });
 }
 
