@@ -1,3 +1,14 @@
+## [3.22.0](https://github.com/bee-queue/arena/compare/v3.21.0...v3.22.0) (2021-05-25)
+
+### Features
+
+- **bull:** adding pause queue button ([019f7f5](https://github.com/bee-queue/arena/commit/019f7f53740c0c1804bbc8506ee0f8155348bba0))
+
+### Bug Fixes
+
+- **bull:** consider paused state ([3651d52](https://github.com/bee-queue/arena/commit/3651d5252d2d5a6b1cf704f34f75a97fe8c7582a))
+- **deps:** upgrading handlebars to 4.7.7 ([5a62529](https://github.com/bee-queue/arena/commit/5a62529507b6c1895facc596a24daea4b9c5f842))
+
 ## [3.21.0](https://github.com/bee-queue/arena/compare/v3.20.1...v3.21.0) (2021-05-20)
 
 ### Features
