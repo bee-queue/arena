@@ -235,7 +235,7 @@ $(document).ready(() => {
     const queueHost = $(this).data('queue-host');
 
     const response = window.confirm(
-      `Do you really want to pause the queue "${queueHost}/${queueName}"?`
+      `Are you sure you want to pause the queue "${queueHost}/${queueName}"?`
     );
     if (response) {
       $.ajax({
@@ -262,7 +262,7 @@ $(document).ready(() => {
     const queueHost = $(this).data('queue-host');
 
     const response = window.confirm(
-      `Do you want to resume the queue "${queueHost}/${queueName}"?`
+      `Are you sure you want to resume the queue "${queueHost}/${queueName}"?`
     );
     if (response) {
       $.ajax({
