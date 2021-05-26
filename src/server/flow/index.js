@@ -109,7 +109,7 @@ class Flows {
   /**
    * Creates and adds jobs with the given data using the provided flow.
    *
-   * @param {Object} flow A bullmq flow class
+   * @param {Object} flow A Bullmq flow class
    * @param {Object} data The data to be used within the flow
    */
   async set(flow, data) {
