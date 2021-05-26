@@ -13,7 +13,7 @@ async function handler(req, res) {
       hasFlows: Flows.hasFlows(),
     });
 
-  let jobCounts;
+  let jobCounts, isPaused;
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
@@ -24,8 +24,13 @@ async function handler(req, res) {
   }
   const stats = await QueueHelpers.getStats(queue);
 
+  if (!queue.IS_BEE) {
+    isPaused = await QueueHelpers.isPaused(queue);
+  }
+
   return res.render('dashboard/templates/queueDetails', {
     basePath,
+    isPaused,
     queueName,
     queueHost,
     queueIsBee: !!queue.IS_BEE,

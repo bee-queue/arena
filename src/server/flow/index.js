@@ -1,5 +1,8 @@
 const _ = require('lodash');
 
+/*
+  This class will be allowed only for BullMQ
+*/
 class Flows {
   constructor(config) {
     this._flows = {};
@@ -40,23 +43,11 @@ class Flows {
   }
 
   _checkConstructors() {
-    let hasBull = false,
-      hasBee = false,
-      hasBullMQ = false;
-    for (const flow of this._config.flows) {
-      if (flow.type === 'bee') hasBee = true;
-      else if (flow.type === 'bullmq') hasBullMQ = true;
-      else hasBull = true;
-
-      if (hasBull && hasBee && hasBullMQ) break;
-    }
-
-    return (
-      (hasBull || hasBee || hasBullMQ) &&
-      (!hasBull || !!this._config.Bull) &&
-      (!hasBee || !!this._config.Bee) &&
-      (!hasBullMQ || !!this._config.BullMQ)
+    const hasBullMQ = this._config.flows.every(
+      (flow) => flow.type === 'bullmq'
     );
+
+    return hasBullMQ && this._config.BullMQ;
   }
 
   async get(connectionName, queueHost) {

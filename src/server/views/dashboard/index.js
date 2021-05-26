@@ -12,7 +12,7 @@ router.get('/flows', flowList);
 router.get('/flows/:flowHost/:connectionName', flowDetails);
 router.get('/:queueHost/:queueName', queueDetails);
 router.get(
-  '/:queueHost/:queueName/:state(waiting|active|completed|succeeded|failed|delayed|waiting-children).:ext?',
+  '/:queueHost/:queueName/:state(waiting|active|completed|succeeded|failed|delayed|paused|waiting-children).:ext?',
   queueJobsByState
 );
 router.get('/:queueHost/:queueName/:id', jobDetails);

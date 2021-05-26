@@ -1,5 +1,5 @@
 const Arena = require('../');
-const {Queue, QueueScheduler, Worker} = require('bullmq');
+const {Queue, Worker, FlowProducer} = require('bullmq');
 const RedisServer = require('redis-server');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
@@ -14,15 +14,14 @@ async function main() {
   const queueName = 'name_of_my_queue';
   const parentQueueName = 'name_of_my_parent_queue';
 
-  const queueScheduler = new QueueScheduler(queueName, {
-    connection: {port: REDIS_SERVER_PORT},
-  });
-  await queueScheduler.waitUntilReady();
-
   const queue = new Queue(queueName, {
     connection: {port: REDIS_SERVER_PORT},
   });
   new Queue(parentQueueName, {
+    connection: {port: REDIS_SERVER_PORT},
+  });
+
+  const flow = new FlowProducer({
     connection: {port: REDIS_SERVER_PORT},
   });
 
@@ -58,13 +57,22 @@ async function main() {
     }
   );
 
-  // adding delayed jobs
-  const delayedJob = await queue.add('delayed', {}, {delay: 60 * 1000});
-  delayedJob.log('Log message');
+  await flow.add({
+    name: 'parent-job',
+    queueName: parentQueueName,
+    data: {},
+    children: [
+      {name: 'child', data: {idx: 0, foo: 'bar'}, queueName},
+      {name: 'child', data: {idx: 1, foo: 'baz'}, queueName},
+      {name: 'child', data: {idx: 2, foo: 'qux'}, queueName},
+    ],
+  });
 
   Arena(
     {
       BullMQ: Queue,
+
+      FlowBullMQ: FlowProducer,
 
       queues: [
         {
@@ -88,6 +96,39 @@ async function main() {
 
           // User-readable display name for the host. Required.
           hostId: 'Queue Server 2',
+
+          // Queue type (Bull or Bullmq or Bee - default Bull).
+          type: 'bullmq',
+
+          redis: {
+            // host: 'localhost',
+            port: REDIS_SERVER_PORT,
+          },
+        },
+      ],
+
+      flows: [
+        {
+          // User-readable display name for the host. Required.
+          hostId: 'Flow server 1',
+
+          // Required for each flow definition.
+          name: 'Connection name 1',
+
+          // Queue type (Bull or Bullmq or Bee - default Bull).
+          type: 'bullmq',
+
+          redis: {
+            // host: 'localhost',
+            port: REDIS_SERVER_PORT,
+          },
+        },
+        {
+          // User-readable display name for the host. Required.
+          hostId: 'Flow server 2',
+
+          // Required for each flow definition.
+          name: 'Connection name 2',
 
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',
