@@ -170,8 +170,8 @@
 <li><a href="{{ basePath }}/">Queues Overview</a></li>
 <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue
     <code>{{ queueHost }}/{{ queueName }}</code></a></li>
+<li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
 {{#if hasFlows}}
 <li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
 {{/if}}
-<li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
 {{/contentFor}}
