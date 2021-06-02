@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
@@ -17,10 +16,13 @@ module.exports = function (config) {
   const defaultConfig = require('./config/index.json');
 
   const Queues = require('./queue');
+  const Flows = require('./flow');
 
   const queues = new Queues({...defaultConfig, ...config});
+  const flows = new Flows({...defaultConfig, ...config});
   require('./views/helpers/handlebars')(handlebars, {queues});
   app.locals.Queues = queues;
+  app.locals.Flows = flows;
   app.locals.appBasePath = '';
   app.locals.vendorPath = '/vendor';
   app.locals.customCssPath = config.customCssPath;

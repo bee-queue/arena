@@ -1,0 +1,13 @@
+<h2>Flow <code>{{ queueHost }}/{{ queueName }}</code></h2>
+
+<h3>404</h3>
+<p>Flow <code>{{ queueHost }}/{{ queueName }}</code> not found</p>
+<p>
+  <a href="{{ basePath }}/flows/" class="btn btn-primary">Go back to Overview</a>
+</p>
+
+{{#contentFor 'sidebar'}}
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li><a href="{{ basePath }}/flows">Flows Overview</a></li>
+<li class="active"><a href="#">404</a></li>
+{{/contentFor}}

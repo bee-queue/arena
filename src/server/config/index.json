@@ -7,5 +7,6 @@
       "hostId": "AWS Server 2"
     }
   ],
-  "queues": []
+  "queues": [],
+  "flows": []
 }

@@ -2,7 +2,7 @@ const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const {queueName, queueHost} = req.params;
-  const {Queues} = req.app.locals;
+  const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   const basePath = req.baseUrl;
   if (!queue)
@@ -10,6 +10,7 @@ async function handler(req, res) {
       basePath,
       queueName,
       queueHost,
+      hasFlows: Flows.hasFlows(),
     });
 
   let jobCounts, isPaused;
@@ -33,6 +34,7 @@ async function handler(req, res) {
     queueName,
     queueHost,
     queueIsBee: !!queue.IS_BEE,
+    hasFlows: Flows.hasFlows(),
     jobCounts,
     stats,
   });

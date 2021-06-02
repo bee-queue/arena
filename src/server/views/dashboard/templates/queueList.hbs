@@ -9,19 +9,22 @@
     </thead>
     <tbody>
       {{#each queues}}
-        <tr>
-          <td>{{ this.hostId }}</td>
-          <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
-        </tr>
+      <tr>
+        <td>{{ this.hostId }}</td>
+        <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
+      </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
 
 {{#contentFor 'sidebar'}}
-  <li class="active"><a href="#">Queues Overview</a></li>
+<li class="active"><a href="#">Queues Overview</a></li>
+{{#if hasFlows}}
+<li><a href="{{ basePath }}/flows">Flows Overview</a></li>
+{{/if}}
 {{/contentFor}}
 
 {{#contentFor 'script'}}
-  new Tablesort(document.getElementById('queueList'));
+new Tablesort(document.getElementById('queueList'));
 {{/contentFor}}

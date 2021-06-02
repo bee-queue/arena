@@ -76,7 +76,7 @@ async function _json(req, res) {
  */
 async function _html(req, res) {
   const {queueName, queueHost, state} = req.params;
-  const {Queues} = req.app.locals;
+  const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   const basePath = req.baseUrl;
   if (!queue)
@@ -155,6 +155,7 @@ async function _html(req, res) {
     disablePromote,
     disableRetry,
     currentPage: page,
+    hasFlows: Flows.hasFlows(),
     pages,
     pageSize,
     lastPage: _.last(pages),

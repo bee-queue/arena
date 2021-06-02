@@ -52,6 +52,12 @@
     "public",
     "src"
   ],
+  "keywords": [
+    "bull-arena",
+    "bull",
+    "bee",
+    "bullmq"
+  ],
   "repository": "https://github.com/bee-queue/arena.git",
   "version": "3.22.0"
 }

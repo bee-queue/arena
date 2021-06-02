@@ -23,4 +23,8 @@ or
 
 `npm run start:bullmq`
 
+or
+
+`npm run start:bullmq_with_flows`
+
 Then open http://localhost:4735 in your browser.
