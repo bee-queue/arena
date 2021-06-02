@@ -1,3 +1,10 @@
+## [3.23.0](https://github.com/bee-queue/arena/compare/v3.22.0...v3.23.0) (2021-06-02)
+
+### Features
+
+- **bullmq:** provide support for flow creation ([da783af](https://github.com/bee-queue/arena/commit/da783afd52853a9c63510c3d1483afe1b15cf6c1))
+- **flow-details:** add redis statistics ([e2b20f3](https://github.com/bee-queue/arena/commit/e2b20f374ccda9d51d3f2b23db5e1c29a0994bba))
+
 ## [3.22.0](https://github.com/bee-queue/arena/compare/v3.21.0...v3.22.0) (2021-05-25)
 
 ### Features
