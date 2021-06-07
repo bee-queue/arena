@@ -28,7 +28,9 @@ async function main() {
 
   new Worker(
     queueName,
-    async function () {
+    async function (job) {
+      await job.updateProgress(20);
+
       // Wait 5sec
       await new Promise((res) => setTimeout(res, 5000));
 

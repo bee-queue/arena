@@ -20,7 +20,7 @@ async function main() {
   });
 
   // Fake process function to move newly created jobs in the UI through a few of the job states.
-  queue.process(async function () {
+  queue.process(async function (job) {
     // Wait 5sec
     await new Promise((res) => setTimeout(res, 5000));
 
@@ -35,6 +35,8 @@ async function main() {
     .createJob({})
     .delayUntil(Date.now() + 60 * 1000)
     .save();
+
+  const job = await queue.createJob({}).save();
 
   Arena(
     {
