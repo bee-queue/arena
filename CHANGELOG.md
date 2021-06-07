@@ -1,3 +1,9 @@
+## [3.24.0](https://github.com/bee-queue/arena/compare/v3.23.0...v3.24.0) (2021-06-07)
+
+### Features
+
+- **bootstrap:** upgrade to v4.6.0 ([c8d24c5](https://github.com/bee-queue/arena/commit/c8d24c58bce363a0931fe1c67b885c165dbfc21b))
+
 ## [3.23.0](https://github.com/bee-queue/arena/compare/v3.22.0...v3.23.0) (2021-06-02)
 
 ### Features
