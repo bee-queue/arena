@@ -1,3 +1,9 @@
+### [3.24.1](https://github.com/bee-queue/arena/compare/v3.24.0...v3.24.1) (2021-06-08)
+
+### Bug Fixes
+
+- **job-details:** show progress for bullmq ([8341174](https://github.com/bee-queue/arena/commit/8341174cba43bf24ca4863df6abe88f2fb37fc98))
+
 ## [3.24.0](https://github.com/bee-queue/arena/compare/v3.23.0...v3.24.0) (2021-06-07)
 
 ### Features
