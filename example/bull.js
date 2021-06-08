@@ -21,8 +21,9 @@ async function main() {
   });
 
   // Fake process function to move newly created jobs in the UI through a few of the job states.
-  queue.process(async function () {
+  queue.process(async function (job) {
     // Wait 5sec
+    job.progress(20);
     await new Promise((res) => setTimeout(res, 5000));
 
     // Randomly succeeds or fails the job to put some jobs in completed and some in failed.
@@ -30,6 +31,8 @@ async function main() {
       throw new Error('fake error');
     }
   });
+
+  await queue.add({});
 
   // adding delayed jobs
   const delayedJob = await queue.add({}, {delay: 60 * 1000});

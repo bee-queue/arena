@@ -122,6 +122,7 @@ class Queues {
 
       const {Bull} = this._config;
       queue = new Bull(name, options);
+      queue.IS_BULL = true;
     }
 
     this._queues[queueHost] = this._queues[queueHost] || {};
