@@ -130,14 +130,7 @@ async function _html(req, res) {
     job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
     job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
     job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
-    job.parentJobId = JobHelpers.getJobId(job.parentKey);
-    const {processed, unprocessed} = await job.getDependencies();
-    if (unprocessed) {
-      job.children = unprocessed.map((child) => JobHelpers.getJobId(child));
-    }
-    _.forOwn(processed, function (value, key) {
-      job.children.push(JobHelpers.getJobId(key));
-    });
+    job.parent = JobHelpers.getKeyProperties(job.parentKey);
   }
 
   let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);

@@ -25,15 +25,6 @@ async function handler(req, res) {
       hasFlows: Flows.hasFlows(),
     });
 
-  job.parentJobId = JobHelpers.getJobId(job.parentKey);
-  const {processed, unprocessed} = await job.getDependencies();
-  if (unprocessed) {
-    job.children = unprocessed.map((child) => JobHelpers.getJobId(child));
-  }
-  _.forOwn(processed, function (value, key) {
-    job.children.push(JobHelpers.getJobId(key));
-  });
-
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
     // references parsing errors.
@@ -49,6 +40,23 @@ async function handler(req, res) {
   if (!queue.IS_BEE) {
     const logs = await queue.getJobLogs(job.id);
     job.logs = logs.logs || 'No Logs';
+  }
+
+  if (queue.IS_BULLMQ) {
+    job.parent = JobHelpers.getKeyProperties(job.parentKey);
+    const {processed, unprocessed} = await job.getDependencies();
+    if (unprocessed && unprocessed.length) {
+      job.unprocessedChildren = unprocessed.map((child) => {
+        return JobHelpers.getKeyProperties(child);
+      });
+    }
+
+    if (processed) {
+      const childrenKeys = Object.keys(processed);
+      job.processedChildren = childrenKeys.map((child) => {
+        return JobHelpers.getKeyProperties(child);
+      });
+    }
   }
 
   return res.render('dashboard/templates/jobDetails', {

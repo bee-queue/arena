@@ -1,7 +1,12 @@
 const Helpers = {
-  getJobId: function (jobData) {
+  getKeyProperties: function (jobData) {
     if (!jobData) return '';
-    return jobData.substring(jobData.lastIndexOf(':') + 1, jobData.length);
+    const [, queueName, id] = jobData.split(':');
+
+    return {
+      id,
+      queueName,
+    };
   },
 };
 
