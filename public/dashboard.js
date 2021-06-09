@@ -69,6 +69,12 @@ $(document).ready(() => {
     }
   });
 
+  // Set up individual "click on job link" handler
+  $('.js-job-link').on('click', function (e) {
+    e.preventDefault();
+    console.log('job clicked');
+  });
+
   // Set up individual "remove job" handler
   $('.js-remove-job').on('click', function (e) {
     e.preventDefault();

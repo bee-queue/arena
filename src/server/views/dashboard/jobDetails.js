@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const JobHelpers = require('../helpers/jobHelpers');
 
 async function handler(req, res) {
   const {queueName, queueHost, id} = req.params;
@@ -23,6 +24,15 @@ async function handler(req, res) {
       queueHost,
       hasFlows: Flows.hasFlows(),
     });
+
+  job.parentJobId = JobHelpers.getJobId(job.parentKey);
+  const {processed, unprocessed} = await job.getDependencies();
+  if (unprocessed) {
+    job.children = unprocessed.map((child) => JobHelpers.getJobId(child));
+  }
+  _.forOwn(processed, function (value, key) {
+    job.children.push(JobHelpers.getJobId(key));
+  });
 
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
