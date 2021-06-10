@@ -29,6 +29,7 @@ async function main() {
     queueName,
     async function () {
       // Wait 5sec
+      return 1;
       await new Promise((res) => setTimeout(res, 5000));
 
       // Randomly succeeds or fails the job to put some jobs in completed and some in failed.
@@ -57,15 +58,16 @@ async function main() {
     }
   );
 
+  const children = Array.from(Array(65).keys()).map((index) => ({
+    name: 'child',
+    data: {idx: index, foo: 'bar'},
+    queueName,
+  }));
   await flow.add({
     name: 'parent-job',
     queueName: parentQueueName,
     data: {},
-    children: [
-      {name: 'child', data: {idx: 0, foo: 'bar'}, queueName},
-      {name: 'child', data: {idx: 1, foo: 'baz'}, queueName},
-      {name: 'child', data: {idx: 2, foo: 'qux'}, queueName},
-    ],
+    children,
   });
 
   Arena(

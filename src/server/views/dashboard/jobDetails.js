@@ -44,7 +44,42 @@ async function handler(req, res) {
 
   if (queue.IS_BULLMQ) {
     job.parent = JobHelpers.getKeyProperties(job.parentKey);
-    const {processed, unprocessed} = await job.getDependencies();
+    const processedCursor = parseInt(req.query.processedCursor, 10) || 0;
+    const processedCount = parseInt(req.query.processedCount, 10) || 50;
+    const unprocessedCursor = parseInt(req.query.unprocessedCursor, 10) || 0;
+    const unprocessedCount = parseInt(req.query.unprocessedCount, 10) || 50;
+    job.processedCount = processedCount;
+    job.unprocessedCount = unprocessedCount;
+
+    console.log(processedCount, unprocessedCount);
+    const {
+      processed,
+      unprocessed,
+      nextProcessedCursor,
+      nextUnprocessedCursor,
+    } = await job.getDependencies({
+      processed: {
+        cursor: processedCursor,
+        count: processedCount,
+      },
+      unprocessed: {
+        cursor: unprocessedCursor,
+        count: unprocessedCount,
+      },
+    });
+    console.log(Object.keys(processed).length);
+    console.log({
+      processed: {
+        cursor: processedCursor,
+        count: processedCount,
+      },
+      unprocessed: {
+        cursor: unprocessedCursor,
+        count: unprocessedCount,
+      },
+    });
+    job.processedCursor = nextProcessedCursor;
+    job.unprocessedCursor = nextUnprocessedCursor;
     if (unprocessed && unprocessed.length) {
       job.unprocessedChildren = unprocessed.map((child) => {
         return JobHelpers.getKeyProperties(child);
