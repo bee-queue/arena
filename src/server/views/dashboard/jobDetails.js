@@ -45,9 +45,9 @@ async function handler(req, res) {
   if (queue.IS_BULLMQ) {
     job.parent = JobHelpers.getKeyProperties(job.parentKey);
     const processedCursor = parseInt(req.query.processedCursor, 10) || 0;
-    const processedCount = parseInt(req.query.processedCount, 10) || 50;
+    const processedCount = parseInt(req.query.processedCount, 10) || 25;
     const unprocessedCursor = parseInt(req.query.unprocessedCursor, 10) || 0;
-    const unprocessedCount = parseInt(req.query.unprocessedCount, 10) || 50;
+    const unprocessedCount = parseInt(req.query.unprocessedCount, 10) || 25;
     job.processedCount = processedCount;
     job.unprocessedCount = unprocessedCount;
 
