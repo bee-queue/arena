@@ -1,3 +1,10 @@
+## [3.25.0](https://github.com/bee-queue/arena/compare/v3.24.1...v3.25.0) (2021-06-10)
+
+### Features
+
+- **parent-children:** implement perma-link for bullmq ([bbd2317](https://github.com/bee-queue/arena/commit/bbd2317606ed5fab5626de06f381ee02d6d7ab45))
+- initial changes for displaying parentJob and childrenJobs in JobDetails template - WIP ([61d93e2](https://github.com/bee-queue/arena/commit/61d93e2fc31080bb3bc6846c212c75b96b5267d9))
+
 ### [3.24.1](https://github.com/bee-queue/arena/compare/v3.24.0...v3.24.1) (2021-06-08)
 
 ### Bug Fixes
