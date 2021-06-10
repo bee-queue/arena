@@ -1,3 +1,9 @@
+## [3.26.0](https://github.com/bee-queue/arena/compare/v3.25.0...v3.26.0) (2021-06-10)
+
+### Features
+
+- **job-details:** add children counters ([71bbb9d](https://github.com/bee-queue/arena/commit/71bbb9dc3d5ec3236b5281b87aad757acde40462))
+
 ## [3.25.0](https://github.com/bee-queue/arena/compare/v3.24.1...v3.25.0) (2021-06-10)
 
 ### Features
