@@ -143,7 +143,7 @@
 {{#if this.unprocessedChildren }}
 <div class="row">
   <div class="col-sm-12">
-    <h5>Unprocessed Children</h5>
+    <h5>Unprocessed Children <span class="count">{{ this.countDependencies.unprocessed}}</span></h5>
 
     <nav aria-label="Unprocessed navigation">
       <ul class="pagination">
@@ -168,7 +168,7 @@
 {{#if this.processedChildren }}
 <div class="row">
   <div class="col-sm-12">
-    <h5>Processed Children</h5>
+    <h5>Processed Children <span class="count">{{ this.countDependencies.processed}}</span></h5>
 
     <nav aria-label="Processed navigation">
       <ul class="pagination">

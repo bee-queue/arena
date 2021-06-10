@@ -66,6 +66,9 @@ async function handler(req, res) {
         count: unprocessedCount,
       },
     });
+    const count = await job.getDependenciesCount();
+    job.countDependencies = count;
+
     job.processedCursor = nextProcessedCursor;
     job.unprocessedCursor = nextUnprocessedCursor;
     if (unprocessed && unprocessed.length) {
