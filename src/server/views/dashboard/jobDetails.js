@@ -51,24 +51,12 @@ async function handler(req, res) {
     job.processedCount = processedCount;
     job.unprocessedCount = unprocessedCount;
 
-    console.log(processedCount, unprocessedCount);
     const {
       processed,
       unprocessed,
       nextProcessedCursor,
       nextUnprocessedCursor,
     } = await job.getDependencies({
-      processed: {
-        cursor: processedCursor,
-        count: processedCount,
-      },
-      unprocessed: {
-        cursor: unprocessedCursor,
-        count: unprocessedCount,
-      },
-    });
-    console.log(Object.keys(processed).length);
-    console.log({
       processed: {
         cursor: processedCursor,
         count: processedCount,
