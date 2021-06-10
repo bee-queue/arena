@@ -128,6 +128,48 @@
 <h5>Data</h5>
 <pre><code class="json">{{json this.data true}}</code></pre>
 
+{{#if this.queue.IS_BULLMQ}}
+{{#if this.parent }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Parent</h5>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI this.parent.queueName }}/{{ this.parent.id }}">
+      <span class="label label-default">{{ this.parent.id }}</span>
+    </a>
+  </div>
+</div>
+{{/if}}
+
+{{#if this.unprocessedChildren }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Unprocessed Children</h5>
+
+    {{#each this.unprocessedChildren}}
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
+      <span class="label label-danger">{{ this.id }}</span>
+    </a>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+{{#if this.processedChildren }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Processed Children</h5>
+
+    {{#each this.processedChildren}}
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
+      <span class="label label-success">{{ this.id }}</span>
+    </a>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+<br>
+{{/if}}
+
 {{#if this.logs}}
 <h5>Logs</h5>
 <pre><code class="json">{{json this.logs true}}</code></pre>

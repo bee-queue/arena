@@ -95,7 +95,7 @@ async function main() {
           name: parentQueueName,
 
           // User-readable display name for the host. Required.
-          hostId: 'Queue Server 2',
+          hostId: 'Queue Server 1',
 
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',

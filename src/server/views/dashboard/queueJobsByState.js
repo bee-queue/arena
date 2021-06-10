@@ -4,6 +4,7 @@ const {
   BULL_STATES,
   BULLMQ_STATES,
 } = require('../helpers/queueHelpers');
+const JobHelpers = require('../helpers/jobHelpers');
 
 function getStates(queue) {
   if (queue.IS_BEE) {
@@ -129,6 +130,7 @@ async function _html(req, res) {
     job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
     job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
     job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
+    job.parent = JobHelpers.getKeyProperties(job.parentKey);
   }
 
   let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);

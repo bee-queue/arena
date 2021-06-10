@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const JobHelpers = require('../helpers/jobHelpers');
 
 async function handler(req, res) {
   const {queueName, queueHost, id} = req.params;
@@ -39,6 +40,23 @@ async function handler(req, res) {
   if (!queue.IS_BEE) {
     const logs = await queue.getJobLogs(job.id);
     job.logs = logs.logs || 'No Logs';
+  }
+
+  if (queue.IS_BULLMQ) {
+    job.parent = JobHelpers.getKeyProperties(job.parentKey);
+    const {processed, unprocessed} = await job.getDependencies();
+    if (unprocessed && unprocessed.length) {
+      job.unprocessedChildren = unprocessed.map((child) => {
+        return JobHelpers.getKeyProperties(child);
+      });
+    }
+
+    if (processed) {
+      const childrenKeys = Object.keys(processed);
+      job.processedChildren = childrenKeys.map((child) => {
+        return JobHelpers.getKeyProperties(child);
+      });
+    }
   }
 
   return res.render('dashboard/templates/jobDetails', {
