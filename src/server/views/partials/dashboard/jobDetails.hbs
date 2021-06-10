@@ -143,7 +143,7 @@
 {{#if this.unprocessedChildren }}
 <div class="row">
   <div class="col-sm-12">
-    <h5>Unprocessed Children</h5>
+    <h5>Unprocessed Children <span class="count">{{ this.countDependencies.unprocessed}}</span></h5>
 
     {{#each this.unprocessedChildren}}
     <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
@@ -157,7 +157,7 @@
 {{#if this.processedChildren }}
 <div class="row">
   <div class="col-sm-12">
-    <h5>Processed Children</h5>
+    <h5>Processed Children <span class="count">{{ this.countDependencies.processed}}</span></h5>
 
     {{#each this.processedChildren}}
     <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">

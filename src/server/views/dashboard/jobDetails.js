@@ -45,11 +45,14 @@ async function handler(req, res) {
   if (queue.IS_BULLMQ) {
     job.parent = JobHelpers.getKeyProperties(job.parentKey);
     const {processed, unprocessed} = await job.getDependencies();
+    const count = await job.getDependenciesCount();
     if (unprocessed && unprocessed.length) {
       job.unprocessedChildren = unprocessed.map((child) => {
         return JobHelpers.getKeyProperties(child);
       });
     }
+
+    job.countDependencies = count;
 
     if (processed) {
       const childrenKeys = Object.keys(processed);
