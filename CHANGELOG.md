@@ -1,3 +1,11 @@
+## [3.28.0](https://github.com/bee-queue/arena/compare/v3.27.0...v3.28.0) (2021-06-11)
+
+### Features
+
+- **flow:** add search button to get a flow tree ([59b0423](https://github.com/bee-queue/arena/commit/59b0423d1525f1166ded19dfe9fe937b3a98023e))
+- **layout:** add treeview ([d3fa754](https://github.com/bee-queue/arena/commit/d3fa754bf292c1e4f3d2805af4dfd155f1437f2f))
+- **tree-view:** add tree view when creating a flow ([eb93a60](https://github.com/bee-queue/arena/commit/eb93a60c96ec4322ea1ca1d9b85389b9839e4712))
+
 ## [3.27.0](https://github.com/bee-queue/arena/compare/v3.26.0...v3.27.0) (2021-06-11)
 
 ### Features
