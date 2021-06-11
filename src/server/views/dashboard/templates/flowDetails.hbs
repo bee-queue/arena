@@ -4,7 +4,8 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="js-toggle-add-flow-editor  btn btn-default btn-xs pull-right">Add Flow</div>
+        <div class="js-toggle-search-flow btn btn-default btn-xs pull-right">Search Flow</div>
+        <div class="js-toggle-add-flow-editor btn btn-default btn-xs pull-right">Add Flow</div>
         <h4 class="panel-title">Flow Panel</h4>
       </div>
       <div class="panel-body">
@@ -13,6 +14,44 @@
           <br />
           <div class="form-inline pull-right">
             <div class="js-add-flow btn btn-primary btn-sm">Create</div>
+          </div>
+        </div>
+        <div class="searchflowx hide">
+          <div class="row">
+            <div class="col-sm-4 ">
+              <h5>Queue Name</h5>
+            </div>
+            <div class="col-sm-2 ">
+              <input class="js-queue-input-search" type="text" name="queueNameInputSearch">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 right-buffer">
+              <h5>Job Id</h5>
+            </div>
+            <div class="col-sm-2 right-buffer">
+              <input class="js-job-id-input-search" type="text" name="jobIdInputSearch">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 right-buffer">
+              <h5>Tree depth</h5>
+            </div>
+            <div class="col-sm-2 right-buffer">
+              <input class="js-depth-input-search" type="text" name="depthInputSearch">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 right-buffer">
+              <h5>Limit Children</h5>
+            </div>
+            <div class="col-sm-2 right-buffer">
+              <input class="js-max-children-input-search" type="text" name="maxChildrenInputSearch">
+            </div>
+          </div>
+          <br />
+          <div class="form-inline pull-right">
+            <div class="js-search-flow btn btn-primary btn-sm">Search</div>
           </div>
         </div>
       </div>
@@ -35,6 +74,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="row hide overflow-hidden js-tree">
+  {{~> dashboard/flowTree }}
 </div>
 
 {{#contentFor 'sidebar'}}

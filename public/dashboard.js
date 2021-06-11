@@ -5,6 +5,22 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  function formatToTreeView(flow) {
+    const {job, children} = flow;
+    const text = `${job.name} <span class="label label-default">${job.id}</span>`;
+
+    if (children && children.length > 0) {
+      return {
+        text,
+        nodes: children.map((child) => formatToTreeView(child)),
+      };
+    } else {
+      return {
+        text,
+      };
+    }
+  }
+
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function (e) {
     e.preventDefault();
@@ -207,7 +223,7 @@ $(document).ready(() => {
   $('.js-toggle-add-flow-editor').on('click', function () {
     const addFlowText = $('.js-toggle-add-flow-editor').text();
     const shouldNotHide = addFlowText === 'Add Flow';
-    const newAddFlowText = shouldNotHide ? 'Cancel' : 'Add Flow';
+    const newAddFlowText = shouldNotHide ? 'Cancel Add' : 'Add Flow';
     $('.jsoneditorx').toggleClass('hide', !shouldNotHide);
     $('.js-toggle-add-flow-editor').text(newAddFlowText);
 
@@ -218,6 +234,14 @@ $(document).ready(() => {
     } else {
       window.jsonEditor.set({});
     }
+  });
+
+  $('.js-toggle-search-flow').on('click', function () {
+    const searchFlowText = $('.js-toggle-search-flow').text();
+    const shouldNotHide = searchFlowText === 'Search Flow';
+    const newSearchFlowText = shouldNotHide ? 'Cancel Search' : 'Search Flow';
+    $('.searchflowx').toggleClass('hide', !shouldNotHide);
+    $('.js-toggle-search-flow').text(newSearchFlowText);
   });
 
   $('.js-add-job').on('click', function () {
@@ -257,12 +281,45 @@ $(document).ready(() => {
       data: flow,
       contentType: 'application/json',
     })
-      .done(() => {
+      .done((res) => {
+        const flowTree = formatToTreeView(res);
         alert('Flow successfully added!');
         localStorage.removeItem('arena:savedFlow');
+        $('#tree').treeview({data: [flowTree]});
+        $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {
         window.alert('Failed to save flow, check console for error.');
+        console.error(jqXHR.responseText);
+      });
+  });
+
+  $('.js-search-flow').on('click', function (e) {
+    e.preventDefault();
+    const queueName = $('.js-queue-input-search').val();
+    const jobId = $('.js-job-id-input-search').val();
+    const depth = $('.js-depth-input-search').val();
+    const maxChildren = $('.js-max-children-input-search').val();
+
+    const {flowHost, connectionName} = window.arenaInitialPayload;
+
+    $.ajax({
+      url: `${basePath}/api/flow/${encodeURIComponent(
+        flowHost
+      )}/${encodeURIComponent(
+        connectionName
+      )}/flow?jobId=${jobId}&queueName=${queueName}&depth=${depth}&maxChildren=${maxChildren}`,
+      type: 'GET',
+      contentType: 'application/json',
+    })
+      .done((res) => {
+        const flowTree = formatToTreeView(res);
+        alert('Flow info successfully fetched!');
+        $('#tree').treeview({data: [flowTree]});
+        $('.js-tree').toggleClass('hide', false);
+      })
+      .fail((jqXHR) => {
+        window.alert('Failed to get flow info, check console for error.');
         console.error(jqXHR.responseText);
       });
   });
