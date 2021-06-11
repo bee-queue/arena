@@ -5,9 +5,20 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function formatToTreeView(flow) {
+  function encodeURI(url) {
+    if (typeof url !== 'string') {
+      return '';
+    }
+    return encodeURIComponent(url);
+  }
+
+  function formatToTreeView(flow, basePath, flowHost) {
     const {job, children} = flow;
-    const text = `${job.name} <span class="label label-default">${job.id}</span>`;
+    const text = `${job.name} <a href="${basePath}/${encodeURI(
+      flowHost
+    )}/${encodeURI(job.queueName)}/${
+      job.id
+    }"><span class="label label-default">${job.id}</span></a>`;
 
     if (children && children.length > 0) {
       return {
@@ -282,7 +293,7 @@ $(document).ready(() => {
       contentType: 'application/json',
     })
       .done((res) => {
-        const flowTree = formatToTreeView(res);
+        const flowTree = formatToTreeView(res, basePath, flowHost);
         alert('Flow successfully added!');
         localStorage.removeItem('arena:savedFlow');
         $('#tree').treeview({data: [flowTree]});
