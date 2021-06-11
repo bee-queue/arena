@@ -1,3 +1,9 @@
+## [3.27.0](https://github.com/bee-queue/arena/compare/v3.26.0...v3.27.0) (2021-06-11)
+
+### Features
+
+- **job-details:** add pagination options in getDependencies ([40e177f](https://github.com/bee-queue/arena/commit/40e177f7acdb2991d6ba6e58b2fa82bce641d348))
+
 ## [3.26.0](https://github.com/bee-queue/arena/compare/v3.25.0...v3.26.0) (2021-06-10)
 
 ### Features
