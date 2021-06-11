@@ -8,11 +8,12 @@ async function handler(req, res) {
   if (!flow) return res.status(404).json({error: 'flow not found'});
 
   try {
-    await Flows.set(flow, data);
+    const result = await Flows.set(flow, data);
+
+    return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json({error: err.message});
   }
-  return res.sendStatus(200);
 }
 
 module.exports = handler;

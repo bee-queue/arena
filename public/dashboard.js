@@ -5,6 +5,22 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  function formatToTreeView(flow) {
+    const {job, children} = flow;
+    const text = `${job.name} <span class="label label-default">${job.id}</span>`;
+
+    if (children && children.length > 0) {
+      return {
+        text,
+        nodes: children.map((child) => formatToTreeView(child)),
+      };
+    } else {
+      return {
+        text,
+      };
+    }
+  }
+
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function (e) {
     e.preventDefault();
@@ -257,9 +273,12 @@ $(document).ready(() => {
       data: flow,
       contentType: 'application/json',
     })
-      .done(() => {
+      .done((res) => {
+        const flowTree = formatToTreeView(res);
         alert('Flow successfully added!');
         localStorage.removeItem('arena:savedFlow');
+        $('#tree').treeview({data: [flowTree]});
+        $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {
         window.alert('Failed to save flow, check console for error.');
