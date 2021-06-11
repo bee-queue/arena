@@ -1,4 +1,9 @@
-const _ = require('lodash');
+const includes = require('lodash.includes');
+const pick = require('lodash.pick');
+const range = require('lodash.range');
+const capitalize = require('lodash.capitalize');
+const last = require('lodash.last');
+const ceil = require('lodash.ceil');
 const {
   BEE_STATES,
   BULL_STATES,
@@ -25,7 +30,7 @@ function getStates(queue) {
  */
 function isValidState(state, queue) {
   const validStates = getStates(queue);
-  return _.includes(validStates, state);
+  return includes(validStates, state);
 }
 
 async function handler(req, res) {
@@ -53,11 +58,11 @@ async function _json(req, res) {
   if (queue.IS_BEE) {
     jobs = await queue.getJobs(state, {size: 1000});
     jobs = jobs.map((j) =>
-      _.pick(j, 'id', 'progress', 'data', 'options', 'status')
+      pick(j, 'id', 'progress', 'data', 'options', 'status')
     );
   } else {
     const words = state.split('-');
-    const finalStateName = words.map((word) => _.capitalize(word)).join('');
+    const finalStateName = words.map((word) => capitalize(word)).join('');
     jobs = await queue[`get${finalStateName}`](0, 1000);
     jobs = jobs.map((j) => j.toJSON());
   }
@@ -133,11 +138,11 @@ async function _html(req, res) {
     job.parent = JobHelpers.getKeyProperties(job.parentKey);
   }
 
-  let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);
+  let pages = range(page - 6, page + 7).filter((page) => page >= 1);
   while (pages.length < 12) {
-    pages.push(_.last(pages) + 1);
+    pages.push(last(pages) + 1);
   }
-  pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
+  pages = pages.filter((page) => page <= ceil(jobCounts[state] / pageSize));
   const disablePromote = !(state === 'delayed' && !queue.IS_BEE);
   const disableRetry = !(
     state === 'failed' ||
@@ -160,7 +165,7 @@ async function _html(req, res) {
     hasFlows: Flows.hasFlows(),
     pages,
     pageSize,
-    lastPage: _.last(pages),
+    lastPage: last(pages),
     order,
   });
 }
