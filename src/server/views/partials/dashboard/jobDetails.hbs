@@ -145,6 +145,17 @@
   <div class="col-sm-12">
     <h5>Unprocessed Children <span class="count">{{ this.countDependencies.unprocessed}}</span></h5>
 
+    <nav aria-label="Unprocessed navigation">
+      <ul class="pagination">
+        <li><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?unprocessedCursor={{ this.unprocessedCursor }}&amp;unprocessedCount={{ this.unprocessedCount }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     {{#each this.unprocessedChildren}}
     <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
       <span class="label label-danger">{{ this.id }}</span>
@@ -158,6 +169,17 @@
 <div class="row">
   <div class="col-sm-12">
     <h5>Processed Children <span class="count">{{ this.countDependencies.processed}}</span></h5>
+
+    <nav aria-label="Processed navigation">
+      <ul class="pagination">
+        <li><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?processedCursor={{ this.processedCursor }}&amp;processedCount={{ this.processedCount }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
     {{#each this.processedChildren}}
     <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
