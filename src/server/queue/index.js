@@ -1,5 +1,5 @@
 const find = require('lodash.find');
-const assignIn = require('lodash.assignIn');
+const assignIn = require('lodash.assignin');
 
 class Queues {
   constructor(config) {
