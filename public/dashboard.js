@@ -5,29 +5,28 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function encodeURI(url) {
-    if (typeof url !== 'string') {
-      return '';
-    }
-    return encodeURIComponent(url);
-  }
-
-  function formatToTreeView(flow, basePath, flowHost) {
+  function formatToTreeView(flow, flowHost) {
     const {job, children} = flow;
-    const text = `${job.name} <a href="${basePath}/${encodeURI(
+    const text = `${job.name} <a href="${basePath}/${encodeURIComponent(
       flowHost
-    )}/${encodeURI(job.queueName)}/${
+    )}/${encodeURIComponent(job.queueName)}/${
       job.id
     }"><span class="label label-default">${job.id}</span></a>`;
+
+    const href = `${basePath}/${encodeURIComponent(
+      flowHost
+    )}/${encodeURIComponent(job.queueName)}/${job.id}`;
 
     if (children && children.length > 0) {
       return {
         text,
-        nodes: children.map((child) => formatToTreeView(child)),
+        // href,
+        nodes: children.map((child) => formatToTreeView(child, flowHost)),
       };
     } else {
       return {
         text,
+        // href,
       };
     }
   }
@@ -293,10 +292,10 @@ $(document).ready(() => {
       contentType: 'application/json',
     })
       .done((res) => {
-        const flowTree = formatToTreeView(res, basePath, flowHost);
+        const flowTree = formatToTreeView(res, flowHost);
         alert('Flow successfully added!');
         localStorage.removeItem('arena:savedFlow');
-        $('#tree').treeview({data: [flowTree]});
+        $('#tree').treeview({data: [flowTree], enableLinks: true});
         $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {
@@ -324,9 +323,9 @@ $(document).ready(() => {
       contentType: 'application/json',
     })
       .done((res) => {
-        const flowTree = formatToTreeView(res);
+        const flowTree = formatToTreeView(res, flowHost);
         alert('Flow info successfully fetched!');
-        $('#tree').treeview({data: [flowTree]});
+        $('#tree').treeview({data: [flowTree], enableLinks: true});
         $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {
