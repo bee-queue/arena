@@ -1,18 +1,4 @@
-function processFlow(flow) {
-  const {job, children} = flow;
-  const queueName = job.queueName;
-
-  if (children && children.length > 0) {
-    return {
-      job: {...job, queueName},
-      children: children.map((child) => processFlow(child)),
-    };
-  } else {
-    return {
-      job: {...job, queueName},
-    };
-  }
-}
+const flowHelpers = require('../helpers/flowHelpers');
 
 async function handler(req, res) {
   const {connectionName, flowHost} = req.params;
@@ -27,8 +13,8 @@ async function handler(req, res) {
       depth: Number(depth),
       maxChildren: Number(maxChildren),
     });
-    const processedFlow = processFlow(flowTree);
-    const {job} = flowTree;
+    const processedFlow = flowHelpers.processFlow(flowTree);
+
     return res.status(200).json(processedFlow);
   } catch (err) {
     return res.status(500).json({error: err.message});

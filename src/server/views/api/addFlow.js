@@ -1,3 +1,5 @@
+const flowHelpers = require('../helpers/flowHelpers');
+
 async function handler(req, res) {
   const {connectionName, flowHost} = req.params;
   const {data} = req.body;
@@ -8,9 +10,10 @@ async function handler(req, res) {
   if (!flow) return res.status(404).json({error: 'flow not found'});
 
   try {
-    const result = await Flows.set(flow, data);
+    const flowTree = await Flows.set(flow, data);
+    const processedFlow = flowHelpers.processFlow(flowTree);
 
-    return res.status(200).json(result);
+    return res.status(200).json(processedFlow);
   } catch (err) {
     return res.status(500).json({error: err.message});
   }
