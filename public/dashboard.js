@@ -306,10 +306,10 @@ $(document).ready(() => {
 
   $('.js-search-flow').on('click', function (e) {
     e.preventDefault();
-    const queueName = $('.js-queue-input-search').val();
-    const jobId = $('.js-job-id-input-search').val();
-    const depth = $('.js-depth-input-search').val();
-    const maxChildren = $('.js-max-children-input-search').val();
+    const queueName = $('#queue-name-input-search').val();
+    const jobId = $('#job-id-input-search').val();
+    const depth = $('#depth-input-search').val();
+    const maxChildren = $('#max-children-input-search').val();
 
     const {flowHost, connectionName} = window.arenaInitialPayload;
 
