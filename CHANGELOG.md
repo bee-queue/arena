@@ -1,3 +1,9 @@
+## [3.29.0](https://github.com/bee-queue/arena/compare/v3.28.0...v3.29.0) (2021-06-14)
+
+### Features
+
+- **tree-view:** use perma links on nodes ([07b6f3d](https://github.com/bee-queue/arena/commit/07b6f3d89970cc8da3b2988f68213b47eac86c51))
+
 ## [3.28.0](https://github.com/bee-queue/arena/compare/v3.27.0...v3.28.0) (2021-06-11)
 
 ### Features
