@@ -80,7 +80,7 @@ async function main() {
           name: queueName,
 
           // User-readable display name for the host. Required.
-          hostId: 'Queue Server 1',
+          hostId: 'Server 1',
 
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',
@@ -95,7 +95,7 @@ async function main() {
           name: parentQueueName,
 
           // User-readable display name for the host. Required.
-          hostId: 'Queue Server 1',
+          hostId: 'Server 1',
 
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',
@@ -110,7 +110,7 @@ async function main() {
       flows: [
         {
           // User-readable display name for the host. Required.
-          hostId: 'Flow server 1',
+          hostId: 'Server 1',
 
           // Required for each flow definition.
           name: 'Connection name 1',
@@ -125,7 +125,7 @@ async function main() {
         },
         {
           // User-readable display name for the host. Required.
-          hostId: 'Flow server 2',
+          hostId: 'Server 1',
 
           // Required for each flow definition.
           name: 'Connection name 2',

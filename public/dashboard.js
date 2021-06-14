@@ -5,14 +5,22 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function formatToTreeView(flow) {
+  function formatToTreeView(flow, flowHost) {
     const {job, children} = flow;
-    const text = `${job.name} <span class="label label-default">${job.id}</span>`;
+    const text = `${job.name} <a href="${basePath}/${encodeURIComponent(
+      flowHost
+    )}/${encodeURIComponent(job.queueName)}/${
+      job.id
+    }"><span class="label label-default">${job.id}</span></a>`;
+
+    const href = `${basePath}/${encodeURIComponent(
+      flowHost
+    )}/${encodeURIComponent(job.queueName)}/${job.id}`;
 
     if (children && children.length > 0) {
       return {
         text,
-        nodes: children.map((child) => formatToTreeView(child)),
+        nodes: children.map((child) => formatToTreeView(child, flowHost)),
       };
     } else {
       return {
@@ -282,10 +290,10 @@ $(document).ready(() => {
       contentType: 'application/json',
     })
       .done((res) => {
-        const flowTree = formatToTreeView(res);
+        const flowTree = formatToTreeView(res, flowHost);
         alert('Flow successfully added!');
         localStorage.removeItem('arena:savedFlow');
-        $('#tree').treeview({data: [flowTree]});
+        $('#tree').treeview({data: [flowTree], enableLinks: true});
         $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {
@@ -296,10 +304,10 @@ $(document).ready(() => {
 
   $('.js-search-flow').on('click', function (e) {
     e.preventDefault();
-    const queueName = $('.js-queue-input-search').val();
-    const jobId = $('.js-job-id-input-search').val();
-    const depth = $('.js-depth-input-search').val();
-    const maxChildren = $('.js-max-children-input-search').val();
+    const queueName = $('#queue-name-input-search').val();
+    const jobId = $('#job-id-input-search').val();
+    const depth = $('#depth-input-search').val();
+    const maxChildren = $('#max-children-input-search').val();
 
     const {flowHost, connectionName} = window.arenaInitialPayload;
 
@@ -313,9 +321,9 @@ $(document).ready(() => {
       contentType: 'application/json',
     })
       .done((res) => {
-        const flowTree = formatToTreeView(res);
+        const flowTree = formatToTreeView(res, flowHost);
         alert('Flow info successfully fetched!');
-        $('#tree').treeview({data: [flowTree]});
+        $('#tree').treeview({data: [flowTree], enableLinks: true});
         $('.js-tree').toggleClass('hide', false);
       })
       .fail((jqXHR) => {

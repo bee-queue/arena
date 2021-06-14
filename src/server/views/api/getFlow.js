@@ -1,3 +1,5 @@
+const flowHelpers = require('../helpers/flowHelpers');
+
 async function handler(req, res) {
   const {connectionName, flowHost} = req.params;
   const {depth, jobId, maxChildren, queueName} = req.query;
@@ -11,7 +13,9 @@ async function handler(req, res) {
       depth: Number(depth),
       maxChildren: Number(maxChildren),
     });
-    return res.status(200).json(flowTree);
+    const processedFlow = flowHelpers.processFlow(flowTree);
+
+    return res.status(200).json(processedFlow);
   } catch (err) {
     return res.status(500).json({error: err.message});
   }
