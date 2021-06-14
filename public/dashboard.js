@@ -20,13 +20,11 @@ $(document).ready(() => {
     if (children && children.length > 0) {
       return {
         text,
-        // href,
         nodes: children.map((child) => formatToTreeView(child, flowHost)),
       };
     } else {
       return {
         text,
-        // href,
       };
     }
   }
