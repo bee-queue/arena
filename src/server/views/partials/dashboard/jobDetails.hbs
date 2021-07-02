@@ -68,9 +68,9 @@
 <div class="row">
   <div class="col-sm-4">
     <h5>Permalinks</h5>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}" class="btn btn-info">Job
       {{ this.id }}</a>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true"
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?json=true"
       class="btn btn-info">JSON</a>
   </div>
 </div>
@@ -148,7 +148,7 @@
     <nav aria-label="Unprocessed navigation">
       <ul class="pagination">
         <li><a
-            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?unprocessedCursor={{ this.unprocessedCursor }}&amp;unprocessedCount={{ this.unprocessedCount }}"
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?unprocessedCursor={{ this.unprocessedCursor }}&amp;unprocessedCount={{ this.unprocessedCount }}"
             aria-label="Previous">
             <span aria-hidden="true">&raquo;</span>
           </a>
@@ -157,7 +157,7 @@
     </nav>
 
     {{#each this.unprocessedChildren}}
-    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ encodeURI this.id }}">
       <span class="label label-danger">{{ this.id }}</span>
     </a>
     {{/each}}
@@ -173,7 +173,7 @@
     <nav aria-label="Processed navigation">
       <ul class="pagination">
         <li><a
-            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?processedCursor={{ this.processedCursor }}&amp;processedCount={{ this.processedCount }}"
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?processedCursor={{ this.processedCursor }}&amp;processedCount={{ this.processedCount }}"
             aria-label="Previous">
             <span aria-hidden="true">&raquo;</span>
           </a>
@@ -182,7 +182,7 @@
     </nav>
 
     {{#each this.processedChildren}}
-    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ this.id }}">
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ encodeURI this.id }}">
       <span class="label label-success">{{ this.id }}</span>
     </a>
     {{/each}}
