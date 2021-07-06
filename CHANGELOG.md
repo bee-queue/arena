@@ -1,3 +1,9 @@
+### [3.29.1](https://github.com/bee-queue/arena/compare/v3.29.0...v3.29.1) (2021-07-06)
+
+### Bug Fixes
+
+- **job-details:** encodeURI of job ID for URL ([0b60010](https://github.com/bee-queue/arena/commit/0b600102769fe066c2aec7046c970009dbd5ef5f)), closes [#416](https://github.com/bee-queue/arena/issues/416)
+
 ## [3.29.0](https://github.com/bee-queue/arena/compare/v3.28.0...v3.29.0) (2021-06-14)
 
 ### Features
