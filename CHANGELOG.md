@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 
-- force new build ([596280c](https://github.com/bee-queue/arena/commit/596280ca1c11d6ea92d56297d65a067a986213b0))
+- Revert bootstrap upgrade in 3.24.0 ([PR](https://github.com/bee-queue/arena/pull/432))
 
 ### [3.29.1](https://github.com/bee-queue/arena/compare/v3.29.0...v3.29.1) (2021-07-06)
 
