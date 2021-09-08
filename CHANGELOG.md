@@ -1,3 +1,9 @@
+### [3.29.3](https://github.com/bee-queue/arena/compare/v3.29.2...v3.29.3) (2021-09-08)
+
+### Bug Fixes
+
+- 🐛 Update how Redis URL is passed to Bull ([81bf488](https://github.com/bee-queue/arena/commit/81bf488d3d668dba986bc03e171e6f3bc0faf761)), closes [OptimalBits/bull#2118](https://github.com/OptimalBits/bull/issues/2118)
+
 ### [3.29.2](https://github.com/bee-queue/arena/compare/v3.29.1...v3.29.2) (2021-08-12)
 
 ### Bug Fixes
