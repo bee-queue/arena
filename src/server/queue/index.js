@@ -120,8 +120,14 @@ class Queues {
       if (queueConfig.createClient)
         options.createClient = queueConfig.createClient;
 
+      if (typeof options.redis === 'string') delete options.redis;
+
       const {Bull} = this._config;
-      queue = new Bull(name, options);
+      if (url) {
+        queue = new Bull(name, url, options);
+      } else {
+        queue = new Bull(name, options);
+      }
       queue.IS_BULL = true;
     }
 
