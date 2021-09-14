@@ -1,10 +1,11 @@
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
-  const {connectionName, flowHost} = req.params;
+  const {connectionName, flowHost, rootPath} = req.params;
   const {Flows} = req.app.locals;
   const flow = await Flows.get(connectionName, flowHost);
-  const basePath = req.baseUrl;
+  const basePath = rootPath ? `${rootPath}${req.baseUrl}` : req.baseUrl;
+
   if (!flow)
     return res.status(404).render('dashboard/templates/flowNotFound', {
       basePath,

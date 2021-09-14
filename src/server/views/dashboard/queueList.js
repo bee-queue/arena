@@ -1,7 +1,7 @@
 function handler(req, res) {
-  const {Queues, Flows} = req.app.locals;
+  const {Queues, Flows, rootPath} = req.app.locals;
   const queues = Queues.list();
-  const basePath = req.baseUrl;
+  const basePath = rootPath ? `${rootPath}${req.baseUrl}` : req.baseUrl;
 
   return res.render('dashboard/templates/queueList', {
     basePath,

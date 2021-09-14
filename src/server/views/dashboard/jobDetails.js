@@ -4,9 +4,9 @@ const JobHelpers = require('../helpers/jobHelpers');
 async function handler(req, res) {
   const {queueName, queueHost, id} = req.params;
   const {json} = req.query;
-  const basePath = req.baseUrl;
+  const {Queues, Flows, rootPath} = req.app.locals;
+  const basePath = rootPath ? `${rootPath}${req.baseUrl}` : req.baseUrl;
 
-  const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   if (!queue)
     return res.status(404).render('dashboard/templates/queueNotFound', {
@@ -51,21 +51,17 @@ async function handler(req, res) {
     job.processedCount = processedCount;
     job.unprocessedCount = unprocessedCount;
 
-    const {
-      processed,
-      unprocessed,
-      nextProcessedCursor,
-      nextUnprocessedCursor,
-    } = await job.getDependencies({
-      processed: {
-        cursor: processedCursor,
-        count: processedCount,
-      },
-      unprocessed: {
-        cursor: unprocessedCursor,
-        count: unprocessedCount,
-      },
-    });
+    const {processed, unprocessed, nextProcessedCursor, nextUnprocessedCursor} =
+      await job.getDependencies({
+        processed: {
+          cursor: processedCursor,
+          count: processedCount,
+        },
+        unprocessed: {
+          cursor: unprocessedCursor,
+          count: unprocessedCount,
+        },
+      });
     const count = await job.getDependenciesCount();
     job.countDependencies = count;
 

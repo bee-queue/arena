@@ -10,7 +10,7 @@ function run(config, listenOpts = {}) {
     typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
 
   app.locals.appBasePath = listenOpts.basePath || app.locals.appBasePath;
-
+  app.locals.rootPath = listenOpts.rootPath || '';
   app.use(
     app.locals.appBasePath,
     express.static(path.join(__dirname, 'public'))

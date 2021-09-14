@@ -2,9 +2,9 @@ const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
   const {queueName, queueHost} = req.params;
-  const {Queues, Flows} = req.app.locals;
+  const {Queues, Flows, rootPath} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
-  const basePath = req.baseUrl;
+  const basePath = rootPath ? `${rootPath}${req.baseUrl}` : req.baseUrl;
   if (!queue)
     return res.status(404).render('dashboard/templates/queueNotFound', {
       basePath,
