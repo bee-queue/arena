@@ -31,12 +31,31 @@ function formatBytes(num) {
   return (neg ? '-' : '') + numStr + ' ' + unit;
 }
 
+function parseRedisServerInfo(redisServerInfo) {
+  if (typeof redisServerInfo !== 'string') {
+    return {};
+  }
+
+  const serverInfo = {};
+  const lines = redisServerInfo.split('\r\n')
+    .filter(line => !!line && !line.startsWith('#'))
+    .map(line => line.trim());
+  for (let i = 0; i < lines.length; ++i) {
+    const idx = line.indexOf(':');
+    if (idx > 0) {
+      serverInfo[line.substring(0, idx)] = line.substring(idx + 1);
+    }
+  }
+  return serverInfo;
+}
+
+
 const Helpers = {
   getStats: async function (queue) {
     const client = await queue.client;
-    await client.info(); // update queue.client.serverInfo
+    const info = await client.info();
 
-    const stats = _.pickBy(client.serverInfo, (value, key) =>
+    const stats = _.pickBy(parseRedisServerInfo(info), (value, key) =>
       _.includes(this._usefulMetrics, key)
     );
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
