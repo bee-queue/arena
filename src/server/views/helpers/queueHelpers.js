@@ -39,8 +39,8 @@ function parseRedisServerInfo(redisServerInfo) {
   const serverInfo = {};
   redisServerInfo
     .split('\r\n')
-    .filter((line) => !!line && !line.startsWith('#')) // remove comments and empty lines
     .map((line) => line.trim())
+    .filter((line) => !!line && !line.startsWith('#')) // remove comments and empty lines
     .forEach((line) => {
       const idx = line.indexOf(':');
       if (idx > 0) {
