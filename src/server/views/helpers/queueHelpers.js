@@ -37,16 +37,16 @@ function parseRedisServerInfo(redisServerInfo) {
   }
 
   const serverInfo = {};
-  const lines = redisServerInfo
+  redisServerInfo
     .split('\r\n')
-    .filter((line) => !!line && !line.startsWith('#'))
-    .map((line) => line.trim());
-  for (let i = 0; i < lines.length; ++i) {
-    const idx = line.indexOf(':');
-    if (idx > 0) {
-      serverInfo[line.substring(0, idx)] = line.substring(idx + 1);
-    }
-  }
+    .filter((line) => !!line && !line.startsWith('#')) // remove comments and empty lines
+    .map((line) => line.trim())
+    .forEach((line) => {
+      const idx = line.indexOf(':');
+      if (idx > 0) {
+        serverInfo[line.substring(0, idx)] = line.substring(idx + 1);
+      }
+    });
   return serverInfo;
 }
 
