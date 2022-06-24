@@ -37,9 +37,10 @@ function parseRedisServerInfo(redisServerInfo) {
   }
 
   const serverInfo = {};
-  const lines = redisServerInfo.split('\r\n')
-    .filter(line => !!line && !line.startsWith('#'))
-    .map(line => line.trim());
+  const lines = redisServerInfo
+    .split('\r\n')
+    .filter((line) => !!line && !line.startsWith('#'))
+    .map((line) => line.trim());
   for (let i = 0; i < lines.length; ++i) {
     const idx = line.indexOf(':');
     if (idx > 0) {
@@ -48,7 +49,6 @@ function parseRedisServerInfo(redisServerInfo) {
   }
   return serverInfo;
 }
-
 
 const Helpers = {
   getStats: async function (queue) {
