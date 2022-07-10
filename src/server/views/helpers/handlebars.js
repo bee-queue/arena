@@ -83,6 +83,11 @@ const helpers = {
     if (job.options && job.options.delay) {
       return job.options.delay;
     }
+
+    // BullMQ
+    if (job.opts && job.opts.delay) {
+      return job.opts.delay + getTimestamp(job);
+    }
   },
 
   getTimestamp,
