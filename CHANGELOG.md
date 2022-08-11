@@ -1,3 +1,9 @@
+### [3.29.5](https://github.com/bee-queue/arena/compare/v3.29.4...v3.29.5) (2022-08-11)
+
+### Bug Fixes
+
+- **deps:** bump minimist from 1.2.5 to 1.2.6 ([#507](https://github.com/bee-queue/arena/issues/507)) ([229cfe3](https://github.com/bee-queue/arena/commit/229cfe3a90e41f11a296fd169e09a5628e948f77))
+
 ### [3.29.4](https://github.com/bee-queue/arena/compare/v3.29.3...v3.29.4) (2022-08-11)
 
 ### Bug Fixes
