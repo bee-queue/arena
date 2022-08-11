@@ -1,3 +1,9 @@
+### [3.29.4](https://github.com/bee-queue/arena/compare/v3.29.3...v3.29.4) (2022-08-11)
+
+### Bug Fixes
+
+- **deps:** bump moment from 2.29.1 to 2.29.4 ([#540](https://github.com/bee-queue/arena/issues/540)) ([81f13a8](https://github.com/bee-queue/arena/commit/81f13a83cf38574746b6f23ae981819383e7a6f6))
+
 ### [3.29.3](https://github.com/bee-queue/arena/compare/v3.29.2...v3.29.3) (2021-09-08)
 
 ### Bug Fixes
