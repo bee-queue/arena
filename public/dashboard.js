@@ -127,6 +127,42 @@ $(document).ready(() => {
     }
   });
 
+  // Set up individual "remove repeatable job" handler
+  $('.js-remove-repeatable-job').on('click', function (e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+
+    const jobId = $(this).data('job-id');
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+    const jobState = $(this).data('job-state');
+
+    const r = window.confirm(
+      `Remove repeatable job #${jobId} in queue "${queueHost}/${queueName}"?`
+    );
+    if (r) {
+      $.ajax({
+        method: 'DELETE',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/repeatable/job/${encodeURIComponent(
+          jobId
+        )}`,
+      })
+        .done(() => {
+          window.location.href = `${basePath}/${encodeURIComponent(
+            queueHost
+          )}/${encodeURIComponent(queueName)}/${jobState}`;
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
+
   // Set up "select all jobs" button handler
   $('.js-select-all-jobs').change(function () {
     const $jobBulkCheckboxes = $('.js-bulk-job');

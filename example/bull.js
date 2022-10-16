@@ -38,6 +38,9 @@ async function main() {
   const delayedJob = await queue.add({}, {delay: 60 * 1000});
   delayedJob.log('Log message');
 
+  // add repeatable jobs
+  await queue.add({}, {repeat: {cron: '15 * * * *'}});
+
   const app = Arena(
     {
       Bull,
