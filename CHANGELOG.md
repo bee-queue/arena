@@ -1,3 +1,9 @@
+## [3.30.0](https://github.com/bee-queue/arena/compare/v3.29.5...v3.30.0) (2022-10-18)
+
+### Features
+
+- **bull:** support removing repeatable jobs ([#574](https://github.com/bee-queue/arena/issues/574)) ([29528cf](https://github.com/bee-queue/arena/commit/29528cfeea91dcf8771551c44fd4dc5e29f87718))
+
 ### [3.29.5](https://github.com/bee-queue/arena/compare/v3.29.4...v3.29.5) (2022-08-11)
 
 ### Bug Fixes
