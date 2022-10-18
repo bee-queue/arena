@@ -137,10 +137,10 @@ $(document).ready(() => {
     const queueHost = $(this).data('queue-host');
     const jobState = $(this).data('job-state');
 
-    const r = window.confirm(
+    const confirmationResponse = window.confirm(
       `Remove repeatable job #${jobId} in queue "${queueHost}/${queueName}"?`
     );
-    if (r) {
+    if (confirmationResponse) {
       $.ajax({
         method: 'DELETE',
         url: `${basePath}/api/queue/${encodeURIComponent(
