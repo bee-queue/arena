@@ -9,7 +9,11 @@ async function handler(req, res) {
   if (!job) return res.status(404).send({error: 'job not found'});
 
   try {
-    await queue.removeRepeatableByKey(job.opts.repeat.key);
+    if (job.opts.repeat.key) {
+      await queue.removeRepeatableByKey(job.opts.repeat.key);
+    } else {
+      await queue.removeRepeatable(job.name, job.opts.repeat);
+    }
     return res.sendStatus(200);
   } catch (e) {
     const body = {
