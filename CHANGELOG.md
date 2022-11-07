@@ -1,3 +1,9 @@
+### [3.30.1](https://github.com/bee-queue/arena/compare/v3.30.0...v3.30.1) (2022-11-07)
+
+### Bug Fixes
+
+- **remove-repeatable:** consider old versions of bull ([#580](https://github.com/bee-queue/arena/issues/580)) ([f406750](https://github.com/bee-queue/arena/commit/f406750ba4654918e194574caa08d29048f6ed03))
+
 ## [3.30.0](https://github.com/bee-queue/arena/compare/v3.29.5...v3.30.0) (2022-10-18)
 
 ### Features
