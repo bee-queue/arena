@@ -1,3 +1,9 @@
+### [3.30.2](https://github.com/bee-queue/arena/compare/v3.30.1...v3.30.2) (2022-12-04)
+
+### Bug Fixes
+
+- **qs:** security patches on body-parser and express dependencies ([#593](https://github.com/bee-queue/arena/issues/593)) ([6c5871f](https://github.com/bee-queue/arena/commit/6c5871ffa149e83f0e51a2123567a9c0856f67d5))
+
 ### [3.30.1](https://github.com/bee-queue/arena/compare/v3.30.0...v3.30.1) (2022-11-07)
 
 ### Bug Fixes
