@@ -59,7 +59,7 @@ async function _json(req, res) {
     const words = state.split('-');
     const finalStateName = words.map((word) => _.capitalize(word)).join('');
     jobs = await queue[`get${finalStateName}`](0, 1000);
-    jobs = jobs.map((j) => j.toJSON());
+    jobs = jobs.map((j) => j && j.toJSON());
   }
 
   const filename = `${queueName}-${state}-dump.json`;
@@ -125,13 +125,21 @@ async function _html(req, res) {
     jobs = await queue.getJobs(stateTypes, startId, endId, order === 'asc');
   }
 
-  for (const job of jobs) {
-    const jobState = queue.IS_BEE ? job.status : await job.getState();
-    job.showRetryButton = !queue.IS_BEE || jobState === 'failed';
-    job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
-    job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
-    job.showDeleteRepeatableButton = queue.IS_BULL && job.opts.repeat;
-    job.parent = JobHelpers.getKeyProperties(job.parentKey);
+  for (let i = 0; i < jobs.length; i++) {
+    if (!jobs[i]) {
+      jobs[i] = {
+        showRetryButton: false,
+        showPromoteButton: false,
+        showDeleteRepeatableButton: false,
+      };
+    } else {
+      const jobState = queue.IS_BEE ? jobs[i].status : await jobs[i].getState();
+      jobs[i].showRetryButton = !queue.IS_BEE || jobState === 'failed';
+      jobs[i].retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
+      jobs[i].showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
+      jobs[i].showDeleteRepeatableButton = queue.IS_BULL && jobs[i].opts.repeat;
+      jobs[i].parent = JobHelpers.getKeyProperties(jobs[i].parentKey);
+    }
   }
 
   let pages = _.range(page - 6, page + 7).filter((page) => page >= 1);

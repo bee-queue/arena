@@ -1,5 +1,5 @@
 const Arena = require('../');
-const {Queue, QueueScheduler, Worker, FlowProducer} = require('bullmq');
+const {Queue, Worker, FlowProducer} = require('bullmq');
 const RedisServer = require('redis-server');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
@@ -13,11 +13,6 @@ async function main() {
   await server.open();
   const queueName = 'name_of_my_queue';
   const parentQueueName = 'name_of_my_parent_queue';
-
-  const queueScheduler = new QueueScheduler(queueName, {
-    connection: {port: REDIS_SERVER_PORT},
-  });
-  await queueScheduler.waitUntilReady();
 
   const queue = new Queue(queueName, {
     connection: {port: REDIS_SERVER_PORT},
@@ -44,6 +39,7 @@ async function main() {
       }
     },
     {
+      concurrency: 3,
       connection: {port: REDIS_SERVER_PORT},
     }
   );

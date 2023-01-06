@@ -73,7 +73,7 @@ const helpers = {
     return mapping;
   },
 
-  getDelayedExectionAt(job) {
+  getDelayedExecutionAt(job) {
     // Bull
     if (job.delay) {
       return job.delay + getTimestamp(job);
