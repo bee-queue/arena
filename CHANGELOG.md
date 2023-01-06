@@ -1,3 +1,9 @@
+### [3.30.3](https://github.com/bee-queue/arena/compare/v3.30.2...v3.30.3) (2023-01-06)
+
+### Bug Fixes
+
+- **bullmq:** consider delayed markers ([#605](https://github.com/bee-queue/arena/issues/605)) fixes [#600](https://github.com/bee-queue/arena/issues/600) ([8b6edae](https://github.com/bee-queue/arena/commit/8b6edae1b0d27833af42f60acf522a5e34b1a97a))
+
 ### [3.30.2](https://github.com/bee-queue/arena/compare/v3.30.1...v3.30.2) (2022-12-04)
 
 ### Bug Fixes
