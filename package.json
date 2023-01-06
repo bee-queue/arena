@@ -24,7 +24,7 @@
     "@semantic-release/npm": "^7.0.5",
     "@semantic-release/release-notes-generator": "^9.0.1",
     "bee-queue": "^1.2.3",
-    "bull": "^3.16.0",
+    "bull": "^4.10.2",
     "conventional-changelog-conventionalcommits": "^4.3.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
