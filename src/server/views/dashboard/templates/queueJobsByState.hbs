@@ -136,7 +136,9 @@
         <li class="list-group-item">
           <div class="js-bulk-action-container bulk-job-container">
             <input type="hidden" name="jobId" value="{{ this.id }}" />
+            {{#if this.id}}
             <input class="js-bulk-job" name="jobChecked" type="checkbox" />
+            {{/if}}
           </div>
 
           <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this}}">
@@ -151,9 +153,14 @@
               {{/if}}
             </h4>
           </a>
+          {{#if this.id}}
           <div id="collapse{{hashIdAttr this}}" class="collapse">
             {{~> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
           </div>
+          {{else}}
+          <div id ="collapse-undefined" class="collapse">
+          </div>
+          {{/if}}
         </li>
         {{/each}}
       </ul>
