@@ -4,7 +4,7 @@ const JobHelpers = require('../helpers/jobHelpers');
 async function handler(req, res) {
   const {queueName, queueHost, id} = req.params;
   const {json} = req.query;
-  const basePath = req.app.locals.appBasePath + req.baseUrl;
+  const basePath = req.baseUrl;
 
   const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);

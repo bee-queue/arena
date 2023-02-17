@@ -1,7 +1,7 @@
 function handler(req, res) {
   const {Flows} = req.app.locals;
   const flows = Flows.list();
-  const basePath = req.app.locals.appBasePath + req.baseUrl;
+  const basePath = req.baseUrl;
 
   return res.render('dashboard/templates/flowList', {basePath, flows});
 }
