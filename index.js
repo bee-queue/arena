@@ -11,15 +11,19 @@ function run(config, listenOpts = {}) {
 
   app.locals.appBasePath = listenOpts.basePath || app.locals.appBasePath;
 
-  app.use(
-    app.locals.appBasePath,
-    express.static(path.join(__dirname, 'public'))
-  );
-  app.use(app.locals.appBasePath, routes);
+  if (listenOpts.disableListen) {
+    app.locals.appBasePath = listenOpts.basePath || app.locals.appBasePath;
+    app.use('/', express.static(path.join(__dirname, 'public')));
+    app.use('/', routes);
+  } else {
+    app.use(
+      listenOpts.basePath || app.locals.appBasePath,
+      express.static(path.join(__dirname, 'public'))
+    );
+    app.use(listenOpts.basePath || app.locals.appBasePath, routes);
 
-  const port = listenOpts.port || 4567;
-  const host = listenOpts.host || '0.0.0.0'; // Default: listen to all network interfaces.
-  if (!listenOpts.disableListen) {
+    const port = listenOpts.port || 4567;
+    const host = listenOpts.host || '0.0.0.0'; // Default: listen to all network interfaces.
     app.listen(port, host, () => {
       console.log(`Arena is running on port ${port} at host ${host}`);
     });
