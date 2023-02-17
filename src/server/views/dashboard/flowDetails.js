@@ -4,7 +4,8 @@ async function handler(req, res) {
   const {connectionName, flowHost} = req.params;
   const {Flows} = req.app.locals;
   const flow = await Flows.get(connectionName, flowHost);
-  const basePath = req.baseUrl;
+  const basePath = req.app.locals.appBasePath + req.baseUrl;
+
   if (!flow)
     return res.status(404).render('dashboard/templates/flowNotFound', {
       basePath,
