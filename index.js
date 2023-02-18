@@ -11,7 +11,7 @@ function run(config, listenOpts = {}) {
 
   if (listenOpts.disableListen) {
     app.locals.appBasePath =
-      listenOpts.basePath == '/' ? listenOpts.basePath : app.locals.appBasePath;
+      listenOpts.basePath == '/' ? app.locals.appBasePath : listenOpts.basePath;
     app.use(
       listenOpts.basePath ? listenOpts.basePath : '/',
       express.static(path.join(__dirname, 'public'))
