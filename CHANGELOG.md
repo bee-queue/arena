@@ -1,3 +1,9 @@
+### [3.30.4](https://github.com/bee-queue/arena/compare/v3.30.3...v3.30.4) (2023-02-18)
+
+### Bug Fixes
+
+- **mounting:** differentiate base and appBase paths when disableListen ([#623](https://github.com/bee-queue/arena/issues/623)) ([387e3ac](https://github.com/bee-queue/arena/commit/387e3ac7fdcf94f72765d80c26d3b074c91cdd03))
+
 ### [3.30.3](https://github.com/bee-queue/arena/compare/v3.30.2...v3.30.3) (2023-01-06)
 
 ### Bug Fixes
