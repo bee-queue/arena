@@ -80,6 +80,7 @@ async function _html(req, res) {
   const {Queues, Flows} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
   const basePath = req.baseUrl;
+
   if (!queue)
     return res.status(404).render('dashboard/templates/queueNotFound', {
       basePath,
