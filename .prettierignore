@@ -1,4 +1,6 @@
 *.hbs
 *.min.js
 *.min.css
+*.d.ts
+tsconfig.json
 pull_request_template.md

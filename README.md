@@ -171,6 +171,41 @@ router.use('/', arena);
 - `useCdn` - set false to use the bundled js and css files (default: true)
 - `customCssPath` - an URL to an external stylesheet (default: null)
 
+In addition to the default export, you can also access both arena and the underlying queues using the named export `run`:
+
+```js
+const Arena = require('bull-arena').run;
+
+const express = require('express');
+const router = express.Router();
+
+const arena = Arena({
+  // Include a reference to the bee-queue or bull libraries, depending on the library being used.
+
+  queues: [
+    {
+      // First queue configuration
+    },
+    {
+      // Second queue configuration
+    },
+    {
+      // And so on...
+    },
+  ],
+});
+
+// manage arena queues using queue
+//app.queues.list()
+
+router.use('/', arena.app);
+```
+
+When calling the named export `run` the following are returned:
+
+- `app` - the arena middleware
+- `queues` - the underlying queues in arena
+
 ##### Example config (for bull)
 
 ```js
