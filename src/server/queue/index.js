@@ -1,4 +1,5 @@
-const _ = require('lodash');
+const find = require('lodash.find');
+const assignIn = require('lodash.assignin');
 
 class Queues {
   constructor(config) {
@@ -56,7 +57,7 @@ class Queues {
   }
 
   async get(queueName, queueHost) {
-    const queueConfig = _.find(this._config.queues, {
+    const queueConfig = find(this._config.queues, {
       name: queueName,
       hostId: queueHost,
     });
@@ -95,7 +96,7 @@ class Queues {
 
     let queue;
     if (isBee) {
-      _.extend(options, {
+      assignIn(options, {
         isWorker: false,
         getEvents: false,
         sendEvents: false,

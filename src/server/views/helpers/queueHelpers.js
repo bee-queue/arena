@@ -1,4 +1,6 @@
 const _ = require('lodash');
+const pickBy = require("lodash.pickby");
+const includes = require('lodash.includes');
 
 /**
  * Formats the number into "human readable" number/
@@ -36,8 +38,8 @@ const Helpers = {
     const client = await queue.client;
     await client.info(); // update queue.client.serverInfo
 
-    const stats = _.pickBy(client.serverInfo, (value, key) =>
-      _.includes(this._usefulMetrics, key)
+    const stats = pickBy(client.serverInfo, (value, key) =>
+      includes(this._usefulMetrics, key)
     );
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
     stats.total_system_memory = formatBytes(

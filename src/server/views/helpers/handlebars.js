@@ -1,14 +1,19 @@
 const crypto = require('crypto');
 const _ = require('lodash');
+const isObject = require('lodash.isobject'); 
+const transform = require('lodash.transform');
+const isString = require('lodash.isstring');
+const ceil = require('lodash.ceil');
+const forEach = require('lodash.foreach');
 const Handlebars = require('handlebars');
 const moment = require('moment');
 
 const replacer = (key, value) => {
-  if (_.isObject(value)) {
-    return _.transform(value, (result, v, k) => {
+  if (isObject(value)) {
+    return transform(value, (result, v, k) => {
       result[Handlebars.Utils.escapeExpression(k)] = v;
     });
-  } else if (_.isString(value)) {
+  } else if (isString(value)) {
     return Handlebars.Utils.escapeExpression(value);
   } else {
     return value;
@@ -45,7 +50,7 @@ const helpers = {
 
   adjustedPage(currentPage, pageSize, newPageSize) {
     const firstId = (currentPage - 1) * pageSize;
-    return _.ceil(firstId / newPageSize) + 1;
+    return ceil(firstId / newPageSize) + 1;
   },
 
   block(name) {
@@ -140,7 +145,7 @@ const helpers = {
 };
 
 module.exports = function registerHelpers(hbs, {queues}) {
-  _.each(helpers, (fn, helper) => {
+  forEach(helpers, (fn, helper) => {
     hbs.registerHelper(helper, fn);
   });
 

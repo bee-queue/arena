@@ -1,10 +1,11 @@
-const _ = require('lodash');
+const includes = require('lodash.includes');
+const isEmpty = require('lodash.isempty');
 
 const ACTIONS = ['remove', 'retry', 'promote'];
 
 function bulkAction(action) {
   return async function handler(req, res) {
-    if (!_.includes(ACTIONS, action)) {
+    if (!includes(ACTIONS, action)) {
       res.status(401).send({
         error: 'unauthorized action',
         details: `action ${action} not permitted`,
@@ -19,7 +20,7 @@ function bulkAction(action) {
     const {jobs, queueState} = req.body;
 
     try {
-      if (!_.isEmpty(jobs)) {
+      if (!isEmpty(jobs)) {
         const jobsPromises = jobs.map((id) =>
           queue.getJob(decodeURIComponent(id))
         );

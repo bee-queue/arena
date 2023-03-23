@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const find = require('lodash.find');
 
 /*
   This class will be allowed only for BullMQ
@@ -51,7 +51,7 @@ class Flows {
   }
 
   async get(connectionName, queueHost) {
-    const flowConfig = _.find(this._config.flows, {
+    const flowConfig = find(this._config.flows, {
       name: connectionName,
       hostId: queueHost,
     });
