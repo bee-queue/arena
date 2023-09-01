@@ -5,8 +5,6 @@ const Bee = require('bee-queue');
 const HTTP_SERVER_PORT = 4735;
 const REDIS_SERVER_PORT = 6379;
 
-// Create a Redis server. This is only for convenience
-
 async function main() {
   const queue = new Bee('name_of_my_queue', {
     activateDelayedJobs: true,
