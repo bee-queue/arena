@@ -1,17 +1,11 @@
 const Arena = require('../');
 const Bee = require('bee-queue');
-const RedisServer = require('redis-server');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
 const HTTP_SERVER_PORT = 4735;
-const REDIS_SERVER_PORT = 4736;
-
-// Create a Redis server. This is only for convenience
+const REDIS_SERVER_PORT = 6379;
 
 async function main() {
-  const server = new RedisServer(REDIS_SERVER_PORT);
-  await server.open();
-
   const queue = new Bee('name_of_my_queue', {
     activateDelayedJobs: true,
     redis: {
