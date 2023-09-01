@@ -81,6 +81,7 @@ const Helpers = {
    */
   BULLMQ_STATES: [
     'waiting',
+    'prioritized',
     'active',
     'completed',
     'failed',
