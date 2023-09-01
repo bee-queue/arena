@@ -25,6 +25,7 @@
     "@semantic-release/release-notes-generator": "^9.0.1",
     "bee-queue": "^1.2.3",
     "bull": "^3.16.0",
+    "commitizen": "^4.2.5",
     "conventional-changelog-conventionalcommits": "^4.3.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
@@ -38,11 +39,17 @@
   "scripts": {
     "ci": "npm run lint && if [ -z \"$CI\" ]; then npm run ci:commitlint; fi",
     "ci:commitlint": "commitlint --from \"origin/${GITHUB_BASE_REF:-master}\"",
+    "cm": "git cz",
     "dry:run": "npm publish --dry-run",
     "lint": "prettier -c .",
     "lint:staged": "lint-staged",
     "prepare": "husky install",
     "pretty:quick": "pretty-quick --ignore-path ./.prettierignore --staged"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "engines": {
     "node": ">=7.6.0"
