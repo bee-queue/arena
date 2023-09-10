@@ -28,7 +28,9 @@ async function handler(req, res) {
   if (json === 'true') {
     // Omit these private and non-stringifyable properties to avoid circular
     // references parsing errors.
-    return res.json(_.omit(job, 'domain', 'queue', '_events', '_eventsCount'));
+    return res.json(
+      _.omit(job, 'domain', 'queue', 'scripts', '_events', '_eventsCount')
+    );
   }
 
   const jobState = queue.IS_BEE ? job.status : await job.getState();
