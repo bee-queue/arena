@@ -1,3 +1,13 @@
+## [4.0.0](https://github.com/bee-queue/arena/compare/v3.30.4...v4.0.0) (2023-09-02)
+
+### ⚠ BREAKING CHANGES
+
+- **bullmq:** add new prioritized state, previous versions of bullmq wont't see this state
+
+### Features
+
+- **bullmq:** support prioritized state ([#664](https://github.com/bee-queue/arena/issues/664)) ([9a7541c](https://github.com/bee-queue/arena/commit/9a7541cd08fa33e8c4f75f8fc38dae3a63eacaa2))
+
 ### [3.30.4](https://github.com/bee-queue/arena/compare/v3.30.3...v3.30.4) (2023-02-18)
 
 ### Bug Fixes
