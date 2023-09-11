@@ -1,3 +1,9 @@
+### [4.0.1](https://github.com/bee-queue/arena/compare/v4.0.0...v4.0.1) (2023-09-11)
+
+### Bug Fixes
+
+- **job-details:** omit scripts attribute to stringify jobs ([#665](https://github.com/bee-queue/arena/issues/665)) fixes [#598](https://github.com/bee-queue/arena/issues/598) ([a76ed5f](https://github.com/bee-queue/arena/commit/a76ed5f9c7d48e647e62a16ef282a77c3eafc999))
+
 ## [4.0.0](https://github.com/bee-queue/arena/compare/v3.30.4...v4.0.0) (2023-09-02)
 
 ### ⚠ BREAKING CHANGES
