@@ -1,3 +1,9 @@
+## [4.1.0](https://github.com/bee-queue/arena/compare/v4.0.1...v4.1.0) (2023-10-28)
+
+### Features
+
+- **bullmq:** support removing repeatable jobs ([#667](https://github.com/bee-queue/arena/issues/667)) ([df1ab37](https://github.com/bee-queue/arena/commit/df1ab37ac51af342ffbadff8aeba2b18313a2dbb))
+
 ### [4.0.1](https://github.com/bee-queue/arena/compare/v4.0.0...v4.0.1) (2023-09-11)
 
 ### Bug Fixes
