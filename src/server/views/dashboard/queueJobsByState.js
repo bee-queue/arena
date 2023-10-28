@@ -138,7 +138,7 @@ async function _html(req, res) {
       jobs[i].showRetryButton = !queue.IS_BEE || jobState === 'failed';
       jobs[i].retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
       jobs[i].showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
-      jobs[i].showDeleteRepeatableButton = queue.IS_BULL && jobs[i].opts.repeat;
+      jobs[i].showDeleteRepeatableButton = !queue.IS_BEE && jobs[i].opts.repeat;
       jobs[i].parent = JobHelpers.getKeyProperties(jobs[i].parentKey);
     }
   }

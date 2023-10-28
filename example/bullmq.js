@@ -69,6 +69,7 @@ async function main() {
 
   // adding delayed jobs
   const delayedJob = await queue.add('delayed', {}, {delay: 60 * 1000});
+  await queue.add('cron', {}, {repeat: {pattern: '* 1 * 1 *'}});
   delayedJob.log('Log message');
 
   Arena(
