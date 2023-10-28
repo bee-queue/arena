@@ -9,10 +9,12 @@ async function handler(req, res) {
   if (!job) return res.status(404).send({error: 'job not found'});
 
   try {
-    if (job.opts.repeat.key) {
-      await queue.removeRepeatableByKey(job.opts.repeat.key);
+    if (job.opts.repeat.key || job.repeatJobKey) {
+      await queue.removeRepeatableByKey(
+        job.opts.repeat.key || job.repeatJobKey
+      );
     } else {
-      await queue.removeRepeatable(job.name, job.opts.repeat);
+      await queue.removeRepeatable(job.name, job.opts.repeat, job.opts.jobId);
     }
     return res.sendStatus(200);
   } catch (e) {
