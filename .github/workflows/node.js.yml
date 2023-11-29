@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+      NPM_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
 
     strategy:
       matrix:
@@ -71,4 +71,4 @@ jobs:
         env:
           # Need to use a separate token so we can push to the protected default branch.
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+          NPM_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'

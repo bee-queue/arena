@@ -30,7 +30,6 @@ function isValidState(state, queue) {
 }
 
 async function handler(req, res) {
-
   if (req.params.ext === 'json') return _json(req, res);
 
   return _html(req, res);
@@ -151,9 +150,11 @@ async function _html(req, res) {
   }
   pages = pages.filter((page) => page <= _.ceil(jobCounts[state] / pageSize));
   jobs = jobs.map((job) => {
-      job.scheduledTimeToExecute = moment(new Date(job.timestamp + job.delay)).fromNow(true);
-      return job;
-  });  
+    job.scheduledTimeToExecute = moment(
+      new Date(job.timestamp + job.delay)
+    ).fromNow(true);
+    return job;
+  });
   const disablePromote = !(state === 'delayed' && !queue.IS_BEE);
   const disableRetry = !(
     state === 'failed' ||
