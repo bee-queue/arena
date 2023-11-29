@@ -1,0 +1,29 @@
+<h2>Flows</h2>
+<h3>Overview</h3>
+
+<div class="no-padding">
+  <table id="flowList" class="table">
+    <thead>
+      <th>Host</th>
+      <th>Name</th>
+    </thead>
+    <tbody>
+      {{#each flows}}
+      <tr>
+        <td>{{ this.hostId }}</td>
+        <td><a href="{{ ../basePath }}/flows/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{#contentFor 'sidebar'}}
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li class="active"><a href="{{ basePath }}/flows">Flows Overview</a></li>
+{{/contentFor}}
+
+{{#contentFor 'script'}}
+new Tablesort(document.getElementById('flowList'));
+{{/contentFor}}

@@ -1,5 +1,5 @@
 async function handler(req, res) {
-  const { queueName, queueHost, id } = req.params;
+  const {queueName, queueHost, id} = req.params;
 
   const {Queues} = req.app.locals;
   const queue = await Queues.get(queueName, queueHost);
@@ -14,7 +14,7 @@ async function handler(req, res) {
   } catch (e) {
     const body = {
       error: 'queue error',
-      details: e.stack
+      details: e.stack,
     };
     return res.status(500).send(body);
   }

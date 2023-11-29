@@ -5,72 +5,121 @@
 <div class="row pagination-container">
   <div class="col-sm-6">
     {{#unless disablePagination}}
-      <nav aria-label="Job navigation">
-        <ul class="pagination">
-          <li
-            {{#eq currentPage 1}}
-              class="disabled">
-                <span>&laquo;</span>
-            {{else}}
-              ><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            {{/eq}}
-          </li>
-          {{#each pages}}
-            <li
-              {{#eq this ../currentPage}}
-                class="active"
-              {{/eq}}>
+    <nav aria-label="Job navigation">
+      <ul class="pagination">
+        <li {{#eq currentPage 1}} class="disabled">
+          <span>&laquo;</span>
+          {{else}}
+          ><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}&amp;order={{ order }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+          {{/eq}}
+        </li>
+        {{#each pages}}
+        <li {{#eq this ../currentPage}} class="active" {{/eq}}>
 
-              <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}">{{ this }}</a>
-            </li>
-          {{/each}}
-          <li
-            {{#eq currentPage lastPage}}
-              class="disabled">
-                <span>&raquo;</span>
-            {{else}}
-              ><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}" aria-label="Previous">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            {{/eq}}
-          </li>
-        </ul>
-      </nav>
+          <a
+            href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI ../queueName }}/{{ ../state }}?page={{ this }}&amp;pageSize={{ ../pageSize }}&amp;order={{ ../order }}">{{ this }}</a>
+        </li>
+        {{/each}}
+        <li {{#eq currentPage lastPage}} class="disabled">
+          <span>&raquo;</span>
+          {{else}}
+          ><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ add currentPage 1 }}&amp;pageSize={{ pageSize }}&amp;order={{ order }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+          {{/eq}}
+        </li>
+      </ul>
+    </nav>
     {{else}}
-      Bee-queue does not support pagination for {{ state }} queues &mdash; currently displaying up to <b>{{ pageSize }} jobs</b>. To change count, use "Size" dropdown.
+    Bee-queue does not support pagination for {{ state }} queues &mdash; currently displaying up to <b>{{ pageSize }}
+      jobs</b>. To change count, use "Size" dropdown.
     {{/unless}}
   </div>
   <div class="col-sm-6 text-right">
-    <button type="button" data-action="remove" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}.json" type="button"
+      class="btn btn-primary">
+      Dump jobs to JSON (limited to 1000)
+    </a>
+    <button type="button" data-action="remove" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
+      data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
       Remove Jobs
     </button>
-    {{#eq state 'failed'}}
-      <button type="button" data-action="retry" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}" data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
-        Retry Jobs
-      </button>
-    {{/eq}}
+    {{#unless disableRetry}}
+    <button type="button" data-action="retry" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
+      data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
+      Retry Jobs
+    </button>
+    {{/unless}}
+    {{#unless disablePromote}}
+    <button type="button" data-action="promote" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
+      data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">
+      Promote Jobs
+    </button>
+    {{/unless}}
 
+    <div class="btn-group">
       <div class="btn-group">
-        {{#if disablePagination}}
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown">
+          {{#if disablePagination}}
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             Size <span class="caret"></span>
           </button>
-        {{else}}
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{else}}
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             Page Size <span class="caret"></span>
           </button>
-        {{/if}}
-        <ul class="dropdown-menu">
-          <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}">{{ pageSize }} jobs</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}&amp;pageSize=5">5 jobs</a></li>
-          <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}&amp;pageSize=20">20 jobs</a></li>
-          <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}&amp;pageSize=100">100 jobs</a></li>
-          <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}&amp;pageSize=1000">1000 jobs</a></li>
-        </ul>
+          {{/if}}
+          <ul class="dropdown-menu">
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}<&amp;order={{ order }}<&amp;pageSize={{ pageSize }}">{{ pageSize }}
+                jobs</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 5 }}<&amp;order={{ order }}&amp;pageSize=5">5
+                jobs</a></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 20 }}<&amp;order={{ order }}&amp;pageSize=20">20
+                jobs</a></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 100 }}<&amp;order={{ order }}&amp;pageSize=100">100
+                jobs</a></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ adjustedPage currentPage pageSize 1000 }}<&amp;order={{ order }}&amp;pageSize=1000">1000
+                jobs</a></li>
+          </ul>
+        </div>
       </div>
+      {{#unless disableOrdering}}
+      <div class="btn-group">
+        <div class="dropdown">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Order <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}&amp;order={{ order }}">{{ order }}
+              </a></li>
+            <li role="separator" class="divider"></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}&amp;order=asc">acs
+              </a></li>
+            <li><a
+                href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ currentPage }}&amp;pageSize={{ pageSize }}&amp;order=desc">desc
+              </a></li>
+          </ul>
+        </div>
+      </div>
+      {{/unless}}
+    </div>
   </div>
 </div>
 
@@ -84,34 +133,43 @@
         </li>
 
         {{#each jobs}}
-          <li class="list-group-item">
-            <div class="js-bulk-action-container bulk-job-container">
-              <input type="hidden" name="jobId" value="{{ this.id }}" />
-              <input class="js-bulk-job" name="jobChecked" type="checkbox" />
-            </div>
+        <li class="list-group-item">
+          <div class="js-bulk-action-container bulk-job-container">
+            <input type="hidden" name="jobId" value="{{ this.id }}" />
+            {{#if this.id}}
+            <input class="js-bulk-job" name="jobChecked" type="checkbox" />
+            {{/if}}
+          </div>
 
-            <a role="button" data-toggle="collapse" href="#collapse{{encodeIdAttr this.id}}">
-              <h4 class="header-collapse">
-                <span class="label label-default">{{ this.id }}</span>
-                {{#if this.data.name}}
-                  <span style="margin-left: 8px">{{ this.data.name }}</span>
-                {{else if this.data.title}}
-                <span style="margin-left: 8px">{{ this.data.title }}</span>
-                {{else if this.name}}
-                  <span style="margin-left: 8px">{{ this.name }}</span>
-                {{/if}}
-                {{# if this.data.datasource}}
-                  - {{this.data.datasource.name}}
-                {{/if}}
-                <span style="color:#afafaf">
-                ({{ this.scheduledTimeToExecute }})
-                </span>
-              </h4>
-            </a>
-            <div id="collapse{{encodeIdAttr this.id}}" class="collapse">
-              {{~> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
-            </div>
-          </li>
+          <a role="button" data-toggle="collapse" href="#collapse{{hashIdAttr this}}">
+            <h4 class="header-collapse">
+              <span class="label label-default">{{#if this.id}}{{ this.id }}{{else}}<em>missing id</em>{{/if}}</span>
+              {{#if this.data.arenaName}}
+              <span style="margin-left: 8px">{{ this.data.arenaName }}</span>
+              {{else if this.name}}
+              <span style="margin-left: 8px">{{ this.name }}</span>
+              {{else if this.data.title}}
+              <span style="margin-left: 8px">{{ this.data.title }}</span>
+              {{else if this.data.name}}
+              <span style="margin-left: 8px">{{ this.data.name }}</span>
+              {{/if}}
+              {{# if this.data.datasource}}
+                - {{this.data.datasource.name}}
+              {{/if}}
+              <span style="color:#afafaf">
+              ({{ this.scheduledTimeToExecute }})
+              </span>
+            </h4>
+          </a>
+          {{#if this.id}}
+          <div id="collapse{{hashIdAttr this}}" class="collapse">
+            {{~> dashboard/jobDetails this basePath=../basePath displayJobInline=true queueName=../queueName queueHost=../queueHost jobState=../state }}
+          </div>
+          {{else}}
+          <div id ="collapse-undefined" class="collapse">
+          </div>
+          {{/if}}
+        </li>
         {{/each}}
       </ul>
     </form>
@@ -119,11 +177,16 @@
 </div>
 
 <p>
-  <em>Hint: </em><kbd><span style="font-family: sans-serif;">&#8679;</span> + Click</kbd><em> to select a range of jobs.</em>
+  <em>Hint: </em><kbd><span style="font-family: sans-serif;">&#8679;</span> + Click</kbd><em> to select a range of
+    jobs.</em>
 </p>
 
 {{#contentFor 'sidebar'}}
-  <li><a href="{{ basePath }}/">Queues Overview</a></li>
-  <li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue <code>{{ queueHost }}/{{ queueName }}</code></a></li>
-  <li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li><a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}">Queue
+    <code>{{ queueHost }}/{{ queueName }}</code></a></li>
+<li class="active"><a href="#">{{capitalize state}} Jobs</a></li>
+{{#if hasFlows}}
+<li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
+{{/if}}
 {{/contentFor}}

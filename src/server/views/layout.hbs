@@ -1,4 +1,5 @@
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,22 +7,36 @@
 
     <title>Arena</title>
 
+    {{#if (useCdn)}}
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
-
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <!-- JSON Viewer -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    {{else}}
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ basePath }}/bootstrap.min.css">
+    <!-- JSON Viewer -->
+    <link rel="stylesheet" href="{{ basePath }}/highlight.default.min.css">
+    <script src="{{ basePath }}/highlight.min.js"></script>
+    {{/if}}
+    <link rel="stylesheet" href="{{ basePath }}/dashboard.css">
     <script>hljs.initHighlightingOnLoad();</script>
 
+    <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/jsoneditor.min.css">
+    <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/tablesort.css">
+    <link rel="stylesheet" href="{{ basePath }}{{ vendorPath }}/bootstrap-treeview.min.css">
+    {{#if customCssPath}}
+    <link rel="stylesheet" href="{{ customCssPath }}">
+    {{/if}}
   </head>
+
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div id="navbar" class="col-sm-3 col-md-2 sidebar">
           <h4>Queue Navigation Tree</h4>
-          <ul class="nav nav-sidebar">
+          <ul id="navbar-list" class="nav nav-sidebar">
             {{{block "sidebar"}}}
           </ul>
         </div>
@@ -33,8 +48,25 @@
     </div>
 
     <input type="hidden" id="basePath" value="{{ basePath }}">
+    {{#if (useCdn)}}
+    <script type="text/javascript"
+      src="//cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+    {{else}}
+    <script type="text/javascript" src="{{ basePath }}/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ basePath }}/bootstrap.min.js"></script>
+    {{/if}}
 
-    <script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@3.2.1,bootstrap@3.3.7"></script>
+    <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/jsoneditor.min.js"></script>
+    <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/tablesort.min.js"></script>
+    <script type="text/javascript" src="{{ basePath }}{{ vendorPath }}/bootstrap-treeview.min.js"></script>
+
     <script type="text/javascript" src="{{ basePath }}/dashboard.js"></script>
+    <script>
+      {{{ block "script" }}}
+    </script>
+    {{#if customJsPath}}
+    <script type="text/javascript" src="{{ customJsPath }}"></script>
+    {{/if}}
   </body>
+
 </html>

@@ -1,27 +1,32 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 
-module.exports = function() {
+module.exports = function (config) {
   const hbs = exphbs.create({
     defaultLayout: `${__dirname}/views/layout`,
     handlebars,
     partialsDir: `${__dirname}/views/partials/`,
-    extname: 'hbs'
+    extname: 'hbs',
   });
-
-  require('handlebars-helpers')({handlebars});
-  require('./views/helpers/handlebars')(handlebars);
 
   const app = express();
 
-  const defaultConfig = require(path.join(__dirname, 'config', 'index.json'));
+  const defaultConfig = require('./config/index.json');
 
   const Queues = require('./queue');
-  app.locals.Queues = new Queues(defaultConfig);
-  app.locals.basePath = '';
+  const Flows = require('./flow');
+
+  const queues = new Queues({...defaultConfig, ...config});
+  const flows = new Flows({...defaultConfig, ...config});
+  require('./views/helpers/handlebars')(handlebars, {queues});
+  app.locals.Queues = queues;
+  app.locals.Flows = flows;
+  app.locals.appBasePath = '';
+  app.locals.vendorPath = '/vendor';
+  app.locals.customCssPath = config.customCssPath;
+  app.locals.customJsPath = config.customJsPath;
 
   app.set('views', `${__dirname}/views`);
   app.set('view engine', 'hbs');
@@ -33,6 +38,6 @@ module.exports = function() {
 
   return {
     app,
-    Queues: app.locals.Queues
+    Queues: app.locals.Queues,
   };
 };
