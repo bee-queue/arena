@@ -18,20 +18,25 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
 
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # For commitlint; ideally this would only check out the feature branch's history, but
           # that's not currently an option.
           fetch-depth: ${{ github.event_name == 'push' }}
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: set up npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > .npmrc
       - run: npm ci
       - run: npm run ci --if-present
       - run: npm run ci:commitlint
@@ -47,7 +52,7 @@ jobs:
     needs: [lint]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # Necessary to prevent the checkout action from writing credentials to .git/config, which
           # semantic-release attempts to use to push despite those credentials being denied the
@@ -55,13 +60,15 @@ jobs:
           # See https://github.com/semantic-release/git/issues/196#issuecomment-601310576.
           persist-credentials: false
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 14.x
+      - name: set up npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > .npmrc
       - run: npm ci
       - name: Release
         run: npx semantic-release -b master,2.x
         env:
           # Need to use a separate token so we can push to the protected default branch.
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
