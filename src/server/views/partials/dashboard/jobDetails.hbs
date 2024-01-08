@@ -1,17 +1,33 @@
 {{#unless displayJobInline}}
-  <h3>{{ this.id }}</h3>
+<h3>{{ this.id }}</h3>
 {{/unless}}
 
 <h5>Actions</h5>
-<button class="btn btn-danger js-remove-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
+<button class="btn btn-danger js-remove-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
   Remove
 </button>
 
-{{#eq jobState 'failed'}}
-  <button class="btn btn-success js-retry-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}" data-job-id="{{ this.id }}">
-    Retry
-  </button>
-{{/eq}}
+{{#if showRetryButton}}
+<button class="btn btn-success js-retry-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}">
+  {{ retryButtonText }}
+</button>
+{{/if}}
+
+{{#if showPromoteButton}}
+<button class="btn btn-success js-promote-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}">
+  Promote
+</button>
+{{/if}}
+
+{{#if showDeleteRepeatableButton}}
+<button class="btn btn-danger js-remove-repeatable-job" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}"
+  data-job-id="{{ this.id }}" data-job-state="{{ jobState }}">
+  Remove Repeatable
+</button>
+{{/if}}
 
 <div class="row">
   <div class="col-sm-3">
@@ -21,47 +37,82 @@
 
   <div class="col-sm-3">
     <h5>Timestamp</h5>
-    {{#if this.options.timestamp}}
-      {{moment this.options.timestamp "llll"}}
-    {{/if}}
-    {{#if this.timestamp}}
-      {{moment this.timestamp "llll"}}
+    {{#if (getTimestamp this)}}
+    {{moment (getTimestamp this) "llll"}}
     {{/if}}
   </div>
+
+  {{#if this.processedOn}}
+  <div class="col-sm-3">
+    <h5>Processed</h5>
+    {{moment this.processedOn "llll"}}
+  </div>
+  {{/if}}
+
+  {{#if this.finishedOn}}
+  <div class="col-sm-3">
+    <h5>Finished</h5>
+    {{moment this.finishedOn "llll"}}
+  </div>
+  {{/if}}
+
+  {{#eq jobState 'delayed'}}
+  <div class="col-sm-3">
+    <h5>Executes At</h5>
+    {{moment (getDelayedExecutionAt this) "llll"}}
+  </div>
+  {{/eq}}
 
   <div class="col-sm-3">
     <h5>Attempts Made</h5>
     {{this.attemptsMade}}
 
     {{#if this.options}}
-      {{length this.options.stacktraces}}
+    {{length this.options.stacktraces}}
     {{/if}}
   </div>
 </div>
 <div class="row">
   <div class="col-sm-4">
     <h5>Permalinks</h5>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}" class="btn btn-info">Job {{ this.id }}</a>
-    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ this.id }}?json=true" class="btn btn-info">JSON</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}" class="btn btn-info">Job
+      {{ this.id }}</a>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?json=true"
+      class="btn btn-info">JSON</a>
   </div>
 </div>
 
-{{#unless this.queue.IS_BEE}}
+{{#if this.queue.IS_BULL}}
 <h5>Progress</h5>
+{{#if (isNumber this._progress)}}
 <div class="progress">
   <div class="progress-bar
-              {{#eq jobState 'failed'}}
-              progress-bar-danger
-              {{/eq}}"
-       role="progressbar"
-       aria-valuenow="{{ this._progress }}"
-       aria-valuemin="0"
-       aria-valuemax="100"
-       style="width: {{ this._progress }}%; min-width: 2em;">
+                {{#eq jobState 'failed'}}
+                progress-bar-danger
+                {{/eq}}" role="progressbar" aria-valuenow="{{ this._progress }}" aria-valuemin="0" aria-valuemax="100"
+    style="width: {{ this._progress }}%; min-width: 2em;">
     {{ this._progress }}%
   </div>
 </div>
-{{/unless}}
+{{else}}
+<pre>{{json this._progress true}}</pre>
+{{/if}}
+{{else if this.queue.IS_BULLMQ}}
+<h5>Progress</h5>
+{{#if (isNumber this.progress)}}
+<div class="progress">
+  <div class="progress-bar
+                {{#eq jobState 'failed'}}
+                progress-bar-danger
+                {{/eq}}" role="progressbar" aria-valuenow="{{ this.progress }}" aria-valuemin="0" aria-valuemax="100"
+    style="width: {{ this.progress }}%; min-width: 2em;">
+    {{ this.progress }}%
+  </div>
+</div>
+{{else}}
+<pre>{{json this.progress true}}</pre>
+{{/if}}
+{{/if}}
 
 {{#if this.returnvalue}}
 <h5>Return Value</h5>
@@ -73,20 +124,82 @@
 <pre><code>{{this.failedReason}}</code></pre>
 {{/if}}
 
-{{#eq jobState 'failed'}}
-  <h5>Stacktraces</h5>
-  {{#if this.options.stacktraces}}
-    {{#each this.options.stacktraces}}
-      <pre>{{ this }}</pre>
-    {{/each}}
-  {{/if}}
+{{#if stacktraces}}
+<h5>Stacktraces</h5>
+{{#each stacktraces}}
+<pre>{{ this }}</pre>
+{{/each}}
+{{/if}}
 
-  {{#if this.stacktrace}}
-    {{#each this.stacktrace}}
-      <pre>{{ this }}</pre>
-    {{/each}}
-  {{/if}}
-{{/eq}}
 
 <h5>Data</h5>
 <pre><code class="json">{{json this.data true}}</code></pre>
+
+{{#if this.queue.IS_BULLMQ}}
+{{#if this.parent }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Parent</h5>
+    <a href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI this.parent.queueName }}/{{ this.parent.id }}">
+      <span class="label label-default">{{ this.parent.id }}</span>
+    </a>
+  </div>
+</div>
+{{/if}}
+
+{{#if this.unprocessedChildren }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Unprocessed Children <span class="count">{{ this.countDependencies.unprocessed}}</span></h5>
+
+    <nav aria-label="Unprocessed navigation">
+      <ul class="pagination">
+        <li><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?unprocessedCursor={{ this.unprocessedCursor }}&amp;unprocessedCount={{ this.unprocessedCount }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    {{#each this.unprocessedChildren}}
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ encodeURI this.id }}">
+      <span class="label label-danger">{{ this.id }}</span>
+    </a>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+{{#if this.processedChildren }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Processed Children <span class="count">{{ this.countDependencies.processed}}</span></h5>
+
+    <nav aria-label="Processed navigation">
+      <ul class="pagination">
+        <li><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?processedCursor={{ this.processedCursor }}&amp;processedCount={{ this.processedCount }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    {{#each this.processedChildren}}
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ encodeURI this.id }}">
+      <span class="label label-success">{{ this.id }}</span>
+    </a>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+<br>
+{{/if}}
+
+{{#if this.logs}}
+<h5>Logs</h5>
+<pre><code class="json">{{json this.logs true}}</code></pre>
+{{/if}}

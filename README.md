@@ -1,8 +1,10 @@
 # Arena
 
-An intuitive Web GUI for [Bee Queue](https://github.com/bee-queue/bee-queue) and [Bull](https://github.com/optimalbits/bull). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
+[![NPM](https://img.shields.io/npm/v/bull-arena.svg)](https://www.npmjs.com/package/bull-arena) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![NPM downloads](https://img.shields.io/npm/dm/bull-arena)](https://www.npmjs.com/package/bull-arena) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-For a quick introduction to the motivations for creating Arena, read *[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www.mixmax.com/blog/introducing-bull-arena)*.
+An intuitive Web GUI for [Bee Queue](https://github.com/bee-queue/bee-queue), [Bull](https://github.com/optimalbits/bull) and [BullMQ](https://github.com/taskforcesh/bullmq). Built on Express so you can run Arena standalone, or mounted in another app as middleware.
+
+For a quick introduction to the motivations for creating Arena, read _[Interactively monitoring Bull, a Redis-backed job queue for Node](https://www.mixmax.com/blog/introducing-bull-arena)_.
 
 ### Screenshots
 
@@ -10,65 +12,75 @@ For a quick introduction to the motivations for creating Arena, read *[Interacti
 
 ### Features
 
-* Check the health of a queue and its jobs at a glance
-* Paginate and filter jobs by their state
-* View details and stacktraces of jobs with permalinks
-* Restart and retry jobs with one click
+- Check the health of a queue and its jobs at a glance
+- Paginate and filter jobs by their state
+- View details and stacktraces of jobs with permalinks
+- Restart and retry jobs with one click
 
 ### Usage
 
-#### Prerequisites
-
-Configure your queues in the "queues" key of [`index.json`](src/server/config/index.json).
-
-Queues are JSON objects. Here are the configuration keys that are common to all three configuration ways:
+Arena accepts the following options:
 
 ```js
-{
-  // required string
-  "name": "my_queue",
+const Arena = require('bull-arena');
 
-  // host display name, give it a helpful name for reference
-  // required string
-  "hostId": "Queue Server 1",
+// Mandatory import of queue library.
+const Bee = require('bee-queue');
 
-  // optional string
-  // default: null (will assume Bull)
-  "type": "bee",
+Arena({
+  // All queue libraries used must be explicitly imported and included.
+  Bee,
 
-  // queue keys prefix
-  // optional string
-  // default: "bq" for Bee, "bull" for Bull
-  "prefix": "foo"
-}
+  // Provide a `Bull` option when using bull, similar to the `Bee` option above.
+
+  queues: [
+    {
+      // Required for each queue definition.
+      name: 'name_of_my_queue',
+
+      // User-readable display name for the host. Required.
+      hostId: 'Queue Server 1',
+
+      // Queue type (Bull or Bee - default Bull).
+      type: 'bee',
+
+      // Queue key prefix. Defaults to "bq" for Bee and "bull" for Bull.
+      prefix: 'foo',
+    },
+  ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css',
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
+});
 ```
 
-The required `name` and `hostId` have to be present in any of the following JSON objects, the optional keys can be present in them.
+The required `name` and `hostId` in each queue object have to be present in each queue object. Additional keys can be present in them, to configure the redis client itself.
 
 The three ways in which you can configure the client are:
 
-##### 1. port/host
+#### 1. port/host
 
-```js
+```jsonc
+// In a queue object.
 {
-  // hostname or IP
-  // required string
+  // Hostname or IP. Required.
   "host": "127.0.0.1",
 
-  // optional number
-  // default: 6379
+  // Bound port. Optional, default: 6379.
   "port": 6379,
 
-  // optional string
+  // Optional, to issue a redis AUTH command.
   "password": "hello",
 
-  // optional number
-  // default: 0
-  "db": 1,
+  // Optional; default 0. Most of the time, you'll leave this absent.
+  "db": 1
 }
 ```
 
-##### 2. URL
+#### 2. URL
 
 You can also provide a `url` field instead of `host`, `port`, `db` and `password`.
 
@@ -78,7 +90,7 @@ You can also provide a `url` field instead of `host`, `port`, `db` and `password
 }
 ```
 
-##### 3. Redis client options
+#### 3. Redis client options
 
 Arena is compatible with both Bee and Bull.
 If you need to pass some specific configuration options directly to the redis client library your queue uses, you can also do so.
@@ -96,33 +108,31 @@ For Bee, the `redis` key will be directly passed to [`redis.createClient`](https
 
 For Bull, the `redis` key will be directly passed to [`ioredis`](https://github.com/luin/ioredis/blob/master/API.md#new_Redis_new), as explained [here](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#queue). To use this to connect to a Sentinel cluster, see [here](https://github.com/luin/ioredis/blob/master/README.md#sentinel).
 
-##### Custom configuration file
+#### Custom configuration file
 
 To specify a custom configuration file location, see [Running Arena as a node module](#running-arena-as-a-node-module).
 
-*Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery*
-
-#### Running the server
-
-Run `npm install` to fetch Arena's dependencies. Then run `npm start` to start the server.
-
-Note that because Arena is implemented using `async`/`await`, Arena only currently supports Node `>=7.6`.
+_Note that if you happen to use Amazon Web Services' ElastiCache as your Redis host, check out http://mixmax.com/blog/bull-queue-aws-autodiscovery_
 
 #### Running Arena as a node module
 
-Alternatively, you can use Arena as a node module. This has potential benefits:
+See the [Docker image](#docker-image) section or the [docker-arena] repository for information about running this standalone.
 
-* Arena can be configured to use any method of server/queue configuration desired
-  * for example, fetching available redis queues from an AWS instance on server start
-  * or even just plain old reading from environment variables
-* Arena can be mounted in other express apps as middleware
+Note that because Arena is implemented using `async`/`await`, Arena only currently supports Node `>=7.6`.
+
+Using Arena as a node module has potential benefits:
+
+- Arena can be configured to use any method of server/queue configuration desired
+  - for example, fetching available redis queues from an AWS instance on server start
+  - or even just plain old reading from environment variables
+- Arena can be mounted in other express apps as middleware
 
 Usage:
 
 In project folder:
 
 ```shell
-yarn add bull-arena
+$ npm install bull-arena
 ```
 
 In router.js:
@@ -134,6 +144,8 @@ const express = require('express');
 const router = express.Router();
 
 const arena = Arena({
+  // Include a reference to the bee-queue or bull libraries, depending on the library being used.
+
   queues: [
     {
       // First queue configuration
@@ -143,44 +155,158 @@ const arena = Arena({
     },
     {
       // And so on...
-    }
-  ]
+    },
+  ],
 });
+
 router.use('/', arena);
 ```
 
-`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration](#prerequisites). The second, `listenOpts`, is an object that can contain the following optional parameters:
+`Arena` takes two arguments. The first, `config`, is a plain object containing the [queue configuration, flow configuration (just for bullmq for now) and other optional parameters](#usage). The second, `listenOpts`, is an object that can contain the following optional parameters:
 
-* `port` - specify custom port to listen on (default: 4567)
-* `basePath` - specify custom path to mount server on (default: '/')
-* `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
+- `port` - specify custom port to listen on (default: 4567)
+- `host` - specify custom ip to listen on (default: '0.0.0.0')
+- `basePath` - specify custom path to mount server on (default: '/')
+- `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
+- `useCdn` - set false to use the bundled js and css files (default: true)
+- `customCssPath` - an URL to an external stylesheet (default: null)
+
+##### Example config (for bull)
+
+```js
+import Arena from 'bull-arena';
+import Bull from 'bull';
+
+const arenaConfig = Arena({
+  Bull,
+  queues: [
+    {
+      type: 'bull',
+
+      // Name of the bull queue, this name must match up exactly with what you've defined in bull.
+      name: "Notification_Emailer",
+
+      // Hostname or queue prefix, you can put whatever you want.
+      hostId: "MyAwesomeQueues",
+
+      // Redis auth.
+      redis: {
+        port: /* Your redis port */,
+        host: /* Your redis host domain*/,
+        password: /* Your redis password */,
+      },
+    },
+  ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css',
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
+},
+{
+  // Make the arena dashboard become available at {my-site.com}/arena.
+  basePath: '/arena',
+
+  // Let express handle the listening.
+  disableListen: true,
+});
+
+// Make arena's resources (js/css deps) available at the base app route
+app.use('/', arenaConfig);
+```
+
+(Credit to [tim-soft](https://github.com/tim-soft) for the example config.)
+
+##### Example config (for bullmq)
+
+```js
+import Arena from 'bull-arena';
+import { Queue, FlowProducer } from "bullmq";
+
+const arenaConfig = Arena({
+  BullMQ: Queue,
+  FlowBullMQ: FlowProducer,
+  queues: [
+    {
+      type: 'bullmq',
+
+      // Name of the bullmq queue, this name must match up exactly with what you've defined in bullmq.
+      name: "testQueue",
+
+      // Hostname or queue prefix, you can put whatever you want.
+      hostId: "worker",
+
+      // Redis auth.
+      redis: {
+        port: /* Your redis port */,
+        host: /* Your redis host domain*/,
+        password: /* Your redis password */,
+      },
+    },
+  ],
+
+  flows: [
+    {
+      type: 'bullmq',
+
+      // Name of the bullmq flow connection, this name helps to identify different connections.
+      name: "testConnection",
+
+      // Hostname, you can put whatever you want.
+      hostId: "Flow",
+
+      // Redis auth.
+      redis: {
+        port: /* Your redis port */,
+        host: /* Your redis host domain*/,
+        password: /* Your redis password */,
+      },
+    },
+  ],
+
+  // Optionally include your own stylesheet
+  customCssPath: 'https://example.com/custom-arena-styles.css',
+
+  // Optionally include your own script
+  customJsPath: 'https://example.com/custom-arena-js.js',
+},
+{
+  // Make the arena dashboard become available at {my-site.com}/arena.
+  basePath: '/arena',
+
+  // Let express handle the listening.
+  disableListen: true,
+});
+
+// Make arena's resources (js/css deps) available at the base app route
+app.use('/', arenaConfig);
+```
 
 ### Bee Queue support
 
-Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: bee` attribute with an individual queue's configuration object.
+Arena is dual-compatible with Bull 3.x and Bee-Queue 1.x. To add a Bee queue to the Arena dashboard, include the `type: 'bee'` property with an individual queue's configuration object.
+
+### BullMQ Queue support
+
+Arena has added preliminary support for BullMQ post 3.4.x version. To add a BullMQ queue to the Arena dashboard, include the `type: 'bullmq'` property with an individual queue's configuration object.
 
 ### Docker image
 
-You can now `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
+You can `docker pull` Arena from [Docker Hub](https://hub.docker.com/r/mixmaxhq/arena/).
 
-To build the image simply run:
+Please see the [docker-arena] repository for details.
 
-```shell
-docker build -t <name-image> .
-```
+### Official UIs
 
-To run a container, execute the following command. Note that we need to settle the location of `index.json` in this container via volume mounting:
+- [Taskforce](https://taskforce.sh) for Bull and Bullmq
 
-```shell
-docker run -p 4567:4567 -v </local/route/to/index.json>:/opt/arena/src/server/config/index.json <name-image>
-```
+### Contributing
 
-### Development
-
-Arena is written using Express, with simple jQuery and Handlebars on the front end.
-
-If updating dependencies, please use Yarn and update the `yarn.lock` file before submitting a pull request.
+See [contributing guidelines](CONTRIBUTING.md) and [an example](example/README.md).
 
 ### License
 
 The [MIT License](LICENSE).
+
+[docker-arena]: https://github.com/bee-queue/docker-arena

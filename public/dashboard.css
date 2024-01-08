@@ -60,13 +60,13 @@
   background-color: #428bca;
 }
 
-
 /*
  * Main content
  */
 
 .main {
   padding: 20px;
+  margin-top: 50px;
 }
 @media (min-width: 768px) {
   .main {
@@ -77,7 +77,6 @@
 .main .page-header {
   margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
@@ -114,7 +113,7 @@
  */
 .header-collapse {
   display: inline;
-  margin: 0 0 0 .5em;
+  margin: 0 0 0 0.5em;
 }
 
 /*
@@ -131,4 +130,8 @@
 pre {
   max-height: 250px;
   overflow-y: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

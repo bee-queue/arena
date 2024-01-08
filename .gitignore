@@ -1,2 +1,8 @@
 node_modules
+package-lock.json
 *.DS_Store
+.vscode
+.idea
+*.tern-port
+*.sublime-workspace
+dump.rdb

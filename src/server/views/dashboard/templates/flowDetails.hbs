@@ -1,0 +1,87 @@
+<h2>Flow <code>{{ flowHost }}/{{ connectionName }}</code></h2>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="js-toggle-search-flow btn btn-default btn-xs pull-right">Search Flow</div>
+        <div class="js-toggle-add-flow-editor btn btn-default btn-xs pull-right">Add Flow</div>
+        <h4 class="panel-title">Flow Panel</h4>
+      </div>
+      <div class="panel-body">
+        <div class="jsoneditorx form-group hide overflow-hidden">
+          <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
+          <br />
+          <div class="form-inline pull-right">
+            <div class="js-add-flow btn btn-primary btn-sm">Create</div>
+          </div>
+        </div>
+        <div class="searchflowx hide">
+          <div class="form-group row">
+            <label for="queue-name-input-search" class="col-sm-4 col-form-label">Queue Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="queue-name-input-search" placeholder="Queue Name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="job-id-input-search" class="col-sm-4 col-form-label">Job Id</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="job-id-input-search" placeholder="Job Id">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="depth-input-search" class="col-sm-4 col-form-label">Tree Depth</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="depth-input-search" placeholder="Tree Depth">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="max-children-input-search" class="col-sm-4 col-form-label">Limit Children</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="max-children-input-search" placeholder="Limit Children">
+            </div>
+          </div>
+          <br />
+          <div class="form-inline pull-right">
+            <div class="js-search-flow btn btn-primary btn-sm">Search</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Redis Statistics</h4>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          {{#each stats}}
+          <tr>
+            <th>{{ @key }}</th>
+            <th>{{ this }}</th>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row hide overflow-hidden js-tree">
+  {{~> dashboard/flowTree }}
+</div>
+
+{{#contentFor 'sidebar'}}
+<li><a href="{{ basePath }}/">Queues Overview</a></li>
+<li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
+<li class="active"><a href="#">Flow <code>{{ flowHost }}/{{ connectionName }}</code></a></li>
+{{/contentFor}}
+
+{{#contentFor 'script'}}
+window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
+window.arenaInitialPayload = {
+flowHost: "{{ flowHost }}",
+connectionName: "{{ connectionName }}"
+};
+{{/contentFor}}

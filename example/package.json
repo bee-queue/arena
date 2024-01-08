@@ -1,0 +1,27 @@
+{
+  "name": "arena-example-project",
+  "version": "1.0.0",
+  "description": "An example project that uses Arena",
+  "main": "bee.js",
+  "scripts": {
+    "dc:up": "docker-compose -f docker-compose.yml up -d",
+    "dc:down": "docker-compose -f docker-compose.yml down",
+    "start:fastify": "node fastify.js",
+    "start:express": "node express.js",
+    "start:bee": "node bee.js",
+    "start:bull": "node bull.js",
+    "start:bullmq": "node bullmq.js",
+    "start:bullmq_with_flows": "node bullmq_with_flows.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/express": "^2.3.0",
+    "bee-queue": "^1.4.0",
+    "bull": "^3.22.6",
+    "bullmq": "^4.8.0",
+    "express": "^4.17.1",
+    "fastify": "^4.13.0"
+  }
+}
