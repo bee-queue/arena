@@ -1,4 +1,5 @@
 const express = require('express');
+const IORedis = require('ioredis');
 const path = require('path');
 const Arena = require('../');
 const Bull = require('bull');
@@ -8,7 +9,19 @@ const HTTP_SERVER_PORT = 4735;
 const REDIS_SERVER_PORT = 6379;
 
 async function main() {
-  const queue = new Bull('name_of_my_queue', {
+  const queueName1 = 'name_of_my_queue_1';
+  const connection = new IORedis({port: REDIS_SERVER_PORT});
+
+  const createClient = (type) => {
+    switch (type) {
+      case 'client':
+        return connection;
+      default:
+        return new IORedis({port: REDIS_SERVER_PORT});
+    }
+  };
+
+  const queue = new Bull(queueName1, {
     redis: {
       port: REDIS_SERVER_PORT,
     },
@@ -42,7 +55,7 @@ async function main() {
       queues: [
         {
           // Required for each queue definition.
-          name: 'name_of_my_queue',
+          name: queueName1,
 
           // User-readable display name for the host. Required.
           hostId: 'Queue Server 1',
@@ -53,6 +66,20 @@ async function main() {
           redis: {
             // host: 'localhost',
             port: REDIS_SERVER_PORT,
+          },
+        },
+        {
+          // Required for each queue definition.
+          name: 'name_of_my_queue_2',
+
+          // User-readable display name for the host. Required.
+          hostId: 'Queue Server 2',
+
+          // Queue type (Bull or Bee - default Bull).
+          type: 'bull',
+
+          redis: {
+            createClient,
           },
         },
       ],

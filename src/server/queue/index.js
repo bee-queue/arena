@@ -106,9 +106,6 @@ class Queues {
       queue = new Bee(name, options);
       queue.IS_BEE = true;
     } else if (isBullMQ) {
-      if (queueConfig.createClient)
-        options.createClient = queueConfig.createClient;
-
       const {BullMQ} = this._config;
       const {redis, ...rest} = options;
       queue = new BullMQ(name, {
