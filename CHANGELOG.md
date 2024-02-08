@@ -1,3 +1,9 @@
+### [4.1.1](https://github.com/bee-queue/arena/compare/v4.1.0...v4.1.1) (2024-02-08)
+
+### Bug Fixes
+
+- **layouts:** include favicon at layout template ([#668](https://github.com/bee-queue/arena/issues/668)) ([a107ad9](https://github.com/bee-queue/arena/commit/a107ad9b16fb8b5c20abece0ed36ca3855895e41))
+
 ## [4.1.0](https://github.com/bee-queue/arena/compare/v4.0.1...v4.1.0) (2023-10-28)
 
 ### Features
