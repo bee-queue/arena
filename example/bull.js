@@ -63,10 +63,7 @@ async function main() {
           // Queue type (Bull or Bee - default Bull).
           type: 'bull',
 
-          redis: {
-            // host: 'localhost',
-            port: REDIS_SERVER_PORT,
-          },
+          createClient,
         },
         {
           // Required for each queue definition.
