@@ -1,6 +1,6 @@
 async function handler(req, res) {
   const {queueName, queueHost} = req.params;
-  const {name, data} = req.body;
+  const {name, data, opts} = req.body;
 
   const {Queues} = req.app.locals;
 
@@ -8,7 +8,7 @@ async function handler(req, res) {
   if (!queue) return res.status(404).json({error: 'queue not found'});
 
   try {
-    await Queues.set(queue, data, name);
+    await Queues.set(queue, data, name, opts);
   } catch (err) {
     return res.status(500).json({error: err.message});
   }

@@ -256,8 +256,9 @@ $(document).ready(() => {
 
     const job = localStorage.getItem('arena:savedJob');
     if (job) {
-      const {name, data} = JSON.parse(job);
+      const {name, data, opts} = JSON.parse(job);
       window.jsonEditor.set(data);
+      if (window.jsonEditorOpts) window.jsonEditorOpts.set(opts);
       $('input.js-add-job-name').val(name);
     } else {
       window.jsonEditor.set({id: ''});
@@ -291,7 +292,8 @@ $(document).ready(() => {
   $('.js-add-job').on('click', function () {
     const name = $('input.js-add-job-name').val() || null;
     const data = window.jsonEditor.get();
-    const job = JSON.stringify({name, data});
+    const opts = window.jsonEditorOpts ? window.jsonEditorOpts.get() : {};
+    const job = JSON.stringify({name, data, opts});
     localStorage.setItem('arena:savedJob', job);
     const {queueHost, queueName} = window.arenaInitialPayload;
     $.ajax({
