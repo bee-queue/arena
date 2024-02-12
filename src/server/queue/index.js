@@ -140,14 +140,16 @@ class Queues {
    * @param {Object} queue A bee or bull queue class
    * @param {Object} data The data to be used within the job
    * @param {String} name The name of the Bull job (optional)
+   * @param {Object} opts The opts to be used within the job
    */
-  async set(queue, data, name) {
+  async set(queue, data, name, opts) {
     if (queue.IS_BEE) {
       return queue.createJob(data).save();
     } else {
       const args = [
         data,
         {
+          ...opts,
           removeOnComplete: false,
           removeOnFail: false,
         },

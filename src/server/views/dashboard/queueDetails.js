@@ -35,6 +35,7 @@ async function handler(req, res) {
     queueName,
     queueHost,
     queueIsBee: !!queue.IS_BEE,
+    queueIsBullMQ: !!queue.IS_BULLMQ,
     hasFlows: Flows.hasFlows(),
     jobCounts,
     stats,

@@ -18,17 +18,41 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="js-toggle-add-job-editor  btn btn-default btn-xs pull-right">Add Job</div>
+        <div class="js-toggle-add-job-editor btn btn-default btn-xs pull-right">Add Job</div>
         <h4 class="panel-title">Job Types</h4>
       </div>
       <div class="panel-body">
         <div class="jsoneditorx form-group hide overflow-hidden">
-          <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
+          {{#unless queueIsBee}}
+          <div class="panel with-nav-tabs panel-primary">
+            <ul class="nav nav-tabs nav-justified">
+              <li class="active"><a href="#tab1primary" data-toggle="tab">Payload</a></li>
+              <li><a class="text-white" href="#tab2primary" data-toggle="tab">Options</a></li>
+            </ul>
+            <div class="panel-body">
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1primary">
+          {{/unless}}
+                  <div class="jsoneditorx hide" id="jsoneditor" style="height:300px;"></div>
+          {{#unless queueIsBee}}
+                </div>
+                <div class="tab-pane fade" id="tab2primary">
+                  <div class="jsoneditorx hide" id="jsoneditoropts" style="height:300px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/unless}}
           <br />
           <div class="form-inline pull-right">
             {{#unless queueIsBee}}
             <input type="text" class="js-add-job-name form-control input-sm" style="margin-right: 10px;"
-              placeholder="Job name (optional)">
+              {{#if queueIsBullMQ}}
+              placeholder="Job name"
+              {{else}}
+              placeholder="Job name (optional)"
+              {{/if}}
+            >
             {{/unless}}
             <div class="js-add-job btn btn-primary btn-sm">Create</div>
           </div>
@@ -75,6 +99,7 @@
 
 {{#contentFor 'script'}}
 window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
+if(document.getElementById('jsoneditoropts')) window.jsonEditorOpts = new JSONEditor(document.getElementById('jsoneditoropts'), { modes: ['code','tree','text'] });
 window.arenaInitialPayload = {
 queueHost: "{{ queueHost }}",
 queueName: "{{ queueName }}"
