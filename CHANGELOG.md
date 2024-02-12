@@ -1,3 +1,9 @@
+## [4.2.0](https://github.com/bee-queue/arena/compare/v4.1.1...v4.2.0) (2024-02-12)
+
+### Features
+
+- **add-job:** provide editor for adding options ([#670](https://github.com/bee-queue/arena/issues/670)) ([3f4c640](https://github.com/bee-queue/arena/commit/3f4c6400b090b64fbcec87df03442bb8c2672790))
+
 ### [4.1.1](https://github.com/bee-queue/arena/compare/v4.1.0...v4.1.1) (2024-02-08)
 
 ### Bug Fixes
