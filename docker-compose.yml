@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  bull_mon:
+    build: .
+    env_file:
+      - ../stg.env
+    ports:
+      - '4444:4567'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    
+networks:
+  default:
+    external:
+      name: cw
