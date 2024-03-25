@@ -310,3 +310,34 @@ See [contributing guidelines](CONTRIBUTING.md) and [an example](example/README.m
 The [MIT License](LICENSE).
 
 [docker-arena]: https://github.com/bee-queue/docker-arena
+
+
+# Cloudways
+## Folder structure on server
+
+#### Staging:
+```
+/var/www/html/event_service_monitoring/
+
+clone the repo with folder name bull_mon_stg
+
+git clone https://github.com/a-samad/arena.git
+```
+
+#### Production
+```
+/var/www/html/event_service_monitoring/
+git clone the repo with folder name bull_mon_prod
+```
+
+## Docker Build and Run Commands
+
+    Build:
+    $ docker build -t bull_mon .
+
+    Execute Docker:
+    $ docker run -it -d --name cw_event_service_mon bull_mon
+
+    $ docker ps
+    CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS      NAMES
+    5b017ecb71a4   bull_mon   "pm2 start index.js …"   2 seconds ago   Up 2 seconds   4567/tcp   cw_event_service_mon
