@@ -332,6 +332,8 @@ git clone the repo with folder name bull_mon_prod
 
 ## Docker Build and Run Commands
 
+    Node9 Docker image: https://hub.docker.com/layers/library/node/9.0/images/sha256-e9d9f6d34ed21ba709ceeff5a6e27fb021561b3aa4b37fa70575d85fef77e9fd?context=explore
+
     Build:
     $ docker build -t bull_mon .
 

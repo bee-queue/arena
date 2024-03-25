@@ -1,9 +1,5 @@
 const Run = require('./index.js');
 const Bull = require('bull');
-const fs = require('fs');
-const path = require('path');
-
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, '../constants.json')));
 
 Run(
     {
@@ -15,7 +11,8 @@ Run(
             "hostId": "CW",
             "redis": {
               "port": 6379,
-              "host": config.redis.url
+              "host": process.env.REDIS_URL,
+              "tls": {}
             }
           }
         ],
