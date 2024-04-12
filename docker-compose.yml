@@ -6,7 +6,7 @@ services:
     env_file:
       - ../.env
     ports:
-      - '80:4567'
+      - '45678:4567'
     volumes:
       - ./:/app
       - /app/node_modules
