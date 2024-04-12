@@ -6,7 +6,7 @@ services:
     env_file:
       - ../.env
     ports:
-      - '4444:4567'
+      - '4567:4567'
     volumes:
       - ./:/app
       - /app/node_modules
