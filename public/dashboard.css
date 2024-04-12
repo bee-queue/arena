@@ -151,6 +151,7 @@ pre {
   float: right;
   padding: 0px 0 0 14px !important;
   line-height: 64px !important;
+  margin: 0 !important;
 }
 .cw-icon{
   width: 160px;
@@ -161,7 +162,7 @@ pre {
   transition: none !important;
   text-indent: -9999px;
   display: inline-block;
-  margin: 7px 25px 0 8px;
+  margin: 16px 25px 0 8px;
   background-size: 160px;
 }
 
