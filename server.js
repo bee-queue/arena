@@ -11,7 +11,8 @@ _.forEach(queueList, function (queue) {
     "hostId": process.env.HOST,
     "redis": {
       "port": 6379,
-      "host": process.env.REDIS_URL
+      "host": process.env.REDIS_URL,
+      ...((process.env.REDIS_TLS==="true") && { tls: {} })
     },
     "name": queue
   });
