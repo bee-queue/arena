@@ -4,7 +4,7 @@ services:
   bull_mon:
     build: .
     env_file:
-      - ../.env
+      - .env
     ports:
       - '45678:4567'
     volumes:

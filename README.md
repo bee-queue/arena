@@ -333,11 +333,20 @@ git clone the repo with folder name bull_mon_prod
 ## Docker Build and Run Commands
 
     Node9 Docker image: https://hub.docker.com/layers/library/node/9.0/images/sha256-e9d9f6d34ed21ba709ceeff5a6e27fb021561b3aa4b37fa70575d85fef77e9fd?context=explore
+    
+    With docker-compose.yaml
+    Add env variables in this file .env, this should not be the part of GIT repo 
+    Port on DEV/STG is 45678
+    Port on PROD is 4567
 
-    Build:
+    $ docker-compose build
+    $ docker-compose up -d
+    $ docker ps
+    CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                         NAMES
+    bd88e12166a0   bull_mon_stg_bull_mon   "pm2 start server.js…"   11 minutes ago   Up 11 minutes   0.0.0.0:45678->4567/tcp, :::45678->4567/tcp   bull_mon_stg_bull_mon_1
+
+    Without docker-compose.yaml
     $ docker build -t bull_mon .
-
-    Execute Docker:
     $ docker run -it -d --name cw_event_service_mon bull_mon
 
     $ docker ps
