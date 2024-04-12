@@ -140,3 +140,31 @@ pre {
 .overflow-hidden {
   overflow: hidden;
 }
+
+.navbar{
+  min-height: 65px;
+}
+.navbar-inverse {
+  background-color: #090236 !important;
+}
+.navbar-brand{
+  float: right;
+  padding: 0px 0 0 14px !important;
+  line-height: 64px !important;
+}
+.cw-icon{
+  width: 160px;
+  height: 35px;
+  background-image: url(/header-logos.png);
+  background-repeat: no-repeat;
+  background-position: left 3px;
+  transition: none !important;
+  text-indent: -9999px;
+  display: inline-block;
+  margin: 7px 25px 0 8px;
+  background-size: 160px;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
