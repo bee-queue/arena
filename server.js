@@ -1,41 +1,26 @@
 const Run = require('./index.js');
 const Bull = require('bull');
+const _ = require('lodash');
+
+const queueList = ["EventService", "MixPanelQueue", "CustomerIOEvent"];
+const queues = [];
+
+_.forEach(queueList, function (queue) {
+  queues.push({
+    "type": "bull",
+    "hostId": process.env.HOST,
+    "redis": {
+      "port": 6379,
+      "host": process.env.REDIS_URL
+    },
+    "name": queue
+  });
+});
 
 Run(
-    {
-        Bull,
-        "queues": [
-          {
-            "type": "bull",
-            "name": "EventService",
-            "hostId": "CW",
-            "redis": {
-              "port": 6379,
-              "host": process.env.REDIS_URL,
-              "tls": {}
-            }
-          },
-          {
-            "type": "bull",
-            "name": "MixPanelQueue",
-            "hostId": "CW",
-            "redis": {
-              "port": 6379,
-              "host": process.env.REDIS_URL,
-              "tls": {}
-            }
-          },
-          {
-            "type": "bull",
-            "name": "CustomerIOEvent",
-            "hostId": "CW",
-            "redis": {
-              "port": 6379,
-              "host": process.env.REDIS_URL,
-              "tls": {}
-            }
-          }
-        ],
-      }
-      
+  {
+      Bull,
+      "queues": queues,
+    }
+    
 );

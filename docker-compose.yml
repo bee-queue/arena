@@ -4,7 +4,7 @@ services:
   bull_mon:
     build: .
     env_file:
-      - ../stg.env
+      - ../.env
     ports:
       - '4444:4567'
     volumes:

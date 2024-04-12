@@ -6,3 +6,4 @@ package-lock.json
 *.tern-port
 *.sublime-workspace
 dump.rdb
+.env
