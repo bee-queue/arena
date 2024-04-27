@@ -6,6 +6,7 @@ const jobAdd = require('./jobAdd');
 const jobPromote = require('./jobPromote');
 const jobRetry = require('./jobRetry');
 const jobRemove = require('./jobRemove');
+const jobDataUpdate = require('./jobDataUpdate');
 const repeatableJobRemove = require('./repeatableJobRemove');
 const bulkJobsPromote = require('./bulkJobsPromote');
 const bulkJobsRemove = require('./bulkJobsRemove');
@@ -24,6 +25,7 @@ router.delete(
   '/queue/:queueHost/:queueName/repeatable/job/:id',
   repeatableJobRemove
 );
+router.put('/queue/:queueHost/:queueName/job/:id/data', jobDataUpdate);
 router.patch('/queue/:queueHost/:queueName/job/:id', jobRetry);
 router.put('/queue/:queueHost/:queueName/pause', queuePause);
 router.put('/queue/:queueHost/:queueName/resume', queueResume);
