@@ -1,6 +1,6 @@
 <h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
 
-{{> dashboard/jobDetails job basePath=basePath queueName=queueName queueHost=queueHost jobState=jobState stacktraces=stacktraces}}
+{{> dashboard/jobDetails job basePath=basePath queueName=queueName queueHost=queueHost jobState=jobState stacktraces=stacktraces view=true}}
 
 {{#contentFor 'sidebar'}}
 <li><a href="{{ basePath }}/">Queues Overview</a></li>
@@ -12,4 +12,9 @@
 {{#if hasFlows}}
 <li><a href="{{ basePath }}/flows/">Flows Overview</a></li>
 {{/if}}
+{{/contentFor}}
+
+{{#contentFor 'script'}}
+window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
+window.jsonEditor.set({{json job.data true}})
 {{/contentFor}}

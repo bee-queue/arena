@@ -314,6 +314,38 @@ $(document).ready(() => {
       });
   });
 
+  $('.js-update-job-data').on('click', function (e) {
+    e.preventDefault();
+    const jobId = $(this).data('job-id');
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+    const stringifiedData = JSON.stringify(window.jsonEditor.get());
+    const r = window.confirm(
+      `Update job #${jobId} data in queue "${queueHost}/${queueName}"?`
+    );
+
+    if (r) {
+      $.ajax({
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/job/${encodeURIComponent(
+          jobId
+        )}/data`,
+        type: 'PUT',
+        data: stringifiedData,
+        contentType: 'application/json',
+      })
+        .done(() => {
+          alert('Job data successfully updated!');
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert('Failed to update job data, check console for error.');
+          console.error(jqXHR.responseText);
+        });
+    }
+  });
+
   $('.js-add-flow').on('click', function () {
     const data = window.jsonEditor.get();
     const flow = JSON.stringify({data});

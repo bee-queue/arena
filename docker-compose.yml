@@ -1,0 +1,7 @@
+version: '3.2'
+services:
+  redis:
+    image: redis:6-alpine
+    container_name: redis-6
+    ports:
+      - 6379:6379
