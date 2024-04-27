@@ -1,3 +1,9 @@
+## [4.3.0](https://github.com/bee-queue/arena/compare/v4.2.0...v4.3.0) (2024-04-27)
+
+### Features
+
+- **details:** update job data ([#674](https://github.com/bee-queue/arena/issues/674)) ([24ab67f](https://github.com/bee-queue/arena/commit/24ab67f637da2ae8add30231340e413342de8461))
+
 ## [4.2.0](https://github.com/bee-queue/arena/compare/v4.1.1...v4.2.0) (2024-02-12)
 
 ### Features
