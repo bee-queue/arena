@@ -15,6 +15,8 @@
 {{/contentFor}}
 
 {{#contentFor 'script'}}
-window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
-window.jsonEditor.set({{json job.data true}})
+if(document.getElementById('jsoneditor')) {
+  window.jsonEditor = new JSONEditor(document.getElementById('jsoneditor'), { modes: ['code','tree','text'] });
+  window.jsonEditor.set({{json job.data true}})
+}
 {{/contentFor}}
