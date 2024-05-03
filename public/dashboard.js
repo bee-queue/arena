@@ -225,23 +225,41 @@ $(document).ready(() => {
       } in queue "${queueHost}/${queueName}"?`
     );
     if (r) {
-      $.ajax({
-        method: action === 'remove' ? 'POST' : 'PATCH',
-        url: `${basePath}/api/queue/${encodeURIComponent(
-          queueHost
-        )}/${encodeURIComponent(queueName)}/${
-          action === 'promote' ? 'delayed/' : ''
-        }job/bulk`,
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-      })
-        .done(() => {
-          window.location.reload();
+      if (action === 'clean') {
+        $.ajax({
+          method: 'DELETE',
+          url: `${basePath}/api/queue/${encodeURIComponent(
+            queueHost
+          )}/${encodeURIComponent(queueName)}/jobs/bulk`,
+          data: JSON.stringify(data),
+          contentType: 'application/json',
         })
-        .fail((jqXHR) => {
-          window.alert(`Request failed, check console for error.`);
-          console.error(jqXHR.responseText);
-        });
+          .done(() => {
+            window.location.reload();
+          })
+          .fail((jqXHR) => {
+            window.alert(`Request failed, check console for error.`);
+            console.error(jqXHR.responseText);
+          });
+      } else {
+        $.ajax({
+          method: action === 'remove' ? 'POST' : 'PATCH',
+          url: `${basePath}/api/queue/${encodeURIComponent(
+            queueHost
+          )}/${encodeURIComponent(queueName)}/${
+            action === 'promote' ? 'delayed/' : ''
+          }job/bulk`,
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+        })
+          .done(() => {
+            window.location.reload();
+          })
+          .fail((jqXHR) => {
+            window.alert(`Request failed, check console for error.`);
+            console.error(jqXHR.responseText);
+          });
+      }
     } else {
       $(this).prop('disabled', false);
     }

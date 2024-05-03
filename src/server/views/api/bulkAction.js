@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const ACTIONS = ['remove', 'retry', 'promote'];
+const ACTIONS = ['clean', 'remove', 'retry', 'promote'];
 
 function bulkAction(action) {
   return async function handler(req, res) {
@@ -19,7 +19,7 @@ function bulkAction(action) {
     const {jobs, queueState} = req.body;
 
     try {
-      if (!_.isEmpty(jobs)) {
+      if (!_.isEmpty(jobs) && job.length > 0) {
         const jobsPromises = jobs.map((id) =>
           queue.getJob(decodeURIComponent(id))
         );
@@ -38,6 +38,9 @@ function bulkAction(action) {
               })
             : fetchedJobs.map((job) => job[action]());
         await Promise.all(actionPromises);
+        return res.sendStatus(200);
+      } else if (action === 'clean') {
+        await queue.clean(1000, queueState);
         return res.sendStatus(200);
       }
     } catch (e) {
