@@ -210,18 +210,22 @@ $(document).ready(() => {
       queueState,
     };
 
-    $bulkActionContainer.each((index, value) => {
-      const isChecked = $(value).find('[name=jobChecked]').is(':checked');
-      const id = encodeURIComponent($(value).find('[name=jobId]').val());
+    if (action !== 'clean') {
+      $bulkActionContainer.each((index, value) => {
+        const isChecked = $(value).find('[name=jobChecked]').is(':checked');
+        const id = encodeURIComponent($(value).find('[name=jobId]').val());
 
-      if (isChecked) {
-        data.jobs.push(id);
-      }
-    });
+        if (isChecked) {
+          data.jobs.push(id);
+        }
+      });
+    }
+
+    const count = action === 'clean' ? 1000 : data.jobs.length;
 
     const r = window.confirm(
-      `${capitalize(action)} ${data.jobs.length} ${
-        data.jobs.length > 1 ? 'jobs' : 'job'
+      `${capitalize(action)} ${count} ${
+        count > 1 ? 'jobs' : 'job'
       } in queue "${queueHost}/${queueName}"?`
     );
     if (r) {
