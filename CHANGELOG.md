@@ -1,3 +1,9 @@
+## [4.4.0](https://github.com/bee-queue/arena/compare/v4.3.0...v4.4.0) (2024-05-03)
+
+### Features
+
+- **bull:** add clean jobs button for completed and failed ([#675](https://github.com/bee-queue/arena/issues/675)) ([e62aef0](https://github.com/bee-queue/arena/commit/e62aef022cf771b715cf65d100391f6f88c5cfd5))
+
 ## [4.3.0](https://github.com/bee-queue/arena/compare/v4.2.0...v4.3.0) (2024-04-27)
 
 ### Features
