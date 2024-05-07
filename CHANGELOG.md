@@ -1,3 +1,9 @@
+### [4.4.1](https://github.com/bee-queue/arena/compare/v4.4.0...v4.4.1) (2024-05-07)
+
+### Bug Fixes
+
+- **jobs:** validate jobs length in bulk action ([#676](https://github.com/bee-queue/arena/issues/676)) ([2bce363](https://github.com/bee-queue/arena/commit/2bce36391052d747c01aa20adda28d38d4a8fdee))
+
 ## [4.4.0](https://github.com/bee-queue/arena/compare/v4.3.0...v4.4.0) (2024-05-03)
 
 ### Features
