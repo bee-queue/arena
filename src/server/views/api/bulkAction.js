@@ -19,7 +19,7 @@ function bulkAction(action) {
     const {jobs, queueState} = req.body;
 
     try {
-      if (!_.isEmpty(jobs) && job.length > 0) {
+      if (!_.isEmpty(jobs) && jobs.length > 0) {
         const jobsPromises = jobs.map((id) =>
           queue.getJob(decodeURIComponent(id))
         );
