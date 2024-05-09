@@ -31,12 +31,35 @@ function formatBytes(num) {
   return (neg ? '-' : '') + numStr + ' ' + unit;
 }
 
+function splitInfo(res) {
+  if (typeof res !== 'string') {
+    return {};
+  }
+
+  const serverInfo = {};
+  const lines = res.split('\r\n');
+  for (let i = 0; i < lines.length; ++i) {
+    if (lines[i]) {
+      const line = lines[i].trim();
+      if (!line.startsWith('#')) {
+        const idx = line.indexOf(':');
+        if (idx > 0) {
+          serverInfo[line.substring(0, idx)] = line.substring(idx + 1);
+        }
+      }
+    }
+  }
+
+  return serverInfo;
+}
+
 const Helpers = {
   getStats: async function (queue) {
     const client = await queue.client;
-    await client.info(); // update queue.client.serverInfo
+    const info = await client.info(); // In node-redis this will update queue.client.serverInfo
 
-    const stats = _.pickBy(client.serverInfo, (value, key) =>
+    // In ioredis we need to parse this information:
+    const stats = _.pickBy(client.serverInfo || splitInfo(info), (value, key) =>
       _.includes(this._usefulMetrics, key)
     );
     stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
