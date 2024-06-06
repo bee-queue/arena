@@ -50,6 +50,12 @@
       data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
       Remove Jobs
     </button>
+    {{#unless disableClean}}
+    <button type="button" data-action="clean" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
+      data-queue-state="{{ state }}" class="js-bulk-action btn btn-danger">
+      Clean 1000 Jobs
+    </button>
+    {{/unless}}
     {{#unless disableRetry}}
     <button type="button" data-action="retry" data-queue-name="{{ queueName }}" data-queue-host="{{ queueHost }}"
       data-queue-state="{{ state }}" class="js-bulk-action btn btn-success">

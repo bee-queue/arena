@@ -40,6 +40,8 @@
     "ci": "npm run lint && if [ -z \"$CI\" ]; then npm run ci:commitlint; fi",
     "ci:commitlint": "commitlint --from \"origin/${GITHUB_BASE_REF:-master}\"",
     "cm": "git cz",
+    "dc:up": "docker-compose -f docker-compose.yml up -d",
+    "dc:down": "docker-compose -f docker-compose.yml down",
     "dry:run": "npm publish --dry-run",
     "lint": "prettier -c .",
     "lint:staged": "lint-staged",
@@ -66,5 +68,5 @@
     "bullmq"
   ],
   "repository": "https://github.com/bee-queue/arena.git",
-  "version": "4.1.0"
+  "version": "4.4.1"
 }

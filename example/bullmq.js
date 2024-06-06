@@ -1,4 +1,5 @@
 const Arena = require('../');
+const IORedis = require('ioredis');
 const {Queue, Worker, FlowProducer} = require('bullmq');
 
 // Select ports that are unlikely to be used by other services a developer might be running locally.
@@ -8,6 +9,8 @@ const REDIS_SERVER_PORT = 6379;
 async function main() {
   const queueName = 'name_of_my_queue';
   const parentQueueName = 'name_of_my_parent_queue';
+
+  const connection = new IORedis({port: REDIS_SERVER_PORT});
 
   const queue = new Queue(queueName, {
     connection: {port: REDIS_SERVER_PORT},
@@ -87,10 +90,7 @@ async function main() {
           // Queue type (Bull or Bullmq or Bee - default Bull).
           type: 'bullmq',
 
-          redis: {
-            // host: 'localhost',
-            port: REDIS_SERVER_PORT,
-          },
+          redis: connection,
         },
         {
           // Required for each queue definition.
