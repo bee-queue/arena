@@ -4,6 +4,7 @@ const {
   BEE_STATES,
   BULL_STATES,
   BULLMQ_STATES,
+  getGroupJobs,
 } = require('../helpers/queueHelpers');
 const JobHelpers = require('../helpers/jobHelpers');
 
@@ -125,6 +126,7 @@ async function _html(req, res) {
   } else {
     const stateTypes = state === 'waiting' ? ['wait', 'paused'] : state;
     jobs = await queue.getJobs(stateTypes, startId, endId, order === 'asc');
+    jobs.push(...(await getGroupJobs(queue, stateTypes)));
   }
 
   for (let i = 0; i < jobs.length; i++) {

@@ -65,6 +65,28 @@ const Helpers = {
     return stats;
   },
 
+  /**
+   * This function grabs all the jobs within all groups that are in the specified states
+   * passed in
+   * @param {Queue} queue
+   * @param {Array} stateTypes
+   * @returns {Array}
+   */
+  getGroupJobs: async function (queue, stateTypes) {
+    const groups = await queue.getGroups();
+    let groupJobs = [];
+    for (const group of groups) {
+      const currentGroupJobs = await queue.getGroupJobs(group.id);
+      for (const job of currentGroupJobs) {
+        const jobState = await job.getState();
+        if (stateTypes.includes(jobState)) {
+          groupJobs.push(job);
+        }
+      }
+    }
+    return groupJobs;
+  },
+
   isPaused: async function (queue) {
     return queue.isPaused();
   },

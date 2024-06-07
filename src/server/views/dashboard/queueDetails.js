@@ -20,6 +20,17 @@ async function handler(req, res) {
     delete jobCounts.newestJob;
   } else if (queue.IS_BULLMQ) {
     jobCounts = await queue.getJobCounts(...QueueHelpers.BULLMQ_STATES);
+    const groupStatus = await queue.getGroupsCountByStatus();
+    /**
+     * adding any groups that are waiting or maxed to the prioritized count
+     * groups that are waiting are waiting for a free worker
+     * groups that are maxed has hit a concurrency limit and is waiting for
+     * the current running job to finish
+     *
+     * why prioritized? since all datasource jobs have a priority assigned,
+     * the go into the prioritized bucket
+     */
+    jobCounts['prioritized'] += groupStatus['waiting'] + groupStatus['maxed'];
   } else {
     jobCounts = await queue.getJobCounts();
   }
