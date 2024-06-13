@@ -1,3 +1,9 @@
+### [4.4.2](https://github.com/bee-queue/arena/compare/v4.4.1...v4.4.2) (2024-06-13)
+
+### Bug Fixes
+
+- **bull:** retry only failed jobs ([#678](https://github.com/bee-queue/arena/issues/678)) ([8488040](https://github.com/bee-queue/arena/commit/848804051a5949487b06453fbf54b1f2ca2dc737))
+
 ### [4.4.1](https://github.com/bee-queue/arena/compare/v4.4.0...v4.4.1) (2024-05-07)
 
 ### Bug Fixes
