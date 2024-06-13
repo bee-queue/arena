@@ -19,7 +19,7 @@
   "dependencies": {
     "@fastify/express": "^2.3.0",
     "bee-queue": "^1.4.0",
-    "bull": "^4.12.2",
+    "bull": "^4.12.4",
     "bullmq": "^4.8.0",
     "express": "^4.17.1",
     "fastify": "^4.13.0"
