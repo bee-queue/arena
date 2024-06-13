@@ -151,7 +151,7 @@ async function _html(req, res) {
   const disablePromote = !(state === 'delayed' && !queue.IS_BEE);
   const disableRetry = !(
     state === 'failed' ||
-    (state === 'delayed' && !queue.IS_BEE)
+    (state === 'delayed' && queue.IS_BEE)
   );
   const disableClean = !(
     state === 'failed' ||
