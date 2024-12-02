@@ -105,3 +105,61 @@ queueHost: "{{ queueHost }}",
 queueName: "{{ queueName }}"
 };
 {{/contentFor}}
+
+<div class="col-sm-6 text-right">
+    <!-- Existing buttons -->
+    <button id="add-wildcard" type="button" class="btn btn-info">
+        Add Wildcard Filter
+    </button>
+    <!-- Other buttons remain unchanged -->
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const wildcardButton = document.getElementById('add-wildcard');
+        const wildcardParam = new URL(window.location.href).searchParams.get('wildcard');
+
+        // Append wildcard to all relevant links and buttons
+        function updateLinksWithWildcard() {
+            if (!wildcardParam) return;
+
+            const buttons = document.querySelectorAll('a, button[data-action]');
+            buttons.forEach(button => {
+                // If it's an anchor tag, append wildcard to href
+                if (button.tagName === 'A' && button.href) {
+                    const url = new URL(button.href);
+                    url.searchParams.set('wildcard', wildcardParam);
+                    button.href = url.toString();
+                }
+
+                // For buttons with data-action, handle form-like behavior or custom logic
+                if (button.dataset.action) {
+                    button.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('wildcard', wildcardParam);
+                        url.searchParams.set('action', button.dataset.action); // Append action if needed
+                        window.location.href = url.toString();
+                    });
+                }
+            });
+        }
+
+        // Handle the Add Wildcard button
+        if (wildcardButton) {
+            wildcardButton.addEventListener('click', () => {
+                const wildcard = prompt('Enter a wildcard pattern (e.g., job-*)');
+                if (wildcard !== null) {
+                    // Get current URL parameters
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('wildcard', wildcard);
+
+                    // Redirect with the new wildcard parameter
+                    window.location.href = url.toString();
+                }
+            });
+        }
+
+        // Update links on page load
+        updateLinksWithWildcard();
+    });
+</script>
