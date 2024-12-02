@@ -191,6 +191,7 @@ async function _html(req, res) {
     lastPage: _.last(pages),
     order,
     totalJobs: _.size(jobs),
+    wildcard,
   });
 }
 
