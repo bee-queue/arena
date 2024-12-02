@@ -102,6 +102,7 @@ async function _html(req, res) {
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.pageSize, 10) || 100;
   const order = req.query.order || 'desc';
+  const wildcard = req.query.wildcard || null;
 
   const startId = (page - 1) * pageSize;
   const endId = startId + pageSize - 1;
@@ -123,7 +124,18 @@ async function _html(req, res) {
     jobs = jobs.filter((job) => job);
   } else {
     const stateTypes = state === 'waiting' ? ['wait', 'paused'] : state;
-    jobs = await queue.getJobs(stateTypes, startId, endId, order === 'asc');
+    jobs = await queue.getJobs(
+      stateTypes,
+      startId,
+      endId,
+      order === 'asc',
+      {},
+      wildcard
+    );
+    if (wildcard) {
+      const regex = new RegExp(wildcard.replace(/\*/g, '.*'));
+      jobs = jobs.filter((job) => regex.test(job.id));
+    }
   }
 
   for (let i = 0; i < jobs.length; i++) {
@@ -178,6 +190,8 @@ async function _html(req, res) {
     pageSize,
     lastPage: _.last(pages),
     order,
+    totalJobs: _.size(jobs),
+    wildcard,
   });
 }
 
