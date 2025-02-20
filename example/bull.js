@@ -39,7 +39,7 @@ async function main() {
     }
   });
 
-  await queue.add({});
+  await queue.add({data: 'data'});
 
   // adding delayed jobs
   const delayedJob = await queue.add({}, {delay: 60 * 1000});

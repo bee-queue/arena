@@ -151,7 +151,12 @@ async function _html(req, res) {
   const disablePromote = !(state === 'delayed' && !queue.IS_BEE);
   const disableRetry = !(
     state === 'failed' ||
-    (state === 'delayed' && !queue.IS_BEE)
+    (state === 'delayed' && queue.IS_BEE)
+  );
+  const disableClean = !(
+    state === 'failed' ||
+    state === 'completed' ||
+    !queue.IS_BULL
   );
 
   return res.render('dashboard/templates/queueJobsByState', {
@@ -164,6 +169,7 @@ async function _html(req, res) {
     disablePagination:
       queue.IS_BEE && (state === 'succeeded' || state === 'failed'),
     disableOrdering: queue.IS_BEE,
+    disableClean,
     disablePromote,
     disableRetry,
     currentPage: page,

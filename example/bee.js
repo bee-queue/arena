@@ -30,7 +30,7 @@ async function main() {
     .delayUntil(Date.now() + 60 * 1000)
     .save();
 
-  const job = await queue.createJob({}).save();
+  await queue.createJob({}).save();
 
   Arena(
     {
