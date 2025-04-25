@@ -1,3 +1,9 @@
+## [4.5.0](https://github.com/bee-queue/arena/compare/v4.4.2...v4.5.0) (2025-04-25)
+
+### Features
+
+- **bullmq:** support ignored children ([#682](https://github.com/bee-queue/arena/issues/682)) ([e41dfb8](https://github.com/bee-queue/arena/commit/e41dfb84201d997dc968f1fd4a9854d44d07d5f4))
+
 ### [4.4.2](https://github.com/bee-queue/arena/compare/v4.4.1...v4.4.2) (2024-06-13)
 
 ### Bug Fixes
