@@ -57,8 +57,26 @@ async function main() {
     queueName: parentQueueName,
     data: {},
     children: [
-      {name: 'child', data: {idx: 0, foo: 'bar'}, queueName},
-      {name: 'child', data: {idx: 1, foo: 'baz'}, queueName},
+      {
+        name: 'child',
+        data: {idx: 0, foo: 'bar'},
+        queueName,
+        opts: {
+          ignoreDependencyOnFailure: true,
+          removeOnComplete: true,
+          removeOnFail: true,
+        },
+      },
+      {
+        name: 'child',
+        data: {idx: 1, foo: 'baz'},
+        queueName,
+        opts: {
+          failParentOnFailure: true,
+          removeOnComplete: true,
+          removeOnFail: true,
+        },
+      },
       {name: 'child', data: {idx: 2, foo: 'qux'}, queueName},
     ],
   });

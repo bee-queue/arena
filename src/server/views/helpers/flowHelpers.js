@@ -1,12 +1,14 @@
 const Helpers = {
   processFlow: function (flow) {
+    if (!flow) return {};
     const {job, children} = flow;
+    const filteredChildren = children.filter((child) => child);
     const queueName = job.queueName;
 
-    if (children && children.length > 0) {
+    if (filteredChildren && filteredChildren.length > 0) {
       return {
         job: {...job, queueName},
-        children: children.map((child) => this.processFlow(child)),
+        children: filteredChildren.map((child) => this.processFlow(child)),
       };
     } else {
       return {

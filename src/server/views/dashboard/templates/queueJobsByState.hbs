@@ -10,7 +10,7 @@
         <li {{#eq currentPage 1}} class="disabled">
           <span>&laquo;</span>
           {{else}}
-          ><a
+          <a
             href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ state }}?page={{ subtract currentPage 1 }}&amp;pageSize={{ pageSize }}&amp;order={{ order }}"
             aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
