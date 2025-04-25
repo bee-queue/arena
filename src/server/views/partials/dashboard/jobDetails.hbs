@@ -227,6 +227,31 @@
   </div>
 </div>
 {{/if}}
+
+{{#if this.ignoredChildren }}
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Ignored Children <span class="count">{{ this.countDependencies.ignored}}</span></h5>
+
+    <nav aria-label="Ignored navigation">
+      <ul class="pagination">
+        <li><a
+            href="{{ basePath }}/{{ encodeURI queueHost }}/{{ encodeURI queueName }}/{{ encodeURI this.id }}?ignoredCursor={{ this.ignoredCursor }}&amp;ignoredCount={{ this.ignoredCount }}"
+            aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    {{#each this.ignoredChildren}}
+    <a href="{{ ../basePath }}/{{ encodeURI ../queueHost }}/{{ encodeURI this.queueName }}/{{ encodeURI this.id }}">
+      <span class="label label-warning">{{ this.id }}</span>
+    </a>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
 <br>
 {{/if}}
 

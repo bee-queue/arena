@@ -49,20 +49,28 @@ async function handler(req, res) {
     job.parent = JobHelpers.getKeyProperties(job.parentKey);
     const processedCursor = parseInt(req.query.processedCursor, 10) || 0;
     const processedCount = parseInt(req.query.processedCount, 10) || 25;
+    const ignoredCursor = parseInt(req.query.ignoredCursor, 10) || 0;
+    const ignoredCount = parseInt(req.query.ignoredCount, 10) || 25;
     const unprocessedCursor = parseInt(req.query.unprocessedCursor, 10) || 0;
     const unprocessedCount = parseInt(req.query.unprocessedCount, 10) || 25;
     job.processedCount = processedCount;
     job.unprocessedCount = unprocessedCount;
-
+    job.ignoredCount = ignoredCount;
     const {
-      processed,
-      unprocessed,
+      processed = {},
+      ignored = {},
+      unprocessed = [],
       nextProcessedCursor,
+      nextIgnoredCursor,
       nextUnprocessedCursor,
     } = await job.getDependencies({
       processed: {
         cursor: processedCursor,
         count: processedCount,
+      },
+      ignored: {
+        cursor: ignoredCursor,
+        count: ignoredCount,
       },
       unprocessed: {
         cursor: unprocessedCursor,
@@ -73,6 +81,7 @@ async function handler(req, res) {
     job.countDependencies = count;
 
     job.processedCursor = nextProcessedCursor;
+    job.ignoredCursor = nextIgnoredCursor;
     job.unprocessedCursor = nextUnprocessedCursor;
     if (unprocessed && unprocessed.length) {
       job.unprocessedChildren = unprocessed.map((child) => {
@@ -80,9 +89,16 @@ async function handler(req, res) {
       });
     }
 
-    if (processed) {
-      const childrenKeys = Object.keys(processed);
-      job.processedChildren = childrenKeys.map((child) => {
+    const processedKeys = Object.keys(processed);
+    if (processedKeys.length) {
+      job.processedChildren = processedKeys.map((child) => {
+        return JobHelpers.getKeyProperties(child);
+      });
+    }
+
+    const ignoredKeys = Object.keys(ignored);
+    if (ignoredKeys.length) {
+      job.ignoredChildren = ignoredKeys.map((child) => {
         return JobHelpers.getKeyProperties(child);
       });
     }

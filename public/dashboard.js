@@ -7,15 +7,14 @@ $(document).ready(() => {
 
   function formatToTreeView(flow, flowHost) {
     const {job, children} = flow;
+    if (!job) {
+      return {};
+    }
     const text = `${job.name} <a href="${basePath}/${encodeURIComponent(
       flowHost
     )}/${encodeURIComponent(job.queueName)}/${
       job.id
     }"><span class="label label-default">${job.id}</span></a>`;
-
-    const href = `${basePath}/${encodeURIComponent(
-      flowHost
-    )}/${encodeURIComponent(job.queueName)}/${job.id}`;
 
     if (children && children.length > 0) {
       return {
