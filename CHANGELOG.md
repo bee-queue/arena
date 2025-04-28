@@ -1,3 +1,9 @@
+### [4.5.1](https://github.com/bee-queue/arena/compare/v4.5.0...v4.5.1) (2025-04-28)
+
+### Bug Fixes
+
+- **get-flow:** consider when there are not children ([#683](https://github.com/bee-queue/arena/issues/683)) ([baa676a](https://github.com/bee-queue/arena/commit/baa676aa5544f09e645ebbd02b02adfb7695a938))
+
 ## [4.5.0](https://github.com/bee-queue/arena/compare/v4.4.2...v4.5.0) (2025-04-25)
 
 ### Features
