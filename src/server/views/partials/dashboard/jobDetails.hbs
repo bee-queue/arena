@@ -1,5 +1,10 @@
 {{#unless displayJobInline}}
 <h3>{{ this.id }}</h3>
+
+{{#if this.name}}
+<h5>Name</h5>
+{{this.name}}
+{{/if}}
 {{/unless}}
 
 <h5>Actions</h5>
