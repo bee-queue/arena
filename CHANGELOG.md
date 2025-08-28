@@ -1,3 +1,9 @@
+## [4.6.0](https://github.com/bee-queue/arena/compare/v4.5.1...v4.6.0) (2025-08-28)
+
+### Features
+
+- **job-details:** show job name if present ([#685](https://github.com/bee-queue/arena/issues/685)) ([112361c](https://github.com/bee-queue/arena/commit/112361c7ae7f7064386ccc521d79953a6cf37823))
+
 ### [4.5.1](https://github.com/bee-queue/arena/compare/v4.5.0...v4.5.1) (2025-04-28)
 
 ### Bug Fixes
