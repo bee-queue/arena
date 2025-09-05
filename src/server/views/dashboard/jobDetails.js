@@ -38,7 +38,7 @@ async function handler(req, res) {
   job.retryButtonText = jobState === 'failed' ? 'Retry' : 'Trigger';
   job.showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
   job.showDeleteRepeatableButton = queue.IS_BULL && job.opts.repeat;
-  const stacktraces = queue.IS_BEE ? job.options.stacktraces : job.stacktrace;
+  job.stacktraces = queue.IS_BEE ? job.options.stacktraces : [job.stacktrace];
 
   if (!queue.IS_BEE) {
     const logs = await queue.getJobLogs(job.id);
@@ -110,7 +110,6 @@ async function handler(req, res) {
     queueHost,
     jobState,
     job,
-    stacktraces,
     hasFlows: Flows.hasFlows(),
   });
 }
