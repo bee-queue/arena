@@ -86,6 +86,23 @@
         </table>
       </div>
     </div>
+    {{#if globalConfig}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Global Configuration</h4>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          {{#each globalConfig}}
+          <tr>
+            <th>{{ @key }}</th>
+            <th>{{ this }}</th>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+    {{/if}}
   </div>
 </div>
 
