@@ -42,17 +42,21 @@ const Helpers = {
       const usedMemoryPrefix = 'used_memory:';
       const lines = doc.split(/\r?\n/);
 
-      for (let i = 0; i < lines.length; i++) {
-        if (lines[i].indexOf(totalSystemMemoryPrefix) === 0) {
-          stats.total_system_memory = formatBytes(
-            parseInt(lines[i].substr(totalSystemMemoryPrefix.length), 10)
-          );
-        }
-
-        if (lines[i].indexOf(usedMemoryPrefix) === 0) {
-          stats.used_memory = formatBytes(
-            parseInt(lines[i].substr(usedMemoryPrefix.length), 10)
-          );
+      for (const line of lines) {
+        for (const metric of Helpers._usefulMetrics) {
+          const metricPrefix = metric + ':';
+          if (line.indexOf(metricPrefix) === 0) {
+            if (
+              metricPrefix === totalSystemMemoryPrefix ||
+              metricPrefix === usedMemoryPrefix
+            ) {
+              stats[metric] = formatBytes(
+                parseInt(line.substr(metricPrefix.length), 10)
+              );
+            } else {
+              stats[metric] = line.substr(metricPrefix.length);
+            }
+          }
         }
       }
     }
