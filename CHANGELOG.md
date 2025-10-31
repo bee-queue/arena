@@ -1,3 +1,9 @@
+## [4.7.0](https://github.com/bee-queue/arena/compare/v4.6.0...v4.7.0) (2025-10-31)
+
+### Features
+
+- **queue:** show queue global config if present ([#686](https://github.com/bee-queue/arena/issues/686)) ([a49254f](https://github.com/bee-queue/arena/commit/a49254f04c5f8194ab5df7f20977e2b339f9ec50))
+
 ## [4.6.0](https://github.com/bee-queue/arena/compare/v4.5.1...v4.6.0) (2025-08-28)
 
 ### Features
