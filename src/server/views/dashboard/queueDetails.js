@@ -1,3 +1,4 @@
+const {rest} = require('lodash');
 const QueueHelpers = require('../helpers/queueHelpers');
 
 async function handler(req, res) {
@@ -14,12 +15,19 @@ async function handler(req, res) {
       hasFlows: Flows.hasFlows(),
     });
 
-  let jobCounts, isPaused;
+  let jobCounts, isPaused, globalConfig;
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
   } else if (queue.IS_BULLMQ) {
     jobCounts = await queue.getJobCounts(...QueueHelpers.BULLMQ_STATES);
+    if (queue.getMeta) {
+      const meta = await queue.getMeta();
+      if (meta) {
+        const {paused, ...restMeta} = meta;
+        globalConfig = restMeta;
+      }
+    }
   } else {
     jobCounts = await queue.getJobCounts();
   }
@@ -37,6 +45,7 @@ async function handler(req, res) {
     queueIsBee: !!queue.IS_BEE,
     queueIsBullMQ: !!queue.IS_BULLMQ,
     hasFlows: Flows.hasFlows(),
+    globalConfig,
     jobCounts,
     stats,
   });

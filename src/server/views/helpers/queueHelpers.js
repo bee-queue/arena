@@ -34,15 +34,33 @@ function formatBytes(num) {
 const Helpers = {
   getStats: async function (queue) {
     const client = await queue.client;
-    await client.info(); // update queue.client.serverInfo
+    const doc = await client.info();
 
-    const stats = _.pickBy(client.serverInfo, (value, key) =>
-      _.includes(this._usefulMetrics, key)
-    );
-    stats.used_memory = formatBytes(parseInt(stats.used_memory, 10));
-    stats.total_system_memory = formatBytes(
-      parseInt(stats.total_system_memory, 10)
-    );
+    const stats = {};
+    if (doc) {
+      const totalSystemMemoryPrefix = 'total_system_memory:';
+      const usedMemoryPrefix = 'used_memory:';
+      const lines = doc.split(/\r?\n/);
+
+      for (const line of lines) {
+        for (const metric of Helpers._usefulMetrics) {
+          const metricPrefix = metric + ':';
+          if (line.indexOf(metricPrefix) === 0) {
+            if (
+              metricPrefix === totalSystemMemoryPrefix ||
+              metricPrefix === usedMemoryPrefix
+            ) {
+              stats[metric] = formatBytes(
+                parseInt(line.substr(metricPrefix.length), 10)
+              );
+            } else {
+              stats[metric] = line.substr(metricPrefix.length);
+            }
+          }
+        }
+      }
+    }
+
     return stats;
   },
 
