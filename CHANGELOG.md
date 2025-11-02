@@ -1,3 +1,9 @@
+## [4.8.0](https://github.com/bee-queue/arena/compare/v4.7.0...v4.8.0) (2025-11-02)
+
+### Features
+
+- **queue:** support updating queue configuration ([#687](https://github.com/bee-queue/arena/issues/687)) ([ab2f6af](https://github.com/bee-queue/arena/commit/ab2f6af8cf21223bf8c88eaf0e5a73c9ee358700))
+
 ## [4.7.0](https://github.com/bee-queue/arena/compare/v4.6.0...v4.7.0) (2025-10-31)
 
 ### Features
