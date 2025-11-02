@@ -37,7 +37,7 @@ async function main() {
       }
     },
     {
-      concurrency: 3,
+      concurrency: 10,
       connection: {port: REDIS_SERVER_PORT},
     }
   );

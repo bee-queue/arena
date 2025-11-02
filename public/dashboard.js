@@ -286,6 +286,48 @@ $(document).ready(() => {
     }
   });
 
+  $('.js-toggle-update-queue-meta').on('click', function () {
+    const updateMetaText = $('.js-toggle-update-queue-meta').text();
+    const shouldNotHide = updateMetaText === 'Update';
+    const newUpdateMetaText = shouldNotHide ? 'Cancel' : 'Update';
+    $('.meta-config-editor').toggleClass('hide', !shouldNotHide);
+    $('.js-toggle-update-queue-meta').text(newUpdateMetaText);
+  });
+
+  $('.js-update-queue-meta').on('click', function () {
+    const {queueHost, queueName} = window.arenaInitialPayload;
+    const concurrency = $('input.js-update-meta-concurrency').val() || null;
+    const max = $('input.js-update-meta-rl-max').val() || null;
+    const duration = $('input.js-update-meta-rl-duration').val() || null;
+
+    const stringifiedData = JSON.stringify({
+      concurrency: concurrency ? parseInt(concurrency, 10) : null,
+      max: max ? parseInt(max, 10) : null,
+      duration: duration ? parseInt(duration, 10) : null,
+    });
+
+    const response = window.confirm(
+      `Are you sure you want to update the queue "${queueHost}/${queueName}" configuration?`
+    );
+    if (response) {
+      $.ajax({
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/update-meta`,
+        type: 'PUT',
+        data: stringifiedData,
+        contentType: 'application/json',
+      })
+        .done(() => {
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    }
+  });
+
   $('.js-toggle-add-flow-editor').on('click', function () {
     const addFlowText = $('.js-toggle-add-flow-editor').text();
     const shouldNotHide = addFlowText === 'Add Flow';
