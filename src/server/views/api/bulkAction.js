@@ -40,7 +40,12 @@ function bulkAction(action) {
         await Promise.all(actionPromises);
         return res.sendStatus(200);
       } else if (action === 'clean') {
-        await queue.clean(1000, queueState);
+        if (queue.IS_BULLMQ) {
+          await queue.clean(0, 1000, queueState);
+        } else {
+          await queue.clean(1000, queueState);
+        }
+
         return res.sendStatus(200);
       }
     } catch (e) {
