@@ -519,4 +519,31 @@ $(document).ready(() => {
       $(this).prop('disabled', false);
     }
   });
+
+  $('.js-remove-rate-limit-key').on('click', function (e) {
+    e.preventDefault();
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    const response = window.confirm(
+      `Are you sure you want to remove the Rate Limit key for the queue "${queueHost}/${queueName}"?`
+    );
+    if (response) {
+      $.ajax({
+        method: 'DELETE',
+        url: `${basePath}/api/queue/${encodeURIComponent(
+          queueHost
+        )}/${encodeURIComponent(queueName)}/rate-limit-key`,
+      })
+        .done(() => {
+          window.location.reload();
+        })
+        .fail((jqXHR) => {
+          window.alert(`Request failed, check console for error.`);
+          console.error(jqXHR.responseText);
+        });
+    } else {
+      $(this).prop('disabled', false);
+    }
+  });
 });

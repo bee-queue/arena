@@ -14,6 +14,15 @@
 {{/if}}
 {{/unless}}
 
+{{#if queueIsBullMQ}}
+{{#if hasRateLimitTtl}}
+<button class="btn btn-xs btn-default js-remove-rate-limit-key" style="margin-bottom: 12px;" data-queue-host="{{ queueHost }}"
+  data-queue-name="{{ queueName }}">
+  Remove Rate Limit Key
+</button>
+{{/if}}
+{{/if}}
+
 <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
