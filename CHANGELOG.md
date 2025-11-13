@@ -1,3 +1,9 @@
+## [4.9.0](https://github.com/bee-queue/arena/compare/v4.8.0...v4.9.0) (2025-11-13)
+
+### Features
+
+- **queue-details:** add button to remove rate limit key ([#688](https://github.com/bee-queue/arena/issues/688)) ([ad87612](https://github.com/bee-queue/arena/commit/ad876123bfe41782e52db42f8d0ced25b503c0a4))
+
 ## [4.8.0](https://github.com/bee-queue/arena/compare/v4.7.0...v4.8.0) (2025-11-02)
 
 ### Features
