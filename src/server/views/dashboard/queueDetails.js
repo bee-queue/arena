@@ -15,7 +15,7 @@ async function handler(req, res) {
       hasFlows: Flows.hasFlows(),
     });
 
-  let jobCounts, isPaused, globalConfig;
+  let jobCounts, hasRateLimitTtl, isPaused, globalConfig;
   if (queue.IS_BEE) {
     jobCounts = await queue.checkHealth();
     delete jobCounts.newestJob;
@@ -31,6 +31,12 @@ async function handler(req, res) {
   } else {
     jobCounts = await queue.getJobCounts();
   }
+
+  if (queue.IS_BULLMQ) {
+    const rateLimitTtl = await queue.getRateLimitTtl();
+    hasRateLimitTtl = rateLimitTtl > 0;
+  }
+
   const stats = await QueueHelpers.getStats(queue);
 
   if (!queue.IS_BEE) {
@@ -39,6 +45,7 @@ async function handler(req, res) {
 
   return res.render('dashboard/templates/queueDetails', {
     basePath,
+    hasRateLimitTtl,
     isPaused,
     queueName,
     queueHost,

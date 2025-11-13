@@ -15,6 +15,7 @@ const bulkJobsRetry = require('./bulkJobsRetry');
 const queuePause = require('./queuePause');
 const queueResume = require('./queueResume');
 const queueUpdateMeta = require('./queueUpdateMeta');
+const queueRemoveRateLimitKey = require('./queueRemoveRateLimitKey');
 
 router.post('/queue/:queueHost/:queueName/job', jobAdd);
 router.post('/flow/:flowHost/:connectionName/flow', addFlow);
@@ -34,5 +35,9 @@ router.put('/queue/:queueHost/:queueName/resume', queueResume);
 router.put('/queue/:queueHost/:queueName/update-meta', queueUpdateMeta);
 router.delete('/queue/:queueHost/:queueName/job/:id', jobRemove);
 router.delete('/queue/:queueHost/:queueName/jobs/bulk', bulkJobsClean);
+router.delete(
+  '/queue/:queueHost/:queueName/rate-limit-key',
+  queueRemoveRateLimitKey
+);
 
 module.exports = router;
