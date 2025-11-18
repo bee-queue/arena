@@ -76,7 +76,11 @@ const helpers = {
   getDelayedExecutionAt(job) {
     // Bull
     if (job.delay) {
-      return job.delay + getTimestamp(job);
+      if (job.processedOn) {
+        return job.processedOn + job.delay;
+      } else {
+        return job.timestamp + job.delay;
+      }
     }
 
     // Bee

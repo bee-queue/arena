@@ -42,8 +42,16 @@
 
   <div class="col-sm-3">
     <h5>Timestamp</h5>
-    {{#if (getTimestamp this)}}
-    {{moment (getTimestamp this) "llll"}}
+    {{#if queue.IS_BEE}}
+      {{#if this.options}}
+        {{#if (isNumber this.options.timestamp)}}
+          {{moment this.options.timestamp "llll"}}
+        {{/if}}
+      {{/if}}
+    {{else}}
+      {{#if (isNumber this.timestamp)}}
+        {{moment this.timestamp "llll"}}
+      {{/if}}
     {{/if}}
   </div>
 
@@ -76,6 +84,13 @@
     {{length this.options.stacktraces}}
     {{/if}}
   </div>
+
+  {{#if (isNumber this.attemptsStarted)}}
+  <div class="col-sm-3">
+    <h5>Attempts Started</h5>
+    {{this.attemptsStarted}}
+  </div>
+  {{/if}}
 </div>
 <div class="row">
   <div class="col-sm-4">
