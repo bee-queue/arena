@@ -107,6 +107,9 @@
             <label for="queue-concurrency-input-search" class="col-sm-8 col-form-label">Concurrency</label>
             <div class="col-sm-4">
               <input type="number" class="js-update-meta-concurrency form-control input-sm" style="margin-right: 10px;"
+                {{#if (isNumber globalConfig.concurrency)}}
+                value={{ globalConfig.concurrency }}
+                {{/if}}
                 placeholder="Concurrency"
               >
             </div>
@@ -115,6 +118,9 @@
             <label for="queue-rl-max-input-search" class="col-sm-8 col-form-label">Rate Limit Max</label>
             <div class="col-sm-4">
               <input type="number" class="js-update-meta-rl-max form-control input-sm" style="margin-right: 10px;"
+                {{#if (isNumber globalConfig.max)}}
+                value={{ globalConfig.max }}
+                {{/if}}
                 placeholder="Max"
               >
             </div>
@@ -123,7 +129,10 @@
             <label for="queue-rl-duration-input-search" class="col-sm-8 col-form-label">Rate Limit Duration</label>
             <div class="col-sm-4">
               <input type="number" class="js-update-meta-rl-duration form-control input-sm" style="margin-right: 10px;"
-                placeholder="Duration"
+                {{#if (isNumber globalConfig.duration)}}
+                value={{ globalConfig.duration }}
+                {{/if}}
+                placeholder="Duration in ms"
               >
             </div>
           </div>
