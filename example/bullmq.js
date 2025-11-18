@@ -72,6 +72,18 @@ async function main() {
 
   // adding delayed jobs
   const delayedJob = await queue.add('delayed', {}, {delay: 60 * 1000});
+  await queue.add(
+    'delayed',
+    {},
+    {
+      delay: 1000,
+      attempts: 4,
+      backoff: {
+        type: 'exponential',
+        delay: 60000,
+      },
+    }
+  );
   await queue.add('cron', {}, {repeat: {pattern: '* 1 * 1 *'}});
   delayedJob.log('Log message');
 
