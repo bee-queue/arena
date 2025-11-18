@@ -1,3 +1,9 @@
+### [4.9.1](https://github.com/bee-queue/arena/compare/v4.9.0...v4.9.1) (2025-11-18)
+
+### Bug Fixes
+
+- **job-details:** generate more accurate executes at ([#689](https://github.com/bee-queue/arena/issues/689)) ([b4b4931](https://github.com/bee-queue/arena/commit/b4b4931661494e7d61ce18b1d1077d4fa4ab92fa))
+
 ## [4.9.0](https://github.com/bee-queue/arena/compare/v4.8.0...v4.9.0) (2025-11-13)
 
 ### Features
