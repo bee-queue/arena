@@ -1,3 +1,9 @@
+### [4.9.2](https://github.com/bee-queue/arena/compare/v4.9.1...v4.9.2) (2025-11-18)
+
+### Bug Fixes
+
+- **queue-details:** show current global values when updating ([#690](https://github.com/bee-queue/arena/issues/690)) ([f40056d](https://github.com/bee-queue/arena/commit/f40056d8940c35570464afc7327a1faf6481dd0f))
+
 ### [4.9.1](https://github.com/bee-queue/arena/compare/v4.9.0...v4.9.1) (2025-11-18)
 
 ### Bug Fixes
