@@ -122,6 +122,7 @@ async function main() {
       ],
     },
     {
+      activeHostId: 'Queue Server 1',
       port: HTTP_SERVER_PORT,
     }
   );

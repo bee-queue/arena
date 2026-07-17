@@ -12,7 +12,7 @@
         </a>
       </h4>
     </div>
-    <div id="host-collapse-{{ @index }}" class="panel-collapse collapse in" role="tabpanel"
+    <div id="host-collapse-{{ @index }}" class="panel-collapse collapse{{#if this.active}} in{{/if}}" role="tabpanel"
       aria-labelledby="host-heading-{{ @index }}">
       <ul class="list-group">
         {{#each this.queues}}

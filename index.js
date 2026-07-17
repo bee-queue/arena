@@ -9,6 +9,13 @@ function run(config, listenOpts = {}) {
   Queues.useCdn =
     typeof listenOpts.useCdn !== 'undefined' ? listenOpts.useCdn : true;
 
+  // Host whose queue list should stay expanded on the overview page; all other
+  // hosts collapse by default. Undefined -> every host collapses.
+  app.locals.activeHostId =
+    typeof listenOpts.activeHostId !== 'undefined'
+      ? listenOpts.activeHostId
+      : config.activeHostId;
+
   if (listenOpts.disableListen) {
     app.locals.appBasePath =
       listenOpts.basePath == '/' ? app.locals.appBasePath : listenOpts.basePath;
