@@ -54,6 +54,10 @@ Arena({
 
   // Optionally include your own script
   customJsPath: 'https://example.com/custom-arena-js.js',
+
+  // Optionally expand a single host on the queues overview page by its `hostId`.
+  // All other hosts start collapsed. When omitted, every host starts collapsed.
+  activeHostId: 'Queue Server 1',
 });
 ```
 
@@ -169,6 +173,7 @@ router.use('/', arena);
 - `basePath` - specify custom path to mount server on (default: '/')
 - `disableListen` - don't let the server listen (useful when mounting Arena as a sub-app of another Express app) (default: false)
 - `useCdn` - set false to use the bundled js and css files (default: true)
+- `activeHostId` - `hostId` of the host to show expanded on the queues overview page; all other hosts start collapsed. Can also be set in `config`. (default: none, every host starts collapsed)
 - `customCssPath` - an URL to an external stylesheet (default: null)
 
 ##### Example config (for bull)

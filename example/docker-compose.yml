@@ -2,6 +2,6 @@ version: '3.2'
 services:
   redis:
     image: redis:7-alpine
-    container_name: cache
+    container_name: cache-arena
     ports:
       - 6379:6379

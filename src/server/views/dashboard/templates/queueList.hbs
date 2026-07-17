@@ -1,21 +1,29 @@
 <h2>Queues</h2>
 <h3>Overview</h3>
 
-<div class="no-padding">
-  <table id="queueList" class="table">
-    <thead>
-      <th>Host</th>
-      <th>Name</th>
-    </thead>
-    <tbody>
-      {{#each queues}}
-      <tr>
-        <td>{{ this.hostId }}</td>
-        <td><a href="{{ ../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a></td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+<div class="panel-group" id="queueList" role="tablist" aria-multiselectable="true">
+  {{#each hosts}}
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="host-heading-{{ @index }}">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" href="#host-collapse-{{ @index }}" aria-expanded="true"
+          aria-controls="host-collapse-{{ @index }}">
+          {{ this.hostId }} <span class="badge">{{ this.queues.length }}</span>
+        </a>
+      </h4>
+    </div>
+    <div id="host-collapse-{{ @index }}" class="panel-collapse collapse{{#if this.active}} in{{/if}}" role="tabpanel"
+      aria-labelledby="host-heading-{{ @index }}">
+      <ul class="list-group">
+        {{#each this.queues}}
+        <li class="list-group-item">
+          <a href="{{ ../../basePath }}/{{ encodeURI this.hostId }}/{{ encodeURI this.name }}">{{ this.name }}</a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{/each}}
 </div>
 
 {{#contentFor 'sidebar'}}
@@ -23,8 +31,4 @@
 {{#if hasFlows}}
 <li><a href="{{ basePath }}/flows">Flows Overview</a></li>
 {{/if}}
-{{/contentFor}}
-
-{{#contentFor 'script'}}
-new Tablesort(document.getElementById('queueList'));
 {{/contentFor}}
