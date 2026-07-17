@@ -1,11 +1,18 @@
+const _ = require('lodash');
+
 function handler(req, res) {
   const {Queues, Flows} = req.app.locals;
   const queues = Queues.list();
   const basePath = req.baseUrl;
 
+  const hosts = _.map(_.groupBy(queues, 'hostId'), (queues, hostId) => ({
+    hostId,
+    queues,
+  }));
+
   return res.render('dashboard/templates/queueList', {
     basePath,
-    queues,
+    hosts,
     hasFlows: Flows.hasFlows(),
   });
 }
