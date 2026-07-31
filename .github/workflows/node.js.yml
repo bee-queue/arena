@@ -40,6 +40,12 @@ jobs:
           GITHUB_BASE_REF: ${{ github.event.pull_request.base.ref }}
 
   release:
+    permissions:
+      id-token: write # Required for OIDC
+      contents: write
+      pull-requests: write # for creating PRs
+      issues: write # additional permission that might be needed
+
     # https://github.community/t/github-actions-does-not-respect-skip-ci/17325/9
     if: "github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
@@ -54,10 +60,10 @@ jobs:
           # push.
           # See https://github.com/semantic-release/git/issues/196#issuecomment-601310576.
           persist-credentials: false
-      - name: Use Node.js 14.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 22.x
       - run: npm ci
       - name: Release
         run: npx semantic-release -b master,2.x
@@ -65,3 +71,4 @@ jobs:
           # Need to use a separate token so we can push to the protected default branch.
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
