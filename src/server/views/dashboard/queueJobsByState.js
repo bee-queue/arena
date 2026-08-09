@@ -140,6 +140,9 @@ async function _html(req, res) {
       jobs[i].showPromoteButton = !queue.IS_BEE && jobState === 'delayed';
       jobs[i].showDeleteRepeatableButton = !queue.IS_BEE && jobs[i].opts.repeat;
       jobs[i].parent = JobHelpers.getKeyProperties(jobs[i].parentKey);
+      jobs[i].stacktraces = queue.IS_BEE
+        ? jobs[i].options.stacktraces
+        : [jobs[i].stacktrace];
     }
   }
 
